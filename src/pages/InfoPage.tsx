@@ -155,10 +155,10 @@ export default function InfoPage() {
                 Gratis offerte aanvragen →
               </Link>
               
-                href="tel:0858008600"
+                href="tel:0858008777"
                 className="flex items-center justify-center gap-2 mt-3 text-white/60 hover:text-white text-sm transition-colors"
               >
-                <Phone className="h-3.5 w-3.5" /> 085 - 80 08 600
+                <Phone className="h-3.5 w-3.5" /> 085 800 8777
               </a>
             </div>
 
@@ -236,10 +236,10 @@ export default function InfoPage() {
               Gratis offerte aanvragen
             </Link>
             
-              href="tel:0858008600"
+              href="tel:0858008777"
               className="border-2 border-white/50 text-white font-semibold py-3 px-7 rounded-xl text-sm sm:text-base hover:border-white hover:bg-white/10 transition"
             >
-              📞 085 - 80 08 600
+              📞 085 800 8777
             </a>
           </div>
         </div>
