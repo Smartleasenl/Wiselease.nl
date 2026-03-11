@@ -141,7 +141,7 @@ export function Header() {
             </button>
 
             <Link to="/" className="absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0 flex items-center z-[60]">
-              <img src="/smart-lease-logo.gif" alt="Smartlease.nl" className="h-8 md:h-12 w-auto" />
+              <img src="/Wiselease_Logo.png" alt="Wiselease" className="h-8 md:h-12 w-auto" />
             </Link>
 
             <div className="flex md:hidden items-center space-x-3 z-[60]">
