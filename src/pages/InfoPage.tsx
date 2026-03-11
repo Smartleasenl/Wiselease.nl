@@ -62,7 +62,7 @@ export default function InfoPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
 
-      {/* ── HERO ── */}
+      {/* HERO */}
       <div className="relative overflow-hidden" style={{ height: 'clamp(220px, 38vw, 440px)' }}>
         {page.hero_image_url
           ? <img src={page.hero_image_url} alt={page.title} className="w-full h-full object-cover" loading="eager" />
@@ -96,11 +96,11 @@ export default function InfoPage() {
         </div>
       </div>
 
-      {/* ── BODY ── */}
+      {/* BODY */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-          {/* ── MAIN CONTENT ── */}
+          {/* MAIN CONTENT */}
           <div className="w-full lg:flex-1 min-w-0">
 
             {page.intro && (
@@ -140,7 +140,7 @@ export default function InfoPage() {
             </button>
           </div>
 
-          {/* ── SIDEBAR ── */}
+          {/* SIDEBAR */}
           <div className="w-full lg:w-72 flex flex-col gap-4 lg:sticky lg:top-24">
 
             <div className="bg-smartlease-blue rounded-2xl p-6 shadow-lg">
@@ -154,7 +154,7 @@ export default function InfoPage() {
               >
                 Gratis offerte aanvragen →
               </Link>
-              
+              <a
                 href="tel:0858008777"
                 className="flex items-center justify-center gap-2 mt-3 text-white/60 hover:text-white text-sm transition-colors"
               >
@@ -219,7 +219,7 @@ export default function InfoPage() {
         </div>
       </div>
 
-      {/* ── BOTTOM BANNER ── */}
+      {/* BOTTOM BANNER */}
       <div className="bg-gradient-to-r from-smartlease-yellow to-smartlease-blue py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-white font-extrabold mb-3" style={{ fontSize: 'clamp(18px, 3vw, 30px)' }}>
@@ -235,7 +235,7 @@ export default function InfoPage() {
             >
               Gratis offerte aanvragen
             </Link>
-            
+            <a
               href="tel:0858008777"
               className="border-2 border-white/50 text-white font-semibold py-3 px-7 rounded-xl text-sm sm:text-base hover:border-white hover:bg-white/10 transition"
             >
