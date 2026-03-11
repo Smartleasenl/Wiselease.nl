@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Hero } from '../components/Hero';
 import { PopularBrands } from '../components/PopularBrands';
-import { WhySmartlease } from '../components/WhySmartlease';
+import { WhyWiselease } from '../components/WhyWiselease';
 import { BlogSection } from '../components/BlogSection';
 import { initScrollReveal } from '../utils/scrollReveal';
 
@@ -15,7 +15,7 @@ export function HomePage() {
     <>
       <Hero />
       <PopularBrands />
-      <WhySmartlease />
+      <WhyWiselease />
       <BlogSection />
     </>
   );
