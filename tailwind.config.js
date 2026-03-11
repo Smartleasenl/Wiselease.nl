@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'smartlease-blue': '#0f4c81',
-        'smartlease-teal': '#00c2a8',
+'smartlease-blue': '#1B2F5E',
+'smartlease-teal': '#F9C349',
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
