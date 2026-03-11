@@ -15,7 +15,6 @@ export default function InfoPage() {
   const { page, loading, error } = usePage(slug);
   const { pages: subPages }      = useSubPages(parentSlug);
 
-  // SEO
   useEffect(() => {
     if (page) {
       document.title = page.meta_title || page.title;
@@ -24,7 +23,6 @@ export default function InfoPage() {
     }
   }, [page]);
 
-  // Redirect /financial-lease (zonder subpagina) naar eerste subpagina
   useEffect(() => {
     if (!loading && !page && subPages.length > 0) {
       navigate(`/${subPages[0].slug}`, { replace: true });
@@ -70,10 +68,8 @@ export default function InfoPage() {
           ? <img src={page.hero_image_url} alt={page.title} className="w-full h-full object-cover" loading="eager" />
           : <div className="w-full h-full bg-gradient-to-br from-smartlease-blue to-blue-900" />
         }
-        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-smartlease-blue/90 via-smartlease-blue/60 to-transparent" />
 
-        {/* Breadcrumb */}
         <div className="absolute top-4 sm:top-6 left-0 right-0 px-4 sm:px-8 max-w-6xl mx-auto">
           <div className="flex items-center gap-1.5 text-xs text-white/60 flex-wrap">
             <Link to="/" className="text-white/60 hover:text-white transition">Home</Link>
@@ -84,9 +80,8 @@ export default function InfoPage() {
           </div>
         </div>
 
-        {/* Hero inhoud */}
         <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 pb-6 sm:pb-10 max-w-6xl mx-auto">
-          <div className="inline-flex bg-smartlease-yellow text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded mb-3">
+          <div className="inline-flex bg-smartlease-yellow text-smartlease-blue text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded mb-3">
             {parentLabel}
           </div>
           <h1 className="text-white font-extrabold leading-tight mb-2 max-w-2xl"
@@ -105,28 +100,26 @@ export default function InfoPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="flex flex-col lg:flex-row gap-8 items-start">
 
-          {/* ── MAIN CONTENT (links) ── */}
+          {/* ── MAIN CONTENT ── */}
           <div className="w-full lg:flex-1 min-w-0">
 
-            {/* Intro */}
             {page.intro && (
               <div className="bg-white rounded-xl p-6 sm:p-8 mb-6 border-l-4 border-smartlease-yellow shadow-sm">
                 <p className="text-gray-700 text-base sm:text-lg leading-relaxed m-0">{page.intro}</p>
               </div>
             )}
 
-            {/* Secties */}
             <div className="flex flex-col gap-4">
               {page.content?.map((section, i) => (
                 <div
                   key={i}
                   className="bg-white rounded-xl p-5 sm:p-7 shadow-sm hover:shadow-md transition-shadow"
-                  style={{ borderTop: `3px solid ${i % 2 === 0 ? '#00B8A9' : '#0F2B46'}` }}
+                  style={{ borderTop: `3px solid ${i % 2 === 0 ? '#F9C349' : '#1B2F5E'}` }}
                 >
                   <div className="flex items-start gap-3 mb-3">
                     <CheckCircle2
                       className="h-5 w-5 flex-shrink-0 mt-0.5"
-                      style={{ color: i % 2 === 0 ? '#00B8A9' : '#0F2B46' }}
+                      style={{ color: i % 2 === 0 ? '#F9C349' : '#1B2F5E' }}
                     />
                     <h2 className="text-smartlease-blue font-bold text-base sm:text-lg leading-snug m-0">
                       {section.heading}
@@ -147,10 +140,9 @@ export default function InfoPage() {
             </button>
           </div>
 
-          {/* ── SIDEBAR (rechts op desktop, accordion op mobiel) ── */}
+          {/* ── SIDEBAR ── */}
           <div className="w-full lg:w-72 flex flex-col gap-4 lg:sticky lg:top-24">
 
-            {/* CTA kaart */}
             <div className="bg-smartlease-blue rounded-2xl p-6 shadow-lg">
               <h3 className="text-white font-bold text-lg mb-2">Offerte aanvragen</h3>
               <p className="text-white/65 text-sm leading-relaxed mb-5">
@@ -158,11 +150,11 @@ export default function InfoPage() {
               </p>
               <Link
                 to="/offerte"
-                className="block text-center bg-smartlease-yellow text-white font-bold py-3 px-4 rounded-xl text-sm hover:bg-smartlease-yellow/90 transition-colors shadow-md"
+                className="block text-center bg-smartlease-yellow text-smartlease-blue font-bold py-3 px-4 rounded-xl text-sm hover:bg-smartlease-yellow/90 transition-colors shadow-md"
               >
                 Gratis offerte aanvragen →
               </Link>
-              <a
+              
                 href="tel:0858008600"
                 className="flex items-center justify-center gap-2 mt-3 text-white/60 hover:text-white text-sm transition-colors"
               >
@@ -170,10 +162,8 @@ export default function InfoPage() {
               </a>
             </div>
 
-            {/* Submenu — accordion op mobiel */}
             {subPages.length > 0 && (
               <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-                {/* Mobile toggle */}
                 <button
                   className="lg:hidden w-full flex items-center justify-between px-5 py-4 text-left"
                   onClick={() => setSidebarOpen(o => !o)}
@@ -181,7 +171,6 @@ export default function InfoPage() {
                   <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{parentLabel}</span>
                   <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${sidebarOpen ? 'rotate-180' : ''}`} />
                 </button>
-                {/* Desktop: altijd tonen, mobile: na klik */}
                 <div className={`lg:block ${sidebarOpen ? 'block' : 'hidden'} px-4 pb-4 lg:px-4 lg:py-4`}>
                   <p className="hidden lg:block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 px-1">{parentLabel}</p>
                   <nav className="flex flex-col gap-0.5">
@@ -208,7 +197,6 @@ export default function InfoPage() {
               </div>
             )}
 
-            {/* USP's */}
             <div className="bg-smartlease-yellow/8 rounded-xl p-4 border border-smartlease-yellow/20 hidden sm:block">
               {[
                 '✓  Binnen 24 uur reactie',
@@ -243,11 +231,11 @@ export default function InfoPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/offerte"
-              className="bg-white text-smartlease-yellow font-bold py-3 px-7 rounded-xl text-sm sm:text-base hover:bg-white/90 transition shadow-md"
+              className="bg-white text-smartlease-blue font-bold py-3 px-7 rounded-xl text-sm sm:text-base hover:bg-white/90 transition shadow-md"
             >
               Gratis offerte aanvragen
             </Link>
-            <a
+            
               href="tel:0858008600"
               className="border-2 border-white/50 text-white font-semibold py-3 px-7 rounded-xl text-sm sm:text-base hover:border-white hover:bg-white/10 transition"
             >
