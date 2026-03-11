@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import {
-  Settings, LayoutDashboard, Users, FileText, BarChart3,
-  Building2, LogOut, Menu, X, ChevronRight, Globe,
-  Layout, PanelBottom, Star, HelpCircle, BookOpen, Link2,  // ← Link2 toegevoegd
-} from 'lucide-react';
+import { Settings, LayoutDashboard, Users, FileText, BarChart3, Building2, LogOut, Menu, X, ChevronRight, Globe, LayoutGrid as Layout, PanelBottom, Star, HelpCircle, BookOpen, Link2 } from 'lucide-react';
 
 const SIDEBAR_ITEMS = [
   { to: '/admin',                   label: 'Dashboard',          icon: LayoutDashboard, exact: true },

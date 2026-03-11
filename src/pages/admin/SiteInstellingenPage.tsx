@@ -1,32 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '../../lib/supabase';
-import {
-  Save,
-  RefreshCw,
-  Image,
-  Phone,
-  Mail,
-  Globe,
-  Type,
-  Layout,
-  Star,
-  Info,
-  MessageSquare,
-  Share2,
-  Search,
-  Bell,
-  Settings,
-  CheckCircle,
-  ChevronDown,
-  ChevronUp,
-  Upload,
-  Trash2,
-  Loader2,
-  Palette,
-  FileText,
-  Zap,
-  AlertCircle,
-} from 'lucide-react';
+import { Save, RefreshCw, Image, Phone, Mail, Globe, Type, LayoutGrid as Layout, Star, Info, MessageSquare, Share2, Search, Bell, Settings, CheckCircle, ChevronDown, ChevronUp, Upload, Trash2, Loader2, Palette, FileText, Zap, AlertCircle } from 'lucide-react';
 
 type SettingsMap = Record<string, string>;
 
