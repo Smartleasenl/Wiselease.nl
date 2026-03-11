@@ -74,7 +74,7 @@ export function LeaseCalculator({ vehiclePrice, onChange }: LeaseCalculatorProps
 
   return (
     <div>
-      <div className="flex items-center space-x-2 mb-4 text-smartlease-teal">
+      <div className="flex items-center space-x-2 mb-4 text-smartlease-yellow">
         <Calculator className="h-5 w-5" />
         <h3 className="font-bold">Financial Lease Calculator</h3>
       </div>
@@ -114,7 +114,7 @@ export function LeaseCalculator({ vehiclePrice, onChange }: LeaseCalculatorProps
         {/* Financieringsbedrag */}
         <div className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-xl border border-gray-100">
           <span className="text-sm font-medium text-gray-700">Financieringsbedrag</span>
-          <span className="text-sm font-bold text-smartlease-teal">{formatPrice(financieringsbedrag)}</span>
+          <span className="text-sm font-bold text-smartlease-yellow">{formatPrice(financieringsbedrag)}</span>
         </div>
 
         {/* Looptijd */}

@@ -144,16 +144,16 @@ export function OfferteVergelijkerPage() {
     <main className="min-h-screen bg-[#f8f9fb]">
       <div className="bg-white border-b border-gray-200/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-          <div className="flex items-center gap-2 text-smartlease-teal text-sm font-semibold mb-4">
+          <div className="flex items-center gap-2 text-smartlease-yellow text-sm font-semibold mb-4">
             <Zap className="h-4 w-4" /><span>AI-gestuurde analyse</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight mb-4">
-            Betaal je te veel<br /><span className="text-smartlease-teal">voor je financial lease?</span>
+            Betaal je te veel<br /><span className="text-smartlease-yellow">voor je financial lease?</span>
           </h1>
           <p className="text-gray-500 text-lg max-w-xl">Upload je huidige offerte en ontvang binnen 10 seconden een <strong>eerlijke</strong> vergelijking — met dezelfde aanbetaling en looptijd.</p>
           <div className="flex flex-wrap gap-4 mt-6">
             {[{ icon: Shield, text: 'Veilig & privé' }, { icon: Zap, text: 'Resultaat in 10 sec' }, { icon: Star, text: '4,9 ★ beoordeling' }].map(({ icon: I, text }) => (
-              <div key={text} className="flex items-center gap-1.5 text-sm text-gray-500"><I className="h-4 w-4 text-smartlease-teal" /><span>{text}</span></div>
+              <div key={text} className="flex items-center gap-1.5 text-sm text-gray-500"><I className="h-4 w-4 text-smartlease-yellow" /><span>{text}</span></div>
             ))}
           </div>
         </div>
@@ -168,10 +168,10 @@ export function OfferteVergelijkerPage() {
               onDragLeave={() => setDragOver(false)}
               onDrop={handleDrop}
               onClick={() => fileRef.current?.click()}
-              className={`rounded-2xl border-2 border-dashed cursor-pointer transition-all p-12 md:p-16 flex flex-col items-center text-center ${dragOver ? 'border-smartlease-teal bg-smartlease-teal/5' : 'border-gray-300 bg-white hover:border-smartlease-teal'}`}
+              className={`rounded-2xl border-2 border-dashed cursor-pointer transition-all p-12 md:p-16 flex flex-col items-center text-center ${dragOver ? 'border-smartlease-yellow bg-smartlease-yellow/5' : 'border-gray-300 bg-white hover:border-smartlease-yellow'}`}
             >
               <input ref={fileRef} type="file" accept=".pdf,image/*" onChange={handleChange} className="hidden" />
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-5 ${dragOver ? 'bg-smartlease-teal text-white' : 'bg-smartlease-teal/10 text-smartlease-teal'}`}>
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-5 ${dragOver ? 'bg-smartlease-yellow text-white' : 'bg-smartlease-yellow/10 text-smartlease-yellow'}`}>
                 <Upload className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Sleep je offerte hierheen</h3>
@@ -188,7 +188,7 @@ export function OfferteVergelijkerPage() {
                   { n: '3', t: 'Eerlijke vergelijking', d: 'Zelfde aanbetaling & looptijd — zo zie je het echte verschil in maandbedrag' },
                 ].map(({ n, t, d }) => (
                   <div key={n} className="flex gap-4">
-                    <div className="w-8 h-8 rounded-full bg-smartlease-teal text-white text-sm font-bold flex items-center justify-center flex-shrink-0">{n}</div>
+                    <div className="w-8 h-8 rounded-full bg-smartlease-yellow text-white text-sm font-bold flex items-center justify-center flex-shrink-0">{n}</div>
                     <div><p className="font-semibold text-gray-800 text-sm">{t}</p><p className="text-gray-400 text-sm mt-0.5">{d}</p></div>
                   </div>
                 ))}
@@ -201,16 +201,16 @@ export function OfferteVergelijkerPage() {
         {step === 'analyzing' && (
           <div className="bg-white rounded-2xl border border-gray-100 p-10 md:p-16 flex flex-col items-center text-center">
             <div className="relative w-20 h-20 mb-6">
-              <div className="absolute inset-0 rounded-full bg-smartlease-teal/10 animate-ping" />
-              <div className="relative w-20 h-20 rounded-full bg-smartlease-teal/10 flex items-center justify-center">
-                <FileText className="h-9 w-9 text-smartlease-teal" />
+              <div className="absolute inset-0 rounded-full bg-smartlease-yellow/10 animate-ping" />
+              <div className="relative w-20 h-20 rounded-full bg-smartlease-yellow/10 flex items-center justify-center">
+                <FileText className="h-9 w-9 text-smartlease-yellow" />
               </div>
             </div>
             <h3 className="text-2xl font-bold text-gray-800 mb-2">Offerte wordt geanalyseerd...</h3>
             <p className="text-gray-400 text-sm mb-1">{fileName}</p>
             <p className="text-gray-400 text-sm mb-8">AI leest aanbetaling, slottermijn & looptijd voor een eerlijke vergelijking</p>
             <div className="w-full max-w-sm bg-gray-100 rounded-full h-2 mb-3">
-              <div className="bg-smartlease-teal h-2 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
+              <div className="bg-smartlease-yellow h-2 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
             </div>
             <p className="text-xs text-gray-400">{Math.round(progress)}%</p>
             <div className="mt-8 space-y-2 text-sm text-gray-400">
@@ -225,7 +225,7 @@ export function OfferteVergelijkerPage() {
         {step === 'result' && offerte && vergelijking && (
           <div className="space-y-6">
             {/* Banner */}
-            <div className={`rounded-2xl p-6 md:p-8 ${pos ? 'bg-gradient-to-r from-emerald-500 to-teal-500' : neu ? 'bg-gradient-to-r from-gray-600 to-gray-700' : 'bg-gradient-to-r from-blue-600 to-blue-700'} text-white`}>
+            <div className={`rounded-2xl p-6 md:p-8 ${pos ? 'bg-gradient-to-r from-emerald-500 to-yellow-500' : neu ? 'bg-gradient-to-r from-gray-600 to-gray-700' : 'bg-gradient-to-r from-blue-600 to-blue-700'} text-white`}>
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center">
@@ -281,7 +281,7 @@ export function OfferteVergelijkerPage() {
               <div className="grid grid-cols-3 text-sm">
                 <div className="p-4 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-wider">Onderdeel</div>
                 <div className="p-4 bg-gray-50 text-xs font-bold text-gray-500 uppercase tracking-wider border-l border-gray-100">{offerte.aanbieder || 'Huidige aanbieder'}</div>
-                <div className="p-4 bg-smartlease-teal/5 text-xs font-bold text-smartlease-teal uppercase tracking-wider border-l border-gray-100">Smartlease.nl</div>
+                <div className="p-4 bg-smartlease-yellow/5 text-xs font-bold text-smartlease-yellow uppercase tracking-wider border-l border-gray-100">Smartlease.nl</div>
 
                 {/* Maandbedrag — EERLIJK */}
                 <div className="p-4 border-t border-gray-50">
@@ -334,7 +334,7 @@ export function OfferteVergelijkerPage() {
               <h3 className="font-bold text-gray-800 text-lg mb-1">Interesse in ons aanbod?</h3>
               <p className="text-gray-400 text-sm mb-6">Vraag direct een persoonlijke offerte aan of neem contact op.</p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <button onClick={handleAanvragen} className="flex-1 bg-smartlease-teal hover:bg-teal-500 text-white font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center gap-2">
+                <button onClick={handleAanvragen} className="flex-1 bg-smartlease-yellow hover:bg-yellow-500 text-white font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center gap-2">
                   <CheckCircle className="h-5 w-5" />Gratis offerte aanvragen
                 </button>
                 <a href="tel:0858008600" className="flex items-center justify-center gap-2 border border-gray-200 hover:border-gray-300 text-gray-700 font-semibold px-5 py-3.5 rounded-xl transition text-sm">
@@ -362,7 +362,7 @@ export function OfferteVergelijkerPage() {
             <h3 className="text-xl font-bold text-gray-800 mb-2">Analyse mislukt</h3>
             <p className="text-gray-400 text-sm mb-6 max-w-sm mx-auto">{errorMsg}</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button onClick={reset} className="bg-smartlease-teal text-white font-bold px-6 py-3 rounded-xl hover:bg-teal-500 transition flex items-center gap-2 justify-center">
+              <button onClick={reset} className="bg-smartlease-yellow text-white font-bold px-6 py-3 rounded-xl hover:bg-yellow-500 transition flex items-center gap-2 justify-center">
                 <RefreshCw className="h-4 w-4" />Opnieuw proberen
               </button>
               <a href="tel:0858008600" className="border border-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-xl hover:border-gray-300 transition flex items-center gap-2 justify-center text-sm">

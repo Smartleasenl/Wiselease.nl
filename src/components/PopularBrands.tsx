@@ -88,7 +88,7 @@ export function PopularBrands() {
                   <p className="text-white/80 text-sm mb-4">
                     {lease.description}
                   </p>
-                  <span className="inline-flex items-center bg-smartlease-teal hover:bg-teal-600 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition w-fit shadow-lg group-hover:shadow-xl">
+                  <span className="inline-flex items-center bg-smartlease-yellow hover:bg-yellow-600 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition w-fit shadow-lg group-hover:shadow-xl">
                     {lease.btnLabel}
                   </span>
                 </div>
@@ -115,7 +115,7 @@ export function PopularBrands() {
               <button
                 key={brand.name}
                 onClick={() => handleBrandClick(brand.name)}
-                className="reveal bg-white border border-gray-200 rounded-xl p-4 md:p-5 hover:border-smartlease-teal hover:shadow-lg transition-all duration-300 group flex flex-col items-center gap-2.5"
+                className="reveal bg-white border border-gray-200 rounded-xl p-4 md:p-5 hover:border-smartlease-yellow hover:shadow-lg transition-all duration-300 group flex flex-col items-center gap-2.5"
                 style={{ animationDelay: `${index * 30}ms` }}
               >
                 <img
@@ -124,7 +124,7 @@ export function PopularBrands() {
                   className="h-8 md:h-10 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
                   loading="lazy"
                 />
-                <span className="font-semibold text-xs md:text-sm text-gray-700 group-hover:text-smartlease-teal transition-colors">
+                <span className="font-semibold text-xs md:text-sm text-gray-700 group-hover:text-smartlease-yellow transition-colors">
                   {brand.name}
                 </span>
               </button>

@@ -50,7 +50,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-teal-50/30 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-yellow-50/30 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
@@ -93,7 +93,7 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@smartlease.nl"
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 
-                  focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal 
+                  focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow 
                   transition-all duration-200"
               />
             </div>
@@ -114,7 +114,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 
-                    focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal 
+                    focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow 
                     transition-all duration-200 pr-12"
                 />
                 <button
@@ -134,7 +134,7 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300 text-smartlease-teal focus:ring-smartlease-teal/30 cursor-pointer"
+                  className="w-4 h-4 rounded border-gray-300 text-smartlease-yellow focus:ring-smartlease-yellow/30 cursor-pointer"
                 />
                 <span className="text-sm text-gray-600">Onthoud mij</span>
               </label>
@@ -145,9 +145,9 @@ export default function LoginPage() {
               type="submit"
               disabled={loading}
               className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl 
-                bg-smartlease-teal text-white font-semibold 
-                hover:bg-smartlease-teal/90 active:scale-[0.98]
-                focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:ring-offset-2
+                bg-smartlease-yellow text-white font-semibold 
+                hover:bg-smartlease-yellow/90 active:scale-[0.98]
+                focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:ring-offset-2
                 disabled:opacity-60 disabled:cursor-not-allowed
                 transition-all duration-200"
             >

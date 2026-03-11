@@ -337,7 +337,7 @@ export default function SiteInstellingenPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-8 w-8 animate-spin text-smartlease-teal" />
+        <Loader2 className="h-8 w-8 animate-spin text-smartlease-yellow" />
       </div>
     );
   }
@@ -366,7 +366,7 @@ export default function SiteInstellingenPage() {
               saved
                 ? 'bg-green-500 text-white'
                 : hasChanges
-                ? 'bg-smartlease-teal text-white hover:bg-smartlease-teal/90 active:scale-[0.98]'
+                ? 'bg-smartlease-yellow text-white hover:bg-smartlease-yellow/90 active:scale-[0.98]'
                 : 'bg-gray-100 text-gray-400 cursor-not-allowed'
             }`}
           >
@@ -412,8 +412,8 @@ export default function SiteInstellingenPage() {
                 className="w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50/50 transition text-left"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-smartlease-teal/10 flex items-center justify-center flex-shrink-0">
-                    <Icon className="h-4.5 w-4.5 text-smartlease-teal" />
+                  <div className="w-9 h-9 rounded-lg bg-smartlease-yellow/10 flex items-center justify-center flex-shrink-0">
+                    <Icon className="h-4.5 w-4.5 text-smartlease-yellow" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">{section.label}</p>
@@ -473,7 +473,7 @@ function SettingField({
   const fileRef = useRef<HTMLInputElement>(null);
 
   const baseInputClass =
-    'w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition';
+    'w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition';
 
   // Toggle
   if (field.type === 'toggle') {
@@ -489,7 +489,7 @@ function SettingField({
             type="button"
             onClick={() => onChange(isOn ? 'false' : 'true')}
             className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
-              isOn ? 'bg-smartlease-teal' : 'bg-gray-200'
+              isOn ? 'bg-smartlease-yellow' : 'bg-gray-200'
             }`}
           >
             <span
@@ -558,7 +558,7 @@ function SettingField({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder="https://..."
-            className="flex-1 px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition"
+            className="flex-1 px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
           />
         </div>
       </div>
@@ -582,7 +582,7 @@ function SettingField({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={field.placeholder}
-            className="flex-1 px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition font-mono"
+            className="flex-1 px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition font-mono"
           />
         </div>
       </div>

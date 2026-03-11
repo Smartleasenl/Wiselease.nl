@@ -93,12 +93,12 @@ export function Footer() {
             ) : null}
 
             <div className="space-y-3">
-              <a href={`tel:${phoneRaw}`} className="flex items-center gap-3 text-sm hover:text-smartlease-teal transition group">
-                <div className="w-8 h-8 rounded-lg bg-smartlease-teal/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-4 w-4 text-smartlease-teal" />
+              <a href={`tel:${phoneRaw}`} className="flex items-center gap-3 text-sm hover:text-smartlease-yellow transition group">
+                <div className="w-8 h-8 rounded-lg bg-smartlease-yellow/10 flex items-center justify-center flex-shrink-0">
+                  <Phone className="h-4 w-4 text-smartlease-yellow" />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-800 group-hover:text-smartlease-teal transition">{phone}</p>
+                  <p className="font-semibold text-gray-800 group-hover:text-smartlease-yellow transition">{phone}</p>
                   <p className="text-xs text-gray-400">{hours}</p>
                 </div>
               </a>
@@ -113,12 +113,12 @@ export function Footer() {
               ) : null}
 
               {s['footer_show_email'] !== 'false' && email ? (
-                <a href={`mailto:${email}`} className="flex items-center gap-3 text-sm hover:text-smartlease-teal transition group">
-                  <div className="w-8 h-8 rounded-lg bg-smartlease-teal/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-4 w-4 text-smartlease-teal" />
+                <a href={`mailto:${email}`} className="flex items-center gap-3 text-sm hover:text-smartlease-yellow transition group">
+                  <div className="w-8 h-8 rounded-lg bg-smartlease-yellow/10 flex items-center justify-center flex-shrink-0">
+                    <Mail className="h-4 w-4 text-smartlease-yellow" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-800 group-hover:text-smartlease-teal transition">{email}</p>
+                    <p className="font-semibold text-gray-800 group-hover:text-smartlease-yellow transition">{email}</p>
                     <p className="text-xs text-gray-400">Wij reageren snel</p>
                   </div>
                 </a>
@@ -133,7 +133,7 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {aanbodLinks.map(link => (
                   <li key={link.id}>
-                    <Link to={link.url} className="text-sm text-gray-500 hover:text-smartlease-teal transition-colors">
+                    <Link to={link.url} className="text-sm text-gray-500 hover:text-smartlease-yellow transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -149,7 +149,7 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {flLinks.map(link => (
                   <li key={link.id}>
-                    <Link to={link.url} className="text-sm text-gray-500 hover:text-smartlease-teal transition-colors">
+                    <Link to={link.url} className="text-sm text-gray-500 hover:text-smartlease-yellow transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -165,7 +165,7 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {meerInfoLinks.map(link => (
                   <li key={link.id}>
-                    <Link to={link.url} className="text-sm text-gray-500 hover:text-smartlease-teal transition-colors">
+                    <Link to={link.url} className="text-sm text-gray-500 hover:text-smartlease-yellow transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -178,14 +178,14 @@ export function Footer() {
 
         {/* CTA blok */}
         {s['footer_show_cta_blok'] !== 'false' ? (
-          <div className="mt-12 rounded-2xl bg-gradient-to-r from-smartlease-teal to-teal-500 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md shadow-teal-100">
+          <div className="mt-12 rounded-2xl bg-gradient-to-r from-smartlease-yellow to-yellow-500 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md shadow-yellow-100">
             <div>
               <p className="font-bold text-white text-lg">Gratis offerte?</p>
               <p className="text-sm text-white/80">Binnen 24 uur een persoonlijk voorstel op maat.</p>
             </div>
             <Link
               to="/offerte"
-              className="flex-shrink-0 bg-white hover:bg-gray-50 text-smartlease-teal font-bold px-6 py-3 rounded-xl transition text-sm shadow-sm"
+              className="flex-shrink-0 bg-white hover:bg-gray-50 text-smartlease-yellow font-bold px-6 py-3 rounded-xl transition text-sm shadow-sm"
             >
               Aanvragen &rarr;
             </Link>

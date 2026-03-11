@@ -99,7 +99,7 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
   return (
     <div
       onClick={onClick}
-      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-gray-200/60 cursor-pointer group border border-gray-100 hover:border-teal-200 transition-all duration-500 ease-out"
+      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-gray-200/60 cursor-pointer group border border-gray-100 hover:border-yellow-200 transition-all duration-500 ease-out"
     >
       {/* Image */}
       <div className="relative overflow-hidden bg-white" style={{ aspectRatio: '4/3' }}>
@@ -135,7 +135,7 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
 
         {/* Bouwjaar badge */}
         {vehicle.bouwjaar_year && (
-          <span className="absolute top-3 left-3 bg-smartlease-teal text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow-lg shadow-teal-500/30 tracking-wide">
+          <span className="absolute top-3 left-3 bg-smartlease-yellow text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow-lg shadow-yellow-500/30 tracking-wide">
             {vehicle.bouwjaar_year}
           </span>
         )}
@@ -161,7 +161,7 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
           {maandprijs > 0 ? (
             <>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">
+                <span className="text-xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-500 bg-clip-text text-transparent">
                   € {maandprijs.toLocaleString('nl-NL')},-
                 </span>
                 <span className="text-sm text-gray-400 font-medium">p/m</span>
@@ -179,19 +179,19 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
 
         <div className="grid grid-cols-2 gap-2">
           <div className="flex items-center gap-2 px-2.5 py-2 bg-gray-50 rounded-xl">
-            <Gauge className="h-3.5 w-3.5 text-smartlease-teal flex-shrink-0" />
+            <Gauge className="h-3.5 w-3.5 text-smartlease-yellow flex-shrink-0" />
             <span className="text-xs text-gray-600 font-medium truncate">{formatKm(vehicle.kmstand)}</span>
           </div>
           <div className="flex items-center gap-2 px-2.5 py-2 bg-gray-50 rounded-xl">
-            <Zap className="h-3.5 w-3.5 text-smartlease-teal flex-shrink-0" />
+            <Zap className="h-3.5 w-3.5 text-smartlease-yellow flex-shrink-0" />
             <span className="text-xs text-gray-600 font-medium">{vehicle.vermogen} pk</span>
           </div>
           <div className="flex items-center gap-2 px-2.5 py-2 bg-gray-50 rounded-xl">
-            <Fuel className="h-3.5 w-3.5 text-smartlease-teal flex-shrink-0" />
+            <Fuel className="h-3.5 w-3.5 text-smartlease-yellow flex-shrink-0" />
             <span className="text-xs text-gray-600 font-medium">{vehicle.brandstof}</span>
           </div>
           <div className="flex items-center gap-2 px-2.5 py-2 bg-gray-50 rounded-xl">
-            <Settings2 className="h-3.5 w-3.5 text-smartlease-teal flex-shrink-0" />
+            <Settings2 className="h-3.5 w-3.5 text-smartlease-yellow flex-shrink-0" />
             <span className="text-xs text-gray-600 font-medium">{vehicle.transmissie}</span>
           </div>
         </div>

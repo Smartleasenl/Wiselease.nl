@@ -108,9 +108,9 @@ export default function DealersPage() {
   const SortIcon = ({ field }: { field: SortField }) => {
     if (sortField !== field) return <ArrowUpDown className="h-3.5 w-3.5 text-gray-300" />;
     return sortDir === 'asc' ? (
-      <ArrowUp className="h-3.5 w-3.5 text-smartlease-teal" />
+      <ArrowUp className="h-3.5 w-3.5 text-smartlease-yellow" />
     ) : (
-      <ArrowDown className="h-3.5 w-3.5 text-smartlease-teal" />
+      <ArrowDown className="h-3.5 w-3.5 text-smartlease-yellow" />
     );
   };
 
@@ -145,8 +145,8 @@ export default function DealersPage() {
               <p className="text-xs text-gray-500">Totaal voertuigen</p>
               <p className="text-2xl font-bold text-gray-900">{totalAutos.toLocaleString('nl-NL')}</p>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center">
-              <Car className="h-5 w-5 text-teal-500" />
+            <div className="w-10 h-10 rounded-xl bg-yellow-50 flex items-center justify-center">
+              <Car className="h-5 w-5 text-yellow-500" />
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@ export default function DealersPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Zoek op naam, plaats of postcode..."
-              className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition"
+              className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
             />
           </div>
           <p className="text-sm text-gray-500">
@@ -187,7 +187,7 @@ export default function DealersPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <Loader2 className="h-8 w-8 text-smartlease-teal animate-spin" />
+            <Loader2 className="h-8 w-8 text-smartlease-yellow animate-spin" />
           </div>
         ) : (
           <>
@@ -245,7 +245,7 @@ export default function DealersPage() {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-center">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-teal-50 text-teal-700 text-xs font-bold">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-700 text-xs font-bold">
                           {dealer.aantal_autos}
                         </span>
                       </td>
@@ -257,7 +257,7 @@ export default function DealersPage() {
                           onClick={() => {
                             window.open(`/aanbod?q=${encodeURIComponent(dealer.naam)}`, '_blank');
                           }}
-                          className="p-1.5 text-gray-400 hover:text-smartlease-teal transition rounded-lg hover:bg-teal-50"
+                          className="p-1.5 text-gray-400 hover:text-smartlease-yellow transition rounded-lg hover:bg-yellow-50"
                           title="Bekijk auto's van deze dealer"
                         >
                           <ExternalLink className="h-4 w-4" />
@@ -308,7 +308,7 @@ export default function DealersPage() {
                         onClick={() => setPage(pageNum)}
                         className={`w-8 h-8 rounded-lg text-xs font-semibold transition ${
                           page === pageNum
-                            ? 'bg-smartlease-teal text-white'
+                            ? 'bg-smartlease-yellow text-white'
                             : 'text-gray-500 hover:bg-gray-100'
                         }`}
                       >

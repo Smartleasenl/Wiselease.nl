@@ -212,7 +212,7 @@ export default function PaginaBeheer() {
               <input
                 value={formData.menu_label}
                 onChange={e => setFormData(p => ({ ...p, menu_label: e.target.value }))}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
                 placeholder="bijv. Zzp lease"
               />
             </div>
@@ -221,7 +221,7 @@ export default function PaginaBeheer() {
               <select
                 value={formData.parent_slug}
                 onChange={e => setFormData(p => ({ ...p, parent_slug: e.target.value }))}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
               >
                 {PARENT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
@@ -233,7 +233,7 @@ export default function PaginaBeheer() {
             <input
               value={formData.slug}
               onChange={e => setFormData(p => ({ ...p, slug: e.target.value }))}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
               placeholder="financial-lease/zzp-lease"
             />
           </div>
@@ -243,7 +243,7 @@ export default function PaginaBeheer() {
             <input
               value={formData.title}
               onChange={e => setFormData(p => ({ ...p, title: e.target.value }))}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
               placeholder="Grote paginatitel"
             />
           </div>
@@ -253,7 +253,7 @@ export default function PaginaBeheer() {
             <input
               value={formData.subtitle}
               onChange={e => setFormData(p => ({ ...p, subtitle: e.target.value }))}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
               placeholder="Ondertitel onder de paginatitel"
             />
           </div>
@@ -263,7 +263,7 @@ export default function PaginaBeheer() {
             <input
               value={formData.hero_image_url}
               onChange={e => setFormData(p => ({ ...p, hero_image_url: e.target.value }))}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
               placeholder="https://images.unsplash.com/..."
             />
             {formData.hero_image_url && (
@@ -277,7 +277,7 @@ export default function PaginaBeheer() {
               value={formData.intro}
               onChange={e => setFormData(p => ({ ...p, intro: e.target.value }))}
               rows={3}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal resize-none"
+              className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow resize-none"
               placeholder="De openingsparagraaf van de pagina..."
             />
           </div>
@@ -288,7 +288,7 @@ export default function PaginaBeheer() {
               <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Inhoud secties</label>
               <button
                 onClick={addSection}
-                className="flex items-center gap-1.5 text-xs font-semibold text-smartlease-teal hover:text-smartlease-teal/80 transition"
+                className="flex items-center gap-1.5 text-xs font-semibold text-smartlease-yellow hover:text-smartlease-yellow/80 transition"
               >
                 <Plus className="h-3.5 w-3.5" /> Sectie toevoegen
               </button>
@@ -310,14 +310,14 @@ export default function PaginaBeheer() {
                   <input
                     value={section.heading}
                     onChange={e => updateSection(i, 'heading', e.target.value)}
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-semibold mb-2 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal bg-white"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-semibold mb-2 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow bg-white"
                     placeholder="Kopje van deze sectie"
                   />
                   <textarea
                     value={section.text}
                     onChange={e => updateSection(i, 'text', e.target.value)}
                     rows={4}
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal bg-white resize-none"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow bg-white resize-none"
                     placeholder="Inhoud van deze sectie..."
                   />
                 </div>
@@ -334,7 +334,7 @@ export default function PaginaBeheer() {
                 <input
                   value={formData.meta_title}
                   onChange={e => setFormData(p => ({ ...p, meta_title: e.target.value }))}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
                   placeholder="Paginatitel | Smartlease.nl"
                 />
               </div>
@@ -344,7 +344,7 @@ export default function PaginaBeheer() {
                   value={formData.meta_description}
                   onChange={e => setFormData(p => ({ ...p, meta_description: e.target.value }))}
                   rows={2}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal resize-none"
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow resize-none"
                   placeholder="Korte beschrijving voor zoekmachines (max. 160 tekens)"
                   maxLength={160}
                 />
@@ -361,7 +361,7 @@ export default function PaginaBeheer() {
             </div>
             <button
               onClick={() => setFormData(p => ({ ...p, is_published: !p.is_published }))}
-              className={`relative w-12 h-6 rounded-full transition-colors ${formData.is_published ? 'bg-smartlease-teal' : 'bg-gray-300'}`}
+              className={`relative w-12 h-6 rounded-full transition-colors ${formData.is_published ? 'bg-smartlease-yellow' : 'bg-gray-300'}`}
             >
               <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${formData.is_published ? 'translate-x-7' : 'translate-x-1'}`} />
             </button>
@@ -379,7 +379,7 @@ export default function PaginaBeheer() {
           <button
             onClick={savePage}
             disabled={saving}
-            className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold bg-smartlease-teal text-white rounded-lg hover:bg-smartlease-teal/90 transition disabled:opacity-60"
+            className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold bg-smartlease-yellow text-white rounded-lg hover:bg-smartlease-yellow/90 transition disabled:opacity-60"
           >
             <Save className="h-4 w-4" />
             {saving ? 'Opslaan...' : 'Opslaan'}
@@ -395,7 +395,7 @@ export default function PaginaBeheer() {
       {/* Toast */}
       {toast && (
         <div className={`fixed top-5 right-5 z-[100] flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-white text-sm font-semibold transition-all ${
-          toast.type === 'success' ? 'bg-smartlease-teal' : 'bg-red-500'
+          toast.type === 'success' ? 'bg-smartlease-yellow' : 'bg-red-500'
         }`}>
           {toast.type === 'success'
             ? <CheckCircle className="h-4 w-4" />
@@ -435,7 +435,7 @@ export default function PaginaBeheer() {
           </div>
           <button
             onClick={startCreate}
-            className="flex items-center gap-2 px-4 py-2.5 bg-smartlease-teal text-white text-sm font-bold rounded-xl hover:bg-smartlease-teal/90 transition shadow-sm"
+            className="flex items-center gap-2 px-4 py-2.5 bg-smartlease-yellow text-white text-sm font-bold rounded-xl hover:bg-smartlease-yellow/90 transition shadow-sm"
           >
             <Plus className="h-4 w-4" /> Nieuwe pagina
           </button>
@@ -449,13 +449,13 @@ export default function PaginaBeheer() {
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Zoek op titel of label..."
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal bg-white"
+              className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow bg-white"
             />
           </div>
           <select
             value={filterParent}
             onChange={e => setFilterParent(e.target.value)}
-            className="border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal bg-white"
+            className="border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow bg-white"
           >
             <option value="all">Alle rubrieken</option>
             {PARENT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -465,7 +465,7 @@ export default function PaginaBeheer() {
         {/* Grouped page lists */}
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-smartlease-teal rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-smartlease-yellow rounded-full animate-spin" />
           </div>
         ) : (
           <div className="space-y-6">
@@ -477,9 +477,9 @@ export default function PaginaBeheer() {
                   {/* Group header */}
                   <div className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-100">
                     <div className="flex items-center gap-2">
-                      <Globe className="h-4 w-4 text-smartlease-teal" />
+                      <Globe className="h-4 w-4 text-smartlease-yellow" />
                       <span className="font-bold text-sm text-gray-700">{group.label}</span>
-                      <span className="text-xs bg-smartlease-teal/10 text-smartlease-teal font-semibold px-2 py-0.5 rounded-full">
+                      <span className="text-xs bg-smartlease-yellow/10 text-smartlease-yellow font-semibold px-2 py-0.5 rounded-full">
                         {groupPages.length}
                       </span>
                     </div>
@@ -521,7 +521,7 @@ export default function PaginaBeheer() {
                                 href={`/${page.slug}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 hover:bg-gray-100 rounded-lg transition text-gray-400 hover:text-smartlease-teal"
+                                className="p-2 hover:bg-gray-100 rounded-lg transition text-gray-400 hover:text-smartlease-yellow"
                                 title="Bekijk pagina"
                               >
                                 <FileText className="h-4 w-4" />
@@ -532,7 +532,7 @@ export default function PaginaBeheer() {
                                 title={page.is_published ? 'Verbergen' : 'Publiceren'}
                               >
                                 {page.is_published
-                                  ? <Eye className="h-4 w-4 text-smartlease-teal" />
+                                  ? <Eye className="h-4 w-4 text-smartlease-yellow" />
                                   : <EyeOff className="h-4 w-4 text-gray-400" />}
                               </button>
                               <button
@@ -579,7 +579,7 @@ export default function PaginaBeheer() {
                               </div>
                               <button
                                 onClick={() => startEdit(page)}
-                                className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-smartlease-teal hover:underline"
+                                className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-smartlease-yellow hover:underline"
                               >
                                 <Pencil className="h-3 w-3" /> Bewerken
                               </button>

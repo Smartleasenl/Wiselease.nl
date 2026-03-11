@@ -37,7 +37,7 @@ export default function InfoPage() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="w-10 h-10 border-2 border-smartlease-teal/20 border-t-smartlease-teal rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-10 h-10 border-2 border-smartlease-yellow/20 border-t-smartlease-yellow rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-400 text-sm">Laden…</p>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function InfoPage() {
         </p>
         <button
           onClick={() => navigate(-1)}
-          className="bg-smartlease-teal text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-smartlease-teal/90 transition"
+          className="bg-smartlease-yellow text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-smartlease-yellow/90 transition"
         >
           ← Terug
         </button>
@@ -86,7 +86,7 @@ export default function InfoPage() {
 
         {/* Hero inhoud */}
         <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 pb-6 sm:pb-10 max-w-6xl mx-auto">
-          <div className="inline-flex bg-smartlease-teal text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded mb-3">
+          <div className="inline-flex bg-smartlease-yellow text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded mb-3">
             {parentLabel}
           </div>
           <h1 className="text-white font-extrabold leading-tight mb-2 max-w-2xl"
@@ -110,7 +110,7 @@ export default function InfoPage() {
 
             {/* Intro */}
             {page.intro && (
-              <div className="bg-white rounded-xl p-6 sm:p-8 mb-6 border-l-4 border-smartlease-teal shadow-sm">
+              <div className="bg-white rounded-xl p-6 sm:p-8 mb-6 border-l-4 border-smartlease-yellow shadow-sm">
                 <p className="text-gray-700 text-base sm:text-lg leading-relaxed m-0">{page.intro}</p>
               </div>
             )}
@@ -141,7 +141,7 @@ export default function InfoPage() {
 
             <button
               onClick={() => navigate(-1)}
-              className="mt-6 inline-flex items-center gap-2 border-2 border-smartlease-teal text-smartlease-teal hover:bg-smartlease-teal hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+              className="mt-6 inline-flex items-center gap-2 border-2 border-smartlease-yellow text-smartlease-yellow hover:bg-smartlease-yellow hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
             >
               <ArrowLeft className="h-3.5 w-3.5" /> Terug
             </button>
@@ -158,7 +158,7 @@ export default function InfoPage() {
               </p>
               <Link
                 to="/offerte"
-                className="block text-center bg-smartlease-teal text-white font-bold py-3 px-4 rounded-xl text-sm hover:bg-smartlease-teal/90 transition-colors shadow-md"
+                className="block text-center bg-smartlease-yellow text-white font-bold py-3 px-4 rounded-xl text-sm hover:bg-smartlease-yellow/90 transition-colors shadow-md"
               >
                 Gratis offerte aanvragen →
               </Link>
@@ -194,12 +194,12 @@ export default function InfoPage() {
                           onClick={() => setSidebarOpen(false)}
                           className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors ${
                             active
-                              ? 'bg-smartlease-teal/10 text-smartlease-teal font-bold'
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-smartlease-teal'
+                              ? 'bg-smartlease-yellow/10 text-smartlease-yellow font-bold'
+                              : 'text-gray-600 hover:bg-gray-50 hover:text-smartlease-yellow'
                           }`}
                         >
                           {p.menu_label}
-                          {active && <ChevronRight className="h-3.5 w-3.5 text-smartlease-teal" />}
+                          {active && <ChevronRight className="h-3.5 w-3.5 text-smartlease-yellow" />}
                         </Link>
                       );
                     })}
@@ -209,7 +209,7 @@ export default function InfoPage() {
             )}
 
             {/* USP's */}
-            <div className="bg-smartlease-teal/8 rounded-xl p-4 border border-smartlease-teal/20 hidden sm:block">
+            <div className="bg-smartlease-yellow/8 rounded-xl p-4 border border-smartlease-yellow/20 hidden sm:block">
               {[
                 '✓  Binnen 24 uur reactie',
                 '✓  Geen kilometerrestrictie',
@@ -219,7 +219,7 @@ export default function InfoPage() {
                 <div
                   key={i}
                   className={`text-smartlease-blue text-sm font-semibold py-2 ${
-                    i < a.length - 1 ? 'border-b border-smartlease-teal/15' : ''
+                    i < a.length - 1 ? 'border-b border-smartlease-yellow/15' : ''
                   }`}
                 >
                   {u}
@@ -232,7 +232,7 @@ export default function InfoPage() {
       </div>
 
       {/* ── BOTTOM BANNER ── */}
-      <div className="bg-gradient-to-r from-smartlease-teal to-smartlease-blue py-12 px-4">
+      <div className="bg-gradient-to-r from-smartlease-yellow to-smartlease-blue py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-white font-extrabold mb-3" style={{ fontSize: 'clamp(18px, 3vw, 30px)' }}>
             Klaar om te starten?
@@ -243,7 +243,7 @@ export default function InfoPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/offerte"
-              className="bg-white text-smartlease-teal font-bold py-3 px-7 rounded-xl text-sm sm:text-base hover:bg-white/90 transition shadow-md"
+              className="bg-white text-smartlease-yellow font-bold py-3 px-7 rounded-xl text-sm sm:text-base hover:bg-white/90 transition shadow-md"
             >
               Gratis offerte aanvragen
             </Link>

@@ -6,7 +6,7 @@ const usps = [
     icon: Users,
     title: '62.000+',
     subtitle: 'Voertuigen beschikbaar',
-    color: 'text-smartlease-teal',
+    color: 'text-smartlease-yellow',
   },
   {
     icon: Shield,
@@ -91,7 +91,7 @@ export function USPSection() {
             return (
               <div
                 key={index}
-                className="reveal text-center p-6 bg-gray-50 rounded-lg border border-gray-200 hover:border-smartlease-teal hover:shadow-md transition-all duration-300"
+                className="reveal text-center p-6 bg-gray-50 rounded-lg border border-gray-200 hover:border-smartlease-yellow hover:shadow-md transition-all duration-300"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white mb-4 border border-gray-200">

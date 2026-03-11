@@ -73,7 +73,7 @@ export default function ReviewsPage() {
           <button
             onClick={() => setFilter(null)}
             className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
-              !filter ? 'bg-smartlease-teal text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              !filter ? 'bg-smartlease-yellow text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
             Alle ({reviews.length})
@@ -86,7 +86,7 @@ export default function ReviewsPage() {
                 key={s}
                 onClick={() => setFilter(filter === s ? null : s)}
                 className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
-                  filter === s ? 'bg-smartlease-teal text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  filter === s ? 'bg-smartlease-yellow text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 {s} <Star className="h-3.5 w-3.5 fill-current" /> ({count})
@@ -100,7 +100,7 @@ export default function ReviewsPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {loading ? (
           <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-gray-200 border-t-smartlease-teal rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-smartlease-yellow rounded-full animate-spin" />
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20 text-gray-400">Geen reviews gevonden.</div>
@@ -112,7 +112,7 @@ export default function ReviewsPage() {
                 className="break-inside-avoid bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
               >
                 {/* Quote icoon */}
-                <Quote className="h-6 w-6 text-smartlease-teal/20 mb-3 -scale-x-100" />
+                <Quote className="h-6 w-6 text-smartlease-yellow/20 mb-3 -scale-x-100" />
 
                 {/* Sterren */}
                 <div className="flex gap-0.5 mb-3">
@@ -150,7 +150,7 @@ export default function ReviewsPage() {
       </div>
 
       {/* ── BOTTOM CTA ── */}
-      <div className="bg-gradient-to-r from-smartlease-teal to-smartlease-blue py-12 px-4">
+      <div className="bg-gradient-to-r from-smartlease-yellow to-smartlease-blue py-12 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-white font-extrabold text-2xl sm:text-3xl mb-3">
             Ook zo tevreden worden?
@@ -159,7 +159,7 @@ export default function ReviewsPage() {
             Vraag vandaag nog een gratis offerte aan. Wij reageren binnen 24 uur.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/offerte" className="bg-white text-smartlease-teal font-bold py-3 px-8 rounded-xl text-sm hover:bg-white/90 transition shadow-md">
+            <Link to="/offerte" className="bg-white text-smartlease-yellow font-bold py-3 px-8 rounded-xl text-sm hover:bg-white/90 transition shadow-md">
               Gratis offerte aanvragen
             </Link>
             <a href="tel:0858008600" className="border-2 border-white/40 text-white font-semibold py-3 px-8 rounded-xl text-sm hover:bg-white/10 transition">

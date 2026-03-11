@@ -59,12 +59,12 @@ function AccordionSection({
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-0 py-5 group"
       >
-        <h3 className="text-lg font-bold text-gray-900 group-hover:text-smartlease-teal transition-colors">
+        <h3 className="text-lg font-bold text-gray-900 group-hover:text-smartlease-yellow transition-colors">
           {title}
         </h3>
         <div
-          className={`w-8 h-8 rounded-full bg-gray-100 group-hover:bg-teal-50 flex items-center justify-center transition-all duration-300 ${
-            open ? 'rotate-180 bg-teal-50' : ''
+          className={`w-8 h-8 rounded-full bg-gray-100 group-hover:bg-yellow-50 flex items-center justify-center transition-all duration-300 ${
+            open ? 'rotate-180 bg-yellow-50' : ''
           }`}
         >
           <ChevronDown className="h-4 w-4" />
@@ -351,7 +351,7 @@ export function VehicleDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f8f9fb]">
-        <Loader2 className="h-12 w-12 text-smartlease-teal animate-spin" />
+        <Loader2 className="h-12 w-12 text-smartlease-yellow animate-spin" />
       </div>
     );
   }
@@ -363,7 +363,7 @@ export function VehicleDetailPage() {
           <p className="text-xl text-gray-600">Voertuig niet gevonden</p>
           <button
             onClick={() => navigate('/aanbod')}
-            className="mt-4 text-smartlease-teal hover:underline font-medium"
+            className="mt-4 text-smartlease-yellow hover:underline font-medium"
           >
             Terug naar overzicht
           </button>
@@ -396,17 +396,17 @@ export function VehicleDetailPage() {
           <div className="flex items-center justify-between">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 text-gray-500 hover:text-smartlease-teal transition-colors font-medium text-sm group"
+              className="flex items-center gap-2 text-gray-500 hover:text-smartlease-yellow transition-colors font-medium text-sm group"
             >
-              <div className="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-teal-50 flex items-center justify-center transition-colors">
+              <div className="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-yellow-50 flex items-center justify-center transition-colors">
                 <ArrowLeft className="h-4 w-4" />
               </div>
               <span className="hidden sm:inline">Terug naar aanbod</span>
             </button>
             <nav className="hidden sm:flex items-center gap-1.5 text-xs text-gray-400">
-              <button onClick={() => navigate('/')} className="hover:text-smartlease-teal transition-colors">Home</button>
+              <button onClick={() => navigate('/')} className="hover:text-smartlease-yellow transition-colors">Home</button>
               <span>›</span>
-              <button onClick={() => navigate('/aanbod')} className="hover:text-smartlease-teal transition-colors">Aanbod</button>
+              <button onClick={() => navigate('/aanbod')} className="hover:text-smartlease-yellow transition-colors">Aanbod</button>
               <span>›</span>
               <span className="text-gray-700 font-medium">{vehicle.merk} {vehicle.model}</span>
             </nav>
@@ -452,7 +452,7 @@ export function VehicleDetailPage() {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
                 {vehicle.btw_marge && (
-                  <span className="absolute top-4 left-4 bg-smartlease-teal text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+                  <span className="absolute top-4 left-4 bg-smartlease-yellow text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
                     {vehicle.btw_marge}
                   </span>
                 )}
@@ -478,7 +478,7 @@ export function VehicleDetailPage() {
                         key={idx}
                         onClick={() => goToImage(idx)}
                         className={`relative rounded-xl overflow-hidden flex-shrink-0 w-20 transition-all duration-300 ${
-                          currentImageIndex === idx ? 'ring-2 ring-smartlease-teal ring-offset-2 scale-105' : 'opacity-60 hover:opacity-100'
+                          currentImageIndex === idx ? 'ring-2 ring-smartlease-yellow ring-offset-2 scale-105' : 'opacity-60 hover:opacity-100'
                         }`}
                         style={{ aspectRatio: '4/3' }}
                       >
@@ -503,7 +503,7 @@ export function VehicleDetailPage() {
                   {vehicle.verkoopprijs > 0 ? (
                     <>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">
+                        <span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-500 bg-clip-text text-transparent">
                           € {calculatorState ? calculatorState.maandbedrag.toLocaleString('nl-NL') : berekenMaandprijs(vehicle.verkoopprijs).toLocaleString('nl-NL')},-
                         </span>
                         <span className="text-sm text-gray-400 font-medium">p/m</span>
@@ -517,28 +517,28 @@ export function VehicleDetailPage() {
               </div>
               <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <div className="flex items-center gap-2.5 px-3.5 py-3 bg-gray-50 rounded-xl border border-gray-100">
-                  <Calendar className="h-[18px] w-[18px] text-smartlease-teal flex-shrink-0" />
+                  <Calendar className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Bouwjaar</p>
                     <p className="text-sm font-semibold text-gray-900">{vehicle.bouwjaar_year}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2.5 px-3.5 py-3 bg-gray-50 rounded-xl border border-gray-100">
-                  <Gauge className="h-[18px] w-[18px] text-smartlease-teal flex-shrink-0" />
+                  <Gauge className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Km-stand</p>
                     <p className="text-sm font-semibold text-gray-900 truncate">{formatKm(vehicle.kmstand)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2.5 px-3.5 py-3 bg-gray-50 rounded-xl border border-gray-100">
-                  <Fuel className="h-[18px] w-[18px] text-smartlease-teal flex-shrink-0" />
+                  <Fuel className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Brandstof</p>
                     <p className="text-sm font-semibold text-gray-900">{vehicle.brandstof}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2.5 px-3.5 py-3 bg-gray-50 rounded-xl border border-gray-100">
-                  <Zap className="h-[18px] w-[18px] text-smartlease-teal flex-shrink-0" />
+                  <Zap className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Vermogen</p>
                     <p className="text-sm font-semibold text-gray-900">{vehicle.vermogen} PK</p>
@@ -559,7 +559,7 @@ export function VehicleDetailPage() {
               <button onClick={handleWhatsApp} className="w-full bg-[#25D366] hover:bg-[#20c05c] text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-green-500/20 text-sm">
                 <MessageCircle className="h-5 w-5" /><span>WhatsApp over deze auto</span>
               </button>
-              <button onClick={handleOfferteNavigate} className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-teal-500/20 text-sm">
+              <button onClick={handleOfferteNavigate} className="w-full bg-gradient-to-r from-yellow-500 to-yellow-500 hover:from-yellow-600 hover:to-yellow-600 text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-yellow-500/20 text-sm">
                 <FileText className="h-5 w-5" /><span>Gratis offerte aanvragen</span>
               </button>
               <button onClick={handleBelMijNavigate} className="w-full bg-white hover:bg-gray-50 text-smartlease-blue border-2 border-smartlease-blue py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all text-sm">
@@ -595,7 +595,7 @@ export function VehicleDetailPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {vehicle.opties.map((optie, idx) => (
                       <div key={idx} className="flex items-center gap-2.5 py-1.5">
-                        <div className="w-5 h-5 rounded-full bg-teal-50 flex items-center justify-center text-smartlease-teal flex-shrink-0">
+                        <div className="w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center text-smartlease-yellow flex-shrink-0">
                           <Check className="h-3 w-3" />
                         </div>
                         <span className="text-sm text-gray-700">{optie}</span>
@@ -633,7 +633,7 @@ export function VehicleDetailPage() {
                           href={vehicle.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-sm text-smartlease-teal hover:underline font-medium"
+                          className="inline-flex items-center gap-2 text-sm text-smartlease-yellow hover:underline font-medium"
                         >
                           <FileText className="h-4 w-4" />
                           Bekijk originele advertentie
@@ -653,7 +653,7 @@ export function VehicleDetailPage() {
                 <button onClick={handleWhatsApp} className="w-full bg-[#25D366] hover:bg-[#20c05c] text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-green-500/20 text-sm">
                   <MessageCircle className="h-5 w-5" /><span>WhatsApp over deze auto</span>
                 </button>
-                <button onClick={handleOfferteNavigate} className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-teal-500/20 text-sm">
+                <button onClick={handleOfferteNavigate} className="w-full bg-gradient-to-r from-yellow-500 to-yellow-500 hover:from-yellow-600 hover:to-yellow-600 text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-yellow-500/20 text-sm">
                   <FileText className="h-5 w-5" /><span>Gratis offerte aanvragen</span>
                 </button>
                 <button onClick={handleBelMijNavigate} className="w-full bg-white hover:bg-gray-50 text-smartlease-blue border-2 border-smartlease-blue py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all text-sm">
@@ -678,7 +678,7 @@ export function VehicleDetailPage() {
             {vehicle.verkoopprijs > 0 ? (
               <>
                 <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Maandbedrag</p>
-                <p className="text-xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">
+                <p className="text-xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-500 bg-clip-text text-transparent">
                   € {(calculatorState ? calculatorState.maandbedrag : berekenMaandprijs(vehicle.verkoopprijs)).toLocaleString('nl-NL')} p/m
                 </p>
               </>
@@ -689,7 +689,7 @@ export function VehicleDetailPage() {
               </>
             )}
           </div>
-          <button onClick={handleOfferteNavigate} className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all shadow-lg shadow-teal-500/20 flex items-center gap-2">
+          <button onClick={handleOfferteNavigate} className="bg-gradient-to-r from-yellow-500 to-yellow-500 hover:from-yellow-600 hover:to-yellow-600 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all shadow-lg shadow-yellow-500/20 flex items-center gap-2">
             <FileText className="h-4 w-4" /><span>Gratis offerte</span>
           </button>
         </div>

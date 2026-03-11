@@ -113,10 +113,10 @@ export function Header() {
       <div className="hidden md:block bg-white border-b border-gray-200 py-2.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-sm">
           <div className="flex items-center space-x-6">
-            <a href="tel:0858008600" className="flex items-center space-x-2 text-gray-700 hover:text-smartlease-teal transition">
-              <Phone className="h-4 w-4 text-smartlease-teal" /><span className="font-semibold">085 - 80 08 600</span>
+            <a href="tel:0858008600" className="flex items-center space-x-2 text-gray-700 hover:text-smartlease-yellow transition">
+              <Phone className="h-4 w-4 text-smartlease-yellow" /><span className="font-semibold">085 - 80 08 600</span>
             </a>
-            <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-700 hover:text-smartlease-teal transition">
+            <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-700 hover:text-smartlease-yellow transition">
               <MessageCircle className="h-4 w-4 text-green-500" /><span>WhatsApp</span>
             </a>
           </div>
@@ -134,7 +134,7 @@ export function Header() {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden relative z-[60] p-2 -ml-2 text-gray-700 hover:text-smartlease-teal transition"
+              className="md:hidden relative z-[60] p-2 -ml-2 text-gray-700 hover:text-smartlease-yellow transition"
               aria-label={mobileMenuOpen ? 'Menu sluiten' : 'Menu openen'}
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -145,7 +145,7 @@ export function Header() {
             </Link>
 
             <div className="flex md:hidden items-center space-x-3 z-[60]">
-              <a href="tel:0858008600" className="p-2 text-gray-700 hover:text-smartlease-teal transition">
+              <a href="tel:0858008600" className="p-2 text-gray-700 hover:text-smartlease-yellow transition">
                 <Phone className="h-5 w-5" />
               </a>
               <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer"
@@ -166,22 +166,22 @@ export function Header() {
                       <div className="flex items-center gap-0.5">
                         <Link
                           to="/aanbod"
-                          className={`font-semibold transition-colors ${isActive ? 'text-smartlease-teal' : 'text-gray-700 hover:text-smartlease-teal'}`}
+                          className={`font-semibold transition-colors ${isActive ? 'text-smartlease-yellow' : 'text-gray-700 hover:text-smartlease-yellow'}`}
                         >
                           {item.label}
                         </Link>
                         <button
                           onClick={() => setOpenDropdown(isOpen ? null : 'aanbod')}
-                          className={`p-0.5 transition-colors ${isActive ? 'text-smartlease-teal' : 'text-gray-700 hover:text-smartlease-teal'}`}
+                          className={`p-0.5 transition-colors ${isActive ? 'text-smartlease-yellow' : 'text-gray-700 hover:text-smartlease-yellow'}`}
                         >
                           <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                         </button>
                       </div>
-                      {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-teal rounded-full" />}
+                      {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-yellow rounded-full" />}
                       {isOpen && (
                         <div className="drop-in absolute top-[calc(100%+1.35rem)] left-1/2 -translate-x-1/2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50">
-                          <div className="px-4 py-3 bg-smartlease-teal/5 border-b border-gray-100">
-                            <span className="font-bold text-smartlease-teal text-sm">Ons aanbod</span>
+                          <div className="px-4 py-3 bg-smartlease-yellow/5 border-b border-gray-100">
+                            <span className="font-bold text-smartlease-yellow text-sm">Ons aanbod</span>
                           </div>
                           <div className="py-2">
                             {AANBOD_SUB.map((sub) => {
@@ -194,13 +194,13 @@ export function Header() {
                                   onClick={() => handleAanbodLink(sub.to)}
                                   className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition-colors ${
                                     isSubActive
-                                      ? 'bg-smartlease-teal/10 text-smartlease-teal font-semibold'
-                                      : 'text-gray-700 hover:bg-gray-50 hover:text-smartlease-teal'
+                                      ? 'bg-smartlease-yellow/10 text-smartlease-yellow font-semibold'
+                                      : 'text-gray-700 hover:bg-gray-50 hover:text-smartlease-yellow'
                                   }`}
                                 >
                                   <Icon className="h-4 w-4 flex-shrink-0 opacity-60" />
                                   {sub.label}
-                                  {isSubActive && <ChevronRight className="h-3.5 w-3.5 ml-auto text-smartlease-teal" />}
+                                  {isSubActive && <ChevronRight className="h-3.5 w-3.5 ml-auto text-smartlease-yellow" />}
                                 </button>
                               );
                             })}
@@ -218,16 +218,16 @@ export function Header() {
                     <div key={item.to} className="relative">
                       <button
                         onClick={() => setOpenDropdown(isOpen ? null : item.dropdownKey!)}
-                        className={`flex items-center gap-1 font-semibold transition-colors ${isActive ? 'text-smartlease-teal' : 'text-gray-700 hover:text-smartlease-teal'}`}
+                        className={`flex items-center gap-1 font-semibold transition-colors ${isActive ? 'text-smartlease-yellow' : 'text-gray-700 hover:text-smartlease-yellow'}`}
                       >
                         {item.label}
                         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-                        {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-teal rounded-full" />}
+                        {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-yellow rounded-full" />}
                       </button>
                       {isOpen && (
                         <div className="drop-in absolute top-[calc(100%+1.35rem)] left-1/2 -translate-x-1/2 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50">
-                          <div className="px-4 py-3 bg-smartlease-teal/5 border-b border-gray-100">
-                            <Link to={item.to} onClick={() => setOpenDropdown(null)} className="font-bold text-smartlease-teal text-sm hover:underline">
+                          <div className="px-4 py-3 bg-smartlease-yellow/5 border-b border-gray-100">
+                            <Link to={item.to} onClick={() => setOpenDropdown(null)} className="font-bold text-smartlease-yellow text-sm hover:underline">
                               Alle {item.label.toLowerCase()} →
                             </Link>
                           </div>
@@ -237,10 +237,10 @@ export function Header() {
                               const isSub = (location.pathname + location.search) === resolvedTo || location.pathname === resolvedTo;
                               return (
                                 <Link key={p.slug} to={resolvedTo} onClick={() => setOpenDropdown(null)}
-                                  className={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${isSub ? 'bg-smartlease-teal/10 text-smartlease-teal font-semibold' : 'text-gray-700 hover:bg-gray-50 hover:text-smartlease-teal'}`}
+                                  className={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${isSub ? 'bg-smartlease-yellow/10 text-smartlease-yellow font-semibold' : 'text-gray-700 hover:bg-gray-50 hover:text-smartlease-yellow'}`}
                                 >
                                   {p.menu_label}
-                                  {isSub && <ChevronRight className="h-3.5 w-3.5 text-smartlease-teal" />}
+                                  {isSub && <ChevronRight className="h-3.5 w-3.5 text-smartlease-yellow" />}
                                 </Link>
                               );
                             })}
@@ -258,13 +258,13 @@ export function Header() {
                     <Link
                       key={item.to}
                       to={item.to}
-                      className={`relative font-semibold transition-colors flex items-center gap-1.5 ${isActive ? 'text-smartlease-teal' : 'text-gray-700 hover:text-smartlease-teal'}`}
+                      className={`relative font-semibold transition-colors flex items-center gap-1.5 ${isActive ? 'text-smartlease-yellow' : 'text-gray-700 hover:text-smartlease-yellow'}`}
                     >
                       {item.label}
-                      <span className="bg-smartlease-teal text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                      <span className="bg-smartlease-yellow text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
                         Nieuw
                       </span>
-                      {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-teal rounded-full" />}
+                      {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-yellow rounded-full" />}
                     </Link>
                   );
                 }
@@ -272,9 +272,9 @@ export function Header() {
                 const isActive = location.pathname === item.to;
                 return (
                   <Link key={item.to} to={item.to}
-                    className={`relative font-semibold transition-colors ${isActive ? 'text-smartlease-teal' : 'text-gray-700 hover:text-smartlease-teal'}`}>
+                    className={`relative font-semibold transition-colors ${isActive ? 'text-smartlease-yellow' : 'text-gray-700 hover:text-smartlease-yellow'}`}>
                     {item.label}
-                    {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-teal rounded-full" />}
+                    {isActive && <span className="absolute -bottom-[1.35rem] left-0 right-0 h-0.5 bg-smartlease-yellow rounded-full" />}
                   </Link>
                 );
               })}
@@ -288,7 +288,7 @@ export function Header() {
         <div className="hidden md:flex items-center justify-center space-x-8 py-2">
           {USP_ITEMS.map((usp, i) => (
             <span key={i} className="inline-flex items-center text-white text-sm font-medium">
-              <Check className="h-3.5 w-3.5 mr-1.5 text-smartlease-teal flex-shrink-0" />{usp}
+              <Check className="h-3.5 w-3.5 mr-1.5 text-smartlease-yellow flex-shrink-0" />{usp}
             </span>
           ))}
         </div>
@@ -296,7 +296,7 @@ export function Header() {
           <div className="animate-marquee flex whitespace-nowrap py-2">
             {[...USP_ITEMS, ...USP_ITEMS].map((usp, i) => (
               <span key={i} className="inline-flex items-center mx-6 text-white text-xs font-medium">
-                <Check className="h-3.5 w-3.5 mr-1.5 text-smartlease-teal flex-shrink-0" />{usp}
+                <Check className="h-3.5 w-3.5 mr-1.5 text-smartlease-yellow flex-shrink-0" />{usp}
               </span>
             ))}
           </div>
@@ -331,18 +331,18 @@ export function Header() {
                   <div key={item.to}>
                     <button
                       onClick={() => setMobileExpanded(isExpanded ? null : item.to)}
-                      className={`w-full group flex items-center space-x-4 px-4 py-4 rounded-2xl mb-1 transition-all duration-200 ${isActive ? 'bg-smartlease-teal/10' : 'hover:bg-gray-50'}`}
+                      className={`w-full group flex items-center space-x-4 px-4 py-4 rounded-2xl mb-1 transition-all duration-200 ${isActive ? 'bg-smartlease-yellow/10' : 'hover:bg-gray-50'}`}
                       style={{
                         opacity: mobileMenuOpen ? 1 : 0,
                         transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)',
                         transition: `opacity .3s ease ${idx * .06}s, transform .3s ease ${idx * .06}s`,
                       }}
                     >
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${isActive ? 'bg-smartlease-teal text-white' : 'bg-gray-100 text-gray-500'}`}>
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${isActive ? 'bg-smartlease-yellow text-white' : 'bg-gray-100 text-gray-500'}`}>
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="flex-1 text-left min-w-0">
-                        <p className={`font-bold text-base ${isActive ? 'text-smartlease-teal' : 'text-gray-900'}`}>{item.label}</p>
+                        <p className={`font-bold text-base ${isActive ? 'text-smartlease-yellow' : 'text-gray-900'}`}>{item.label}</p>
                         <p className="text-xs text-gray-400 mt-0.5">{item.desc}</p>
                       </div>
                       <ChevronDown className={`h-4 w-4 flex-shrink-0 text-gray-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
@@ -357,7 +357,7 @@ export function Header() {
                             <button
                               key={sub.to}
                               onClick={() => { setMobileMenuOpen(false); navigate(sub.to); }}
-                              className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-colors text-left ${isSub ? 'bg-smartlease-teal/10 text-smartlease-teal font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-smartlease-teal'}`}
+                              className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-colors text-left ${isSub ? 'bg-smartlease-yellow/10 text-smartlease-yellow font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-smartlease-yellow'}`}
                             >
                               <SubIcon className="h-4 w-4 opacity-60 flex-shrink-0" />
                               {sub.label}
@@ -377,18 +377,18 @@ export function Header() {
                   <div key={item.to}>
                     <button
                       onClick={() => setMobileExpanded(isExpanded ? null : item.to)}
-                      className={`w-full group flex items-center space-x-4 px-4 py-4 rounded-2xl mb-1 transition-all duration-200 ${isActive ? 'bg-smartlease-teal/10' : 'hover:bg-gray-50'}`}
+                      className={`w-full group flex items-center space-x-4 px-4 py-4 rounded-2xl mb-1 transition-all duration-200 ${isActive ? 'bg-smartlease-yellow/10' : 'hover:bg-gray-50'}`}
                       style={{
                         opacity: mobileMenuOpen ? 1 : 0,
                         transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)',
                         transition: `opacity .3s ease ${idx * .06}s, transform .3s ease ${idx * .06}s`,
                       }}
                     >
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${isActive ? 'bg-smartlease-teal text-white' : 'bg-gray-100 text-gray-500'}`}>
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${isActive ? 'bg-smartlease-yellow text-white' : 'bg-gray-100 text-gray-500'}`}>
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="flex-1 text-left min-w-0">
-                        <p className={`font-bold text-base ${isActive ? 'text-smartlease-teal' : 'text-gray-900'}`}>{item.label}</p>
+                        <p className={`font-bold text-base ${isActive ? 'text-smartlease-yellow' : 'text-gray-900'}`}>{item.label}</p>
                         <p className="text-xs text-gray-400 mt-0.5">{item.desc}</p>
                       </div>
                       <ChevronDown className={`h-4 w-4 flex-shrink-0 text-gray-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
@@ -396,7 +396,7 @@ export function Header() {
                     {isExpanded && (
                       <div className="ml-[3.75rem] mb-2 flex flex-col gap-0.5">
                         <Link to={item.to} onClick={() => setMobileMenuOpen(false)}
-                          className="px-4 py-2.5 rounded-xl text-sm font-semibold text-smartlease-teal hover:bg-smartlease-teal/10 transition-colors">
+                          className="px-4 py-2.5 rounded-xl text-sm font-semibold text-smartlease-yellow hover:bg-smartlease-yellow/10 transition-colors">
                           Overzichtspagina →
                         </Link>
                         {subPages.map((p) => {
@@ -404,7 +404,7 @@ export function Header() {
                           const isSub = location.pathname === resolvedTo;
                           return (
                             <Link key={p.slug} to={resolvedTo} onClick={() => setMobileMenuOpen(false)}
-                              className={`px-4 py-2.5 rounded-xl text-sm transition-colors ${isSub ? 'bg-smartlease-teal/10 text-smartlease-teal font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-smartlease-teal'}`}>
+                              className={`px-4 py-2.5 rounded-xl text-sm transition-colors ${isSub ? 'bg-smartlease-yellow/10 text-smartlease-yellow font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-smartlease-yellow'}`}>
                               {p.menu_label}
                             </Link>
                           );
@@ -419,28 +419,28 @@ export function Header() {
               const isVergelijker = item.to === '/offerte-vergelijker';
               return (
                 <Link key={item.to} to={item.to} onClick={() => setMobileMenuOpen(false)}
-                  className={`group flex items-center space-x-4 px-4 py-4 rounded-2xl mb-2 transition-all duration-200 ${isActive ? 'bg-smartlease-teal/10' : 'hover:bg-gray-50 active:bg-gray-100'}`}
+                  className={`group flex items-center space-x-4 px-4 py-4 rounded-2xl mb-2 transition-all duration-200 ${isActive ? 'bg-smartlease-yellow/10' : 'hover:bg-gray-50 active:bg-gray-100'}`}
                   style={{
                     opacity: mobileMenuOpen ? 1 : 0,
                     transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)',
                     transition: `opacity .3s ease ${idx * .06}s, transform .3s ease ${idx * .06}s`,
                   }}
                 >
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors ${isActive ? 'bg-smartlease-teal text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-smartlease-teal/10 group-hover:text-smartlease-teal'}`}>
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors ${isActive ? 'bg-smartlease-yellow text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-smartlease-yellow/10 group-hover:text-smartlease-yellow'}`}>
                     <Icon className="h-5 w-5" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`font-bold text-base flex items-center gap-2 ${isActive ? 'text-smartlease-teal' : 'text-gray-900'}`}>
+                    <p className={`font-bold text-base flex items-center gap-2 ${isActive ? 'text-smartlease-yellow' : 'text-gray-900'}`}>
                       {item.label}
                       {isVergelijker && (
-                        <span className="bg-smartlease-teal text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                        <span className="bg-smartlease-yellow text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
                           Nieuw
                         </span>
                       )}
                     </p>
                     <p className="text-xs text-gray-400 mt-0.5">{item.desc}</p>
                   </div>
-                  <ChevronRight className={`h-4 w-4 flex-shrink-0 transition-colors ${isActive ? 'text-smartlease-teal' : 'text-gray-300 group-hover:text-smartlease-teal'}`} />
+                  <ChevronRight className={`h-4 w-4 flex-shrink-0 transition-colors ${isActive ? 'text-smartlease-yellow' : 'text-gray-300 group-hover:text-smartlease-yellow'}`} />
                 </Link>
               );
             })}
@@ -451,8 +451,8 @@ export function Header() {
           <div className="px-4 py-6">
             <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-4 mb-3">Contact</p>
             <a href="tel:0858008600" className="flex items-center space-x-4 px-4 py-3.5 rounded-2xl hover:bg-gray-50 transition mb-2">
-              <div className="w-11 h-11 rounded-xl bg-smartlease-teal/10 flex items-center justify-center flex-shrink-0">
-                <Phone className="h-5 w-5 text-smartlease-teal" />
+              <div className="w-11 h-11 rounded-xl bg-smartlease-yellow/10 flex items-center justify-center flex-shrink-0">
+                <Phone className="h-5 w-5 text-smartlease-yellow" />
               </div>
               <div>
                 <p className="font-bold text-gray-900">085 - 80 08 600</p>

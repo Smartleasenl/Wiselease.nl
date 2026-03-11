@@ -16,7 +16,7 @@ interface BlogPost {
 }
 
 const GRADIENT_MAP: Record<string, string> = {
-  'Advies':    'from-teal-500 to-cyan-500',
+  'Advies':    'from-yellow-500 to-yellow-500',
   'Fiscaal':   'from-blue-500 to-indigo-500',
   'Top 10':    'from-violet-500 to-purple-500',
   'Elektrisch':'from-emerald-500 to-green-500',
@@ -92,7 +92,7 @@ export function BlogSection() {
   return (
     <section ref={sectionRef} className="relative pt-20 md:pt-28 pb-10 md:pb-14 overflow-hidden bg-[#f8f9fb]">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-teal-100/40 to-cyan-100/30 rounded-full blur-[100px]" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-yellow-100/40 to-yellow-100/30 rounded-full blur-[100px]" />
         <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-gradient-to-tr from-blue-100/30 to-indigo-100/20 rounded-full blur-[100px]" />
       </div>
 
@@ -100,23 +100,23 @@ export function BlogSection() {
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between mb-12 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div>
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 border border-teal-200/50 text-teal-600 px-4 py-2 rounded-full mb-4">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500/10 to-yellow-500/10 border border-yellow-200/50 text-yellow-600 px-4 py-2 rounded-full mb-4">
               <Sparkles className="h-4 w-4" />
               <span className="font-semibold text-sm">Updates & Insights</span>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.1]">
               Het laatste{' '}
-              <span className="bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent">nieuws</span>
+              <span className="bg-gradient-to-r from-yellow-500 to-yellow-500 bg-clip-text text-transparent">nieuws</span>
             </h2>
             <p className="text-gray-500 mt-3 text-lg max-w-lg">Tips, trends en inzichten over financial lease</p>
           </div>
           <div className="hidden md:flex items-center gap-3 mt-4 md:mt-0">
             <button onClick={() => scroll('left')} disabled={!canScrollLeft}
-              className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-teal-500 hover:border-teal-300 hover:shadow-lg disabled:opacity-30 transition-all duration-300">
+              className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-yellow-500 hover:border-yellow-300 hover:shadow-lg disabled:opacity-30 transition-all duration-300">
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button onClick={() => scroll('right')} disabled={!canScrollRight}
-              className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-teal-500 hover:border-teal-300 hover:shadow-lg disabled:opacity-30 transition-all duration-300">
+              className="w-12 h-12 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-yellow-500 hover:border-yellow-300 hover:shadow-lg disabled:opacity-30 transition-all duration-300">
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
@@ -152,11 +152,11 @@ export function BlogSection() {
                 </div>
                 <div className="flex flex-col flex-1 p-5 md:p-6">
                   <p className="text-xs text-gray-400 font-medium mb-2">{formatDate(post.published_at)}</p>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 leading-snug group-hover:text-teal-600 transition-colors duration-300 line-clamp-2">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 leading-snug group-hover:text-yellow-600 transition-colors duration-300 line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="text-sm text-gray-500 leading-relaxed mb-4 line-clamp-2 flex-1">{post.excerpt}</p>
-                  <div className="flex items-center gap-2 text-sm font-bold text-teal-500 group-hover:text-teal-600 transition-colors">
+                  <div className="flex items-center gap-2 text-sm font-bold text-yellow-500 group-hover:text-yellow-600 transition-colors">
                     <span>Lees verder</span>
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform duration-300" />
                   </div>
@@ -171,14 +171,14 @@ export function BlogSection() {
         <div className="flex items-center justify-center gap-2.5 mt-8">
           {posts.map((_, idx) => (
             <button key={idx} onClick={() => scrollToIndex(idx)}
-              className={`transition-all duration-400 rounded-full ${activeIndex === idx ? 'w-8 h-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 shadow-lg shadow-teal-500/30' : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'}`} />
+              className={`transition-all duration-400 rounded-full ${activeIndex === idx ? 'w-8 h-2.5 bg-gradient-to-r from-yellow-500 to-yellow-500 shadow-lg shadow-yellow-500/30' : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'}`} />
           ))}
         </div>
 
         {/* CTA */}
         <div className={`text-center mt-12 transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '900ms' }}>
           <button onClick={() => navigate('/blog')}
-            className="group inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 px-6 py-3.5 rounded-xl font-semibold text-sm border border-gray-200 hover:border-teal-300 transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-teal-500/10">
+            className="group inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-700 px-6 py-3.5 rounded-xl font-semibold text-sm border border-gray-200 hover:border-yellow-300 transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-yellow-500/10">
             Bekijk alle artikelen
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </button>

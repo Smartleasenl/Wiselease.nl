@@ -221,7 +221,7 @@ export function BelMijPage() {
                   </div>
                   <p className="text-sm text-gray-600 font-semibold">{vehicleTitle}</p>
                   {vehicle.verkoopprijs && vehicle.verkoopprijs > 0 && (
-                    <p className="text-sm font-bold text-smartlease-teal mt-1">{fmt(vehicle.verkoopprijs)}</p>
+                    <p className="text-sm font-bold text-smartlease-yellow mt-1">{fmt(vehicle.verkoopprijs)}</p>
                   )}
                 </div>
               )}
@@ -257,14 +257,14 @@ export function BelMijPage() {
                     </div>
                     <div className="border-t border-gray-200 pt-2 flex justify-between">
                       <span className="font-bold text-gray-900">Maandbedrag</span>
-                      <span className="font-bold text-smartlease-teal">€ {calculator.maandbedrag} p/m</span>
+                      <span className="font-bold text-smartlease-yellow">€ {calculator.maandbedrag} p/m</span>
                     </div>
                   </div>
                 </div>
               )}
 
               <div className="flex gap-3 pt-2">
-                <Link to="/aanbod" className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-smartlease-teal text-white rounded-xl font-semibold hover:bg-smartlease-teal/90 transition">
+                <Link to="/aanbod" className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-smartlease-yellow text-white rounded-xl font-semibold hover:bg-smartlease-yellow/90 transition">
                   <Car className="h-5 w-5" /> Bekijk meer auto's
                 </Link>
                 <Link to="/" className="flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition">
@@ -283,9 +283,9 @@ export function BelMijPage() {
     <div className="bg-[#f8f9fb] min-h-screen">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <nav className="text-sm text-gray-400 mb-6">
-          <Link to="/" className="hover:text-smartlease-teal transition">Home</Link>
+          <Link to="/" className="hover:text-smartlease-yellow transition">Home</Link>
           <span className="mx-2">›</span>
-          <Link to="/aanbod" className="hover:text-smartlease-teal transition">Aanbod</Link>
+          <Link to="/aanbod" className="hover:text-smartlease-yellow transition">Aanbod</Link>
           <span className="mx-2">›</span>
           <span className="text-gray-700">Terugbelverzoek</span>
         </nav>
@@ -316,48 +316,48 @@ export function BelMijPage() {
 
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <User className="h-5 w-5 text-smartlease-teal" />
+                  <User className="h-5 w-5 text-smartlease-yellow" />
                   <h2 className="font-bold text-gray-900">Persoonlijke gegevens</h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">Voornaam <span className="text-red-500">*</span></label>
                     <input type="text" required value={form.voornaam} onChange={(e) => setForm({ ...form, voornaam: e.target.value })} placeholder="Jan"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">Achternaam <span className="text-red-500">*</span></label>
                     <input type="text" required value={form.achternaam} onChange={(e) => setForm({ ...form, achternaam: e.target.value })} placeholder="de Vries"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">E-mailadres <span className="text-red-500">*</span></label>
                     <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="jan@bedrijf.nl"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">Telefoonnummer <span className="text-red-500">*</span></label>
                     <input type="tel" required value={form.telefoon} onChange={(e) => setForm({ ...form, telefoon: e.target.value })} placeholder="06 - 12345678"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                   </div>
                 </div>
               </div>
 
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <Building2 className="h-5 w-5 text-smartlease-teal" />
+                  <Building2 className="h-5 w-5 text-smartlease-yellow" />
                   <h2 className="font-bold text-gray-900">Bedrijfsgegevens</h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">Bedrijfsnaam <span className="text-red-500">*</span></label>
                     <input type="text" required value={form.bedrijfsnaam} onChange={(e) => setForm({ ...form, bedrijfsnaam: e.target.value })} placeholder="Bedrijfsnaam B.V."
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">KvK-nummer <span className="text-gray-400 font-normal">(optioneel)</span></label>
                     <input type="text" value={form.kvk_nummer} onChange={(e) => setForm({ ...form, kvk_nummer: e.target.value })} placeholder="12345678" maxLength={8}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                   </div>
                 </div>
               </div>
@@ -368,7 +368,7 @@ export function BelMijPage() {
                 </label>
                 <textarea value={form.bericht} onChange={(e) => setForm({ ...form, bericht: e.target.value })}
                   placeholder="Bijv. 's ochtends tussen 9:00 en 12:00, of heb je nog specifieke vragen?" rows={3}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition resize-y" />
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition resize-y" />
               </div>
 
               <button type="submit" disabled={loading}
@@ -389,13 +389,13 @@ export function BelMijPage() {
                   <VehiclePhoto imageUrl={cachedImageUrl} title={vehicleTitle} />
                   <div className="p-4">
                     <div className="flex items-center gap-2 mb-3">
-                      <Car className="h-4 w-4 text-smartlease-teal flex-shrink-0" />
+                      <Car className="h-4 w-4 text-smartlease-yellow flex-shrink-0" />
                       <h3 className="font-bold text-gray-900 text-sm">Gekozen voertuig</h3>
                     </div>
                     <h4 className="font-bold text-gray-900">{vehicle.merk} {vehicle.model}</h4>
                     {vehicle.uitvoering && <p className="text-xs text-gray-500 mt-0.5">{vehicle.uitvoering}</p>}
                     {vehicle.verkoopprijs && vehicle.verkoopprijs > 0 && (
-                      <p className="text-lg font-bold text-smartlease-teal mt-2">{fmt(vehicle.verkoopprijs)}</p>
+                      <p className="text-lg font-bold text-smartlease-yellow mt-2">{fmt(vehicle.verkoopprijs)}</p>
                     )}
                     <div className="grid grid-cols-2 gap-2 text-xs mt-3">
                       {vehicle.bouwjaar && (
@@ -431,7 +431,7 @@ export function BelMijPage() {
               {calculator && (
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
                   <h3 className="flex items-center gap-2 font-bold text-gray-900 text-sm mb-3">
-                    <Calculator className="h-4 w-4 text-smartlease-teal" /> Jouw berekening
+                    <Calculator className="h-4 w-4 text-smartlease-yellow" /> Jouw berekening
                   </h3>
                   <div className="space-y-2">
                     {vehicle?.verkoopprijs && vehicle.verkoopprijs > 0 && (
@@ -460,7 +460,7 @@ export function BelMijPage() {
                     </div>
                     <div className="border-t border-gray-100 pt-2 flex justify-between">
                       <span className="text-gray-900 font-semibold">Maandbedrag</span>
-                      <span className="text-lg font-bold text-smartlease-teal">{fmt(calculator.maandbedrag)}/mnd</span>
+                      <span className="text-lg font-bold text-smartlease-yellow">{fmt(calculator.maandbedrag)}/mnd</span>
                     </div>
                   </div>
                 </div>
@@ -468,13 +468,13 @@ export function BelMijPage() {
 
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
                 <h3 className="font-bold text-gray-900 text-sm">Vragen?</h3>
-                <a href="tel:0858008600" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-teal transition">
+                <a href="tel:0858008600" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-yellow transition">
                   <Phone className="h-4 w-4" /> 085 - 80 08 600
                 </a>
                 <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-600 hover:text-green-600 transition">
                   <MessageCircle className="h-4 w-4" /> WhatsApp
                 </a>
-                <a href="mailto:info@smartlease.nl" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-teal transition">
+                <a href="mailto:info@smartlease.nl" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-yellow transition">
                   <Mail className="h-4 w-4" /> info@smartlease.nl
                 </a>
               </div>

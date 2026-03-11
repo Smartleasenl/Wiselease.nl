@@ -97,10 +97,10 @@ function SidebarContent({ onClose, onLogout, isActive }: {
           return (
             <Link key={item.to} to={item.to} onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
-                active ? 'bg-smartlease-teal/10 text-smartlease-teal' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                active ? 'bg-smartlease-yellow/10 text-smartlease-yellow' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
             >
-              <Icon className={`h-5 w-5 flex-shrink-0 ${active ? 'text-smartlease-teal' : 'text-gray-400'}`} />
+              <Icon className={`h-5 w-5 flex-shrink-0 ${active ? 'text-smartlease-yellow' : 'text-gray-400'}`} />
               {item.label}
               {active && <ChevronRight className="h-4 w-4 ml-auto" />}
             </Link>

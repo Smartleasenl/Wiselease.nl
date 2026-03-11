@@ -310,14 +310,14 @@ export function Hero() {
           >
 {(<>
   Waar{' '}
-  <span className="text-smartlease-teal">slim</span>{' '}
+  <span className="text-smartlease-yellow">slim</span>{' '}
   {heroTitle.split(' ').slice(2).join(' ')}
 </>)}
           </h1>
 
           <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
             Zoek in onze{' '}
-            <span className="text-smartlease-teal font-bold tabular-nums">
+            <span className="text-smartlease-yellow font-bold tabular-nums">
               {totalCount !== null && totalCount > 0 ? (
                 <AnimatedCounter target={totalCount} />
               ) : (
@@ -340,7 +340,7 @@ export function Hero() {
                 onKeyDown={handleKeyDown}
                 onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
                 placeholder="Zoek op merk of model, bijv. Audi Q5..."
-                className="w-full pl-11 pr-10 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 font-medium focus:ring-2 focus:ring-smartlease-teal focus:border-smartlease-teal transition-all"
+                className="w-full pl-11 pr-10 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 font-medium focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow transition-all"
               />
               {searchQuery && (
                 <button
@@ -359,12 +359,12 @@ export function Hero() {
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={() => handleSuggestionClick(suggestion)}
                       className={`w-full text-left px-4 py-2.5 flex items-center gap-3 transition-colors border-b border-gray-50 last:border-0 ${
-                        i === activeSuggestion ? 'bg-teal-50' : 'hover:bg-gray-50'
+                        i === activeSuggestion ? 'bg-yellow-50' : 'hover:bg-gray-50'
                       }`}
                     >
                       <Search className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <span className={`text-sm font-medium ${i === activeSuggestion ? 'text-smartlease-teal' : 'text-gray-800'}`}>
+                        <span className={`text-sm font-medium ${i === activeSuggestion ? 'text-smartlease-yellow' : 'text-gray-800'}`}>
                           {suggestion.label}
                         </span>
                       </div>
@@ -415,7 +415,7 @@ export function Hero() {
 
               <button
                 onClick={handleSearch}
-                className="bg-smartlease-teal hover:bg-teal-600 text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-all shadow-md hover:shadow-lg whitespace-nowrap"
+                className="bg-smartlease-yellow hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-all shadow-md hover:shadow-lg whitespace-nowrap"
               >
                 <Search className="h-5 w-5" />
                 <span>Vinden</span>
@@ -433,7 +433,7 @@ export function Hero() {
                 <button
                   key={brand.name}
                   onClick={() => handleBrandClick(brand.name)}
-                  className="flex items-center space-x-2 bg-white hover:bg-gray-50 border border-gray-200 hover:border-smartlease-teal rounded-full px-4 py-2 md:px-5 md:py-2.5 transition-all duration-200 group shadow-sm hover:shadow-md"
+                  className="flex items-center space-x-2 bg-white hover:bg-gray-50 border border-gray-200 hover:border-smartlease-yellow rounded-full px-4 py-2 md:px-5 md:py-2.5 transition-all duration-200 group shadow-sm hover:shadow-md"
                 >
                   <img
                     src={brand.logo}
@@ -441,7 +441,7 @@ export function Hero() {
                     className="h-5 w-5 md:h-6 md:w-6 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
                     loading="lazy"
                   />
-                  <span className="text-sm font-medium text-gray-600 group-hover:text-smartlease-teal transition-colors">
+                  <span className="text-sm font-medium text-gray-600 group-hover:text-smartlease-yellow transition-colors">
                     {brand.short || brand.name}
                   </span>
                 </button>

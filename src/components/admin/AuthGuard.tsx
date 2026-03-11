@@ -43,7 +43,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-smartlease-teal mx-auto mb-3" />
+          <Loader2 className="h-8 w-8 animate-spin text-smartlease-yellow mx-auto mb-3" />
           <p className="text-sm text-gray-500">Laden...</p>
         </div>
       </div>

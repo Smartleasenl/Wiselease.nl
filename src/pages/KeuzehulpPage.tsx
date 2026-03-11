@@ -187,7 +187,7 @@ function scoreVehicle(v: any, p: Prefs): ScoredVehicle {
 function ProgressBar({ step, total }: { step: number; total: number }) {
   return (
     <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
-      <div className="h-full bg-gradient-to-r from-smartlease-teal to-teal-400 rounded-full transition-all duration-500"
+      <div className="h-full bg-gradient-to-r from-smartlease-yellow to-yellow-400 rounded-full transition-all duration-500"
         style={{ width: `${((step + 1) / total) * 100}%` }} />
     </div>
   );
@@ -356,11 +356,11 @@ export function KeuzehulpPage() {
               key={o.id}
               onClick={() => setPrefs({ ...prefs, vehicleType: o.id })}
               className={`w-full flex items-center space-x-3 p-5 rounded-xl border-2 text-left transition-all ${
-                sel ? 'border-smartlease-teal bg-smartlease-teal/5' : 'border-gray-200 hover:border-gray-300'
+                sel ? 'border-smartlease-yellow bg-smartlease-yellow/5' : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                sel ? 'bg-smartlease-teal text-white' : 'bg-gray-100 text-gray-400'
+                sel ? 'bg-smartlease-yellow text-white' : 'bg-gray-100 text-gray-400'
               }`}>
                 <Icon className="h-6 w-6" />
               </div>
@@ -368,7 +368,7 @@ export function KeuzehulpPage() {
                 <p className="font-bold text-gray-900">{o.label}</p>
                 <p className="text-xs text-gray-500">{o.desc}</p>
               </div>
-              {sel && <Check className="h-5 w-5 text-smartlease-teal flex-shrink-0" />}
+              {sel && <Check className="h-5 w-5 text-smartlease-yellow flex-shrink-0" />}
             </button>
           );
         })}
@@ -386,7 +386,7 @@ export function KeuzehulpPage() {
         <button
           onClick={() => setPrefs({ ...prefs, budgetType: 'maand', budgetMin: 0, budgetMax: 500 })}
           className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition ${
-            prefs.budgetType === 'maand' ? 'bg-white text-smartlease-teal shadow-sm' : 'text-gray-500'
+            prefs.budgetType === 'maand' ? 'bg-white text-smartlease-yellow shadow-sm' : 'text-gray-500'
           }`}
         >
           Per maand
@@ -394,7 +394,7 @@ export function KeuzehulpPage() {
         <button
           onClick={() => setPrefs({ ...prefs, budgetType: 'aanschaf', budgetMin: 0, budgetMax: 30000 })}
           className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition ${
-            prefs.budgetType === 'aanschaf' ? 'bg-white text-smartlease-teal shadow-sm' : 'text-gray-500'
+            prefs.budgetType === 'aanschaf' ? 'bg-white text-smartlease-yellow shadow-sm' : 'text-gray-500'
           }`}
         >
           Aankoopbedrag
@@ -404,11 +404,11 @@ export function KeuzehulpPage() {
         <div>
           <div className="flex justify-between mb-2">
             <span className="text-sm font-medium text-gray-700">Maximum per maand</span>
-            <span className="text-lg font-bold text-smartlease-teal">€ {prefs.budgetMax} p/m</span>
+            <span className="text-lg font-bold text-smartlease-yellow">€ {prefs.budgetMax} p/m</span>
           </div>
           <input type="range" min={100} max={2000} step={50} value={prefs.budgetMax}
             onChange={(e) => setPrefs({ ...prefs, budgetMax: +e.target.value })}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-teal" />
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-yellow" />
           <div className="flex justify-between text-xs text-gray-400 mt-1">
             <span>€ 100</span><span>€ 2.000</span>
           </div>
@@ -417,11 +417,11 @@ export function KeuzehulpPage() {
         <div>
           <div className="flex justify-between mb-2">
             <span className="text-sm font-medium text-gray-700">Maximum</span>
-            <span className="text-lg font-bold text-smartlease-teal">{fmt(prefs.budgetMax)}</span>
+            <span className="text-lg font-bold text-smartlease-yellow">{fmt(prefs.budgetMax)}</span>
           </div>
           <input type="range" min={5000} max={150000} step={1000} value={prefs.budgetMax}
             onChange={(e) => setPrefs({ ...prefs, budgetMax: +e.target.value })}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-teal" />
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-yellow" />
           <div className="flex justify-between text-xs text-gray-400 mt-1">
             <span>€ 5.000</span><span>€ 150.000</span>
           </div>
@@ -444,11 +444,11 @@ export function KeuzehulpPage() {
               key={t.value}
               onClick={() => setPrefs({ ...prefs, carrosserie: tog(prefs.carrosserie, t.value) })}
               className={`flex items-center justify-between p-4 rounded-xl border-2 text-left transition-all ${
-                sel ? 'border-smartlease-teal bg-smartlease-teal/5' : 'border-gray-200 hover:border-gray-300'
+                sel ? 'border-smartlease-yellow bg-smartlease-yellow/5' : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <span className="font-semibold text-sm">{t.label}</span>
-              {sel && <Check className="h-4 w-4 text-smartlease-teal" />}
+              {sel && <Check className="h-4 w-4 text-smartlease-yellow" />}
             </button>
           );
         })}
@@ -471,7 +471,7 @@ export function KeuzehulpPage() {
               return (
                 <button key={b} onClick={() => setPrefs({ ...prefs, brandstof: tog(prefs.brandstof, b) })}
                   className={`px-3.5 py-2 rounded-lg text-sm font-semibold border-2 transition ${
-                    sel ? 'border-smartlease-teal bg-smartlease-teal/5 text-smartlease-teal' : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                    sel ? 'border-smartlease-yellow bg-smartlease-yellow/5 text-smartlease-yellow' : 'border-gray-200 text-gray-600 hover:border-gray-300'
                   }`}>
                   {sel && <Check className="h-3.5 w-3.5 inline mr-1 -mt-0.5" />}{b}
                 </button>
@@ -485,7 +485,7 @@ export function KeuzehulpPage() {
             {['', 'Automaat', 'Handgeschakeld'].map((t) => (
               <button key={t} onClick={() => setPrefs({ ...prefs, transmissie: t })}
                 className={`px-3.5 py-2 rounded-lg text-sm font-semibold border-2 transition ${
-                  prefs.transmissie === t ? 'border-smartlease-teal bg-smartlease-teal/5 text-smartlease-teal' : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                  prefs.transmissie === t ? 'border-smartlease-yellow bg-smartlease-yellow/5 text-smartlease-yellow' : 'border-gray-200 text-gray-600 hover:border-gray-300'
                 }`}>
                 {t || 'Geen voorkeur'}
               </button>
@@ -495,11 +495,11 @@ export function KeuzehulpPage() {
         <div>
           <div className="flex justify-between mb-2">
             <label className="text-sm font-bold text-gray-700">Minimaal bouwjaar</label>
-            <span className="text-sm font-bold text-smartlease-teal">{prefs.bouwjaarMin}</span>
+            <span className="text-sm font-bold text-smartlease-yellow">{prefs.bouwjaarMin}</span>
           </div>
           <input type="range" min={2010} max={2026} step={1} value={prefs.bouwjaarMin}
             onChange={(e) => setPrefs({ ...prefs, bouwjaarMin: +e.target.value })}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-teal" />
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-yellow" />
           <div className="flex justify-between text-xs text-gray-400 mt-1">
             <span>2010</span><span>2026</span>
           </div>
@@ -523,16 +523,16 @@ export function KeuzehulpPage() {
               key={m.id}
               onClick={() => setPrefs({ ...prefs, mustHave: tog(prefs.mustHave, m.id) })}
               className={`w-full flex items-center space-x-3 p-4 rounded-xl border-2 text-left transition-all ${
-                sel ? 'border-smartlease-teal bg-smartlease-teal/5' : 'border-gray-200 hover:border-gray-300'
+                sel ? 'border-smartlease-yellow bg-smartlease-yellow/5' : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                sel ? 'bg-smartlease-teal text-white' : 'bg-gray-100 text-gray-400'
+                sel ? 'bg-smartlease-yellow text-white' : 'bg-gray-100 text-gray-400'
               }`}>
                 <Icon className="h-5 w-5" />
               </div>
               <span className="font-semibold text-sm flex-1">{m.label}</span>
-              {sel && <Check className="h-5 w-5 text-smartlease-teal flex-shrink-0" />}
+              {sel && <Check className="h-5 w-5 text-smartlease-yellow flex-shrink-0" />}
             </button>
           );
         })}
@@ -552,7 +552,7 @@ export function KeuzehulpPage() {
           return (
             <button key={m.name} onClick={() => setPrefs({ ...prefs, merken: tog(prefs.merken, m.name) })}
               className={`flex flex-col items-center p-3 rounded-xl border-2 transition ${
-                sel ? 'border-smartlease-teal bg-smartlease-teal/5' : 'border-gray-200 hover:border-gray-300'
+                sel ? 'border-smartlease-yellow bg-smartlease-yellow/5' : 'border-gray-200 hover:border-gray-300'
               }`}>
               <img src={m.logo} alt={m.name} className="h-8 w-8 sm:h-10 sm:w-10 object-contain mb-1.5" loading="lazy" />
               <span className="text-xs font-semibold text-gray-700 text-center leading-tight">{m.name}</span>
@@ -568,16 +568,16 @@ export function KeuzehulpPage() {
   const stepLoading = () => (
     <div className="text-center py-12">
       <div className="relative inline-block mb-6">
-        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-smartlease-teal to-teal-400 flex items-center justify-center animate-pulse">
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-smartlease-yellow to-yellow-400 flex items-center justify-center animate-pulse">
           <Sparkles className="h-8 w-8 text-white" />
         </div>
-        <div className="absolute inset-0 w-16 h-16 rounded-full border-4 border-smartlease-teal/30 animate-ping" />
+        <div className="absolute inset-0 w-16 h-16 rounded-full border-4 border-smartlease-yellow/30 animate-ping" />
       </div>
       <h2 className="text-xl font-bold text-gray-900 mb-2">We zoeken je perfecte match...</h2>
       <p className="text-sm text-gray-500">Onze AI analyseert 60.000+ auto's</p>
       <div className="mt-6 flex justify-center space-x-2">
         {[0, 1, 2].map((i) => (
-          <div key={i} className="w-2.5 h-2.5 rounded-full bg-smartlease-teal animate-bounce"
+          <div key={i} className="w-2.5 h-2.5 rounded-full bg-smartlease-yellow animate-bounce"
             style={{ animationDelay: `${i * 150}ms` }} />
         ))}
       </div>
@@ -598,7 +598,7 @@ export function KeuzehulpPage() {
       {results.length === 0 ? (
         <div className="text-center py-8">
           <p className="text-gray-500 mb-4 text-sm">Geen auto's gevonden. Pas je criteria aan.</p>
-          <button onClick={doReset} className="bg-smartlease-teal text-white px-5 py-2.5 rounded-xl text-sm font-semibold">
+          <button onClick={doReset} className="bg-smartlease-yellow text-white px-5 py-2.5 rounded-xl text-sm font-semibold">
             Opnieuw
           </button>
         </div>
@@ -615,12 +615,12 @@ export function KeuzehulpPage() {
               <div
                 key={v.id}
                 className={`bg-white rounded-xl border-2 overflow-hidden transition-all hover:shadow-md ${
-                  isTop ? 'border-smartlease-teal shadow-md' : 'border-gray-200'
+                  isTop ? 'border-smartlease-yellow shadow-md' : 'border-gray-200'
                 }`}
                 style={{ opacity: 0, animation: `kfSlide 0.4s ease-out ${idx * 80}ms forwards` }}
               >
                 {isTop && (
-                  <div className="bg-gradient-to-r from-smartlease-teal to-teal-400 text-white text-center py-1.5 text-xs font-bold flex items-center justify-center space-x-1">
+                  <div className="bg-gradient-to-r from-smartlease-yellow to-yellow-400 text-white text-center py-1.5 text-xs font-bold flex items-center justify-center space-x-1">
                     <Sparkles className="h-3.5 w-3.5" />
                     <span>Beste match voor jou</span>
                   </div>
@@ -654,7 +654,7 @@ export function KeuzehulpPage() {
                       {v.bouwjaar_year} · {fmt(v.verkoopprijs || 0)} · {fmtKm(v.kmstand || 0)} km
                     </p>
                     {v.maandprijs > 0 && (
-                      <p className="text-base font-bold text-smartlease-teal mb-1">€ {v.maandprijs} p/m</p>
+                      <p className="text-base font-bold text-smartlease-yellow mb-1">€ {v.maandprijs} p/m</p>
                     )}
                   </div>
                 </div>
@@ -671,7 +671,7 @@ export function KeuzehulpPage() {
                   <a
                     href={link}
                     onClick={(e) => { e.preventDefault(); nav(link); }}
-                    className="w-full flex items-center justify-center space-x-1.5 bg-gray-50 hover:bg-smartlease-teal hover:text-white text-gray-700 py-2.5 rounded-lg text-sm font-semibold transition border border-gray-200 hover:border-smartlease-teal"
+                    className="w-full flex items-center justify-center space-x-1.5 bg-gray-50 hover:bg-smartlease-yellow hover:text-white text-gray-700 py-2.5 rounded-lg text-sm font-semibold transition border border-gray-200 hover:border-smartlease-yellow"
                   >
                     <span>Bekijk deze auto</span>
                     <ChevronRight className="h-4 w-4" />
@@ -716,7 +716,7 @@ export function KeuzehulpPage() {
 
       <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
         <div className="text-center mb-6">
-          <div className="inline-flex items-center space-x-1.5 bg-smartlease-teal/10 text-smartlease-teal px-3 py-1.5 rounded-full mb-3">
+          <div className="inline-flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow px-3 py-1.5 rounded-full mb-3">
             <Sparkles className="h-4 w-4" />
             <span className="font-semibold text-xs">AI Keuzehulp</span>
           </div>
@@ -763,7 +763,7 @@ export function KeuzehulpPage() {
               <button
                 onClick={goNext}
                 disabled={!canProceed}
-                className="flex items-center space-x-1.5 bg-smartlease-teal hover:bg-teal-600 disabled:bg-gray-200 disabled:text-gray-400 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-md disabled:shadow-none"
+                className="flex items-center space-x-1.5 bg-smartlease-yellow hover:bg-yellow-600 disabled:bg-gray-200 disabled:text-gray-400 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-md disabled:shadow-none"
               >
                 <span>{step === TOTAL - 1 ? 'Vind mijn auto' : 'Volgende'}</span>
                 {step === TOTAL - 1 ? <Sparkles className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}

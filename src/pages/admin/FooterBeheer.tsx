@@ -132,7 +132,7 @@ export default function FooterBeheer() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-8 h-8 border-2 border-gray-200 border-t-smartlease-teal rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-gray-200 border-t-smartlease-yellow rounded-full animate-spin" />
       </div>
     );
   }
@@ -143,7 +143,7 @@ export default function FooterBeheer() {
       {/* Toast */}
       {toast && (
         <div className={`fixed top-5 right-5 z-50 flex items-center gap-3 px-5 py-3 rounded-xl shadow-lg text-white text-sm font-semibold ${
-          toast.type === 'success' ? 'bg-smartlease-teal' : 'bg-red-500'
+          toast.type === 'success' ? 'bg-smartlease-yellow' : 'bg-red-500'
         }`}>
           {toast.type === 'success' ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
           {toast.msg}
@@ -159,7 +159,7 @@ export default function FooterBeheer() {
         <button
           onClick={save}
           disabled={saving || !dirty}
-          className="flex items-center gap-2 px-5 py-2.5 bg-smartlease-teal text-white text-sm font-bold rounded-xl hover:bg-smartlease-teal/90 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
+          className="flex items-center gap-2 px-5 py-2.5 bg-smartlease-yellow text-white text-sm font-bold rounded-xl hover:bg-smartlease-yellow/90 transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
         >
           <Save className="h-4 w-4" />
           {saving ? 'Opslaan...' : dirty ? 'Opslaan' : 'Opgeslagen'}
@@ -171,7 +171,7 @@ export default function FooterBeheer() {
         href="/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2 text-sm text-smartlease-teal font-semibold mb-8 hover:underline"
+        className="flex items-center gap-2 text-sm text-smartlease-yellow font-semibold mb-8 hover:underline"
       >
         <Eye className="h-4 w-4" /> Bekijk footer op de website →
       </a>
@@ -191,14 +191,14 @@ export default function FooterBeheer() {
                   onChange={e => setText(item.key, e.target.value)}
                   rows={3}
                   placeholder={item.placeholder}
-                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal resize-none"
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow resize-none"
                 />
               ) : (
                 <input
                   value={get(item.key)}
                   onChange={e => setText(item.key, e.target.value)}
                   placeholder={item.placeholder}
-                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
                 />
               )}
             </div>
@@ -226,15 +226,15 @@ export default function FooterBeheer() {
                   <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{item.desc}</p>
                 </div>
                 <div className="flex items-center gap-2.5 flex-shrink-0">
-                  <span className={`text-xs font-semibold ${on ? 'text-smartlease-teal' : 'text-gray-400'}`}>
+                  <span className={`text-xs font-semibold ${on ? 'text-smartlease-yellow' : 'text-gray-400'}`}>
                     {on ? 'Aan' : 'Uit'}
                   </span>
                   {on
-                    ? <Eye className="h-4 w-4 text-smartlease-teal" />
+                    ? <Eye className="h-4 w-4 text-smartlease-yellow" />
                     : <EyeOff className="h-4 w-4 text-gray-300" />
                   }
                   {/* Toggle switch */}
-                  <div className={`relative w-11 h-6 rounded-full transition-colors ${on ? 'bg-smartlease-teal' : 'bg-gray-200'}`}>
+                  <div className={`relative w-11 h-6 rounded-full transition-colors ${on ? 'bg-smartlease-yellow' : 'bg-gray-200'}`}>
                     <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${on ? 'translate-x-6' : 'translate-x-1'}`} />
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export default function FooterBeheer() {
           <button
             onClick={save}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-3 bg-smartlease-teal text-white font-bold rounded-xl hover:bg-smartlease-teal/90 transition disabled:opacity-60 shadow-md"
+            className="flex items-center gap-2 px-6 py-3 bg-smartlease-yellow text-white font-bold rounded-xl hover:bg-smartlease-yellow/90 transition disabled:opacity-60 shadow-md"
           >
             <Save className="h-4 w-4" />
             {saving ? 'Opslaan...' : 'Wijzigingen opslaan'}

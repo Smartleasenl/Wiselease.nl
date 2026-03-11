@@ -69,7 +69,7 @@ export function RangeSlider({
       <div className="relative pt-6 pb-2">
         <div className="relative h-2 bg-gray-200 rounded-full">
           <div
-            className="absolute h-2 bg-smartlease-teal rounded-full"
+            className="absolute h-2 bg-smartlease-yellow rounded-full"
             style={{
               left: `${minPercent}%`,
               right: `${100 - maxPercent}%`,

@@ -83,7 +83,7 @@ export default function LeadsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="h-8 w-8 animate-spin text-smartlease-teal" />
+        <Loader2 className="h-8 w-8 animate-spin text-smartlease-yellow" />
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function LeadsPage() {
             key={f}
             onClick={() => setFilter(f)}
             className={`px-3.5 py-2 rounded-xl text-sm font-medium transition ${
-              filter === f ? 'bg-smartlease-teal text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+              filter === f ? 'bg-smartlease-yellow text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
             }`}
           >
             {f === 'alle' ? 'Alle' : STATUS_OPTIONS.find((s) => s.value === f)?.label}
@@ -167,7 +167,7 @@ export default function LeadsPage() {
                     <td className="px-5 py-4">
                       <button
                         onClick={() => setSelectedLead(lead)}
-                        className="p-2 text-gray-400 hover:text-smartlease-teal hover:bg-smartlease-teal/10 rounded-lg transition"
+                        className="p-2 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
                       >
                         <Eye className="h-4 w-4" />
                       </button>
@@ -197,12 +197,12 @@ export default function LeadsPage() {
             {/* Contact info */}
             <div className="space-y-2.5 mb-5">
               {selectedLead.email && (
-                <a href={`mailto:${selectedLead.email}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-teal transition">
+                <a href={`mailto:${selectedLead.email}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
                   <Mail className="h-4 w-4 text-gray-400 flex-shrink-0" /> {selectedLead.email}
                 </a>
               )}
               {selectedLead.telefoon && (
-                <a href={`tel:${selectedLead.telefoon}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-teal transition">
+                <a href={`tel:${selectedLead.telefoon}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
                   <Phone className="h-4 w-4 text-gray-400 flex-shrink-0" /> {selectedLead.telefoon}
                 </a>
               )}
@@ -216,7 +216,7 @@ export default function LeadsPage() {
                         href={`/auto/${selectedLead.vehicle_id}/voertuig`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-smartlease-teal hover:underline mt-0.5"
+                        className="inline-flex items-center gap-1 text-xs text-smartlease-yellow hover:underline mt-0.5"
                       >
                         <ExternalLink className="h-3 w-3" /> Bekijk advertentie
                       </a>
@@ -260,7 +260,7 @@ export default function LeadsPage() {
                   </div>
                   <div className="flex justify-between text-sm pt-2 border-t border-gray-200">
                     <span className="text-gray-700 font-medium">Maandbedrag</span>
-                    <span className="font-bold text-smartlease-teal">{formatPrice(selectedLead.calculator_data.maandbedrag)}/mnd</span>
+                    <span className="font-bold text-smartlease-yellow">{formatPrice(selectedLead.calculator_data.maandbedrag)}/mnd</span>
                   </div>
                 </div>
               </div>

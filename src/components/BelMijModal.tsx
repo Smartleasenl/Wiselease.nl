@@ -93,7 +93,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
               </p>
               <button
                 onClick={handleClose}
-                className="px-6 py-2.5 bg-smartlease-teal text-white rounded-xl font-semibold hover:bg-smartlease-teal/90 transition"
+                className="px-6 py-2.5 bg-smartlease-yellow text-white rounded-xl font-semibold hover:bg-smartlease-yellow/90 transition"
               >
                 Sluiten
               </button>
@@ -117,7 +117,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
                   value={form.naam}
                   onChange={(e) => setForm({ ...form, naam: e.target.value })}
                   placeholder="Je naam"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
                 />
               </div>
 
@@ -131,7 +131,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
                   value={form.telefoon}
                   onChange={(e) => setForm({ ...form, telefoon: e.target.value })}
                   placeholder="06 - 12345678"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
                 />
               </div>
 

@@ -22,7 +22,7 @@ export function VehicleGrid({
   if (loading && !data) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 className="h-10 w-10 text-smartlease-teal animate-spin" />
+        <Loader2 className="h-10 w-10 text-smartlease-yellow animate-spin" />
       </div>
     );
   }
@@ -57,7 +57,7 @@ export function VehicleGrid({
             <select
               value={currentSort}
               onChange={(e) => onSortChange(e.target.value)}
-              className="appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-700 focus:ring-2 focus:ring-teal-500/20 focus:border-teal-400 transition-all cursor-pointer hover:border-gray-300"
+              className="appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-700 focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-400 transition-all cursor-pointer hover:border-gray-300"
             >
               <option value="">Standaard</option>
               <option value="maandprijs_laag">Maandprijs: laag - hoog</option>

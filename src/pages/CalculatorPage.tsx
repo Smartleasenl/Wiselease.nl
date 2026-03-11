@@ -96,7 +96,7 @@ export function CalculatorPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center space-x-2 bg-smartlease-teal/10 text-smartlease-teal px-4 py-2 rounded-full mb-4">
+          <div className="inline-flex items-center space-x-2 bg-smartlease-yellow/10 text-smartlease-yellow px-4 py-2 rounded-full mb-4">
             <Calculator className="h-5 w-5" />
             <span className="font-semibold text-sm">Financial Lease Calculator</span>
           </div>
@@ -124,7 +124,7 @@ export function CalculatorPage() {
                       const val = Math.min(Math.max(0, Number(e.target.value)), 250000);
                       setVehiclePrice(val);
                     }}
-                    className="w-28 px-2 py-1.5 text-sm font-semibold border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-smartlease-teal focus:border-smartlease-teal"
+                    className="w-28 px-2 py-1.5 text-sm font-semibold border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow"
                   />
                 </div>
               </div>
@@ -135,7 +135,7 @@ export function CalculatorPage() {
                 step="500"
                 value={vehiclePrice}
                 onChange={(e) => setVehiclePrice(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-teal"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-yellow"
               />
               <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>€ 5.000</span>
@@ -156,7 +156,7 @@ export function CalculatorPage() {
                       const val = Math.min(Math.max(0, Number(e.target.value)), vehiclePrice * 0.5);
                       setDownPayment(val);
                     }}
-                    className="w-24 px-2 py-1.5 text-sm font-semibold border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-smartlease-teal focus:border-smartlease-teal"
+                    className="w-24 px-2 py-1.5 text-sm font-semibold border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow"
                   />
                   <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded">
                     {downPaymentPercent}%
@@ -170,7 +170,7 @@ export function CalculatorPage() {
                 step="100"
                 value={downPayment}
                 onChange={(e) => setDownPayment(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-teal"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-yellow"
               />
               <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>€ 0</span>
@@ -190,7 +190,7 @@ export function CalculatorPage() {
                     onClick={() => setDuration(months)}
                     className={`py-2.5 px-3 text-sm font-semibold rounded-lg transition-all ${
                       duration === months
-                        ? 'bg-smartlease-teal text-white shadow-md'
+                        ? 'bg-smartlease-yellow text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -213,7 +213,7 @@ export function CalculatorPage() {
                       const value = Math.min(Math.max(0, Number(e.target.value)), maxResidualValue);
                       setResidualValue(value);
                     }}
-                    className="w-24 px-2 py-1.5 text-sm font-semibold border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-smartlease-teal focus:border-smartlease-teal"
+                    className="w-24 px-2 py-1.5 text-sm font-semibold border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow"
                   />
                   <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded">
                     {residualValuePercent}%
@@ -227,7 +227,7 @@ export function CalculatorPage() {
                 step="100"
                 value={residualValue}
                 onChange={(e) => setResidualValue(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-teal"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-smartlease-yellow"
               />
               <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>€ 0</span>
@@ -239,7 +239,7 @@ export function CalculatorPage() {
             <div className="border-t border-gray-100" />
 
             {/* Result */}
-            <div className="bg-gradient-to-br from-smartlease-teal to-teal-600 text-white rounded-xl p-6 md:p-8">
+            <div className="bg-gradient-to-br from-smartlease-yellow to-yellow-600 text-white rounded-xl p-6 md:p-8">
               <div className="text-center mb-6">
                 <p className="text-sm text-white/80 mb-1">Je maandtermijn</p>
                 <p className="text-5xl md:text-6xl font-bold">
@@ -265,7 +265,7 @@ export function CalculatorPage() {
               </button>
               <button
                 onClick={handleOfferte}
-                className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white py-4 rounded-xl font-semibold flex items-center justify-center space-x-2 transition shadow-lg shadow-teal-500/20"
+                className="w-full bg-gradient-to-r from-yellow-500 to-yellow-500 hover:from-yellow-600 hover:to-yellow-600 text-white py-4 rounded-xl font-semibold flex items-center justify-center space-x-2 transition shadow-lg shadow-yellow-500/20"
               >
                 <FileText className="h-5 w-5" />
                 <span>Gratis offerte aanvragen</span>

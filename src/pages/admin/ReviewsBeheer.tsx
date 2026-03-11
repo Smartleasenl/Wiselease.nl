@@ -151,7 +151,7 @@ export default function ReviewsBeheer() {
       {/* Toast */}
       {toast && (
         <div className={`fixed top-5 right-5 z-50 flex items-center gap-3 px-5 py-3 rounded-xl shadow-xl text-white text-sm font-semibold ${
-          toast.type === 'success' ? 'bg-smartlease-teal' : 'bg-red-500'
+          toast.type === 'success' ? 'bg-smartlease-yellow' : 'bg-red-500'
         }`}>
           {toast.type === 'success' ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
           {toast.msg}
@@ -166,7 +166,7 @@ export default function ReviewsBeheer() {
         </div>
         <button
           onClick={() => { setForm(EMPTY_REVIEW); setEditId(null); setFormOpen(o => !o); }}
-          className="flex items-center gap-2 px-4 py-2.5 bg-smartlease-teal text-white text-sm font-bold rounded-xl hover:bg-smartlease-teal/90 transition shadow-sm"
+          className="flex items-center gap-2 px-4 py-2.5 bg-smartlease-yellow text-white text-sm font-bold rounded-xl hover:bg-smartlease-yellow/90 transition shadow-sm"
         >
           <Plus className="h-4 w-4" /> Review toevoegen
         </button>
@@ -239,7 +239,7 @@ export default function ReviewsBeheer() {
                   <button
                     onClick={saveAiPreview}
                     disabled={saving}
-                    className="flex items-center gap-2 px-4 py-2 bg-smartlease-teal text-white text-sm font-bold rounded-lg hover:bg-smartlease-teal/90 transition disabled:opacity-60"
+                    className="flex items-center gap-2 px-4 py-2 bg-smartlease-yellow text-white text-sm font-bold rounded-lg hover:bg-smartlease-yellow/90 transition disabled:opacity-60"
                   >
                     <Save className="h-3.5 w-3.5" />
                     {saving ? 'Opslaan...' : `Alle ${aiPreview.length} opslaan`}
@@ -280,13 +280,13 @@ export default function ReviewsBeheer() {
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1.5">Naam *</label>
               <input value={form.naam} onChange={e => setForm(p => ({ ...p, naam: e.target.value }))}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
                 placeholder="Jan de Vries" />
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1.5">Bedrijf</label>
               <input value={form.bedrijf} onChange={e => setForm(p => ({ ...p, bedrijf: e.target.value }))}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow"
                 placeholder="Optioneel" />
             </div>
           </div>
@@ -304,19 +304,19 @@ export default function ReviewsBeheer() {
             <div>
               <label className="block text-xs font-semibold text-gray-500 mb-1.5">Datum</label>
               <input type="date" value={form.datum} onChange={e => setForm(p => ({ ...p, datum: e.target.value }))}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal" />
+                className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow" />
             </div>
           </div>
           <div className="mb-4">
             <label className="block text-xs font-semibold text-gray-500 mb-1.5">Review tekst *</label>
             <textarea value={form.tekst} onChange={e => setForm(p => ({ ...p, tekst: e.target.value }))}
-              rows={4} className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-teal/30 focus:border-smartlease-teal resize-none"
+              rows={4} className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/30 focus:border-smartlease-yellow resize-none"
               placeholder="Wat schreef de klant?" />
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button onClick={() => setForm(p => ({ ...p, is_published: !p.is_published }))}
-                className={`relative w-10 h-5 rounded-full transition-colors ${form.is_published ? 'bg-smartlease-teal' : 'bg-gray-300'}`}>
+                className={`relative w-10 h-5 rounded-full transition-colors ${form.is_published ? 'bg-smartlease-yellow' : 'bg-gray-300'}`}>
                 <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${form.is_published ? 'translate-x-5' : 'translate-x-0.5'}`} />
               </button>
               <span className="text-sm text-gray-600">Gepubliceerd</span>
@@ -327,7 +327,7 @@ export default function ReviewsBeheer() {
                 Annuleren
               </button>
               <button onClick={saveForm} disabled={saving}
-                className="flex items-center gap-2 px-4 py-2 bg-smartlease-teal text-white text-sm font-bold rounded-lg hover:bg-smartlease-teal/90 transition disabled:opacity-60">
+                className="flex items-center gap-2 px-4 py-2 bg-smartlease-yellow text-white text-sm font-bold rounded-lg hover:bg-smartlease-yellow/90 transition disabled:opacity-60">
                 <Save className="h-3.5 w-3.5" /> {saving ? 'Opslaan...' : 'Opslaan'}
               </button>
             </div>
@@ -382,7 +382,7 @@ export default function ReviewsBeheer() {
                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition flex-shrink-0">
                   <button onClick={() => togglePublished(r)} title={r.is_published ? 'Verbergen' : 'Publiceren'}
                     className="p-2 hover:bg-gray-100 rounded-lg transition">
-                    {r.is_published ? <Eye className="h-4 w-4 text-smartlease-teal" /> : <EyeOff className="h-4 w-4 text-gray-400" />}
+                    {r.is_published ? <Eye className="h-4 w-4 text-smartlease-yellow" /> : <EyeOff className="h-4 w-4 text-gray-400" />}
                   </button>
                   <button onClick={() => startEdit(r)} title="Bewerken"
                     className="p-2 hover:bg-blue-50 rounded-lg transition text-gray-400 hover:text-blue-500">

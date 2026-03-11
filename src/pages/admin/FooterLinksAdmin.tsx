@@ -130,7 +130,7 @@ export default function FooterLinksAdmin() {
             onClick={() => { setActiveTab(col.key); setAdding(false); setEditId(null); }}
             className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg transition border-b-2 -mb-px ${
               activeTab === col.key
-                ? 'border-smartlease-teal text-smartlease-teal bg-teal-50'
+                ? 'border-smartlease-yellow text-smartlease-yellow bg-yellow-50'
                 : 'border-transparent text-gray-500 hover:text-gray-800'
             }`}
           >
@@ -180,7 +180,7 @@ export default function FooterLinksAdmin() {
                     className="border border-gray-300 rounded-lg px-3 py-1.5 text-sm flex-1 min-w-[180px]"
                   />
                   <button onClick={() => saveEdit(link.id)}
-                    className="p-1.5 bg-smartlease-teal text-white rounded-lg hover:bg-teal-600 transition">
+                    className="p-1.5 bg-smartlease-yellow text-white rounded-lg hover:bg-yellow-600 transition">
                     <Save className="h-4 w-4" />
                   </button>
                   <button onClick={() => { setEditId(null); setEditData({}); }}
@@ -205,7 +205,7 @@ export default function FooterLinksAdmin() {
                 title={link.is_active ? 'Verbergen in footer' : 'Tonen in footer'}
                 className={`p-1.5 rounded-lg transition flex-shrink-0 ${
                   link.is_active
-                    ? 'text-smartlease-teal hover:bg-teal-50'
+                    ? 'text-smartlease-yellow hover:bg-yellow-50'
                     : 'text-gray-300 hover:bg-gray-100'
                 }`}
               >
@@ -232,7 +232,7 @@ export default function FooterLinksAdmin() {
 
           {/* Nieuwe link toevoegen */}
           {adding ? (
-            <div className="flex items-center gap-2 px-4 py-3 bg-teal-50 border-t border-teal-100 flex-wrap">
+            <div className="flex items-center gap-2 px-4 py-3 bg-yellow-50 border-t border-yellow-100 flex-wrap">
               <input
                 autoFocus
                 value={newLink.label}
@@ -248,7 +248,7 @@ export default function FooterLinksAdmin() {
               />
               <button onClick={addLink}
                 disabled={!newLink.label || !newLink.url}
-                className="px-4 py-1.5 bg-smartlease-teal text-white text-sm font-semibold rounded-lg hover:bg-teal-600 disabled:opacity-40 transition">
+                className="px-4 py-1.5 bg-smartlease-yellow text-white text-sm font-semibold rounded-lg hover:bg-yellow-600 disabled:opacity-40 transition">
                 Toevoegen
               </button>
               <button onClick={() => setAdding(false)}
@@ -260,7 +260,7 @@ export default function FooterLinksAdmin() {
             <div className="px-4 py-3 border-t border-gray-100">
               <button
                 onClick={() => { setAdding(true); setNewLink({ ...EMPTY_LINK, column_key: activeTab }); }}
-                className="flex items-center gap-2 text-sm font-semibold text-smartlease-teal hover:text-teal-600 transition"
+                className="flex items-center gap-2 text-sm font-semibold text-smartlease-yellow hover:text-yellow-600 transition"
               >
                 <Plus className="h-4 w-4" />
                 Link toevoegen aan {COLUMNS.find(c => c.key === activeTab)?.label}

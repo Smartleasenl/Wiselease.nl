@@ -174,7 +174,7 @@ export function OffertePage() {
           </div>
           <div className="p-6 sm:p-8 space-y-6">
             <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-              <FileText className="h-5 w-5 text-smartlease-teal" /> Overzicht van je aanvraag
+              <FileText className="h-5 w-5 text-smartlease-yellow" /> Overzicht van je aanvraag
             </h2>
 
             <div className="bg-gray-50 rounded-xl p-4">
@@ -192,7 +192,7 @@ export function OffertePage() {
                     {vehicle.kmstand != null && <span>{vehicle.kmstand.toLocaleString('nl-NL')} km</span>}
                   </div>
                   {vehicle.verkoopprijs != null && (
-                    <p className="text-smartlease-teal font-bold mt-1">{formatPrice(vehicle.verkoopprijs)}</p>
+                    <p className="text-smartlease-yellow font-bold mt-1">{formatPrice(vehicle.verkoopprijs)}</p>
                   )}
                 </div>
               </div>
@@ -229,7 +229,7 @@ export function OffertePage() {
                   </div>
                   <div className="border-t border-gray-200 pt-2 flex justify-between">
                     <span className="text-gray-900 font-semibold">Maandbedrag</span>
-                    <span className="text-lg font-bold text-smartlease-teal">{formatPrice(calculator.maandbedrag)}/mnd</span>
+                    <span className="text-lg font-bold text-smartlease-yellow">{formatPrice(calculator.maandbedrag)}/mnd</span>
                   </div>
                 </div>
               </div>
@@ -252,7 +252,7 @@ export function OffertePage() {
               )}
             </div>
 
-            <div className="bg-smartlease-teal/5 rounded-xl p-4 text-sm text-gray-600">
+            <div className="bg-smartlease-yellow/5 rounded-xl p-4 text-sm text-gray-600">
               <p className="font-semibold text-gray-900 mb-1">Wat gebeurt er nu?</p>
               <p>Je ontvangt een bevestigingsmail op <strong>{form.email}</strong>. Onze lease specialist neemt binnen 1 werkdag contact met je op.</p>
             </div>
@@ -260,7 +260,7 @@ export function OffertePage() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 to={`/auto/${vehicle.id}/${encodeURIComponent(vehicleTitle.toLowerCase().replace(/\s+/g, '-'))}`}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-smartlease-teal text-white rounded-xl font-semibold hover:bg-smartlease-teal/90 transition"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-smartlease-yellow text-white rounded-xl font-semibold hover:bg-smartlease-yellow/90 transition"
               >
                 <ArrowLeft className="h-4 w-4" /> Terug naar auto
               </Link>
@@ -278,11 +278,11 @@ export function OffertePage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <nav className="text-sm text-gray-400 mb-6">
-        <Link to="/" className="hover:text-smartlease-teal transition">Home</Link><span className="mx-2">›</span>
-        <Link to="/aanbod" className="hover:text-smartlease-teal transition">Aanbod</Link><span className="mx-2">›</span>
+        <Link to="/" className="hover:text-smartlease-yellow transition">Home</Link><span className="mx-2">›</span>
+        <Link to="/aanbod" className="hover:text-smartlease-yellow transition">Aanbod</Link><span className="mx-2">›</span>
         <Link
           to={`/auto/${vehicle.id}/${encodeURIComponent(vehicleTitle.toLowerCase().replace(/\s+/g, '-'))}`}
-          className="hover:text-smartlease-teal transition"
+          className="hover:text-smartlease-yellow transition"
         >
           {vehicleTitle}
         </Link><span className="mx-2">›</span>
@@ -304,47 +304,47 @@ export function OffertePage() {
 
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6">
               <h2 className="flex items-center gap-2 font-bold text-gray-900 mb-4">
-                <User className="h-5 w-5 text-smartlease-teal" /> Persoonlijke gegevens
+                <User className="h-5 w-5 text-smartlease-yellow" /> Persoonlijke gegevens
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Voornaam <span className="text-red-500">*</span></label>
                   <input type="text" required value={form.voornaam} onChange={e => setForm({...form, voornaam: e.target.value})} placeholder="Jan"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Achternaam <span className="text-red-500">*</span></label>
                   <input type="text" required value={form.achternaam} onChange={e => setForm({...form, achternaam: e.target.value})} placeholder="de Vries"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">E-mailadres <span className="text-red-500">*</span></label>
                   <input type="email" required value={form.email} onChange={e => setForm({...form, email: e.target.value})} placeholder="jan@bedrijf.nl"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Telefoonnummer <span className="text-red-500">*</span></label>
                   <input type="tel" required value={form.telefoon} onChange={e => setForm({...form, telefoon: e.target.value})} placeholder="06 - 12345678"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                 </div>
               </div>
             </div>
 
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6">
               <h2 className="flex items-center gap-2 font-bold text-gray-900 mb-1">
-                <Building2 className="h-5 w-5 text-smartlease-teal" /> Bedrijfsgegevens
+                <Building2 className="h-5 w-5 text-smartlease-yellow" /> Bedrijfsgegevens
               </h2>
               <p className="text-xs text-gray-400 mb-4">Smartlease bedient uitsluitend zakelijke klanten.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Bedrijfsnaam <span className="text-red-500">*</span></label>
                   <input type="text" required value={form.bedrijfsnaam} onChange={e => setForm({...form, bedrijfsnaam: e.target.value})} placeholder="Bedrijf B.V."
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">KvK-nummer <span className="text-gray-400 font-normal">(optioneel)</span></label>
                   <input type="text" value={form.kvk_nummer} onChange={e => setForm({...form, kvk_nummer: e.target.value})} placeholder="12345678" maxLength={8}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition" />
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                 </div>
               </div>
             </div>
@@ -353,11 +353,11 @@ export function OffertePage() {
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Opmerking <span className="text-gray-400 font-normal">(optioneel)</span></label>
               <textarea value={form.bericht} onChange={e => setForm({...form, bericht: e.target.value})}
                 placeholder="Heb je nog specifieke wensen of vragen?" rows={3}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition resize-y" />
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition resize-y" />
             </div>
 
             <button type="submit" disabled={loading}
-              className="flex items-center justify-center gap-2 w-full px-8 py-4 bg-smartlease-teal text-white rounded-xl font-bold text-lg hover:bg-smartlease-teal/90 active:scale-[0.98] disabled:opacity-60 transition-all shadow-lg shadow-smartlease-teal/20">
+              className="flex items-center justify-center gap-2 w-full px-8 py-4 bg-smartlease-yellow text-white rounded-xl font-bold text-lg hover:bg-smartlease-yellow/90 active:scale-[0.98] disabled:opacity-60 transition-all shadow-lg shadow-smartlease-yellow/20">
               {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
               {loading ? 'Bezig met verzenden...' : 'Offerte aanvragen'}
             </button>
@@ -384,7 +384,7 @@ export function OffertePage() {
                   <p className="text-xs text-gray-400 mt-1">{vehicle.kmstand.toLocaleString('nl-NL')} km</p>
                 )}
                 {vehicle.verkoopprijs != null && (
-                  <p className="text-lg font-bold text-smartlease-teal mt-2">{formatPrice(vehicle.verkoopprijs)}</p>
+                  <p className="text-lg font-bold text-smartlease-yellow mt-2">{formatPrice(vehicle.verkoopprijs)}</p>
                 )}
               </div>
             </div>
@@ -393,7 +393,7 @@ export function OffertePage() {
             {calculator && (
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
                 <h3 className="flex items-center gap-2 font-bold text-gray-900 text-sm mb-3">
-                  <Calculator className="h-4 w-4 text-smartlease-teal" /> Jouw berekening
+                  <Calculator className="h-4 w-4 text-smartlease-yellow" /> Jouw berekening
                 </h3>
                 <div className="space-y-2">
                   {aankoopprijs && (
@@ -422,7 +422,7 @@ export function OffertePage() {
                   </div>
                   <div className="border-t border-gray-100 pt-2 flex justify-between">
                     <span className="text-gray-900 font-semibold">Maandbedrag</span>
-                    <span className="text-lg font-bold text-smartlease-teal">{formatPrice(calculator.maandbedrag)}/mnd</span>
+                    <span className="text-lg font-bold text-smartlease-yellow">{formatPrice(calculator.maandbedrag)}/mnd</span>
                   </div>
                 </div>
               </div>
@@ -430,13 +430,13 @@ export function OffertePage() {
 
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
               <h3 className="font-bold text-gray-900 text-sm">Vragen?</h3>
-              <a href="tel:0858008600" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-teal transition">
+              <a href="tel:0858008600" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-yellow transition">
                 <Phone className="h-4 w-4" /> 085 - 80 08 600
               </a>
               <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-600 hover:text-green-600 transition">
                 <MessageCircle className="h-4 w-4" /> WhatsApp
               </a>
-              <a href="mailto:info@smartlease.nl" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-teal transition">
+              <a href="mailto:info@smartlease.nl" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-yellow transition">
                 <Mail className="h-4 w-4" /> info@smartlease.nl
               </a>
             </div>

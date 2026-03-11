@@ -240,7 +240,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
     return '';
   };
 
-  const selectClass = 'w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-smartlease-teal focus:border-smartlease-teal transition-all bg-white hover:border-gray-300 appearance-none cursor-pointer';
+  const selectClass = 'w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow transition-all bg-white hover:border-gray-300 appearance-none cursor-pointer';
   const labelClass = 'block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5';
 
   const filterContent = (
@@ -255,7 +255,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
             placeholder="Bijv. S-Line, R-Line, M-Sport..."
-            className="w-full pl-9 pr-9 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-smartlease-teal focus:border-smartlease-teal transition-all bg-white hover:border-gray-300"
+            className="w-full pl-9 pr-9 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow transition-all bg-white hover:border-gray-300"
           />
           {searchQuery && (
             <button
@@ -376,11 +376,11 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
       <div className="mt-5 pt-4 border-t border-gray-100">
         <button
           onClick={() => setShowExtraOptions(!showExtraOptions)}
-          className="flex items-center space-x-2 text-sm font-semibold text-gray-600 hover:text-smartlease-teal transition"
+          className="flex items-center space-x-2 text-sm font-semibold text-gray-600 hover:text-smartlease-yellow transition"
         >
           <span>Extra opties</span>
           {selectedOptions.length > 0 && (
-            <span className="bg-smartlease-teal/10 text-smartlease-teal text-xs px-2 py-0.5 rounded-full font-bold">
+            <span className="bg-smartlease-yellow/10 text-smartlease-yellow text-xs px-2 py-0.5 rounded-full font-bold">
               {selectedOptions.length}
             </span>
           )}
@@ -393,7 +393,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
                 key={option.value}
                 className={`flex items-center space-x-2 px-3 py-2.5 rounded-lg cursor-pointer transition-all text-sm border ${
                   selectedOptions.includes(option.value)
-                    ? 'bg-smartlease-teal/10 border-smartlease-teal/30 text-smartlease-teal font-medium'
+                    ? 'bg-smartlease-yellow/10 border-smartlease-yellow/30 text-smartlease-yellow font-medium'
                     : 'border-transparent hover:bg-gray-50 text-gray-600'
                 }`}
               >
@@ -401,7 +401,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
                   type="checkbox"
                   checked={selectedOptions.includes(option.value)}
                   onChange={() => handleOptionToggle(option.value)}
-                  className="w-4 h-4 text-smartlease-teal border-gray-300 rounded focus:ring-smartlease-teal"
+                  className="w-4 h-4 text-smartlease-yellow border-gray-300 rounded focus:ring-smartlease-yellow"
                 />
                 <span>{option.label}</span>
               </label>
@@ -421,10 +421,10 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
           className="w-full flex items-center justify-between bg-white border border-gray-200 rounded-xl px-4 py-3.5 shadow-sm active:scale-[0.98] transition-transform"
         >
           <div className="flex items-center space-x-2.5">
-            <SlidersHorizontal className="h-5 w-5 text-smartlease-teal" />
+            <SlidersHorizontal className="h-5 w-5 text-smartlease-yellow" />
             <span className="font-bold text-gray-900">Filters</span>
             {activeFilterCount > 0 && (
-              <span className="bg-smartlease-teal text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+              <span className="bg-smartlease-yellow text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
                 {activeFilterCount}
               </span>
             )}
@@ -438,7 +438,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
               <button
                 key={chip.key}
                 onClick={() => removeFilter(chip.key)}
-                className="flex items-center space-x-1.5 bg-smartlease-teal/10 text-smartlease-teal pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-teal/20 transition"
+                className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition"
               >
                 <span>{chip.label}</span><X className="h-3 w-3" />
               </button>
@@ -453,7 +453,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
           <div className="fixed inset-0 z-50 bg-white flex flex-col animate-slide-up">
             <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100 bg-white">
               <div className="flex items-center space-x-2">
-                <SlidersHorizontal className="h-5 w-5 text-smartlease-teal" />
+                <SlidersHorizontal className="h-5 w-5 text-smartlease-yellow" />
                 <h2 className="text-lg font-bold text-gray-900">Filters</h2>
               </div>
               <button onClick={() => setShowMobileFilters(false)} className="p-2 -mr-2 text-gray-400 hover:text-gray-700 transition">
@@ -471,7 +471,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
               )}
               <button
                 onClick={() => setShowMobileFilters(false)}
-                className="flex-1 bg-smartlease-teal hover:bg-teal-600 text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 transition shadow-lg active:scale-[0.98]"
+                className="flex-1 bg-smartlease-yellow hover:bg-yellow-600 text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center space-x-2 transition shadow-lg active:scale-[0.98]"
               >
                 <Search className="h-4 w-4" />
                 <span>{totalResults !== undefined ? `Toon ${totalResults.toLocaleString('nl-NL')} auto's` : 'Toon resultaten'}</span>
@@ -485,16 +485,16 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
       <div className="hidden md:block bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center space-x-2.5">
-            <SlidersHorizontal className="h-5 w-5 text-smartlease-teal" />
+            <SlidersHorizontal className="h-5 w-5 text-smartlease-yellow" />
             <h2 className="text-lg font-bold text-gray-900">Filters</h2>
             {activeFilterCount > 0 && (
-              <span className="bg-smartlease-teal text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+              <span className="bg-smartlease-yellow text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
                 {activeFilterCount}
               </span>
             )}
           </div>
           {activeFilterCount > 0 && (
-            <button onClick={clearFilters} className="flex items-center space-x-1.5 text-sm text-gray-400 hover:text-smartlease-teal transition font-medium">
+            <button onClick={clearFilters} className="flex items-center space-x-1.5 text-sm text-gray-400 hover:text-smartlease-yellow transition font-medium">
               <X className="h-4 w-4" /><span>Wis alle filters</span>
             </button>
           )}
@@ -506,7 +506,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
               <button
                 key={chip.key}
                 onClick={() => removeFilter(chip.key)}
-                className="flex items-center space-x-1.5 bg-smartlease-teal/10 text-smartlease-teal pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-teal/20 transition group"
+                className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition group"
               >
                 <span>{chip.label}</span>
                 <X className="h-3.5 w-3.5 opacity-50 group-hover:opacity-100 transition" />

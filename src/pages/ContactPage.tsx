@@ -55,7 +55,7 @@ export function ContactPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       {/* Breadcrumb */}
       <nav className="text-sm text-gray-400 mb-8">
-        <a href="/" className="hover:text-smartlease-teal transition">Home</a>
+        <a href="/" className="hover:text-smartlease-yellow transition">Home</a>
         <span className="mx-2">›</span>
         <span className="text-gray-700">Contact</span>
       </nav>
@@ -77,7 +77,7 @@ export function ContactPage() {
               </p>
               <button
                 onClick={() => setSuccess(false)}
-                className="px-6 py-2.5 bg-smartlease-teal text-white rounded-xl font-semibold hover:bg-smartlease-teal/90 transition"
+                className="px-6 py-2.5 bg-smartlease-yellow text-white rounded-xl font-semibold hover:bg-smartlease-yellow/90 transition"
               >
                 Nieuw bericht sturen
               </button>
@@ -102,7 +102,7 @@ export function ContactPage() {
                     value={form.naam}
                     onChange={(e) => setForm({ ...form, naam: e.target.value })}
                     placeholder="Je volledige naam"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
                   />
                 </div>
                 <div>
@@ -114,7 +114,7 @@ export function ContactPage() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="naam@voorbeeld.nl"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
                   />
                 </div>
               </div>
@@ -129,7 +129,7 @@ export function ContactPage() {
                   value={form.telefoon}
                   onChange={(e) => setForm({ ...form, telefoon: e.target.value })}
                   placeholder="06 - 12345678"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
                 />
               </div>
 
@@ -142,14 +142,14 @@ export function ContactPage() {
                   onChange={(e) => setForm({ ...form, bericht: e.target.value })}
                   placeholder="Waar kunnen we je mee helpen?"
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-teal/20 focus:border-smartlease-teal transition resize-y"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition resize-y"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 bg-smartlease-teal text-white rounded-xl font-semibold hover:bg-smartlease-teal/90 active:scale-[0.98] disabled:opacity-60 transition-all"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 bg-smartlease-yellow text-white rounded-xl font-semibold hover:bg-smartlease-yellow/90 active:scale-[0.98] disabled:opacity-60 transition-all"
               >
                 {loading ? (
                   <Loader2 className="h-5 w-5 animate-spin" />
@@ -169,13 +169,13 @@ export function ContactPage() {
 
             <a
               href="tel:0858008600"
-              className="flex items-center gap-4 p-4 rounded-xl bg-smartlease-teal/5 hover:bg-smartlease-teal/10 transition group"
+              className="flex items-center gap-4 p-4 rounded-xl bg-smartlease-yellow/5 hover:bg-smartlease-yellow/10 transition group"
             >
-              <div className="w-11 h-11 rounded-xl bg-smartlease-teal/10 flex items-center justify-center flex-shrink-0">
-                <Phone className="h-5 w-5 text-smartlease-teal" />
+              <div className="w-11 h-11 rounded-xl bg-smartlease-yellow/10 flex items-center justify-center flex-shrink-0">
+                <Phone className="h-5 w-5 text-smartlease-yellow" />
               </div>
               <div>
-                <p className="font-bold text-gray-900 group-hover:text-smartlease-teal transition">085 - 80 08 600</p>
+                <p className="font-bold text-gray-900 group-hover:text-smartlease-yellow transition">085 - 80 08 600</p>
                 <p className="text-xs text-gray-400">Bel ons direct</p>
               </div>
             </a>
@@ -203,7 +203,7 @@ export function ContactPage() {
                 <Mail className="h-5 w-5 text-gray-500" />
               </div>
               <div>
-                <p className="font-bold text-gray-900 group-hover:text-smartlease-teal transition">info@smartlease.nl</p>
+                <p className="font-bold text-gray-900 group-hover:text-smartlease-yellow transition">info@smartlease.nl</p>
                 <p className="text-xs text-gray-400">Stuur een email</p>
               </div>
             </a>
@@ -231,7 +231,7 @@ export function ContactPage() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="flex items-center gap-2 text-sm text-smartlease-teal hover:underline"
+                    className="flex items-center gap-2 text-sm text-smartlease-yellow hover:underline"
                   >
                     <CheckCircle className="h-4 w-4 text-green-500" />
                     {link.label}

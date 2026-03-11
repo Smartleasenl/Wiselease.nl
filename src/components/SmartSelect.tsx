@@ -192,7 +192,7 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
           className={[
             'w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors duration-100',
             isSelected
-              ? 'bg-teal-50 text-smartlease-teal font-semibold'
+              ? 'bg-yellow-50 text-smartlease-yellow font-semibold'
               : 'text-gray-700 hover:bg-gray-50 font-medium',
           ].join(' ')}
         >
@@ -202,7 +202,7 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
                 className={[
                   'w-4 h-4 rounded flex-shrink-0 border-2 flex items-center justify-center transition-colors',
                   isSelected
-                    ? 'bg-smartlease-teal border-smartlease-teal'
+                    ? 'bg-smartlease-yellow border-smartlease-yellow'
                     : 'border-gray-300',
                 ].join(' ')}
               >
@@ -214,7 +214,7 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
             <span>{opt.label}</span>
           )}
           {!multi && isSelected && (
-            <Check className="h-3.5 w-3.5 flex-shrink-0 text-smartlease-teal" />
+            <Check className="h-3.5 w-3.5 flex-shrink-0 text-smartlease-yellow" />
           )}
         </button>
       </li>
@@ -246,7 +246,7 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
           className={[
             'leading-none transition-all duration-200 pointer-events-none whitespace-nowrap',
             isActive || open
-              ? 'text-[10px] font-semibold tracking-widest uppercase text-smartlease-teal'
+              ? 'text-[10px] font-semibold tracking-widest uppercase text-smartlease-yellow'
               : 'text-sm font-medium text-gray-400',
           ].join(' ')}
         >
@@ -272,7 +272,7 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
           type="button"
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => setOpen(false)}
-          className="text-xs font-semibold text-white bg-smartlease-teal hover:bg-teal-600 px-3 py-1.5 rounded-lg transition-colors"
+          className="text-xs font-semibold text-white bg-smartlease-yellow hover:bg-yellow-600 px-3 py-1.5 rounded-lg transition-colors"
         >
           Toepassen
         </button>
@@ -307,7 +307,7 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
                 onChange={(e) => setQuery(e.target.value)}
                 onMouseDown={(e) => e.stopPropagation()}
                 placeholder={`Zoek ${placeholder.toLowerCase()}...`}
-                className="w-full pl-8 pr-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-smartlease-teal focus:ring-1 focus:ring-smartlease-teal/20 placeholder-gray-400 text-gray-800"
+                className="w-full pl-8 pr-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-smartlease-yellow focus:ring-1 focus:ring-smartlease-yellow/20 placeholder-gray-400 text-gray-800"
               />
             </div>
           </div>
@@ -365,16 +365,16 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
           disabled
             ? 'opacity-50 cursor-not-allowed border-gray-100'
             : open
-            ? 'border-smartlease-teal ring-2 ring-smartlease-teal/20 shadow-sm'
+            ? 'border-smartlease-yellow ring-2 ring-smartlease-yellow/20 shadow-sm'
             : isActive
-            ? 'border-smartlease-teal/60 shadow-sm hover:border-smartlease-teal'
+            ? 'border-smartlease-yellow/60 shadow-sm hover:border-smartlease-yellow'
             : 'border-gray-200 hover:border-gray-300 hover:shadow-sm',
         ].join(' ')}
       >
         {icon && (
           <span
             className={`flex-shrink-0 transition-colors duration-200 ${
-              isActive || open ? 'text-smartlease-teal' : 'text-gray-400'
+              isActive || open ? 'text-smartlease-yellow' : 'text-gray-400'
             }`}
           >
             {icon}
@@ -394,7 +394,7 @@ return `${multiValues.length} ${label === 'merk' ? 'merken' : label === 'model' 
         ) : (
           <ChevronDown
             className={`flex-shrink-0 h-4 w-4 transition-all duration-300 ${
-              open ? 'rotate-180 text-smartlease-teal' : 'text-gray-400'
+              open ? 'rotate-180 text-smartlease-yellow' : 'text-gray-400'
             }`}
           />
         )}

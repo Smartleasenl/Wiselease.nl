@@ -94,8 +94,8 @@ export default function AdminDashboard() {
       value: loading ? '...' : stats.activeVehicles.toLocaleString('nl-NL'),
       sub: `${stats.totalVehicles.toLocaleString('nl-NL')} totaal`,
       icon: Car,
-      color: 'text-smartlease-teal',
-      bg: 'bg-smartlease-teal/10',
+      color: 'text-smartlease-yellow',
+      bg: 'bg-smartlease-yellow/10',
     },
     {
       label: 'Leads',
@@ -185,14 +185,14 @@ export default function AdminDashboard() {
                 to={action.to}
                 className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50 transition group"
               >
-                <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0 group-hover:bg-smartlease-teal/10 transition">
-                  <Icon className="h-5 w-5 text-gray-500 group-hover:text-smartlease-teal transition" />
+                <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0 group-hover:bg-smartlease-yellow/10 transition">
+                  <Icon className="h-5 w-5 text-gray-500 group-hover:text-smartlease-yellow transition" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-gray-900">{action.label}</p>
                   <p className="text-sm text-gray-400">{action.desc}</p>
                 </div>
-                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-smartlease-teal transition" />
+                <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-smartlease-yellow transition" />
               </Link>
             );
           })}
