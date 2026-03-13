@@ -154,7 +154,7 @@ Deno.serve(async (req: Request) => {
 
       <p>Heb je nog vragen? Neem gerust contact met ons op:</p>
       <p>
-        <strong>Telefoon:</strong> 085 - 80 08 600<br>
+        <strong>Telefoon:</strong> 085 - 80 08 777<br>
         <strong>Email:</strong> info@smartlease.nl<br>
         <strong>WhatsApp:</strong> +31 6 13669328
       </p>
