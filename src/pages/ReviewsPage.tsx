@@ -162,7 +162,7 @@ export default function ReviewsPage() {
             <Link to="/offerte" className="bg-white text-smartlease-yellow font-bold py-3 px-8 rounded-xl text-sm hover:bg-white/90 transition shadow-md">
               Gratis offerte aanvragen
             </Link>
-            <a href="tel:0858008600" className="border-2 border-white/40 text-white font-semibold py-3 px-8 rounded-xl text-sm hover:bg-white/10 transition">
+            <a href="tel:0858008777" className="border-2 border-white/40 text-white font-semibold py-3 px-8 rounded-xl text-sm hover:bg-white/10 transition">
               📞 085 - 80 08 600
             </a>
           </div>
