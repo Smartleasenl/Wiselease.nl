@@ -337,7 +337,7 @@ export function OfferteVergelijkerPage() {
                 <button onClick={handleAanvragen} className="flex-1 bg-smartlease-yellow hover:bg-yellow-500 text-white font-bold px-6 py-3.5 rounded-xl transition flex items-center justify-center gap-2">
                   <CheckCircle className="h-5 w-5" />Gratis offerte aanvragen
                 </button>
-                <a href="tel:0858008600" className="flex items-center justify-center gap-2 border border-gray-200 hover:border-gray-300 text-gray-700 font-semibold px-5 py-3.5 rounded-xl transition text-sm">
+                <a href="tel:0858008777" className="flex items-center justify-center gap-2 border border-gray-200 hover:border-gray-300 text-gray-700 font-semibold px-5 py-3.5 rounded-xl transition text-sm">
                   <Phone className="h-4 w-4" />085 - 80 08 600
                 </a>
                 <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 border border-gray-200 hover:border-green-300 text-gray-700 hover:text-green-600 font-semibold px-5 py-3.5 rounded-xl transition text-sm">
