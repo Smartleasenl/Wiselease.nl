@@ -19,8 +19,6 @@ import {
   MessageCircle,
   MapPin,
   Building2,
-  Shield,
-  Tag,
 } from 'lucide-react';
 import type { VehicleDetail } from '../types/vehicle';
 import { LeaseCalculator, type CalculatorState } from '../components/LeaseCalculator';
@@ -41,47 +39,59 @@ function berekenMaandprijs(verkoopprijs: number): number {
   return Math.round(pmt);
 }
 
-// ─── Accordion ───────────────────────────────────────────────────────────────
-function AccordionSection({ title, defaultOpen = false, children, count }: {
-  title: string; defaultOpen?: boolean; children: React.ReactNode; count?: number;
+// ─── Accordion Section ────────────────────────────────────────────────────────
+function AccordionSection({
+  title,
+  defaultOpen = false,
+  children,
+}: {
+  title: string;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="border-b border-gray-100 last:border-b-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-5 group">
-        <div className="flex items-center gap-3">
-          <h3 className="text-base font-bold text-gray-900 group-hover:text-[#f5a623] transition-colors">{title}</h3>
-          {count !== undefined && count > 0 && (
-            <span className="bg-[#f5a623]/10 text-[#f5a623] text-xs font-bold px-2 py-0.5 rounded-full">{count}</span>
-          )}
-        </div>
-        <div className={`w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center transition-all duration-300 group-hover:border-[#f5a623] group-hover:text-[#f5a623] ${open ? 'rotate-180 border-[#f5a623] text-[#f5a623]' : 'text-gray-400'}`}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-0 py-5 group"
+      >
+        <h3 className="text-lg font-bold text-gray-900 group-hover:text-smartlease-yellow transition-colors">
+          {title}
+        </h3>
+        <div className={`w-8 h-8 rounded-full bg-gray-100 group-hover:bg-yellow-50 flex items-center justify-center transition-all duration-300 ${open ? 'rotate-180 bg-yellow-50' : ''}`}>
           <ChevronDown className="h-4 w-4" />
         </div>
       </button>
-      <div className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'max-h-[3000px] opacity-100 pb-6' : 'max-h-0 opacity-0'}`}>
+      <div className={`overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'max-h-[2000px] opacity-100 pb-6' : 'max-h-0 opacity-0'}`}>
         {children}
       </div>
     </div>
   );
 }
 
-// ─── Spec Item ───────────────────────────────────────────────────────────────
-function SpecItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: string | number }) {
+// ─── Spec Item ────────────────────────────────────────────────────────────────
+function SpecItem({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string | number;
+}) {
   return (
-    <div className="group flex items-center gap-3 p-3.5 rounded-xl bg-gray-50 hover:bg-[#f5a623]/5 border border-transparent hover:border-[#f5a623]/20 transition-all duration-200">
-      <div className="w-9 h-9 rounded-lg bg-white shadow-sm flex items-center justify-center flex-shrink-0 text-[#f5a623] group-hover:shadow-md transition-shadow">
-        {icon}
-      </div>
+    <div className="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-gray-50/70 border border-gray-100/80">
+      <div className="text-smartlease-yellow/80 flex-shrink-0">{icon}</div>
       <div className="min-w-0">
-        <p className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold mb-0.5">{label}</p>
-        <p className="text-sm font-bold text-gray-900 truncate">{value}</p>
+        <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">{label}</p>
+        <p className="text-sm font-semibold text-gray-900">{value}</p>
       </div>
     </div>
   );
 }
 
-// ─── Main Component ──────────────────────────────────────────────────────────
+// ─── Main Component ───────────────────────────────────────────────────────────
 export function VehicleDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -91,17 +101,17 @@ export function VehicleDetailPage() {
   const [imageLoading, setImageLoading] = useState(false);
   const [calculatorState, setCalculatorState] = useState<CalculatorState | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [thumbsVisible, setThumbsVisible] = useState(false);
 
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
   const touchEndX = useRef(0);
   const isSwiping = useRef(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
-  const thumbsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => setIsAdmin(!!session?.user));
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAdmin(!!session?.user);
+    });
   }, []);
 
   useEffect(() => {
@@ -125,6 +135,8 @@ export function VehicleDetailPage() {
     return [];
   }, [vehicle]);
 
+  const thumbImages = useMemo<string[]>(() => images, [images]);
+
   const preloadImage = useCallback((src: string) => { new Image().src = src; }, []);
 
   useEffect(() => {
@@ -134,14 +146,6 @@ export function VehicleDetailPage() {
       if (images[idx]) preloadImage(images[idx]);
     });
   }, [currentImageIndex, images, preloadImage]);
-
-  // Scroll active thumb into view
-  useEffect(() => {
-    if (thumbsRef.current) {
-      const btn = thumbsRef.current.children[currentImageIndex] as HTMLElement;
-      if (btn) btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-  }, [currentImageIndex]);
 
   const formatPrice = (price: number) => {
     if (price === 0) return 'Prijs op aanvraag';
@@ -223,21 +227,20 @@ export function VehicleDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <Loader2 className="h-10 w-10 text-[#f5a623] animate-spin mx-auto mb-3" />
-          <p className="text-sm text-gray-400 font-medium">Voertuig laden...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fb]">
+        <Loader2 className="h-12 w-12 text-smartlease-yellow animate-spin" />
       </div>
     );
   }
 
   if (!vehicle) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fb]">
         <div className="text-center">
-          <p className="text-xl text-gray-600 mb-4">Voertuig niet gevonden</p>
-          <button onClick={() => navigate('/aanbod')} className="text-[#f5a623] hover:underline font-semibold">Terug naar aanbod</button>
+          <p className="text-xl text-gray-600">Voertuig niet gevonden</p>
+          <button onClick={() => navigate('/aanbod')} className="mt-4 text-smartlease-yellow hover:underline font-medium">
+            Terug naar overzicht
+          </button>
         </div>
       </div>
     );
@@ -248,43 +251,41 @@ export function VehicleDetailPage() {
   const kenteken = (vehicle as any).kenteken as string | undefined;
   const motorinhoud = (vehicle as any).motorinhoud as number | undefined;
   const nap = (vehicle as any).nap as boolean | undefined;
-  const maandbedrag = calculatorState ? calculatorState.maandbedrag : berekenMaandprijs(vehicle.verkoopprijs);
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-28 lg:pb-0">
+    <div className="bg-[#f8f9fb] min-h-screen pb-24 lg:pb-0">
       <style>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
+          from { opacity: 0; transform: translateY(16px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .anim-1 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
-        .anim-2 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.12s both; }
-        .anim-3 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.19s both; }
-        .anim-4 { animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.26s both; }
-        .thumb-btn { transition: all 0.2s ease; }
-        .thumb-btn:hover { transform: scale(1.05); }
-        .image-fade { transition: opacity 0.25s ease; }
+        .animate-fade-up { animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .delay-1 { animation-delay: 0.08s; }
+        .delay-2 { animation-delay: 0.16s; }
+        .delay-3 { animation-delay: 0.24s; }
+        .delay-4 { animation-delay: 0.32s; }
       `}</style>
 
-      {/* ── Sticky Nav ── */}
-      <div className="bg-white/90 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-          <button onClick={handleBack} className="flex items-center gap-2.5 text-gray-600 hover:text-[#f5a623] transition-colors text-sm font-semibold group">
-            <div className="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-[#f5a623]/10 flex items-center justify-center transition-colors">
-              <ArrowLeft className="h-4 w-4" />
-            </div>
-            <span className="hidden sm:inline">Terug naar aanbod</span>
-          </button>
-          <nav className="hidden sm:flex items-center gap-1.5 text-xs text-gray-400">
-            <button onClick={() => navigate('/')} className="hover:text-[#f5a623] transition-colors">Home</button>
-            <span className="text-gray-200">›</span>
-            <button onClick={() => navigate('/aanbod')} className="hover:text-[#f5a623] transition-colors">Aanbod</button>
-            <span className="text-gray-200">›</span>
-            <span className="text-gray-700 font-semibold">{vehicle.merk} {vehicle.model}</span>
-          </nav>
+      {/* Sticky breadcrumb */}
+      <div className="bg-white/80 backdrop-blur-xl border-b border-gray-200/60 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+          <div className="flex items-center justify-between">
+            <button onClick={handleBack} className="flex items-center gap-2 text-gray-500 hover:text-smartlease-yellow transition-colors font-medium text-sm group">
+              <div className="w-8 h-8 rounded-full bg-gray-100 group-hover:bg-yellow-50 flex items-center justify-center transition-colors">
+                <ArrowLeft className="h-4 w-4" />
+              </div>
+              <span className="hidden sm:inline">Terug naar aanbod</span>
+            </button>
+            <nav className="hidden sm:flex items-center gap-1.5 text-xs text-gray-400">
+              <button onClick={() => navigate('/')} className="hover:text-smartlease-yellow transition-colors">Home</button>
+              <span>›</span>
+              <button onClick={() => navigate('/aanbod')} className="hover:text-smartlease-yellow transition-colors">Aanbod</button>
+              <span>›</span>
+              <span className="text-gray-700 font-medium">{vehicle.merk} {vehicle.model}</span>
+            </nav>
+          </div>
         </div>
       </div>
 
@@ -292,87 +293,67 @@ export function VehicleDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
 
           {/* ════════ LEFT COLUMN ════════ */}
-          <div className="lg:col-span-8 space-y-5">
+          <div className="lg:col-span-8">
 
-            {/* ── Gallery ── */}
-            <div className="anim-1 rounded-2xl overflow-hidden bg-white shadow-sm ring-1 ring-black/5">
+            {/* Hero Gallery */}
+            <div className="animate-fade-up opacity-0 rounded-2xl overflow-hidden bg-white shadow-sm mb-5">
               <div
                 ref={imageContainerRef}
-                className="relative bg-gray-900 touch-pan-y select-none"
-                style={{ aspectRatio: '16/10' }}
+                className="relative bg-gray-900 touch-pan-y"
+                style={{ aspectRatio: '4/3' }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               >
                 {images.length > 0 ? (
-                  <img
-                    src={images[currentImageIndex]}
-                    alt={`${vehicle.merk} ${vehicle.model}`}
-                    className={`w-full h-full object-cover image-fade ${imageLoading ? 'opacity-60' : 'opacity-100'}`}
-                    onLoad={() => setImageLoading(false)}
-                    draggable={false}
-                  />
+                  <>
+                    <img
+                      src={images[currentImageIndex]}
+                      alt={`${vehicle.merk} ${vehicle.model}`}
+                      className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoading ? 'opacity-70' : 'opacity-100'}`}
+                      onLoad={() => setImageLoading(false)}
+                      draggable={false}
+                    />
+                    {imageLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Loader2 className="h-8 w-8 text-white animate-spin drop-shadow-lg" />
+                      </div>
+                    )}
+                  </>
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400 flex-col gap-3">
-                    <div className="text-5xl">🚗</div>
-                    <p className="text-sm font-medium">{vehicle.merk} {vehicle.model}</p>
+                  <div className="w-full h-full flex items-center justify-center text-gray-400">
+                    <div className="text-center"><div className="text-6xl mb-4">🚗</div><p className="text-sm">{vehicle.merk} {vehicle.model}</p></div>
                   </div>
                 )}
-
-                {imageLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                    <Loader2 className="h-7 w-7 text-white animate-spin drop-shadow-lg" />
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                {vehicle.btw_marge && (
+                  <span className="absolute top-4 left-4 bg-smartlease-yellow text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+                    {vehicle.btw_marge}
+                  </span>
                 )}
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/10 pointer-events-none" />
-
-                {/* Badges */}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  {vehicle.btw_marge && (
-                    <span className="bg-[#f5a623] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
-                      {vehicle.btw_marge}
-                    </span>
-                  )}
-                  {nap && (
-                    <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg flex items-center gap-1">
-                      <Shield className="h-3 w-3" /> NAP
-                    </span>
-                  )}
-                </div>
-
-                {/* Counter */}
-                {images.length > 1 && (
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm text-white px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide">
-                    {currentImageIndex + 1} / {images.length}
-                  </div>
-                )}
-
-                {/* Nav arrows */}
                 {images.length > 1 && (
                   <>
-                    <button onClick={prevImage} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 backdrop-blur-md hover:bg-white/35 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95">
+                    <button onClick={prevImage} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 flex items-center justify-center text-white transition-all">
                       <ChevronLeft className="h-5 w-5" />
                     </button>
-                    <button onClick={nextImage} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 backdrop-blur-md hover:bg-white/35 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-105 active:scale-95">
+                    <button onClick={nextImage} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/40 flex items-center justify-center text-white transition-all">
                       <ChevronRight className="h-5 w-5" />
                     </button>
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-xs font-medium tracking-wide">
+                      {currentImageIndex + 1} / {images.length}
+                    </div>
                   </>
                 )}
               </div>
-
-              {/* Thumbnails */}
-              {images.length > 1 && (
-                <div className="bg-gray-50 border-t border-gray-100 p-2.5">
-                  <div ref={thumbsRef} className="flex gap-2 overflow-x-auto hide-scrollbar">
-                    {images.map((img, idx) => (
+              {thumbImages.length > 1 && (
+                <div className="p-2.5 overflow-x-auto hide-scrollbar">
+                  <div className="flex gap-2">
+                    {thumbImages.map((img, idx) => (
                       <button
                         key={idx}
                         onClick={() => goToImage(idx)}
-                        className={`thumb-btn relative rounded-lg overflow-hidden flex-shrink-0 w-[72px] ${currentImageIndex === idx ? 'ring-2 ring-[#f5a623] ring-offset-1 scale-105' : 'opacity-55 hover:opacity-90'}`}
-                        style={{ aspectRatio: '16/10' }}
+                        className={`relative rounded-xl overflow-hidden flex-shrink-0 w-20 transition-all duration-300 ${currentImageIndex === idx ? 'ring-2 ring-smartlease-yellow ring-offset-2 scale-105' : 'opacity-60 hover:opacity-100'}`}
+                        style={{ aspectRatio: '4/3' }}
                       >
                         <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
                       </button>
@@ -382,149 +363,130 @@ export function VehicleDetailPage() {
               )}
             </div>
 
-            {/* ── Title & Quick Specs Card ── */}
-            <div className="anim-2 bg-white rounded-2xl shadow-sm ring-1 ring-black/5 overflow-hidden">
-              {/* Header */}
-              <div className="p-6 md:p-7 border-b border-gray-100">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1.5">
-                      {vehicle.categorie && (
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#f5a623] bg-[#f5a623]/10 px-2.5 py-1 rounded-full">
-                          {vehicle.categorie}
+            {/* Title & Price Card */}
+            <div className="animate-fade-up opacity-0 delay-1 bg-white rounded-2xl shadow-sm p-5 md:p-7 mb-5">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div className="flex-1">
+                  <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight leading-tight">
+                    {vehicle.merk} {vehicle.model}
+                  </h1>
+                  <p className="text-gray-500 mt-1 text-sm md:text-base">{vehicle.uitvoering}</p>
+                </div>
+                <div className="flex flex-col items-start md:items-end">
+                  {vehicle.verkoopprijs > 0 ? (
+                    <>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl md:text-4xl font-bold text-smartlease-yellow">
+                          € {(calculatorState ? calculatorState.maandbedrag : berekenMaandprijs(vehicle.verkoopprijs)).toLocaleString('nl-NL')},-
                         </span>
-                      )}
-                    </div>
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                      {vehicle.merk} {vehicle.model}
-                    </h1>
-                    <p className="text-gray-500 mt-1.5 text-sm leading-relaxed line-clamp-2">{vehicle.uitvoering}</p>
-                  </div>
-                  <div className="flex flex-row sm:flex-col items-center sm:items-end gap-3 sm:gap-1">
-                    {vehicle.verkoopprijs > 0 ? (
-                      <>
-                        <div>
-                          <p className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold text-right mb-0.5">v.a. p/maand</p>
-                          <p className="text-3xl md:text-4xl font-black text-[#f5a623] leading-none">
-                            €{maandbedrag.toLocaleString('nl-NL')}
-                          </p>
-                        </div>
-                        <div className="sm:mt-2 text-right">
-                          <p className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">Aankoopprijs</p>
-                          <p className="text-sm font-bold text-gray-700">{formatPrice(vehicle.verkoopprijs)}</p>
-                        </div>
-                      </>
-                    ) : (
-                      <span className="text-2xl font-black text-gray-900">Prijs op aanvraag</span>
-                    )}
-                  </div>
+                        <span className="text-sm text-gray-400 font-medium">p/m</span>
+                      </div>
+                      <span className="text-sm text-gray-400 mt-0.5">{formatPrice(vehicle.verkoopprijs)}</span>
+                    </>
+                  ) : (
+                    <span className="text-3xl font-bold text-smartlease-blue">{formatPrice(vehicle.verkoopprijs)}</span>
+                  )}
                 </div>
               </div>
-
-              {/* Quick spec pills */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-gray-100">
+              <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {[
-                  { icon: <Calendar className="h-4 w-4" />, label: 'Bouwjaar', value: String(vehicle.bouwjaar_year) },
-                  { icon: <Gauge className="h-4 w-4" />, label: 'Km-stand', value: formatKm(vehicle.kmstand) },
-                  { icon: <Fuel className="h-4 w-4" />, label: 'Brandstof', value: vehicle.brandstof },
-                  { icon: <Zap className="h-4 w-4" />, label: 'Vermogen', value: `${vehicle.vermogen} PK` },
+                  { icon: <Calendar className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />, label: 'Bouwjaar', value: String(vehicle.bouwjaar_year) },
+                  { icon: <Gauge className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />, label: 'Km-stand', value: formatKm(vehicle.kmstand) },
+                  { icon: <Fuel className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />, label: 'Brandstof', value: vehicle.brandstof },
+                  { icon: <Zap className="h-[18px] w-[18px] text-smartlease-yellow flex-shrink-0" />, label: 'Vermogen', value: `${vehicle.vermogen} PK` },
                 ].map(({ icon, label, value }) => (
-                  <div key={label} className="flex flex-col items-center justify-center py-4 px-3 gap-1.5 bg-white hover:bg-gray-50 transition-colors">
-                    <div className="text-[#f5a623]">{icon}</div>
-                    <p className="text-[9px] uppercase tracking-widest text-gray-400 font-bold">{label}</p>
-                    <p className="text-sm font-bold text-gray-900 text-center leading-tight">{value}</p>
+                  <div key={label} className="flex items-center gap-2.5 px-3.5 py-3 bg-gray-50 rounded-xl border border-gray-100">
+                    {icon}
+                    <div className="min-w-0">
+                      <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">{label}</p>
+                      <p className="text-sm font-semibold text-gray-900 truncate">{value}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* ── Mobile Calculator ── */}
+            {/* Mobile Calculator */}
             {vehicle.verkoopprijs > 0 && (
-              <div className="lg:hidden anim-3 bg-white rounded-2xl shadow-sm ring-1 ring-black/5 p-5">
+              <div className="lg:hidden animate-fade-up opacity-0 delay-2 bg-white rounded-2xl shadow-sm p-5 mb-5">
                 <LeaseCalculator vehiclePrice={vehicle.verkoopprijs} onChange={setCalculatorState} />
               </div>
             )}
 
-            {/* ── Mobile CTAs ── */}
-            <div className="lg:hidden anim-3 space-y-2.5">
-              <button onClick={handleWhatsApp} className="w-full bg-[#25D366] hover:bg-[#20c05c] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-green-500/20 text-sm active:scale-[0.98]">
+            {/* Mobile CTAs */}
+            <div className="lg:hidden animate-fade-up opacity-0 delay-3 space-y-2.5 mb-5">
+              <button onClick={handleWhatsApp} className="w-full bg-[#25D366] hover:bg-[#20c05c] text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-green-500/20 text-sm">
                 <MessageCircle className="h-5 w-5" /><span>WhatsApp over deze auto</span>
               </button>
-              <button onClick={handleOfferteNavigate} className="w-full bg-[#f5a623] hover:bg-[#e09518] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-yellow-500/20 text-sm active:scale-[0.98]">
+              <button onClick={handleOfferteNavigate} className="w-full bg-smartlease-yellow hover:bg-yellow-500 text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-yellow-500/20 text-sm">
                 <FileText className="h-5 w-5" /><span>Gratis offerte aanvragen</span>
               </button>
-              <button onClick={handleBelMijNavigate} className="w-full bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 transition-all text-sm active:scale-[0.98]">
+              <button onClick={handleBelMijNavigate} className="w-full bg-white hover:bg-gray-50 text-smartlease-blue border-2 border-smartlease-blue py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all text-sm">
                 <Phone className="h-5 w-5" /><span>Bel mij over deze auto</span>
               </button>
             </div>
 
-            {/* ── Details Accordion Card ── */}
-            <div className="anim-4 bg-white rounded-2xl shadow-sm ring-1 ring-black/5 px-6 md:px-7">
+            {/* Accordion Details */}
+            <div className="animate-fade-up opacity-0 delay-4 bg-white rounded-2xl shadow-sm px-5 md:px-7">
 
-              <AccordionSection title="Specificaties" defaultOpen={true}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <SpecItem icon={<Calendar className="h-4 w-4" />} label="Bouwjaar" value={vehicle.bouwjaar_year} />
-                  <SpecItem icon={<Gauge className="h-4 w-4" />} label="Kilometerstand" value={formatKm(vehicle.kmstand)} />
-                  <SpecItem icon={<Fuel className="h-4 w-4" />} label="Brandstof" value={vehicle.brandstof} />
-                  <SpecItem icon={<Settings className="h-4 w-4" />} label="Transmissie" value={vehicle.transmissie} />
-                  <SpecItem icon={<Zap className="h-4 w-4" />} label="Vermogen" value={`${vehicle.vermogen} PK`} />
+              <AccordionSection title="Informatie" defaultOpen={true}>
+                <div className="grid grid-cols-2 gap-3">
+                  <SpecItem icon={<Calendar className="h-[18px] w-[18px]" />} label="Bouwjaar" value={vehicle.bouwjaar_year} />
+                  <SpecItem icon={<Gauge className="h-[18px] w-[18px]" />} label="Kilometerstand" value={formatKm(vehicle.kmstand)} />
+                  <SpecItem icon={<Fuel className="h-[18px] w-[18px]" />} label="Brandstof" value={vehicle.brandstof} />
+                  <SpecItem icon={<Settings className="h-[18px] w-[18px]" />} label="Transmissie" value={vehicle.transmissie} />
+                  <SpecItem icon={<Zap className="h-[18px] w-[18px]" />} label="Vermogen" value={`${vehicle.vermogen} PK`} />
                   {motorinhoud && motorinhoud > 0 && (
-                    <SpecItem icon={<Settings className="h-4 w-4" />} label="Cilinderinhoud" value={`${motorinhoud} cc`} />
+                    <SpecItem icon={<Settings className="h-[18px] w-[18px]" />} label="Motorinhoud" value={`${motorinhoud} cc`} />
                   )}
-                  <SpecItem icon={<Palette className="h-4 w-4" />} label="Kleur" value={vehicle.kleur} />
-                  <SpecItem icon={<DoorClosed className="h-4 w-4" />} label="Deuren" value={vehicle.deuren} />
+                  <SpecItem icon={<Palette className="h-[18px] w-[18px]" />} label="Kleur" value={vehicle.kleur} />
+                  <SpecItem icon={<DoorClosed className="h-[18px] w-[18px]" />} label="Deuren" value={vehicle.deuren} />
                   {kenteken && kenteken !== '-' && kenteken !== '' && (
-                    <SpecItem icon={<Tag className="h-4 w-4" />} label="Kenteken" value={kenteken} />
+                    <SpecItem icon={<FileText className="h-[18px] w-[18px]" />} label="Kenteken" value={kenteken} />
                   )}
                   {nap && (
-                    <SpecItem icon={<Shield className="h-4 w-4" />} label="NAP" value="Gecertificeerd" />
+                    <SpecItem icon={<Check className="h-[18px] w-[18px]" />} label="NAP" value="Gecertificeerd" />
                   )}
                 </div>
               </AccordionSection>
 
-              {opties && opties.length > 0 && (
-                <AccordionSection title="Opties & uitrusting" count={opties.length}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              <AccordionSection title="Opties">
+                {opties && opties.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {opties.map((optie, idx) => (
-                      <div key={idx} className="flex items-center gap-2.5 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors group">
-                        <div className="w-5 h-5 rounded-full bg-[#f5a623]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#f5a623]/20 transition-colors">
-                          <Check className="h-3 w-3 text-[#f5a623]" />
+                      <div key={idx} className="flex items-center gap-2.5 py-1.5">
+                        <div className="w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center text-smartlease-yellow flex-shrink-0">
+                          <Check className="h-3 w-3" />
                         </div>
-                        <span className="text-sm text-gray-700 font-medium">{optie}</span>
+                        <span className="text-sm text-gray-700">{optie}</span>
                       </div>
                     ))}
                   </div>
-                </AccordionSection>
-              )}
-
-              {!opties || opties.length === 0 ? (
-                <AccordionSection title="Opties & uitrusting">
-                  <p className="text-sm text-gray-400 italic">Geen opties beschikbaar voor dit voertuig</p>
-                </AccordionSection>
-              ) : null}
+                ) : (
+                  <p className="text-gray-500 text-sm">Geen opties beschikbaar</p>
+                )}
+              </AccordionSection>
 
               <AccordionSection title="Omschrijving">
                 {omschrijving ? (
-                  <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-                    <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{omschrijving}</p>
-                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{omschrijving}</p>
                 ) : (
-                  <p className="text-sm text-gray-400 italic">Geen omschrijving beschikbaar voor dit voertuig</p>
+                  <p className="text-gray-500 text-sm">Geen omschrijving beschikbaar</p>
                 )}
               </AccordionSection>
 
               {isAdmin && (
                 <AccordionSection title="Verkoper (admin)">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {(vehicle as any).aanbieder_naam && (
-                      <SpecItem icon={<Building2 className="h-4 w-4" />} label="Bedrijfsnaam" value={(vehicle as any).aanbieder_naam} />
+                      <SpecItem icon={<Building2 className="h-[18px] w-[18px]" />} label="Bedrijfsnaam" value={(vehicle as any).aanbieder_naam} />
                     )}
                     {(vehicle as any).aanbieder_plaats && (
-                      <SpecItem icon={<MapPin className="h-4 w-4" />} label="Plaats" value={(vehicle as any).aanbieder_plaats} />
+                      <SpecItem icon={<MapPin className="h-[18px] w-[18px]" />} label="Plaats" value={(vehicle as any).aanbieder_plaats} />
                     )}
                     {(vehicle as any).link && (
-                      <div className="sm:col-span-2 mt-2">
-                        <a href={(vehicle as any).link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-[#f5a623] hover:underline font-semibold">
+                      <div className="sm:col-span-2">
+                        <a href={(vehicle as any).link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-smartlease-yellow hover:underline font-medium">
                           <FileText className="h-4 w-4" />Bekijk originele advertentie
                         </a>
                       </div>
@@ -538,75 +500,47 @@ export function VehicleDetailPage() {
           {/* ════════ RIGHT SIDEBAR ════════ */}
           <div className="hidden lg:block lg:col-span-4">
             <div className="sticky top-20 space-y-4">
-
-              {/* Price card */}
-              {vehicle.verkoopprijs > 0 && (
-                <div className="bg-white rounded-2xl shadow-sm ring-1 ring-black/5 overflow-hidden">
-                  <div className="bg-gradient-to-br from-[#1a2744] to-[#243461] p-5 text-white">
-                    <p className="text-xs uppercase tracking-widest text-white/60 font-semibold mb-1">v.a. per maand</p>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-black text-[#f5a623]">€{maandbedrag.toLocaleString('nl-NL')}</span>
-                      <span className="text-white/60 text-sm font-medium">p/m</span>
-                    </div>
-                    <p className="text-white/50 text-xs mt-2">Aankoopprijs: {formatPrice(vehicle.verkoopprijs)}</p>
-                    <p className="text-white/30 text-[10px] mt-1">Indicatief · 72 mnd · 15% aanbetaling · 8.99%</p>
-                  </div>
-                  <div className="p-4">
-                    <LeaseCalculator vehiclePrice={vehicle.verkoopprijs} onChange={setCalculatorState} />
-                  </div>
-                </div>
-              )}
-
-              {/* CTA buttons */}
               <div className="space-y-2.5">
-                <button onClick={handleWhatsApp} className="w-full bg-[#25D366] hover:bg-[#20c05c] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 transition-all shadow-md shadow-green-500/20 text-sm active:scale-[0.98]">
+                <button onClick={handleWhatsApp} className="w-full bg-[#25D366] hover:bg-[#20c05c] text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-green-500/20 text-sm">
                   <MessageCircle className="h-5 w-5" /><span>WhatsApp over deze auto</span>
                 </button>
-                <button onClick={handleOfferteNavigate} className="w-full bg-[#f5a623] hover:bg-[#e09518] text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 transition-all shadow-md shadow-yellow-500/20 text-sm active:scale-[0.98]">
+                <button onClick={handleOfferteNavigate} className="w-full bg-smartlease-yellow hover:bg-yellow-500 text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-yellow-500/20 text-sm">
                   <FileText className="h-5 w-5" /><span>Gratis offerte aanvragen</span>
                 </button>
-                <button onClick={handleBelMijNavigate} className="w-full bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2.5 transition-all text-sm active:scale-[0.98]">
+                <button onClick={handleBelMijNavigate} className="w-full bg-white hover:bg-gray-50 text-smartlease-blue border-2 border-smartlease-blue py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all text-sm">
                   <Phone className="h-5 w-5" /><span>Bel mij over deze auto</span>
                 </button>
               </div>
-
-              {/* Trust badges */}
-              <div className="bg-white rounded-2xl ring-1 ring-black/5 p-4">
-                <div className="space-y-3">
-                  {[
-                    { icon: '✅', text: 'Gratis en vrijblijvende offerte' },
-                    { icon: '🔒', text: 'Veilig financial lease afsluiten' },
-                    { icon: '⚡', text: 'Snel antwoord via WhatsApp' },
-                  ].map(({ icon, text }) => (
-                    <div key={text} className="flex items-center gap-3 text-sm text-gray-600">
-                      <span className="text-base">{icon}</span>
-                      <span className="font-medium">{text}</span>
-                    </div>
-                  ))}
+              {vehicle.verkoopprijs > 0 && (
+                <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+                  <LeaseCalculator vehiclePrice={vehicle.verkoopprijs} onChange={setCalculatorState} />
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Sticky Mobile Footer ── */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] z-50">
-        <div className="flex items-center justify-between px-4 py-3 max-w-lg mx-auto gap-4">
+      {/* Mobile sticky footer */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-gray-200/60 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] z-50">
+        <div className="flex items-center justify-between px-4 py-3 max-w-lg mx-auto">
           <div>
             {vehicle.verkoopprijs > 0 ? (
               <>
-                <p className="text-[9px] uppercase tracking-widest text-gray-400 font-bold">v.a. per maand</p>
-                <p className="text-2xl font-black text-[#f5a623] leading-tight">
-                  €{maandbedrag.toLocaleString('nl-NL')}
+                <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Maandbedrag</p>
+                <p className="text-xl font-bold text-smartlease-yellow">
+                  € {(calculatorState ? calculatorState.maandbedrag : berekenMaandprijs(vehicle.verkoopprijs)).toLocaleString('nl-NL')} p/m
                 </p>
               </>
             ) : (
-              <p className="text-base font-bold text-gray-900">Prijs op aanvraag</p>
+              <>
+                <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Vraagprijs</p>
+                <p className="text-xl font-bold text-gray-900">{formatPrice(vehicle.verkoopprijs)}</p>
+              </>
             )}
           </div>
-          <button onClick={handleOfferteNavigate} className="flex-1 max-w-[200px] bg-[#f5a623] hover:bg-[#e09518] text-white px-5 py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-yellow-500/20 flex items-center justify-center gap-2 active:scale-[0.97]">
-            <FileText className="h-4 w-4" /><span>Offerte aanvragen</span>
+          <button onClick={handleOfferteNavigate} className="bg-smartlease-yellow hover:bg-yellow-500 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all shadow-lg shadow-yellow-500/20 flex items-center gap-2">
+            <FileText className="h-4 w-4" /><span>Gratis offerte</span>
           </button>
         </div>
       </div>
