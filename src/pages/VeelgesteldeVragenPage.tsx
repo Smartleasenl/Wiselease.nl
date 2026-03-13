@@ -483,7 +483,7 @@ export default function VeelgesteldeVragenPage() {
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
               <a
-                href="tel:0858008600"
+                href="tel:0858008777"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10,
                   padding: '14px 28px', borderRadius: 14,
