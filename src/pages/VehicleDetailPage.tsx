@@ -261,7 +261,7 @@ export function VehicleDetailPage() {
               </div>
             </div>
 
-            <div className="animate-fade-up opacity-0 delay-2 bg-white rounded-2xl shadow-sm p-5 md:p-7">
+            <div className="bg-white rounded-2xl shadow-sm p-5 md:p-7">
               <h2 className="font-semibold text-gray-900 mb-4">Specificaties</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div className="flex items-center gap-2.5 px-3.5 py-3 bg-gray-50 rounded-xl border border-gray-100">
@@ -296,12 +296,12 @@ export function VehicleDetailPage() {
             </div>
 
             {vehicle.verkoopprijs > 0 && (
-              <div className="lg:hidden animate-fade-up opacity-0 delay-2 bg-white rounded-2xl shadow-sm p-5 mb-5">
+              <div className="lg:hidden bg-white rounded-2xl shadow-sm p-5 mb-5">
                 <LeaseCalculator vehiclePrice={vehicle.verkoopprijs} onChange={setCalculatorState} />
               </div>
             )}
 
-            <div className="lg:hidden animate-fade-up opacity-0 delay-3 space-y-2.5 mb-5">
+            <div className="lg:hidden space-y-2.5 mb-5">
               <button onClick={handleWhatsApp} className="w-full bg-[#25D366] hover:bg-[#20c05c] text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-green-500/20 text-sm">
                 <MessageCircle className="h-5 w-5" /><span>WhatsApp over deze auto</span>
               </button>
@@ -313,7 +313,7 @@ export function VehicleDetailPage() {
               </button>
             </div>
 
-            <div className="animate-fade-up opacity-0 delay-4 bg-white rounded-2xl shadow-sm px-5 md:px-7">
+            <div className="bg-white rounded-2xl shadow-sm px-5 md:px-7">
               <AccordionSection title="Informatie" defaultOpen={true}>
                 <div className="grid grid-cols-2 gap-3">
                   <SpecItem icon={<Calendar className="h-[18px] w-[18px]" />} label="Bouwjaar" value={vehicle.bouwjaar_year} />
