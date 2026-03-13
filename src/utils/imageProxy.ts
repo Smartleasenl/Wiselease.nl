@@ -5,7 +5,8 @@ const IMG_PROXY = 'https://img.wiselease.nl';
 export function getProxiedImageUrl(originalUrl: string | null | undefined): string {
   if (!originalUrl) return '';
   if (!originalUrl.includes('nederlandmobiel.nl')) return originalUrl;
-  return `${IMG_PROXY}?url=${encodeURIComponent(originalUrl)}`;
+  // Stuur de URL direct mee zonder encodeURIComponent
+  return `${IMG_PROXY}/?url=${originalUrl}`;
 }
 
 export function proxyThumb(externalId: string | number, size = 640, n = 1): string {
