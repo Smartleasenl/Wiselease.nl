@@ -198,7 +198,7 @@ export function VehicleDetailPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 space-y-5">
-            <div className="animate-fade-up opacity-0 delay-1 bg-white rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
               <div className="relative bg-gray-100" style={{ aspectRatio: '16/10' }}>
                 {currentImage ? (
                   <img
