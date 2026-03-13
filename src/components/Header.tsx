@@ -450,7 +450,7 @@ export function Header() {
 
           <div className="px-4 py-6">
             <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-4 mb-3">Contact</p>
-            <a href="tel:0858008600" className="flex items-center space-x-4 px-4 py-3.5 rounded-2xl hover:bg-gray-50 transition mb-2">
+            <a href="tel:0858008777" className="flex items-center space-x-4 px-4 py-3.5 rounded-2xl hover:bg-gray-50 transition mb-2">
               <div className="w-11 h-11 rounded-xl bg-smartlease-yellow/10 flex items-center justify-center flex-shrink-0">
                 <Phone className="h-5 w-5 text-smartlease-yellow" />
               </div>
