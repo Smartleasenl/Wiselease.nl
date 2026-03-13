@@ -145,7 +145,7 @@ export function Header() {
             </Link>
 
             <div className="flex md:hidden items-center space-x-3 z-[60]">
-              <a href="tel:0858008600" className="p-2 text-gray-700 hover:text-smartlease-yellow transition">
+              <a href="tel:0858008777" className="p-2 text-gray-700 hover:text-smartlease-yellow transition">
                 <Phone className="h-5 w-5" />
               </a>
               <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer"
