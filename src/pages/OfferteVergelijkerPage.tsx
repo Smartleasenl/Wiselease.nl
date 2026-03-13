@@ -365,7 +365,7 @@ export function OfferteVergelijkerPage() {
               <button onClick={reset} className="bg-smartlease-yellow text-white font-bold px-6 py-3 rounded-xl hover:bg-yellow-500 transition flex items-center gap-2 justify-center">
                 <RefreshCw className="h-4 w-4" />Opnieuw proberen
               </button>
-              <a href="tel:0858008600" className="border border-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-xl hover:border-gray-300 transition flex items-center gap-2 justify-center text-sm">
+              <a href="tel:0858008777" className="border border-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-xl hover:border-gray-300 transition flex items-center gap-2 justify-center text-sm">
                 <Phone className="h-4 w-4" />Bel ons direct
               </a>
             </div>
