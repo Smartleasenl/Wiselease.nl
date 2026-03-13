@@ -55,8 +55,8 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <img
-            src="/smart-lease-logo.gif"
-            alt="Smartlease.nl"
+            src="/Wiselease_Logo.png"
+            alt="Wiselease"
             className="h-12 mx-auto mb-4"
           />
           <h1 className="text-2xl font-bold text-gray-900">Admin Login</h1>
@@ -162,7 +162,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-6">
-          © 2026 Smartlease.nl — Admin Panel
+          © 2026 Wiselease — Admin Panel
         </p>
       </div>
     </div>
