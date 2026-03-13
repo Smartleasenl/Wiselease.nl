@@ -1,6 +1,6 @@
 // src/utils/imageProxy.ts
 // Afbeeldingen via Netlify function — proxiet nederlandmobiel.nl images
-const IMG_PROXY = '/img-proxy';
+const IMG_PROXY = 'http://img.wiselease.nl';
 
 export function getProxiedImageUrl(originalUrl: string | null | undefined): string {
   if (!originalUrl) return '';
