@@ -42,8 +42,8 @@ const SECTIONS: SectionDef[] = [
     description: 'Telefoon, email, adres en openingstijden',
     icon: Phone,
     fields: [
-      { key: 'contact_phone', label: 'Telefoonnummer (weergave)', type: 'tel', placeholder: '085 - 80 08 600' },
-      { key: 'contact_phone_raw', label: 'Telefoonnummer (link)', type: 'tel', placeholder: '0858008600', hint: 'Zonder spaties, voor tel: link' },
+      { key: 'contact_phone', label: 'Telefoonnummer (weergave)', type: 'tel', placeholder: '085 - 80 08 777' },
+      { key: 'contact_phone_raw', label: 'Telefoonnummer (link)', type: 'tel', placeholder: '0858008777', hint: 'Zonder spaties, voor tel: link' },
       { key: 'contact_whatsapp', label: 'WhatsApp nummer', type: 'tel', placeholder: '31613669328', hint: 'Landcode + nummer zonder +' },
       { key: 'contact_email', label: 'E-mailadres', type: 'email', placeholder: 'info@smartlease.nl' },
       { key: 'contact_address', label: 'Adres', type: 'text', placeholder: 'Straatnaam 1' },
