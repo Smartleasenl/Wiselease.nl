@@ -40,7 +40,7 @@ export default function AdminLayout() {
         <button onClick={() => setSidebarOpen(true)} className="p-2 -ml-2 text-gray-600 hover:text-gray-900 transition">
           <Menu className="h-6 w-6" />
         </button>
-        <img src="/smart-lease-logo.gif" alt="Smartlease" className="h-7" />
+        <img src="/Wiselease_Logo.png" alt="Wiselease" className="h-7" />
         <div className="w-10" />
       </div>
 
@@ -76,7 +76,7 @@ function SidebarContent({ onClose, onLogout, isActive }: {
     <div className="flex flex-col h-full">
       <div className="px-5 py-5 flex items-center justify-between border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <img src="/smart-lease-logo.gif" alt="Smartlease" className="h-8" />
+          <img src="/Wiselease_Logo.png" alt="Wiselease" className="h-8" />
           <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Admin</span>
         </div>
         {onClose && (
