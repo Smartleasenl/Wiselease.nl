@@ -19,6 +19,7 @@ import {
   ChevronDown,
   ChevronUp,
   ArrowLeft,
+  ChevronLeft,
 } from 'lucide-react';
 import type { VehicleDetail } from '../types/vehicle';
 import { LeaseCalculator, type CalculatorState } from '../components/LeaseCalculator';
@@ -28,6 +29,8 @@ export function VehicleDetailPage() {
   const navigate = useNavigate();
 
   const [vehicle, setVehicle] = useState<VehicleDetail | null>(null);
+  const [images, setImages] = useState<string[]>([]);
+  const [activeImage, setActiveImage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -91,6 +94,22 @@ export function VehicleDetailPage() {
       }
 
       setVehicle(data as VehicleDetail);
+
+      // Haal foto's op uit vehicle_images
+      const { data: imgData } = await supabase
+        .from('vehicle_images')
+        .select('url')
+        .eq('vehicle_id', id)
+        .order('volgorde', { ascending: true });
+
+      if (imgData && imgData.length > 0) {
+        setImages(imgData.map((i: any) => i.url));
+      } else if (data.afbeelding) {
+        setImages([data.afbeelding]);
+      } else if (data.large_picture) {
+        setImages([data.large_picture]);
+      }
+
       setLoading(false);
       setTimeout(() => setMounted(true), 80);
     };
@@ -162,6 +181,8 @@ export function VehicleDetailPage() {
 
   if (!vehicle) return null;
 
+  const currentImage = images[activeImage];
+
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
@@ -176,10 +197,11 @@ export function VehicleDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 space-y-5">
             <div className="animate-fade-up opacity-0 delay-1 bg-white rounded-2xl shadow-sm overflow-hidden">
+              {/* Hoofdfoto */}
               <div className="relative bg-gray-100" style={{ aspectRatio: '16/10' }}>
-                {vehicle.afbeelding ? (
+                {currentImage ? (
                   <img
-                    src={vehicle.afbeelding}
+                    src={currentImage}
                     alt={`${vehicle.merk} ${vehicle.model}`}
                     className="w-full h-full object-contain"
                   />
@@ -192,7 +214,45 @@ export function VehicleDetailPage() {
                     </div>
                   </div>
                 )}
+
+                {/* Navigatie pijlen */}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setActiveImage((prev) => (prev - 1 + images.length) % images.length)}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition"
+                    >
+                      <ChevronLeft className="h-5 w-5 text-gray-700" />
+                    </button>
+                    <button
+                      onClick={() => setActiveImage((prev) => (prev + 1) % images.length)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition"
+                    >
+                      <ChevronRight className="h-5 w-5 text-gray-700" />
+                    </button>
+                    <div className="absolute bottom-3 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
+                      {activeImage + 1} / {images.length}
+                    </div>
+                  </>
+                )}
               </div>
+
+              {/* Thumbnail strip */}
+              {images.length > 1 && (
+                <div className="flex gap-2 px-4 py-3 overflow-x-auto">
+                  {images.slice(0, 10).map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveImage(idx)}
+                      className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition ${
+                        activeImage === idx ? 'border-smartlease-yellow' : 'border-transparent'
+                      }`}
+                    >
+                      <img src={img} alt="" className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <div className="p-5 md:p-7">
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
