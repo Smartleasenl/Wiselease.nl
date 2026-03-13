@@ -52,7 +52,7 @@ export function Footer() {
   const meerInfoLinks = allLinks.filter(l => l.column_key === 'meer_informatie');
 
   const phone       = s['contact_phone']        || '085 - 80 08 600';
-  const phoneRaw    = s['contact_phone_raw']     || '0858008600';
+  const phoneRaw    = s['contact_phone_raw']     || '0858008777';
   const whatsapp    = s['contact_whatsapp']      || '31613669328';
   const email       = s['contact_email']         || 'info@smartlease.nl';
   const hours       = s['footer_openingstijden'] || 'Ma-Vr 9:00 - 18:00 | Za 10:00 - 14:00';
