@@ -85,31 +85,32 @@ export function VehicleDetailPage() {
         return;
       }
 
-      const { data, error } = await supabase
-        .from('vehicles')
-        .select('*')
-        .eq('id', id)
-        .maybeSingle();
+      // Gebruik Edge Function zodat opties + images in één call meekomen
+      const res = await fetch(
+        `https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/vehicles/detail?id=${id}`
+      );
 
-      if (error || !data) {
+      if (!res.ok) {
+        navigate('/aanbod');
+        return;
+      }
+
+      const data = await res.json();
+
+      if (!data || data.error) {
         navigate('/aanbod');
         return;
       }
 
       setVehicle(data as VehicleDetail);
 
-      const { data: imgData } = await supabase
-        .from('vehicle_images')
-        .select('url')
-        .eq('vehicle_id', id)
-        .order('id', { ascending: true });
-
-      if (imgData && imgData.length > 0) {
-        setImages(imgData.map((i: any) => i.url));
-      } else if (data.afbeelding) {
-        setImages([data.afbeelding]);
+      // Images zitten al in de Edge Function response
+      if (data.images && data.images.length > 0) {
+        setImages(data.images);
       } else if (data.large_picture) {
         setImages([data.large_picture]);
+      } else if (data.small_picture) {
+        setImages([data.small_picture]);
       }
 
       setLoading(false);
@@ -321,8 +322,8 @@ export function VehicleDetailPage() {
                   <SpecItem icon={<Fuel className="h-[18px] w-[18px]" />} label="Brandstof" value={vehicle.brandstof} />
                   <SpecItem icon={<Settings className="h-[18px] w-[18px]" />} label="Transmissie" value={vehicle.transmissie} />
                   <SpecItem icon={<Zap className="h-[18px] w-[18px]" />} label="Vermogen" value={`${vehicle.vermogen} PK`} />
-                  {vehicle.motorinhoud && (
-                    <SpecItem icon={<Settings className="h-[18px] w-[18px]" />} label="Motorinhoud" value={vehicle.motorinhoud} />
+                  {vehicle.motorinhoud && vehicle.motorinhoud > 0 && (
+                    <SpecItem icon={<Settings className="h-[18px] w-[18px]" />} label="Motorinhoud" value={`${vehicle.motorinhoud} cc`} />
                   )}
                   <SpecItem icon={<Palette className="h-[18px] w-[18px]" />} label="Kleur" value={vehicle.kleur} />
                   <SpecItem icon={<DoorClosed className="h-[18px] w-[18px]" />} label="Deuren" value={vehicle.deuren} />
