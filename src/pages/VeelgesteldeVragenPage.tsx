@@ -496,7 +496,7 @@ export default function VeelgesteldeVragenPage() {
                 onMouseLeave={e => (e.currentTarget.style.transform = 'none')}
               >
                 <Phone style={{ width: 16, height: 16 }} />
-                085 – 80 08 600
+                085 – 80 08 777
               </a>
 
               <a
