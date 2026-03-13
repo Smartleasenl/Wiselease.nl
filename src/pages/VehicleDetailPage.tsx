@@ -100,7 +100,7 @@ export function VehicleDetailPage() {
         .from('vehicle_images')
         .select('url')
         .eq('vehicle_id', id)
-        .order('volgorde', { ascending: true });
+        .order('id', { ascending: true });
 
       if (imgData && imgData.length > 0) {
         setImages(imgData.map((i: any) => i.url));
@@ -181,9 +181,7 @@ export function VehicleDetailPage() {
 
   if (!vehicle) return null;
 
-  const PROXY = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/image-proxy?url=';
-  const proxyImg = (url: string) => url ? `${PROXY}${encodeURIComponent(url)}` : '';
-  const currentImage = proxyImg(images[activeImage]);
+  const currentImage = images[activeImage];
 
   return (
     <div className="bg-white">
@@ -250,7 +248,7 @@ export function VehicleDetailPage() {
                         activeImage === idx ? 'border-smartlease-yellow' : 'border-transparent'
                       }`}
                     >
-                      <img src={proxyImg(img)} alt="" className="w-full h-full object-cover" />
+                      <img src={img} alt="" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
