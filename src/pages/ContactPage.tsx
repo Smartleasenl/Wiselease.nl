@@ -168,7 +168,7 @@ export function ContactPage() {
             <h2 className="font-bold text-gray-900 text-lg">Meer weten?</h2>
 
             <a
-              href="tel:0858008600"
+              href="tel:0858008777"
               className="flex items-center gap-4 p-4 rounded-xl bg-smartlease-yellow/5 hover:bg-smartlease-yellow/10 transition group"
             >
               <div className="w-11 h-11 rounded-xl bg-smartlease-yellow/10 flex items-center justify-center flex-shrink-0">
