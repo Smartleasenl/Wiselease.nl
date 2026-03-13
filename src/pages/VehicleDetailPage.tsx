@@ -24,6 +24,9 @@ import {
 import type { VehicleDetail } from '../types/vehicle';
 import { LeaseCalculator, type CalculatorState } from '../components/LeaseCalculator';
 
+const PROXY = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/image-proxy?url=';
+const proxyImg = (url: string) => url ? `${PROXY}${encodeURIComponent(url)}` : '';
+
 export function VehicleDetailPage() {
   const { id, slug } = useParams<{ id: string; slug?: string }>();
   const navigate = useNavigate();
@@ -95,7 +98,6 @@ export function VehicleDetailPage() {
 
       setVehicle(data as VehicleDetail);
 
-      // Haal foto's op uit vehicle_images
       const { data: imgData } = await supabase
         .from('vehicle_images')
         .select('url')
@@ -181,7 +183,7 @@ export function VehicleDetailPage() {
 
   if (!vehicle) return null;
 
-  const currentImage = images[activeImage];
+  const currentImage = proxyImg(images[activeImage] || '');
 
   return (
     <div className="bg-white">
@@ -197,7 +199,6 @@ export function VehicleDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8 space-y-5">
             <div className="animate-fade-up opacity-0 delay-1 bg-white rounded-2xl shadow-sm overflow-hidden">
-              {/* Hoofdfoto */}
               <div className="relative bg-gray-100" style={{ aspectRatio: '16/10' }}>
                 {currentImage ? (
                   <img
@@ -215,7 +216,6 @@ export function VehicleDetailPage() {
                   </div>
                 )}
 
-                {/* Navigatie pijlen */}
                 {images.length > 1 && (
                   <>
                     <button
@@ -237,7 +237,6 @@ export function VehicleDetailPage() {
                 )}
               </div>
 
-              {/* Thumbnail strip */}
               {images.length > 1 && (
                 <div className="flex gap-2 px-4 py-3 overflow-x-auto">
                   {images.slice(0, 10).map((img, idx) => (
@@ -248,7 +247,7 @@ export function VehicleDetailPage() {
                         activeImage === idx ? 'border-smartlease-yellow' : 'border-transparent'
                       }`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                      <img src={proxyImg(img)} alt="" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
