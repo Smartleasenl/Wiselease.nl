@@ -8,18 +8,15 @@ export default async (req: Request) => {
       },
     });
   }
-
   try {
     const url = new URL(req.url);
     const imageUrl = url.searchParams.get("url");
-
     if (!imageUrl || !imageUrl.startsWith("https://images.nederlandmobiel.nl/")) {
       return new Response(JSON.stringify({ error: "Missing or invalid url parameter" }), {
         status: 400,
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
     }
-
     const imageRes = await fetch(imageUrl, {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -31,17 +28,14 @@ export default async (req: Request) => {
         "sec-fetch-site": "same-site",
       },
     });
-
     if (!imageRes.ok) {
       return new Response(JSON.stringify({ error: `Failed to fetch image: ${imageRes.status}` }), {
         status: imageRes.status,
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
     }
-
     const contentType = imageRes.headers.get("content-type") || "image/jpeg";
     const imageBody = await imageRes.arrayBuffer();
-
     return new Response(imageBody, {
       status: 200,
       headers: {
@@ -60,12 +54,3 @@ export default async (req: Request) => {
 };
 
 export const config = { path: "/img-proxy" };
-```
-
-Dan in je `imageProxy.ts` utility de URL aanpassen van:
-```
-https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/image-proxy?url=
-```
-naar:
-```
-/img-proxy?url=
