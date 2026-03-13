@@ -203,7 +203,7 @@ export function VehicleDetailPage() {
       '',
       'Kunnen jullie mij meer informatie geven?',
     ];
-    window.open(`https://wa.me/31850808600?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+    window.open(`https://wa.me/31850808777?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
   };
 
   const buildVehicleState = () => ({
