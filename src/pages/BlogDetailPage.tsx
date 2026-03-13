@@ -258,7 +258,7 @@ export default function BlogDetailPage() {
                 textDecoration: 'none',
               }}>
                 <Phone style={{ width: 14, height: 14 }} />
-                085 – 80 08 600
+                085 – 80 08 777
               </a>
 
               <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" style={{
