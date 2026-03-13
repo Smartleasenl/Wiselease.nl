@@ -113,8 +113,8 @@ export function Header() {
       <div className="hidden md:block bg-white border-b border-gray-200 py-2.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-sm">
           <div className="flex items-center space-x-6">
-            <a href="tel:0858008600" className="flex items-center space-x-2 text-gray-700 hover:text-smartlease-yellow transition">
-              <Phone className="h-4 w-4 text-smartlease-yellow" /><span className="font-semibold">085 - 80 08 600</span>
+            <a href="tel:0858008777" className="flex items-center space-x-2 text-gray-700 hover:text-smartlease-yellow transition">
+              <Phone className="h-4 w-4 text-smartlease-yellow" /><span className="font-semibold">085 - 80 08 777</span>
             </a>
             <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-700 hover:text-smartlease-yellow transition">
               <MessageCircle className="h-4 w-4 text-green-500" /><span>WhatsApp</span>
