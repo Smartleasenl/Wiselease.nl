@@ -6,7 +6,7 @@ import type {
   VehicleDetail,
 } from '../types/vehicle';
 
-const API_BASE_URL = 'https://bcjbghqrdlzwxgfuuxss.supabase.co/functions/v1/vehicles';
+const API_BASE_URL = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/vehicles';
 
 export const vehicleApi = {
   async search(params: SearchParams): Promise<SearchResponse> {
