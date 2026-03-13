@@ -430,7 +430,7 @@ export function OffertePage() {
 
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
               <h3 className="font-bold text-gray-900 text-sm">Vragen?</h3>
-              <a href="tel:0858008600" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-yellow transition">
+              <a href="tel:0858008777" className="flex items-center gap-3 text-sm text-gray-600 hover:text-smartlease-yellow transition">
                 <Phone className="h-4 w-4" /> 085 - 80 08 600
               </a>
               <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-600 hover:text-green-600 transition">
