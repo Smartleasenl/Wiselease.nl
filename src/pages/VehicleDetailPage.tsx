@@ -181,7 +181,9 @@ export function VehicleDetailPage() {
 
   if (!vehicle) return null;
 
-  const currentImage = images[activeImage];
+  const PROXY = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/image-proxy?url=';
+  const proxyImg = (url: string) => url ? `${PROXY}${encodeURIComponent(url)}` : '';
+  const currentImage = proxyImg(images[activeImage]);
 
   return (
     <div className="bg-white">
@@ -248,7 +250,7 @@ export function VehicleDetailPage() {
                         activeImage === idx ? 'border-smartlease-yellow' : 'border-transparent'
                       }`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                      <img src={proxyImg(img)} alt="" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
