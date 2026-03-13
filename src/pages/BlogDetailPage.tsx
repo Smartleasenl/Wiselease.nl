@@ -249,7 +249,7 @@ export default function BlogDetailPage() {
                 Gratis offerte →
               </Link>
 
-              <a href="tel:0858008600" style={{
+              <a href="tel:0858008777" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                 padding: '11px 20px', borderRadius: 12, marginBottom: 8,
                 background: 'rgba(255,255,255,0.07)',
