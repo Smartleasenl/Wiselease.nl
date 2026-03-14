@@ -60,8 +60,12 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
   );
   const [ranges, setRanges] = useState(DEFAULT_RANGES);
 
-  const selectedMerken = filters.merk ? (filters.merk as string).split(',') : [];
-  const selectedModellen = filters.model ? (filters.model as string).split(',') : [];
+const selectedMerken = filters.merk
+  ? Array.isArray(filters.merk) ? filters.merk : (filters.merk as string).split(',')
+  : [];
+const selectedModellen = filters.model
+  ? Array.isArray(filters.model) ? filters.model : (filters.model as string).split(',')
+  : [];
   const searchQuery = (filters.zoek as string) || '';
 
   useEffect(() => {
