@@ -11,21 +11,41 @@ function parseURL(search: string) {
   const filters: SearchParams = {};
   let page = 1;
   let sort = '';
+  
+  const skipKeys = new Set(['page', 'sort', 'bodytype', 'fuel', 'type']);
+  const arrayKeys = new Set(['model', 'merk', 'brandstof', 'categorie']);
+
   sp.forEach((value, key) => {
-    if (key === 'page') page = parseInt(value) || 1;
-    else if (key === 'sort') sort = value;
-    else if (key === 'bodytype' || key === 'fuel' || key === 'type') {
-      // Skip these - we handle them separately
+    if (key === 'page') { page = parseInt(value) || 1; return; }
+    if (key === 'sort') { sort = value; return; }
+    if (skipKeys.has(key)) return;
+
+    if (arrayKeys.has(key)) {
+      const existing = filters[key];
+      if (existing) {
+        filters[key] = Array.isArray(existing)
+          ? [...existing, value]
+          : [existing as string, value];
+      } else {
+        filters[key] = value;
+      }
+    } else {
+      filters[key] = value;
     }
-    else filters[key] = value;
   });
+
   return { filters, page, sort };
 }
 
 function buildQS(filters: SearchParams, page: number, sort: string) {
   const params = new URLSearchParams();
   Object.entries(filters).forEach(([key, value]) => {
-    if (value !== undefined && value !== '') params.append(key, String(value));
+    if (value === undefined || value === '') return;
+    if (Array.isArray(value)) {
+      value.forEach(v => params.append(key, String(v)));
+    } else {
+      params.append(key, String(value));
+    }
   });
   if (page > 1) params.append('page', String(page));
   if (sort) params.append('sort', sort);
