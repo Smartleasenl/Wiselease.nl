@@ -1,6 +1,7 @@
 export interface Vehicle {
   id: number;
   external_id?: string;
+  og_image_url?: string | null;
   merk: string;
   model: string;
   uitvoering: string;
@@ -70,8 +71,8 @@ export interface FiltersResponse {
   merken: string[];
   brandstoffen: string[];
   transmissies: string[];
-  categorieen: string[];   // ← geen ë, plain ASCII
-  kleuren: string[];       // ← nieuw toegevoegd
+  categorieen: string[];
+  kleuren: string[];
   ranges?: {
     minJaar: number;
     maxJaar: number;
@@ -83,4 +84,4 @@ export interface FiltersResponse {
 export interface ModelOption {
   model: string;
   count: number;
-} 
+}
