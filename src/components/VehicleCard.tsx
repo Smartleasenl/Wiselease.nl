@@ -21,6 +21,7 @@ function berekenMaandprijs(verkoopprijs: number): number {
 
 const PLACEHOLDER_W = 946;
 const PLACEHOLDER_H = 473;
+const SUPABASE_STORAGE = 'https://jtntbwioxszeocumgvzk.supabase.co/storage/v1/object/public/vehicle-images';
 
 function isPlaceholderImg(img: HTMLImageElement): boolean {
   return img.naturalWidth === PLACEHOLDER_W && img.naturalHeight === PLACEHOLDER_H;
@@ -30,8 +31,8 @@ function CarPlaceholder({ merk, model }: { merk: string; model: string }) {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 select-none">
       <img
-        src="/smart-lease-logo.gif"
-        alt="Smartlease.nl"
+        src="/Wiselease_Logo.png"
+        alt="Wiselease.nl"
         className="h-12 w-auto opacity-40 mb-3"
       />
       <p className="text-xs text-gray-400 font-medium">{merk} {model}</p>
@@ -42,13 +43,17 @@ function CarPlaceholder({ merk, model }: { merk: string; model: string }) {
 export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
   const [imgError, setImgError] = useState(false);
 
+  // Gebruik og_image_url (Supabase Storage) als die beschikbaar is
+  const storageUrl = vehicle.og_image_url || 
+    (vehicle.external_id 
+      ? `${SUPABASE_STORAGE}/thumbnails/${vehicle.external_id}.jpg`
+      : null);
   const proxyUrl = vehicle.external_id ? proxyThumb(vehicle.external_id) : null;
-  const fallbackUrl = null;
 
-  const [imageUrl, setImageUrl] = useState<string | null>(proxyUrl || fallbackUrl);
+  const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
 
   useEffect(() => {
-    const firstUrl = proxyUrl || fallbackUrl;
+    const firstUrl = storageUrl || proxyUrl;
     if (!firstUrl) {
       setImgError(true);
       return;
@@ -77,9 +82,9 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
       img.src = url;
     }
 
-    const second = proxyUrl && fallbackUrl && fallbackUrl !== proxyUrl ? fallbackUrl : null;
+    const second = storageUrl && proxyUrl && proxyUrl !== storageUrl ? proxyUrl : null;
     tryUrl(firstUrl, second);
-  }, [vehicle.external_id]);
+  }, [vehicle.external_id, vehicle.og_image_url]);
 
   const formatPrice = (price: number) => {
     if (price === 0) return 'Prijs op aanvraag';
@@ -113,8 +118,8 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
               className="w-full h-full object-contain object-center transition-transform duration-700 ease-out"
               loading="lazy"
               onError={() => {
-                if (imageUrl !== fallbackUrl && fallbackUrl) {
-                  setImageUrl(fallbackUrl);
+                if (imageUrl !== proxyUrl && proxyUrl) {
+                  setImageUrl(proxyUrl);
                 } else {
                   setImgError(true);
                 }
@@ -122,8 +127,8 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
               onLoad={(e) => {
                 const img = e.currentTarget;
                 if (img.naturalWidth === 0 || img.naturalWidth < 10 || isPlaceholderImg(img)) {
-                  if (imageUrl !== fallbackUrl && fallbackUrl) {
-                    setImageUrl(fallbackUrl);
+                  if (imageUrl !== proxyUrl && proxyUrl) {
+                    setImageUrl(proxyUrl);
                   } else {
                     setImgError(true);
                   }
@@ -133,14 +138,12 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
           </>
         )}
 
-        {/* Bouwjaar badge */}
         {vehicle.bouwjaar_year && (
           <span className="absolute top-3 left-3 bg-smartlease-yellow text-white text-xs font-bold px-2.5 py-1 rounded-lg shadow-lg shadow-yellow-500/30 tracking-wide">
             {vehicle.bouwjaar_year}
           </span>
         )}
 
-        {/* BTW/Marge badge */}
         {vehicle.btw_marge && (
           <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">
             {vehicle.btw_marge}
