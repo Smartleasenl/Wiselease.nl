@@ -1,4 +1,4 @@
-const VPS_IMG_PROXY = 'https://wiselease.nl/public/img.php';
+const VPS_IMG_PROXY = 'https://wiselease.nl/img.php';
 
 export function getProxiedImageUrl(originalUrl: string | null | undefined): string {
   if (!originalUrl) return '';
