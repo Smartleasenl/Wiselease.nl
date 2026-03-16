@@ -42,43 +42,26 @@ function CarPlaceholder({ merk, model }: { merk: string; model: string }) {
 export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
   const [imgError, setImgError] = useState(false);
 
-  const storageUrl = vehicle.og_image_url || null;
-  const proxyUrl = vehicle.external_id ? proxyThumb(vehicle.external_id) : null;
-  const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
+  const proxyUrl = vehicle.external_id ? proxyThumb(vehicle.external_id, 1280) : null;
+  const [imageUrl, setImageUrl] = useState<string | null>(proxyUrl);
 
   useEffect(() => {
-    const firstUrl = storageUrl || proxyUrl;
-    if (!firstUrl) {
+    if (!proxyUrl) {
       setImgError(true);
       return;
     }
 
-    function tryUrl(url: string, nextUrl: string | null) {
-      const img = new Image();
-      img.onload = () => {
-        if (isPlaceholderImg(img)) {
-          if (nextUrl) {
-            tryUrl(nextUrl, null);
-          } else {
-            setImgError(true);
-          }
-        } else {
-          setImageUrl(url);
-        }
-      };
-      img.onerror = () => {
-        if (nextUrl) {
-          tryUrl(nextUrl, null);
-        } else {
-          setImgError(true);
-        }
-      };
-      img.src = url;
-    }
-
-    const second = storageUrl && proxyUrl && proxyUrl !== storageUrl ? proxyUrl : null;
-    tryUrl(firstUrl, second);
-  }, [vehicle.external_id, vehicle.og_image_url]);
+    const img = new Image();
+    img.onload = () => {
+      if (isPlaceholderImg(img)) {
+        setImgError(true);
+      } else {
+        setImageUrl(proxyUrl);
+      }
+    };
+    img.onerror = () => setImgError(true);
+    img.src = proxyUrl;
+  }, [vehicle.external_id]);
 
   const formatPrice = (price: number) => {
     if (price === 0) return 'Prijs op aanvraag';
@@ -104,31 +87,19 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
         {showPlaceholder ? (
           <CarPlaceholder merk={vehicle.merk} model={vehicle.model} />
         ) : (
-          <>
-            <img
-              src={imageUrl!}
-              alt={`${vehicle.merk} ${vehicle.model}`}
-              className="w-full h-full object-contain object-center transition-transform duration-700 ease-out"
-              loading="lazy"
-              onError={() => {
-                if (imageUrl !== proxyUrl && proxyUrl) {
-                  setImageUrl(proxyUrl);
-                } else {
-                  setImgError(true);
-                }
-              }}
-              onLoad={(e) => {
-                const img = e.currentTarget;
-                if (img.naturalWidth === 0 || img.naturalWidth < 10 || isPlaceholderImg(img)) {
-                  if (imageUrl !== proxyUrl && proxyUrl) {
-                    setImageUrl(proxyUrl);
-                  } else {
-                    setImgError(true);
-                  }
-                }
-              }}
-            />
-          </>
+          <img
+            src={imageUrl!}
+            alt={`${vehicle.merk} ${vehicle.model}`}
+            className="w-full h-full object-contain object-center transition-transform duration-700 ease-out"
+            loading="lazy"
+            onError={() => setImgError(true)}
+            onLoad={(e) => {
+              const img = e.currentTarget;
+              if (img.naturalWidth === 0 || img.naturalWidth < 10 || isPlaceholderImg(img)) {
+                setImgError(true);
+              }
+            }}
+          />
         )}
 
         {vehicle.bouwjaar_year && (
