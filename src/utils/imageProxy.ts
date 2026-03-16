@@ -1,31 +1,32 @@
-// src/utils/imageProxy.ts
-const SUPABASE_IMG_PROXY = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/image-proxy';
+const VPS_IMG_PROXY = 'https://wiselease.nl/public/img.php';
 
 export function getProxiedImageUrl(originalUrl: string | null | undefined): string {
   if (!originalUrl) return '';
   if (!originalUrl.includes('nederlandmobiel.nl')) return originalUrl;
-  return `${SUPABASE_IMG_PROXY}?url=${encodeURIComponent(originalUrl)}`;
+  const match = originalUrl.match(/nederlandmobiel\.nl\/auto\/(\d+)\/(\d+)\/(\d+)/);
+  if (match) {
+    const [, id, size, number] = match;
+    return `${VPS_IMG_PROXY}?id=${id}&s=${size}&n=${number}`;
+  }
+  return originalUrl;
 }
 
-export function proxyThumb(externalId: string | number, size = 640, n = 1): string {
+export function proxyThumb(externalId: string | number, size = 320, n = 1): string {
   if (!externalId) return '';
-  const url = `https://images.nederlandmobiel.nl/auto/${externalId}/${size}/${n}.jpg?download=true&platform=wiselease`;
-  return `${SUPABASE_IMG_PROXY}?url=${encodeURIComponent(url)}`;
+  return `${VPS_IMG_PROXY}?id=${externalId}&s=${size}&n=${n}`;
 }
 
 export function proxyLargeImage(externalId: string | number, n = 1): string {
   if (!externalId) return '';
-  const url = `https://images.nederlandmobiel.nl/auto/${externalId}/1280/${n}.jpg?download=true&platform=wiselease`;
-  return `${SUPABASE_IMG_PROXY}?url=${encodeURIComponent(url)}`;
+  return `${VPS_IMG_PROXY}?id=${externalId}&s=1280&n=${n}`;
 }
 
-export function getVehicleImageUrl(smallPicture: string | null | undefined, size = 640): string {
+export function getVehicleImageUrl(smallPicture: string | null | undefined, size = 320): string {
   if (!smallPicture) return '';
   return getProxiedImageUrl(smallPicture);
 }
 
 export function getOgImageUrl(externalId: string | number): string {
   if (!externalId) return 'https://wiselease.nl/wiselease-logo.png';
-  const url = `https://images.nederlandmobiel.nl/auto/${externalId}/1280/1.jpg?download=true&platform=wiselease`;
-  return `${SUPABASE_IMG_PROXY}?url=${encodeURIComponent(url)}`;
+  return `${VPS_IMG_PROXY}?id=${externalId}&s=1280&n=1`;
 }
