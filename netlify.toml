@@ -14,7 +14,7 @@ publish = "dist"
 
 [[redirects]]
   from = "/public/img.php"
-  to = "http://94.204.65.192/public/img.php"
+  to = "/.netlify/functions/img-proxy-wiselease"
   status = 200
   force = true
 
