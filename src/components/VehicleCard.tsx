@@ -49,6 +49,8 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
       ? `${SUPABASE_STORAGE}/thumbnails/${vehicle.external_id}.jpg`
       : null);
   const proxyUrl = vehicle.external_id ? proxyThumb(vehicle.external_id) : null;
+const storageUrl = vehicle.og_image_url || null;
+const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
 
   const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
 
