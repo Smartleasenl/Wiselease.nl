@@ -11,7 +11,7 @@ export function getProxiedImageUrl(originalUrl: string | null | undefined): stri
   return originalUrl;
 }
 
-export function proxyThumb(externalId: string | number, size = 320, n = 1): string {
+export function proxyThumb(externalId: string | number, size = 1280, n = 1): string {
   if (!externalId) return '';
   return `${VPS_IMG_PROXY}?id=${externalId}&s=${size}&n=${n}`;
 }
