@@ -21,7 +21,6 @@ function berekenMaandprijs(verkoopprijs: number): number {
 
 const PLACEHOLDER_W = 946;
 const PLACEHOLDER_H = 473;
-const SUPABASE_STORAGE = 'https://jtntbwioxszeocumgvzk.supabase.co/storage/v1/object/public/vehicle-images';
 
 function isPlaceholderImg(img: HTMLImageElement): boolean {
   return img.naturalWidth === PLACEHOLDER_W && img.naturalHeight === PLACEHOLDER_H;
@@ -43,15 +42,8 @@ function CarPlaceholder({ merk, model }: { merk: string; model: string }) {
 export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
   const [imgError, setImgError] = useState(false);
 
-  // Gebruik og_image_url (Supabase Storage) als die beschikbaar is
-  const storageUrl = vehicle.og_image_url || 
-    (vehicle.external_id 
-      ? `${SUPABASE_STORAGE}/thumbnails/${vehicle.external_id}.jpg`
-      : null);
+  const storageUrl = vehicle.og_image_url || null;
   const proxyUrl = vehicle.external_id ? proxyThumb(vehicle.external_id) : null;
-const storageUrl = vehicle.og_image_url || null;
-const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
-
   const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
 
   useEffect(() => {
@@ -108,7 +100,6 @@ const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
       onClick={onClick}
       className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-gray-200/60 cursor-pointer group border border-gray-100 hover:border-yellow-200 transition-all duration-500 ease-out"
     >
-      {/* Image */}
       <div className="relative overflow-hidden bg-white" style={{ aspectRatio: '4/3' }}>
         {showPlaceholder ? (
           <CarPlaceholder merk={vehicle.merk} model={vehicle.model} />
@@ -153,7 +144,6 @@ const [imageUrl, setImageUrl] = useState<string | null>(storageUrl || proxyUrl);
         )}
       </div>
 
-      {/* Content */}
       <div className="p-4 md:p-5">
         <div className="mb-3">
           <h3 className="text-base font-bold text-gray-900 mb-0.5 group-hover:text-smartlease-blue transition-colors duration-300">
