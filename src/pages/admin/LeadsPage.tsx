@@ -204,12 +204,12 @@ export default function LeadsPage() {
                 </div>
                 <div className="space-y-1.5">
                   {lead.email && (
-                    <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-xs text-gray-500">
+                    <a href={'mailto:' + lead.email} className="flex items-center gap-2 text-xs text-gray-500">
                       <Mail className="h-3.5 w-3.5 text-gray-400" /> {lead.email}
                     </a>
                   )}
                   {lead.telefoon && (
-                    <a href={`tel:${lead.telefoon}`} className="flex items-center gap-2 text-xs text-gray-500">
+                    <a href={'tel:' + lead.telefoon} className="flex items-center gap-2 text-xs text-gray-500">
                       <Phone className="h-3.5 w-3.5 text-gray-400" /> {lead.telefoon}
                     </a>
                   )}
@@ -242,12 +242,12 @@ export default function LeadsPage() {
 
             <div className="space-y-2.5 mb-5">
               {selectedLead.email && (
-                <a href={`mailto:${selectedLead.email}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
+                <a href={'mailto:' + selectedLead.email} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
                   <Mail className="h-4 w-4 text-gray-400 flex-shrink-0" /> {selectedLead.email}
                 </a>
               )}
               {selectedLead.telefoon && (
-                <a href={`tel:${selectedLead.telefoon}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
+                <a href={'tel:' + selectedLead.telefoon} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
                   <Phone className="h-4 w-4 text-gray-400 flex-shrink-0" /> {selectedLead.telefoon}
                 </a>
               )}
@@ -257,7 +257,6 @@ export default function LeadsPage() {
                   <div>
                     <p>{selectedLead.vehicle_info}</p>
                     {selectedLead.vehicle_id && (
-                  <a
                       
                         href={'/auto/' + selectedLead.vehicle_id + '/voertuig'}
                         target="_blank"
