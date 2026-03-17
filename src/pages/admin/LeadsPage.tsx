@@ -254,14 +254,12 @@ export default function LeadsPage() {
                   <div>
                     <p>{selectedLead.vehicle_info}</p>
 {selectedLead.vehicle_id && (
-  
-    href={'/auto/' + selectedLead.vehicle_id + '/voertuig'}
-    target="_blank"
-    rel="noopener noreferrer"
+  <button
+    onClick={() => window.open('/auto/' + selectedLead.vehicle_id + '/voertuig', '_blank')}
     className="inline-flex items-center gap-1 text-xs text-smartlease-yellow hover:underline mt-0.5"
   >
     <ExternalLink className="h-3 w-3" /> Bekijk advertentie
-  </a>
+  </button>
 )}
                   </div>
                 </div>
