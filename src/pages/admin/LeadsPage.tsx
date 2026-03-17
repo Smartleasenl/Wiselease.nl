@@ -174,52 +174,6 @@ export default function LeadsPage() {
     </table>
   </div>
 </div>
-          </div>
-
-          {/* Mobiel cards */}
-          <div className="md:hidden space-y-3">
-            {filteredLeads.map((lead) => (
-              <div key={lead.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-                <div className="flex items-start justify-between gap-3 mb-3">
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-900">{lead.naam || '—'}</p>
-                    {lead.vehicle_info && (
-                      <p className="text-xs text-gray-400 mt-0.5 truncate">{lead.vehicle_info}</p>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    {getStatusBadge(lead.status)}
-                    <button
-                      onClick={() => setSelectedLead(lead)}
-                      className="p-1.5 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
-                    >
-                      <Eye className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  {lead.email && (
-                    <a href={'mailto:' + lead.email} className="flex items-center gap-2 text-xs text-gray-500">
-                      <Mail className="h-3.5 w-3.5 text-gray-400" /> {lead.email}
-                    </a>
-                  )}
-                  {lead.telefoon && (
-                    <a href={'tel:' + lead.telefoon} className="flex items-center gap-2 text-xs text-gray-500">
-                      <Phone className="h-3.5 w-3.5 text-gray-400" /> {lead.telefoon}
-                    </a>
-                  )}
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-xs text-gray-400 capitalize">{lead.type}</span>
-                    <span className="text-xs text-gray-400 flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> {formatDate(lead.created_at)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
 
       {/* Lead detail modal */}
       {selectedLead && (
