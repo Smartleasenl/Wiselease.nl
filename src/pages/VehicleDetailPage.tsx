@@ -178,36 +178,52 @@ export function VehicleDetailPage() {
     isSwiping.current = false;
   }, [nextImage, prevImage]);
 
-  const handleWhatsApp = () => {
-    if (!vehicle) return;
-    const maandbedrag = calculatorState ? calculatorState.maandbedrag : berekenMaandprijs(vehicle.verkoopprijs);
-    const aanbetaling = calculatorState ? calculatorState.aanbetaling : vehicle.verkoopprijs * 0.15;
-    const slottermijn = calculatorState ? calculatorState.slottermijn : vehicle.verkoopprijs * 0.15;
-    const financieringsbedrag = calculatorState?.financieringsbedrag ?? (vehicle.verkoopprijs - aanbetaling);
-    const looptijd = calculatorState ? calculatorState.looptijd : 72;
-    const slug = `${vehicle.merk}-${vehicle.model}`.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    const autoUrl = `https://wiselease.nl/auto/${vehicle.id}/${encodeURIComponent(slug)}`;
-    const lines = [
-      'Hallo, ik heb interesse in de volgende auto:',
-      '',
-      `🚗 ${vehicle.merk} ${vehicle.model}${vehicle.uitvoering ? ' ' + vehicle.uitvoering : ''}`,
-      `📅 Bouwjaar: ${vehicle.bouwjaar_year}`,
-      `📍 Kilometerstand: ${formatKm(vehicle.kmstand)}`,
-      `⛽ Brandstof: ${vehicle.brandstof}`,
-      '',
-      `💰 Aankoopprijs: ${formatPrice(vehicle.verkoopprijs)}`,
-      `   └ Aanbetaling: ${formatPrice(aanbetaling)}`,
-      `   └ Financieringsbedrag: ${formatPrice(financieringsbedrag)}`,
-      `   └ Looptijd: ${looptijd} maanden`,
-      `   └ Slottermijn: ${formatPrice(slottermijn)}`,
-      ...(maandbedrag > 0 ? [`📆 Maandbedrag: €${maandbedrag.toLocaleString('nl-NL')}/mnd`] : []),
-      '',
-      `🔗 ${autoUrl}`,
-      '',
-      'Kunnen jullie mij meer informatie geven?',
-    ];
-    window.open(`https://wa.me/31850808777?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
-  };
+const handleWhatsApp = () => {
+  if (!vehicle) return;
+
+  const maandbedrag = calculatorState
+    ? calculatorState.maandbedrag
+    : berekenMaandprijs(vehicle.verkoopprijs);
+
+  const slug = `${vehicle.merk}-${vehicle.model}`
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+  const autoUrl = `https://wiselease.nl/auto/${vehicle.id}/${encodeURIComponent(slug)}`;
+
+  const aanbetaling = calculatorState
+    ? calculatorState.aanbetaling
+    : vehicle.verkoopprijs * 0.15;
+  const slottermijn = calculatorState
+    ? calculatorState.slottermijn
+    : vehicle.verkoopprijs * 0.15;
+  const financieringsbedrag = calculatorState?.financieringsbedrag
+    ?? (vehicle.verkoopprijs - aanbetaling);
+  const looptijd = calculatorState ? calculatorState.looptijd : 72;
+
+  const lines = [
+    'Hallo, ik heb interesse in de volgende auto:',
+    '',
+    `${vehicle.merk} ${vehicle.model}${vehicle.uitvoering ? ' ' + vehicle.uitvoering : ''}`,
+    `Bouwjaar: ${vehicle.bouwjaar_year}`,
+    `Kilometerstand: ${formatKm(vehicle.kmstand)}`,
+    `Brandstof: ${vehicle.brandstof}`,
+    '',
+    `Aankoopprijs: ${formatPrice(vehicle.verkoopprijs)}`,
+    `  - Aanbetaling: ${formatPrice(aanbetaling)}`,
+    `  - Financieringsbedrag: ${formatPrice(financieringsbedrag)}`,
+    `  - Looptijd: ${looptijd} maanden`,
+    `  - Slottermijn: ${formatPrice(slottermijn)}`,
+    ...(maandbedrag > 0 ? [`Maandbedrag: €${maandbedrag.toLocaleString('nl-NL')}/mnd`] : []),
+    '',
+    autoUrl,
+    '',
+    'Kunnen jullie mij meer informatie geven?',
+  ];
+
+  const message = lines.join('\n');
+  window.open(`https://wa.me/31858008777?text=${encodeURIComponent(message)}`, '_blank');
+};
 
   const buildVehicleState = () => ({
     id: vehicle!.id, merk: vehicle!.merk, model: vehicle!.model, uitvoering: vehicle!.uitvoering,
