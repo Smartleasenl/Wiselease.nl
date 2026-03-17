@@ -253,16 +253,16 @@ export default function LeadsPage() {
                   <Car className="h-4 w-4 text-gray-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <p>{selectedLead.vehicle_info}</p>
-                    {selectedLead.vehicle_id && (
-                      
-                        href={'/auto/' + selectedLead.vehicle_id + '/voertuig'}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-smartlease-yellow hover:underline mt-0.5"
-                      >
-                        <ExternalLink className="h-3 w-3" /> Bekijk advertentie
-                      </a>
-                    )}
+{selectedLead.vehicle_id && (
+  
+    href={'/auto/' + selectedLead.vehicle_id + '/voertuig'}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-1 text-xs text-smartlease-yellow hover:underline mt-0.5"
+  >
+    <ExternalLink className="h-3 w-3" /> Bekijk advertentie
+  </a>
+)}
                   </div>
                 </div>
               )}
