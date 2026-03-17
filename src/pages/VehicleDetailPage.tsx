@@ -25,8 +25,12 @@ import { LeaseCalculator, type CalculatorState } from '../components/LeaseCalcul
 import { supabase } from '../lib/supabase';
 
 const API_BASE = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/vehicles';
-const PROXY = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/image-proxy?url=';
-const proxyImg = (url: string) => url ? `${PROXY}${encodeURIComponent(url)}` : '';
+const proxyImg = (url: string) => {
+  if (!url) return '';
+  const match = url.match(/nederlandmobiel\.nl\/auto\/(\d+)\/(\d+)\/(\d+)/);
+  if (match) return `https://img.wiselease.nl/img.php?id=${match[1]}&s=${match[2]}&n=${match[3]}`;
+  return url;
+};
 
 function berekenMaandprijs(verkoopprijs: number): number {
   if (!verkoopprijs || verkoopprijs <= 0) return 0;
