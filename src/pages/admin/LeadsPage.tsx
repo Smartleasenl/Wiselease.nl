@@ -118,9 +118,8 @@ export default function LeadsPage() {
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full" style={{minWidth: '600px'}}>
+<div style={{overflowX: 'auto', WebkitOverflowScrolling: 'touch'}} className="bg-white rounded-2xl border border-gray-100 shadow-sm">
+  <table className="w-full" style={{minWidth: '600px'}}>
               <thead>
                 <tr className="border-b border-gray-100">
                   <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Naam</th>
