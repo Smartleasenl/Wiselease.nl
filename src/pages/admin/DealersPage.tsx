@@ -190,7 +190,7 @@ export default function DealersPage() {
                         {dealer.aantal_autos}
                       </span>
                       <button
-                        window.open('/aanbod?aanbieder_naam=' + encodeURIComponent(dealer.naam), '_blank')
+                        window.open('/aanbod?aanbieder_naam=' + encodeURIComponent(dealer.naam), '_blank')}
                         className="p-1.5 text-gray-400 hover:text-smartlease-yellow transition rounded-lg hover:bg-yellow-50"
                       >
                         <ExternalLink className="h-4 w-4" />
