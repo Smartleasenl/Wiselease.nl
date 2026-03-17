@@ -19,6 +19,18 @@ publish = "dist"
   force = true
 
 [[redirects]]
+  from = "/auto/:vehicleId/*"
+  to = "/.netlify/functions/og-meta"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/auto/:vehicleId"
+  to = "/.netlify/functions/og-meta"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
