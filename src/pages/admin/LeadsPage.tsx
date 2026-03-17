@@ -117,65 +117,63 @@ export default function LeadsPage() {
             {filter !== 'alle' ? 'Probeer een ander filter' : 'Leads verschijnen hier zodra ze binnenkomen'}
           </p>
         </div>
-      ) : (
-        <>
-          {/* Desktop tabel */}
-          <div className="hidden md:block bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-100">
-                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Naam</th>
-                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Contact</th>
-                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Type</th>
-                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Status</th>
-                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Datum</th>
-                    <th className="px-5 py-3"></th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
-                  {filteredLeads.map((lead) => (
-                    <tr key={lead.id} className="hover:bg-gray-50/50 transition">
-                      <td className="px-5 py-4">
-                        <p className="font-medium text-gray-900 text-sm">{lead.naam || '—'}</p>
-                        {lead.vehicle_info && (
-                          <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[180px]">{lead.vehicle_info}</p>
-                        )}
-                      </td>
-                      <td className="px-5 py-4">
-                        <div className="space-y-0.5">
-                          {lead.email && (
-                            <p className="text-xs text-gray-500 flex items-center gap-1">
-                              <Mail className="h-3 w-3" /> {lead.email}
-                            </p>
-                          )}
-                          {lead.telefoon && (
-                            <p className="text-xs text-gray-500 flex items-center gap-1">
-                              <Phone className="h-3 w-3" /> {lead.telefoon}
-                            </p>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-5 py-4">
-                        <span className="text-xs text-gray-500 capitalize">{lead.type}</span>
-                      </td>
-                      <td className="px-5 py-4">{getStatusBadge(lead.status)}</td>
-                      <td className="px-5 py-4">
-                        <span className="text-xs text-gray-400">{formatDate(lead.created_at)}</span>
-                      </td>
-                      <td className="px-5 py-4">
-                        <button
-                          onClick={() => setSelectedLead(lead)}
-                          className="p-2 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
-                        >
-                          <Eye className="h-4 w-4" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full" style={{minWidth: '600px'}}>
+      <thead>
+        <tr className="border-b border-gray-100">
+          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Naam</th>
+          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Contact</th>
+          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Type</th>
+          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Status</th>
+          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Datum</th>
+          <th className="px-4 py-3"></th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-50">
+        {filteredLeads.map((lead) => (
+          <tr key={lead.id} className="hover:bg-gray-50/50 transition">
+            <td className="px-4 py-3">
+              <p className="font-medium text-gray-900 text-sm">{lead.naam || '—'}</p>
+              {lead.vehicle_info && (
+                <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[150px]">{lead.vehicle_info}</p>
+              )}
+            </td>
+            <td className="px-4 py-3">
+              <div className="space-y-0.5">
+                {lead.email && (
+                  <p className="text-xs text-gray-500 flex items-center gap-1">
+                    <Mail className="h-3 w-3" /> {lead.email}
+                  </p>
+                )}
+                {lead.telefoon && (
+                  <p className="text-xs text-gray-500 flex items-center gap-1">
+                    <Phone className="h-3 w-3" /> {lead.telefoon}
+                  </p>
+                )}
+              </div>
+            </td>
+            <td className="px-4 py-3">
+              <span className="text-xs text-gray-500 capitalize">{lead.type}</span>
+            </td>
+            <td className="px-4 py-3">{getStatusBadge(lead.status)}</td>
+            <td className="px-4 py-3">
+              <span className="text-xs text-gray-400">{formatDate(lead.created_at)}</span>
+            </td>
+            <td className="px-4 py-3">
+              <button
+                onClick={() => setSelectedLead(lead)}
+                className="p-2 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
+              >
+                <Eye className="h-4 w-4" />
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
           </div>
 
           {/* Mobiel cards */}
