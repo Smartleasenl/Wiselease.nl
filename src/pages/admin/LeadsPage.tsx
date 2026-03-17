@@ -257,6 +257,7 @@ export default function LeadsPage() {
                   <div>
                     <p>{selectedLead.vehicle_info}</p>
                     {selectedLead.vehicle_id && (
+                  </a>
                       
                         href={'/auto/' + selectedLead.vehicle_id + '/voertuig'}
                         target="_blank"
