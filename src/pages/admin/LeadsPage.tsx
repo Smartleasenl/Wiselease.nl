@@ -121,70 +121,116 @@ export default function LeadsPage() {
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Naam</th>
-                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Contact</th>
-                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Type</th>
-                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Status</th>
-                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Datum</th>
-                  <th className="px-5 py-3"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
-                {filteredLeads.map((lead) => (
-                  <tr key={lead.id} className="hover:bg-gray-50/50 transition">
-                    <td className="px-5 py-4">
-                      <p className="font-medium text-gray-900 text-sm">{lead.naam || '—'}</p>
-                      {lead.vehicle_info && (
-                        <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[180px]">{lead.vehicle_info}</p>
-                      )}
-                    </td>
-                    <td className="px-5 py-4">
-                      <div className="space-y-0.5">
-                        {lead.email && (
-                          <p className="text-xs text-gray-500 flex items-center gap-1">
-                            <Mail className="h-3 w-3" /> {lead.email}
-                          </p>
-                        )}
-                        {lead.telefoon && (
-                          <p className="text-xs text-gray-500 flex items-center gap-1">
-                            <Phone className="h-3 w-3" /> {lead.telefoon}
-                          </p>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-5 py-4">
-                      <span className="text-xs text-gray-500 capitalize">{lead.type}</span>
-                    </td>
-                    <td className="px-5 py-4">{getStatusBadge(lead.status)}</td>
-                    <td className="px-5 py-4">
-                      <span className="text-xs text-gray-400">{formatDate(lead.created_at)}</span>
-                    </td>
-                    <td className="px-5 py-4">
-                      <button
-                        onClick={() => setSelectedLead(lead)}
-                        className="p-2 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
-                      >
-                        <Eye className="h-4 w-4" />
-                      </button>
-                    </td>
+        <>
+          {/* Desktop tabel */}
+          <div className="hidden md:block bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-100">
+                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Naam</th>
+                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Contact</th>
+                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Type</th>
+                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Status</th>
+                    <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">Datum</th>
+                    <th className="px-5 py-3"></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {filteredLeads.map((lead) => (
+                    <tr key={lead.id} className="hover:bg-gray-50/50 transition">
+                      <td className="px-5 py-4">
+                        <p className="font-medium text-gray-900 text-sm">{lead.naam || '—'}</p>
+                        {lead.vehicle_info && (
+                          <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[180px]">{lead.vehicle_info}</p>
+                        )}
+                      </td>
+                      <td className="px-5 py-4">
+                        <div className="space-y-0.5">
+                          {lead.email && (
+                            <p className="text-xs text-gray-500 flex items-center gap-1">
+                              <Mail className="h-3 w-3" /> {lead.email}
+                            </p>
+                          )}
+                          {lead.telefoon && (
+                            <p className="text-xs text-gray-500 flex items-center gap-1">
+                              <Phone className="h-3 w-3" /> {lead.telefoon}
+                            </p>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-5 py-4">
+                        <span className="text-xs text-gray-500 capitalize">{lead.type}</span>
+                      </td>
+                      <td className="px-5 py-4">{getStatusBadge(lead.status)}</td>
+                      <td className="px-5 py-4">
+                        <span className="text-xs text-gray-400">{formatDate(lead.created_at)}</span>
+                      </td>
+                      <td className="px-5 py-4">
+                        <button
+                          onClick={() => setSelectedLead(lead)}
+                          className="p-2 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
+                        >
+                          <Eye className="h-4 w-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+
+          {/* Mobiel cards */}
+          <div className="md:hidden space-y-3">
+            {filteredLeads.map((lead) => (
+              <div key={lead.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-gray-900">{lead.naam || '—'}</p>
+                    {lead.vehicle_info && (
+                      <p className="text-xs text-gray-400 mt-0.5 truncate">{lead.vehicle_info}</p>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    {getStatusBadge(lead.status)}
+                    <button
+                      onClick={() => setSelectedLead(lead)}
+                      className="p-1.5 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
+                    >
+                      <Eye className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  {lead.email && (
+                    <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-xs text-gray-500">
+                      <Mail className="h-3.5 w-3.5 text-gray-400" /> {lead.email}
+                    </a>
+                  )}
+                  {lead.telefoon && (
+                    <a href={`tel:${lead.telefoon}`} className="flex items-center gap-2 text-xs text-gray-500">
+                      <Phone className="h-3.5 w-3.5 text-gray-400" /> {lead.telefoon}
+                    </a>
+                  )}
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="text-xs text-gray-400 capitalize">{lead.type}</span>
+                    <span className="text-xs text-gray-400 flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {formatDate(lead.created_at)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       {/* Lead detail modal */}
       {selectedLead && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4">
           <div className="absolute inset-0 bg-gray-900/50 backdrop-blur-sm" onClick={() => setSelectedLead(null)} />
-          <div className="relative bg-white rounded-2xl shadow-xl max-w-lg w-full max-h-[85vh] overflow-y-auto p-6">
+          <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-xl w-full sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
             <button
               onClick={() => setSelectedLead(null)}
               className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600 transition"
@@ -194,7 +240,6 @@ export default function LeadsPage() {
 
             <h2 className="text-lg font-bold text-gray-900 mb-4">{selectedLead.naam || 'Onbekend'}</h2>
 
-            {/* Contact info */}
             <div className="space-y-2.5 mb-5">
               {selectedLead.email && (
                 <a href={`mailto:${selectedLead.email}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
@@ -212,7 +257,7 @@ export default function LeadsPage() {
                   <div>
                     <p>{selectedLead.vehicle_info}</p>
                     {selectedLead.vehicle_id && (
-                      <a
+                      
                         href={`/auto/${selectedLead.vehicle_id}/voertuig`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -229,7 +274,6 @@ export default function LeadsPage() {
               </p>
             </div>
 
-            {/* Calculator data */}
             {selectedLead.calculator_data && (
               <div className="mb-5">
                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Berekening</p>
@@ -266,7 +310,6 @@ export default function LeadsPage() {
               </div>
             )}
 
-            {/* Bericht */}
             {selectedLead.bericht && (
               <div className="mb-5">
                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Bericht</p>
@@ -274,7 +317,6 @@ export default function LeadsPage() {
               </div>
             )}
 
-            {/* Status wijzigen */}
             <div>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Status wijzigen</p>
               <div className="flex gap-2 flex-wrap">
