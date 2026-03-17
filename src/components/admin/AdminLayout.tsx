@@ -36,7 +36,6 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Mobiel topbar */}
       <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-30">
         <button onClick={() => setSidebarOpen(true)} className="p-2 -ml-2 text-gray-600 hover:text-gray-900 transition">
           <Menu className="h-6 w-6" />
@@ -45,7 +44,6 @@ export default function AdminLayout() {
         <div className="w-10" />
       </div>
 
-      {/* Mobiel sidebar overlay */}
       {sidebarOpen && (
         <div className="lg:hidden fixed inset-0 z-40">
           <div className="absolute inset-0 bg-gray-900/50 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
@@ -56,12 +54,9 @@ export default function AdminLayout() {
       )}
 
       <div className="flex">
-        {/* Desktop sidebar */}
         <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-white border-r border-gray-200">
           <SidebarContent onLogout={handleLogout} isActive={isActive} />
         </aside>
-
-        {/* Main content */}
         <main className="flex-1 lg:pl-64 min-w-0 w-full">
           <div className="px-3 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-6xl mx-auto">
             <Outlet />
@@ -77,6 +72,8 @@ function SidebarContent({ onClose, onLogout, isActive }: {
   onLogout: () => void;
   isActive: (path: string, exact?: boolean) => boolean;
 }) {
+  const websiteUrl = '/';
+
   return (
     <div className="flex flex-col h-full">
       <div className="px-5 py-5 flex items-center justify-between border-b border-gray-100">
@@ -95,14 +92,18 @@ function SidebarContent({ onClose, onLogout, isActive }: {
         {SIDEBAR_ITEMS.map((item) => {
           const Icon = item.icon;
           const active = isActive(item.to, item.exact);
+          const activeClass = 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 bg-smartlease-yellow/10 text-smartlease-yellow';
+          const inactiveClass = 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 text-gray-600 hover:bg-gray-50 hover:text-gray-900';
+          const activeIconClass = 'h-5 w-5 flex-shrink-0 text-smartlease-yellow';
+          const inactiveIconClass = 'h-5 w-5 flex-shrink-0 text-gray-400';
           return (
             <Link
               key={item.to}
               to={item.to}
               onClick={onClose}
-              className={'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ' + (active ? 'bg-smartlease-yellow/10 text-smartlease-yellow' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900')}
+              className={active ? activeClass : inactiveClass}
             >
-              <Icon className={'h-5 w-5 flex-shrink-0 ' + (active ? 'text-smartlease-yellow' : 'text-gray-400')} />
+              <Icon className={active ? activeIconClass : inactiveIconClass} />
               {item.label}
               {active && <ChevronRight className="h-4 w-4 ml-auto" />}
             </Link>
@@ -111,15 +112,13 @@ function SidebarContent({ onClose, onLogout, isActive }: {
       </nav>
 
       <div className="px-3 py-4 border-t border-gray-100 space-y-1">
-        
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition"
+        <button
+          onClick={() => window.open(websiteUrl, '_blank')}
+          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition w-full text-left"
         >
           <Globe className="h-5 w-5 text-gray-400" />
           Bekijk website
-        </a>
+        </button>
         <button
           onClick={onLogout}
           className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-600 hover:bg-red-50 transition w-full text-left"
@@ -128,5 +127,6 @@ function SidebarContent({ onClose, onLogout, isActive }: {
           Uitloggen
         </button>
       </div>
+    </div>
   );
 }
