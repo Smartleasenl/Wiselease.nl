@@ -72,7 +72,7 @@ export default function LeadsPage() {
 
   const getStatusBadge = (status: string) => {
     const opt = STATUS_OPTIONS.find((s) => s.value === status) || STATUS_OPTIONS[0];
-    return <span className={`px-2.5 py-1 rounded-lg text-xs font-semibold ${opt.color}`}>{opt.label}</span>;
+    return <span className={'px-2.5 py-1 rounded-lg text-xs font-semibold ' + opt.color}>{opt.label}</span>;
   };
 
   const formatDate = (date: string) =>
@@ -97,15 +97,12 @@ export default function LeadsPage() {
         </div>
       </div>
 
-      {/* Filters */}
       <div className="flex gap-2 mb-4 flex-wrap">
         {['alle', ...STATUS_OPTIONS.map((s) => s.value)].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-3.5 py-2 rounded-xl text-sm font-medium transition ${
-              filter === f ? 'bg-smartlease-yellow text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
-            }`}
+            className={'px-3.5 py-2 rounded-xl text-sm font-medium transition ' + (filter === f ? 'bg-smartlease-yellow text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50')}
           >
             {f === 'alle' ? 'Alle' : STATUS_OPTIONS.find((s) => s.value === f)?.label}
           </button>
@@ -204,12 +201,12 @@ export default function LeadsPage() {
                 </div>
                 <div className="space-y-1.5">
                   {lead.email && (
-                    <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-xs text-gray-500">
+                    <a href={'mailto:' + lead.email} className="flex items-center gap-2 text-xs text-gray-500">
                       <Mail className="h-3.5 w-3.5 text-gray-400" /> {lead.email}
                     </a>
                   )}
                   {lead.telefoon && (
-                    <a href={`tel:${lead.telefoon}`} className="flex items-center gap-2 text-xs text-gray-500">
+                    <a href={'tel:' + lead.telefoon} className="flex items-center gap-2 text-xs text-gray-500">
                       <Phone className="h-3.5 w-3.5 text-gray-400" /> {lead.telefoon}
                     </a>
                   )}
@@ -242,12 +239,12 @@ export default function LeadsPage() {
 
             <div className="space-y-2.5 mb-5">
               {selectedLead.email && (
-                <a href={`mailto:${selectedLead.email}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
+                <a href={'mailto:' + selectedLead.email} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
                   <Mail className="h-4 w-4 text-gray-400 flex-shrink-0" /> {selectedLead.email}
                 </a>
               )}
               {selectedLead.telefoon && (
-                <a href={`tel:${selectedLead.telefoon}`} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
+                <a href={'tel:' + selectedLead.telefoon} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
                   <Phone className="h-4 w-4 text-gray-400 flex-shrink-0" /> {selectedLead.telefoon}
                 </a>
               )}
@@ -257,7 +254,6 @@ export default function LeadsPage() {
                   <div>
                     <p>{selectedLead.vehicle_info}</p>
                     {selectedLead.vehicle_id && (
-                  <a
                       
                         href={'/auto/' + selectedLead.vehicle_id + '/voertuig'}
                         target="_blank"
@@ -325,11 +321,7 @@ export default function LeadsPage() {
                   <button
                     key={opt.value}
                     onClick={() => updateStatus(selectedLead.id, opt.value)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                      selectedLead.status === opt.value
-                        ? opt.color + ' ring-2 ring-offset-1 ring-gray-300'
-                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                    }`}
+                    className={'px-3 py-1.5 rounded-lg text-xs font-semibold transition ' + (selectedLead.status === opt.value ? opt.color + ' ring-2 ring-offset-1 ring-gray-300' : 'bg-gray-100 text-gray-500 hover:bg-gray-200')}
                   >
                     {opt.label}
                   </button>
@@ -341,4 +333,4 @@ export default function LeadsPage() {
       )}
     </div>
   );
-} 
+}
