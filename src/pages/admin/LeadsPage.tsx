@@ -97,12 +97,12 @@ export default function LeadsPage() {
         </div>
       </div>
 
-      <div className="flex gap-2 mb-4 flex-wrap">
+      <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
         {['alle', ...STATUS_OPTIONS.map((s) => s.value)].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={'px-3.5 py-2 rounded-xl text-sm font-medium transition ' + (filter === f ? 'bg-smartlease-yellow text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50')}
+            className={'px-3.5 py-2 rounded-xl text-sm font-medium transition whitespace-nowrap ' + (filter === f ? 'bg-smartlease-yellow text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50')}
           >
             {f === 'alle' ? 'Alle' : STATUS_OPTIONS.find((s) => s.value === f)?.label}
           </button>
@@ -117,78 +117,74 @@ export default function LeadsPage() {
             {filter !== 'alle' ? 'Probeer een ander filter' : 'Leads verschijnen hier zodra ze binnenkomen'}
           </p>
         </div>
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-  <div className="overflow-x-auto">
-    <table className="w-full" style={{minWidth: '600px'}}>
-      <thead>
-        <tr className="border-b border-gray-100">
-          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Naam</th>
-          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Contact</th>
-          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Type</th>
-          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Status</th>
-          <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Datum</th>
-          <th className="px-4 py-3"></th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-gray-50">
-        {filteredLeads.map((lead) => (
-          <tr key={lead.id} className="hover:bg-gray-50/50 transition">
-            <td className="px-4 py-3">
-              <p className="font-medium text-gray-900 text-sm">{lead.naam || '—'}</p>
-              {lead.vehicle_info && (
-                <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[150px]">{lead.vehicle_info}</p>
-              )}
-            </td>
-            <td className="px-4 py-3">
-              <div className="space-y-0.5">
-                {lead.email && (
-                  <p className="text-xs text-gray-500 flex items-center gap-1">
-                    <Mail className="h-3 w-3" /> {lead.email}
-                  </p>
-                )}
-                {lead.telefoon && (
-                  <p className="text-xs text-gray-500 flex items-center gap-1">
-                    <Phone className="h-3 w-3" /> {lead.telefoon}
-                  </p>
-                )}
-              </div>
-            </td>
-            <td className="px-4 py-3">
-              <span className="text-xs text-gray-500 capitalize">{lead.type}</span>
-            </td>
-            <td className="px-4 py-3">{getStatusBadge(lead.status)}</td>
-            <td className="px-4 py-3">
-              <span className="text-xs text-gray-400">{formatDate(lead.created_at)}</span>
-            </td>
-            <td className="px-4 py-3">
-              <button
-                onClick={() => setSelectedLead(lead)}
-                className="p-2 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
-              >
-                <Eye className="h-4 w-4" />
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
+      ) : (
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full" style={{minWidth: '600px'}}>
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Naam</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Contact</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Type</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Status</th>
+                  <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-3">Datum</th>
+                  <th className="px-4 py-3"></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {filteredLeads.map((lead) => (
+                  <tr key={lead.id} className="hover:bg-gray-50/50 transition">
+                    <td className="px-4 py-3">
+                      <p className="font-medium text-gray-900 text-sm">{lead.naam || '—'}</p>
+                      {lead.vehicle_info && (
+                        <p className="text-xs text-gray-400 mt-0.5 truncate max-w-[150px]">{lead.vehicle_info}</p>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="space-y-0.5">
+                        {lead.email && (
+                          <p className="text-xs text-gray-500 flex items-center gap-1">
+                            <Mail className="h-3 w-3" /> {lead.email}
+                          </p>
+                        )}
+                        {lead.telefoon && (
+                          <p className="text-xs text-gray-500 flex items-center gap-1">
+                            <Phone className="h-3 w-3" /> {lead.telefoon}
+                          </p>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="text-xs text-gray-500 capitalize">{lead.type}</span>
+                    </td>
+                    <td className="px-4 py-3">{getStatusBadge(lead.status)}</td>
+                    <td className="px-4 py-3">
+                      <span className="text-xs text-gray-400">{formatDate(lead.created_at)}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <button
+                        onClick={() => setSelectedLead(lead)}
+                        className="p-2 text-gray-400 hover:text-smartlease-yellow hover:bg-smartlease-yellow/10 rounded-lg transition"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
-      {/* Lead detail modal */}
       {selectedLead && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4">
           <div className="absolute inset-0 bg-gray-900/50 backdrop-blur-sm" onClick={() => setSelectedLead(null)} />
           <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-xl w-full sm:max-w-lg max-h-[90vh] overflow-y-auto p-6">
-            <button
-              onClick={() => setSelectedLead(null)}
-              className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600 transition"
-            >
+            <button onClick={() => setSelectedLead(null)} className="absolute top-4 right-4 p-1 text-gray-400 hover:text-gray-600 transition">
               <X className="h-5 w-5" />
             </button>
-
             <h2 className="text-lg font-bold text-gray-900 mb-4">{selectedLead.naam || 'Onbekend'}</h2>
-
             <div className="space-y-2.5 mb-5">
               {selectedLead.email && (
                 <a href={'mailto:' + selectedLead.email} className="flex items-center gap-3 text-sm text-gray-700 hover:text-smartlease-yellow transition">
@@ -205,14 +201,14 @@ export default function LeadsPage() {
                   <Car className="h-4 w-4 text-gray-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <p>{selectedLead.vehicle_info}</p>
-{selectedLead.vehicle_id && (
-  <button
-    onClick={() => window.open('/auto/' + selectedLead.vehicle_id + '/voertuig', '_blank')}
-    className="inline-flex items-center gap-1 text-xs text-smartlease-yellow hover:underline mt-0.5"
-  >
-    <ExternalLink className="h-3 w-3" /> Bekijk advertentie
-  </button>
-)}
+                    {selectedLead.vehicle_id && (
+                      <button
+                        onClick={() => window.open('/auto/' + selectedLead.vehicle_id + '/voertuig', '_blank')}
+                        className="inline-flex items-center gap-1 text-xs text-smartlease-yellow hover:underline mt-0.5"
+                      >
+                        <ExternalLink className="h-3 w-3" /> Bekijk advertentie
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
@@ -220,7 +216,6 @@ export default function LeadsPage() {
                 <Clock className="h-4 w-4 text-gray-400 flex-shrink-0" /> {formatDate(selectedLead.created_at)}
               </p>
             </div>
-
             {selectedLead.calculator_data && (
               <div className="mb-5">
                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Berekening</p>
@@ -256,14 +251,12 @@ export default function LeadsPage() {
                 </div>
               </div>
             )}
-
             {selectedLead.bericht && (
               <div className="mb-5">
                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Bericht</p>
                 <p className="text-sm text-gray-700 bg-gray-50 rounded-xl p-4">{selectedLead.bericht}</p>
               </div>
             )}
-
             <div>
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Status wijzigen</p>
               <div className="flex gap-2 flex-wrap">
