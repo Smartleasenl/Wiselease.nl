@@ -1,72 +1,12 @@
-import type { Context } from "https://edge.netlify.com";
-
-const SUPABASE_URL = "https://jtntbwioxszeocumgvzk.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ikp0bnRid2lveHN6ZW9jdW1ndnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDQwNjksImV4cCI6MjA4ODgyMDA2OX0.C3COoJCKSqpWMTuIBmZNFMBgbSVLExBGX4YOV9OhLiQ";
-
-const BOT_AGENTS = [
-  'whatsapp', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
-  'googlebot', 'slackbot', 'telegrambot', 'discordbot', 'applebot',
-  'bingbot', 'duckduckbot', 'pinterest', 'vkshare', 'curl', 'python'
-];
-
-function isBot(userAgent: string): boolean {
-  const ua = userAgent.toLowerCase();
-  return BOT_AGENTS.some(bot => ua.includes(bot));
-}
-
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-function buildHtml({ title, description, imageUrl, pageUrl }: {
-  title: string; description: string; imageUrl: string; pageUrl: string;
-}): string {
-  return `<!DOCTYPE html>
-<html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${escapeHtml(title)}</title>
-  <meta name="description" content="${escapeHtml(description)}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Wiselease.nl" />
-  <meta property="og:title" content="${escapeHtml(title)}" />
-  <meta property="og:description" content="${escapeHtml(description)}" />
-  <meta property="og:image" content="${escapeHtml(imageUrl)}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:url" content="${escapeHtml(pageUrl)}" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${escapeHtml(title)}" />
-  <meta name="twitter:description" content="${escapeHtml(description)}" />
-  <meta name="twitter:image" content="${escapeHtml(imageUrl)}" />
-  <script>window.location.href = "${escapeHtml(pageUrl)}";</script>
-</head>
-<body>
-  <h1>${escapeHtml(title)}</h1>
-  <p>${escapeHtml(description)}</p>
-</body>
-</html>`;
-}
-
 export default async (request: Request, context: Context) => {
   const url = new URL(request.url);
-  const userAgent = request.headers.get("user-agent") || "";
-
-  // Niet-bots: gewoon doorgaan naar de SPA
-  if (!isBot(userAgent)) {
-    return context.next();
-  }
 
   const match = url.pathname.match(/^\/auto\/(\d+)/);
   if (!match) return context.next();
 
   const vehicleId = match[1];
 
+  // Haal voertuigdata op
   let vehicle: any = null;
   try {
     const res = await fetch(
