@@ -189,12 +189,12 @@ export default function DealersPage() {
                       <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-700 text-xs font-bold">
                         {dealer.aantal_autos}
                       </span>
-                      <button
-                        window.open('/aanbod?aanbieder_naam=' + encodeURIComponent(dealer.naam), '_blank')}
-                        className="p-1.5 text-gray-400 hover:text-smartlease-yellow transition rounded-lg hover:bg-yellow-50"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                      </button>
+<button
+  onClick={() => { window.open('/aanbod?aanbieder_naam=' + encodeURIComponent(dealer.naam), '_blank'); }}
+  className="p-1.5 text-gray-400 hover:text-smartlease-yellow transition rounded-lg hover:bg-yellow-50"
+>
+  <ExternalLink className="h-4 w-4" />
+</button>
                     </div>
                   </div>
                   <div className="ml-10 space-y-1">
