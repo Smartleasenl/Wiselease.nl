@@ -121,7 +121,7 @@ export function VehicleDetailPage() {
     if (!id) return;
     setLoading(true);
     setCurrentImageIndex(0);
-    fetch(`${API_BASE}/detail?id=${id}`)
+    fetch(`https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/vehicles/detail?id=${id}`)
       .then(r => r.json())
       .then(data => { setVehicle(data); setLoading(false); })
       .catch(() => setLoading(false));
