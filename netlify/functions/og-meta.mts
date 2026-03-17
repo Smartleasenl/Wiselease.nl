@@ -113,7 +113,7 @@ export default async (req: Request): Promise<Response> => {
   ].filter(Boolean).join(" · ");
 
   const imageUrl = vehicle.og_image_url ||
-    `https://img.wiselease.nl/img.php?id=${vehicle.external_id}&s=1280&n=1`;
+  `https://wiselease.nl/.netlify/functions/img-proxy-wiselease?id=${vehicle.external_id}&s=1280&n=1`;
 
   return new Response(buildHtml({ title, description, imageUrl, pageUrl }), {
     status: 200,
