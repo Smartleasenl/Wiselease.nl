@@ -60,12 +60,28 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
   );
   const [ranges, setRanges] = useState(DEFAULT_RANGES);
 
-const selectedMerken = filters.merk
-  ? Array.isArray(filters.merk) ? filters.merk : (filters.merk as string).split(',')
-  : [];
-const selectedModellen = filters.model
-  ? Array.isArray(filters.model) ? filters.model : (filters.model as string).split(',')
-  : [];
+  const selectedMerken = filters.merk
+    ? Array.isArray(filters.merk) ? filters.merk : (filters.merk as string).split(',')
+    : [];
+  const selectedModellen = filters.model
+    ? Array.isArray(filters.model) ? filters.model : (filters.model as string).split(',')
+    : [];
+  const selectedCategorieen = filters.categorie
+    ? (filters.categorie as string).split(',')
+    : [];
+  const selectedBrandstoffen = filters.brandstof
+    ? (filters.brandstof as string).split(',')
+    : [];
+  const selectedTransmissies = filters.transmissie
+    ? (filters.transmissie as string).split(',')
+    : [];
+  const selectedKleuren = filters.kleur
+    ? (filters.kleur as string).split(',')
+    : [];
+  const selectedBtwMarge = filters.btw_marge
+    ? (filters.btw_marge as string).split(',').map(v => v.charAt(0).toUpperCase() + v.slice(1))
+    : [];
+
   const searchQuery = (filters.zoek as string) || '';
 
   useEffect(() => {
@@ -141,6 +157,16 @@ const selectedModellen = filters.model
     onFiltersChange(newFilters);
   };
 
+  const handleMultiChange = (key: keyof SearchParams, vals: string[], lowercase = false) => {
+    const newFilters = { ...filters };
+    if (vals.length > 0) {
+      newFilters[key] = lowercase ? vals.map(v => v.toLowerCase()).join(',') : vals.join(',') as any;
+    } else {
+      delete newFilters[key];
+    }
+    onFiltersChange(newFilters);
+  };
+
   const handleRangeChange = (key: 'jaar' | 'kmstand' | 'vermogen', value: [number, number]) => {
     const newFilters = { ...filters };
     if (key === 'jaar') {
@@ -190,34 +216,31 @@ const selectedModellen = filters.model
     const chips: { key: string; label: string }[] = [];
     if (searchQuery) chips.push({ key: 'zoek', label: `"${searchQuery}"` });
     if (selectedMerken.length > 0) {
-      chips.push({
-        key: 'merk',
-        label: selectedMerken.length === 1 ? selectedMerken[0] : `${selectedMerken.length} merken`,
-      });
+      chips.push({ key: 'merk', label: selectedMerken.length === 1 ? selectedMerken[0] : `${selectedMerken.length} merken` });
     }
     if (selectedModellen.length > 0) {
-      chips.push({
-        key: 'model',
-        label: selectedModellen.length === 1 ? selectedModellen[0] : `${selectedModellen.length} modellen`,
-      });
+      chips.push({ key: 'model', label: selectedModellen.length === 1 ? selectedModellen[0] : `${selectedModellen.length} modellen` });
     }
     if (filters.budget_min || filters.budget_max) {
       const min = filters.budget_min || 0;
       const max = filters.budget_max;
       chips.push({ key: 'budget', label: max ? `€${min}-€${max} p/m` : `€${min}+ p/m` });
     }
-    if (filters.categorie) {
-      const cat = filters.categorie as string;
-      const label =
-        cat === '__PERSONENAUTO__' ? 'Personenauto' :
-        cat === '__MOTOR__' ? 'Motoren' :
-        cat;
-      chips.push({ key: 'categorie', label });
+    if (selectedCategorieen.length > 0) {
+      chips.push({ key: 'categorie', label: selectedCategorieen.length === 1 ? selectedCategorieen[0] : `${selectedCategorieen.length} categorieën` });
     }
-    if (filters.brandstof) chips.push({ key: 'brandstof', label: filters.brandstof as string });
-    if (filters.transmissie) chips.push({ key: 'transmissie', label: filters.transmissie as string });
-    if (filters.kleur) chips.push({ key: 'kleur', label: filters.kleur as string });
-    if (filters.btw_marge) chips.push({ key: 'btw_marge', label: (filters.btw_marge as string).toUpperCase() });
+    if (selectedBrandstoffen.length > 0) {
+      chips.push({ key: 'brandstof', label: selectedBrandstoffen.length === 1 ? selectedBrandstoffen[0] : `${selectedBrandstoffen.length} brandstoffen` });
+    }
+    if (selectedTransmissies.length > 0) {
+      chips.push({ key: 'transmissie', label: selectedTransmissies.length === 1 ? selectedTransmissies[0] : `${selectedTransmissies.length} transmissies` });
+    }
+    if (selectedKleuren.length > 0) {
+      chips.push({ key: 'kleur', label: selectedKleuren.length === 1 ? selectedKleuren[0] : `${selectedKleuren.length} kleuren` });
+    }
+    if (selectedBtwMarge.length > 0) {
+      chips.push({ key: 'btw_marge', label: selectedBtwMarge.join(', ') });
+    }
     if (selectedOptions.length > 0) {
       chips.push({ key: 'opties', label: `${selectedOptions.length} opties` });
     }
@@ -227,7 +250,6 @@ const selectedModellen = filters.model
   const activeChips = getActiveChips();
   const activeFilterCount = activeChips.length;
 
-  // Veilige fallbacks voor alle filter arrays
   const merkenOptions = (availableFilters?.merken ?? []).map((m) => ({ label: m }));
   const modelOptions = models.map((m) => ({ label: m.model, count: m.count }));
   const categorieen = availableFilters?.categorieen ?? [];
@@ -262,10 +284,7 @@ const selectedModellen = filters.model
             className="w-full pl-9 pr-9 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow transition-all bg-white hover:border-gray-300"
           />
           {searchQuery && (
-            <button
-              onClick={() => handleSearchChange('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-            >
+            <button onClick={() => handleSearchChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
               <X className="h-4 w-4" />
             </button>
           )}
@@ -276,73 +295,62 @@ const selectedModellen = filters.model
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <div>
           <label className={labelClass}>Merk</label>
-          <MultiSelect
-            options={merkenOptions}
-            selected={selectedMerken}
-            onChange={handleMerkenChange}
-            placeholder="Alle merken"
-            searchable
-          />
+          <MultiSelect options={merkenOptions} selected={selectedMerken} onChange={handleMerkenChange} placeholder="Alle merken" searchable />
         </div>
-
         <div>
           <label className={labelClass}>Model</label>
-          <MultiSelect
-            options={modelOptions}
-            selected={selectedModellen}
-            onChange={handleModellenChange}
-            placeholder="Alle modellen"
-            searchable
-            disabled={selectedMerken.length === 0}
-          />
+          <MultiSelect options={modelOptions} selected={selectedModellen} onChange={handleModellenChange} placeholder="Alle modellen" searchable disabled={selectedMerken.length === 0} />
         </div>
-
         <div>
           <label className={labelClass}>Maandbudget</label>
           <select value={getCurrentBudgetValue()} onChange={(e) => handleBudgetChange(e.target.value)} className={selectClass}>
             {BUDGET_OPTIONS.map((o) => (<option key={o.value} value={o.value}>{o.label}</option>))}
           </select>
         </div>
-
         <div>
           <label className={labelClass}>Categorie</label>
-          <select value={filters.categorie || ''} onChange={(e) => handleFilterChange('categorie', e.target.value)} className={selectClass}>
-            <option value="">Alle categorieën</option>
-            {categorieen.map((c) => (<option key={c} value={c}>{c}</option>))}
-          </select>
+          <MultiSelect
+            options={categorieen.map(c => ({ label: c }))}
+            selected={selectedCategorieen}
+            onChange={(vals) => handleMultiChange('categorie', vals)}
+            placeholder="Alle categorieën"
+          />
         </div>
-
         <div>
           <label className={labelClass}>Brandstof</label>
-          <select value={filters.brandstof || ''} onChange={(e) => handleFilterChange('brandstof', e.target.value)} className={selectClass}>
-            <option value="">Alle brandstoffen</option>
-            {brandstoffen.map((b) => (<option key={b} value={b}>{b}</option>))}
-          </select>
+          <MultiSelect
+            options={brandstoffen.map(b => ({ label: b }))}
+            selected={selectedBrandstoffen}
+            onChange={(vals) => handleMultiChange('brandstof', vals)}
+            placeholder="Alle brandstoffen"
+          />
         </div>
-
         <div>
           <label className={labelClass}>Transmissie</label>
-          <select value={filters.transmissie || ''} onChange={(e) => handleFilterChange('transmissie', e.target.value)} className={selectClass}>
-            <option value="">Alle transmissies</option>
-            {transmissies.map((t) => (<option key={t} value={t}>{t}</option>))}
-          </select>
+          <MultiSelect
+            options={transmissies.map(t => ({ label: t }))}
+            selected={selectedTransmissies}
+            onChange={(vals) => handleMultiChange('transmissie', vals)}
+            placeholder="Alle transmissies"
+          />
         </div>
-
         <div>
           <label className={labelClass}>Kleur</label>
-          <select value={filters.kleur || ''} onChange={(e) => handleFilterChange('kleur', e.target.value)} className={selectClass}>
-            <option value="">Alle kleuren</option>
-            {kleuren.map((k) => (<option key={k} value={k}>{k}</option>))}
-          </select>
+          <MultiSelect
+            options={kleuren.map(k => ({ label: k }))}
+            selected={selectedKleuren}
+            onChange={(vals) => handleMultiChange('kleur', vals)}
+            placeholder="Alle kleuren"
+          />
         </div>
-
         <div>
           <label className={labelClass}>BTW/Marge</label>
-          <select value={filters.btw_marge || ''} onChange={(e) => handleFilterChange('btw_marge', e.target.value)} className={selectClass}>
-            <option value="">Alle</option>
-            <option value="btw">BTW</option>
-            <option value="marge">Marge</option>
-          </select>
+          <MultiSelect
+            options={[{ label: 'BTW' }, { label: 'Marge' }]}
+            selected={selectedBtwMarge}
+            onChange={(vals) => handleMultiChange('btw_marge', vals, true)}
+            placeholder="Alle"
+          />
         </div>
       </div>
 
@@ -439,17 +447,11 @@ const selectedModellen = filters.model
         {activeChips.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-3">
             {activeChips.map((chip) => (
-              <button
-                key={chip.key}
-                onClick={() => removeFilter(chip.key)}
-                className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition"
-              >
+              <button key={chip.key} onClick={() => removeFilter(chip.key)} className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition">
                 <span>{chip.label}</span><X className="h-3 w-3" />
               </button>
             ))}
-            <button onClick={clearFilters} className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1.5 transition font-medium">
-              Wis alles
-            </button>
+            <button onClick={clearFilters} className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1.5 transition font-medium">Wis alles</button>
           </div>
         )}
 
@@ -469,9 +471,7 @@ const selectedModellen = filters.model
             </div>
             <div className="border-t border-gray-100 px-4 py-3 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.06)] flex items-center space-x-3">
               {activeFilterCount > 0 && (
-                <button onClick={clearFilters} className="px-4 py-3 text-sm font-semibold text-gray-500 hover:text-gray-900 transition whitespace-nowrap">
-                  Wis alles
-                </button>
+                <button onClick={clearFilters} className="px-4 py-3 text-sm font-semibold text-gray-500 hover:text-gray-900 transition whitespace-nowrap">Wis alles</button>
               )}
               <button
                 onClick={() => setShowMobileFilters(false)}
@@ -507,11 +507,7 @@ const selectedModellen = filters.model
         {activeChips.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-5 pb-4 border-b border-gray-100">
             {activeChips.map((chip) => (
-              <button
-                key={chip.key}
-                onClick={() => removeFilter(chip.key)}
-                className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition group"
-              >
+              <button key={chip.key} onClick={() => removeFilter(chip.key)} className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition group">
                 <span>{chip.label}</span>
                 <X className="h-3.5 w-3.5 opacity-50 group-hover:opacity-100 transition" />
               </button>
