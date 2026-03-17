@@ -1,14 +1,12 @@
 async search(params: SearchParams): Promise<SearchResponse> {
   const queryParams = new URLSearchParams();
-  
-  const multiKeys = new Set(['merk', 'model', 'categorie', 'brandstof', 'transmissie', 'kleur', 'btw_marge']);
+  const multiKeys = ['merk', 'model', 'categorie', 'brandstof', 'transmissie', 'kleur', 'btw_marge'];
   
   Object.entries(params).forEach(([key, value]) => {
     if (value === undefined || value === null || value === '') return;
-    if (multiKeys.has(key)) {
-      // Stuur als meerdere aparte params zodat getAll() werkt
-      const vals = value.toString().split(',').map((v: string) => v.trim()).filter(Boolean);
-      vals.forEach((v: string) => queryParams.append(key, v));
+    if (multiKeys.includes(key)) {
+      const vals = value.toString().split(',').map(v => v.trim()).filter(Boolean);
+      vals.forEach(v => queryParams.append(key, v));
     } else {
       queryParams.append(key, value.toString());
     }
