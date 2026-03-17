@@ -24,7 +24,6 @@ import type { VehicleDetail } from '../types/vehicle';
 import { LeaseCalculator, type CalculatorState } from '../components/LeaseCalculator';
 import { supabase } from '../lib/supabase';
 
-const API_BASE = 'https://jtntbwioxszeocumgvzk.supabase.co/functions/v1/vehicles';
 const proxyImg = (url: string) => {
   if (!url) return '';
   const match = url.match(/nederlandmobiel\.nl\/auto\/(\d+)\/(\d+)\/(\d+)/);
