@@ -1,5 +1,5 @@
 const SUPABASE_URL = "https://jtntbwioxszeocumgvzk.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ikp0bnRid2lveHN6ZW9jdW1ndnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDQwNjksImV4cCI6MjA4ODgyMDA2OX0.C3COoJCKSqpWMTuIBmZNFMBgbSVLExBGX4YOV9OhLiQ";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0bnRid2lveHN6ZW9jdW1ndnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDE3OTksImV4cCI6MjA4ODgxNzc5OX0.KyAoKAScDFID7zqlOQPgfW82MDzjkmdvBWZlqWYsJnc";
 
 function escapeHtml(str: string): string {
   return str
