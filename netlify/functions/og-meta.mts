@@ -1,7 +1,7 @@
 import type { Config } from "@netlify/functions";
 
-const SUPABASE_URL = "https://bcjbghqrdlzwxgfuuxss.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjamJnaHFyZGx6d3hnZnV1eHNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjE4MzExNTEsImV4cCI6MjAzNzQwNzE1MX0.mL3MmFGjkMiaCMNhL6f2MghYF9rRORSY-ZSb-YKp4tM";
+const SUPABASE_URL = "https://jtntbwioxszeocumgvzk.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ikp0bnRid2lveHN6ZW9jdW1ndnprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNDQwNjksImV4cCI6MjA4ODgyMDA2OX0.C3COoJCKSqpWMTuIBmZNFMBgbSVLExBGX4YOV9OhLiQ";
 
 const BOT_AGENTS = [
   'whatsapp', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
@@ -33,7 +33,7 @@ function buildHtml({ title, description, imageUrl, pageUrl }: {
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Smartlease.nl" />
+  <meta property="og:site_name" content="Wiselease.nl" />
   <meta property="og:title" content="${escapeHtml(title)}" />
   <meta property="og:description" content="${escapeHtml(description)}" />
   <meta property="og:image" content="${escapeHtml(imageUrl)}" />
@@ -61,7 +61,6 @@ export default async (req: Request): Promise<Response> => {
   const vehicleId = match[1];
   const userAgent = req.headers.get("user-agent") || "";
 
-  // Niet-bots: redirect naar de SPA
   if (!isBot(userAgent)) {
     return new Response(null, {
       status: 302,
@@ -69,11 +68,10 @@ export default async (req: Request): Promise<Response> => {
     });
   }
 
-  // Bot: haal voertuigdata op
   let vehicle: any = null;
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/vehicles?id=eq.${vehicleId}&select=id,merk,model,uitvoering,verkoopprijs,bouwjaar_year,kmstand,og_image_url&is_active=eq.true`,
+      `${SUPABASE_URL}/rest/v1/vehicles?id=eq.${vehicleId}&select=id,merk,model,uitvoering,verkoopprijs,bouwjaar_year,kmstand,og_image_url,external_id&is_active=eq.true`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -89,21 +87,21 @@ export default async (req: Request): Promise<Response> => {
 
   if (!vehicle) {
     return new Response(buildHtml({
-      title: "Smartlease.nl | Financial Lease",
-      description: "Vind jouw ideale leaseauto bij Smartlease.nl.",
-      imageUrl: "https://smartlease.nl/smart-lease-logo.gif",
+      title: "Wiselease.nl | Financial Lease",
+      description: "Vind jouw ideale leaseauto bij Wiselease.nl.",
+      imageUrl: "https://wiselease.nl/wiselease-logo.png",
       pageUrl,
     }), { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
   }
 
-  const title = `${vehicle.merk} ${vehicle.model}${vehicle.uitvoering ? " – " + vehicle.uitvoering : ""} | Smartlease.nl`;
+  const title = `${vehicle.merk} ${vehicle.model}${vehicle.uitvoering ? " – " + vehicle.uitvoering : ""} | Wiselease.nl`;
 
   const r = 8.99 / 100 / 12;
   const months = 72;
   const maandprijs = vehicle.verkoopprijs
     ? Math.round(
         (vehicle.verkoopprijs * 0.85 * r * Math.pow(1 + r, months) -
-          vehicle.verkoopprijs * 0.1 * r) /
+          vehicle.verkoopprijs * 0.15 * r) /
           (Math.pow(1 + r, months) - 1)
       )
     : null;
@@ -115,7 +113,7 @@ export default async (req: Request): Promise<Response> => {
   ].filter(Boolean).join(" · ");
 
   const imageUrl = vehicle.og_image_url ||
-    `${SUPABASE_URL}/storage/v1/object/public/vehicle-images/thumbnails/${vehicleId}.jpg`;
+    `https://img.wiselease.nl/img.php?id=${vehicle.external_id}&s=1280&n=1`;
 
   return new Response(buildHtml({ title, description, imageUrl, pageUrl }), {
     status: 200,
