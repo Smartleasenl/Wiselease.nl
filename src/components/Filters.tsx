@@ -343,16 +343,15 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
             placeholder="Alle kleuren"
           />
         </div>
-        <div>
-          <label className={labelClass}>BTW/Marge</label>
-          <MultiSelect
-            options={[{ label: 'BTW' }, { label: 'Marge' }]}
-            selected={selectedBtwMarge}
-            onChange={(vals) => handleMultiChange('btw_marge', vals, true)}
-            placeholder="Alle"
-          />
-        </div>
-      </div>
+<div>
+  <label className={labelClass}>BTW/Marge</label>
+  <MultiSelect
+    options={[{ label: 'btw' }, { label: 'marge' }]}
+    selected={filters.btw_marge ? (filters.btw_marge as string).split(',') : []}
+    onChange={(vals) => handleMultiChange('btw_marge', vals)}
+    placeholder="Alle"
+  />
+</div>
 
       {/* Range sliders */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
