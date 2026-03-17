@@ -128,6 +128,5 @@ function SidebarContent({ onClose, onLogout, isActive }: {
           Uitloggen
         </button>
       </div>
-    </div>
   );
 }
