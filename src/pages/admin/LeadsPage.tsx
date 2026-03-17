@@ -173,7 +173,7 @@ export default function LeadsPage() {
               </tbody>
             </table>
           </div>
-      )}
+      )} 
 
       {selectedLead && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-0 sm:px-4">
