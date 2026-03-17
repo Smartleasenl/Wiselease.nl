@@ -272,7 +272,7 @@ export default function DealersPage() {
                       <td className="px-4 py-3 text-right text-gray-600">{fmt(dealer.prijs_max)}</td>
                       <td className="px-4 py-3">
                         <button
-                          window.open('/aanbod?aanbieder_naam=' + encodeURIComponent(dealer.naam), '_blank')
+                          window.open('/aanbod?q=' + encodeURIComponent(dealer.naam), '_blank')}
                           className="p-1.5 text-gray-400 hover:text-smartlease-yellow transition rounded-lg hover:bg-yellow-50"
                         >
                           <ExternalLink className="h-4 w-4" />
