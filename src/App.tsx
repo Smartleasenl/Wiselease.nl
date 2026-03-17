@@ -25,6 +25,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import SiteInstellingenPage from './pages/admin/SiteInstellingenPage';
 import LeadsPage from './pages/admin/LeadsPage';
+import LeadDetailPage from './pages/admin/LeadDetailPage';
 import { PaginasPage, StatistiekenPage } from './pages/admin/PlaceholderPages';
 import DealersPage from './pages/admin/DealersPage';
 import PaginaBeheer from './pages/admin/PaginaBeheer';
@@ -86,6 +87,7 @@ function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="site-instellingen" element={<SiteInstellingenPage />} />
           <Route path="leads" element={<LeadsPage />} />
+          <Route path="leads/:id" element={<LeadDetailPage />} />
           <Route path="paginas" element={<PaginasPage />} />
           <Route path="pagina-beheer" element={<PaginaBeheer />} />
           <Route path="footer-beheer" element={<FooterBeheer />} />
@@ -113,7 +115,7 @@ function App() {
           {INFO_SLUGS.map((slug) => (
             <Route
               key={slug}
-              path={`/financial-lease/${slug}`}
+              path={'/financial-lease/' + slug}
               element={<InfoPage />}
             />
           ))}
