@@ -445,13 +445,19 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
         </button>
 
         {activeChips.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-3">
+          <div className="flex flex-wrap items-center gap-2 mt-3">
             {activeChips.map((chip) => (
               <button key={chip.key} onClick={() => removeFilter(chip.key)} className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition">
                 <span>{chip.label}</span><X className="h-3 w-3" />
               </button>
             ))}
-            <button onClick={clearFilters} className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1.5 transition font-medium">Wis alles</button>
+            <button
+              onClick={clearFilters}
+              className="flex items-center space-x-1 text-xs font-semibold text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-full transition"
+            >
+              <X className="h-3 w-3" />
+              <span>Wis alles</span>
+            </button>
           </div>
         )}
 
@@ -471,7 +477,13 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
             </div>
             <div className="border-t border-gray-100 px-4 py-3 bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.06)] flex items-center space-x-3">
               {activeFilterCount > 0 && (
-                <button onClick={clearFilters} className="px-4 py-3 text-sm font-semibold text-gray-500 hover:text-gray-900 transition whitespace-nowrap">Wis alles</button>
+                <button
+                  onClick={clearFilters}
+                  className="flex items-center space-x-1.5 px-4 py-3 text-sm font-semibold text-red-400 hover:text-red-600 transition whitespace-nowrap"
+                >
+                  <X className="h-4 w-4" />
+                  <span>Wis alles</span>
+                </button>
               )}
               <button
                 onClick={() => setShowMobileFilters(false)}
@@ -487,31 +499,34 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
 
       {/* DESKTOP */}
       <div className="hidden md:block bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center space-x-2.5">
-            <SlidersHorizontal className="h-5 w-5 text-smartlease-yellow" />
-            <h2 className="text-lg font-bold text-gray-900">Filters</h2>
-            {activeFilterCount > 0 && (
-              <span className="bg-smartlease-yellow text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
-                {activeFilterCount}
-              </span>
-            )}
-          </div>
+        {/* Header */}
+        <div className="flex items-center space-x-2.5 mb-5">
+          <SlidersHorizontal className="h-5 w-5 text-smartlease-yellow" />
+          <h2 className="text-lg font-bold text-gray-900">Filters</h2>
           {activeFilterCount > 0 && (
-            <button onClick={clearFilters} className="flex items-center space-x-1.5 text-sm text-gray-400 hover:text-smartlease-yellow transition font-medium">
-              <X className="h-4 w-4" /><span>Wis alle filters</span>
-            </button>
+            <span className="bg-smartlease-yellow text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+              {activeFilterCount}
+            </span>
           )}
         </div>
 
+        {/* Actieve chips + Wis alle filters naast elkaar */}
         {activeChips.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-5 pb-4 border-b border-gray-100">
+          <div className="flex flex-wrap items-center gap-2 mb-5 pb-4 border-b border-gray-100">
             {activeChips.map((chip) => (
               <button key={chip.key} onClick={() => removeFilter(chip.key)} className="flex items-center space-x-1.5 bg-smartlease-yellow/10 text-smartlease-yellow pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold hover:bg-smartlease-yellow/20 transition group">
                 <span>{chip.label}</span>
                 <X className="h-3.5 w-3.5 opacity-50 group-hover:opacity-100 transition" />
               </button>
             ))}
+            {/* Wis alle filters — prominent, rood, direct naast de chips */}
+            <button
+              onClick={clearFilters}
+              className="flex items-center space-x-1.5 text-xs font-semibold text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 pl-2.5 pr-3 py-1.5 rounded-full transition"
+            >
+              <X className="h-3.5 w-3.5" />
+              <span>Wis alle filters</span>
+            </button>
           </div>
         )}
 
