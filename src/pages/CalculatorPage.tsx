@@ -80,7 +80,7 @@ export function CalculatorPage() {
 
   const handleWhatsApp = () => {
     const message = `Hallo, ik wil graag een financial lease aanvragen.\n\nAankoopprijs: ${formatPrice(vehiclePrice)}\nAanbetaling: ${formatPrice(downPayment)} (${downPaymentPercent}%)\nLooptijd: ${duration} maanden\nSlottermijn: ${formatPrice(residualValue)}\nBerekend maandbedrag: ${formatPrice(Math.round(monthlyPayment))}`;
-    window.open(`https://wa.me/31613669328?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/31858008777?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handleOfferte = () => {
