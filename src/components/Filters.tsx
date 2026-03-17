@@ -348,7 +348,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
           <MultiSelect
             options={[{ label: 'btw' }, { label: 'marge' }]}
             selected={filters.btw_marge ? (filters.btw_marge as string).split(',') : []}
-            onChange={(vals) => handleMultiChange('btw_marge', vals, true)}
+            onChange={(vals) => handleMultiChange('btw_marge', vals)}
             placeholder="Alle"
           />
         </div>
