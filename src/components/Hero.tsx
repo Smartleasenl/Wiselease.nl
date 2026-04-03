@@ -68,11 +68,16 @@ const popularBrands = [
 ];
 
 interface Suggestion {
-  type: 'merk' | 'model';
+  type: 'merk' | 'model' | 'dealer' | 'kenteken' | 'advertentie';
   merk: string;
   model?: string;
   label: string;
   sublabel?: string;
+}
+
+interface DealerOption {
+  naam: string;
+  count: number;
 }
 
 export function Hero() {
@@ -80,6 +85,7 @@ export function Hero() {
   const { settings: siteSettings, loaded: settingsLoaded } = useSiteSettings();
 
   const [filters, setFilters] = useState<FiltersResponse | null>(null);
+  const [dealers, setDealers] = useState<DealerOption[]>([]);
 
   // Multi-select: arrays instead of single strings
   const [selectedMerken, setSelectedMerken] = useState<string[]>([]);
@@ -100,6 +106,26 @@ export function Hero() {
   useEffect(() => {
     vehicleApi.getFilters().then(setFilters);
     vehicleApi.search({ per_page: 1 }).then((data) => setTotalCount(data.total));
+
+    // Laad dealernamen
+    supabase
+      .from('vehicles')
+      .select('aanbieder_naam')
+      .eq('is_active', true)
+      .not('aanbieder_naam', 'is', null)
+      .then(({ data }) => {
+        if (data) {
+          const countMap = new Map<string, number>();
+          data.forEach((v: any) => {
+            const naam = v.aanbieder_naam;
+            if (naam) countMap.set(naam, (countMap.get(naam) || 0) + 1);
+          });
+          const sorted = Array.from(countMap.entries())
+            .map(([naam, count]) => ({ naam, count }))
+            .sort((a, b) => b.count - a.count);
+          setDealers(sorted);
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -153,8 +179,37 @@ export function Hero() {
 
     const buildSuggestions = async () => {
       const results: Suggestion[] = [];
-      const sortedMerken = [...filters.merken].sort((a, b) => b.length - a.length);
 
+      // Kenteken detectie (bijv. XX-XXX-XX)
+      const kentekenClean = q.replace(/[-\s]/g, '');
+      if (kentekenClean.length >= 5 && kentekenClean.length <= 8 && /^[a-zA-Z0-9]+$/.test(kentekenClean)) {
+        results.push({
+          type: 'kenteken',
+          merk: q.toUpperCase().replace(/\s/g, '-'),
+          label: `Kenteken ${q.toUpperCase()}`,
+          sublabel: 'Zoek op kenteken',
+        });
+        setSuggestions(results);
+        setShowSuggestions(true);
+        setActiveSuggestion(0);
+        return;
+      }
+
+      // Advertentienummer (alleen cijfers, minimaal 4)
+      if (/^\d{4,}$/.test(q)) {
+        results.push({
+          type: 'advertentie',
+          merk: q,
+          label: `Advertentie #${q}`,
+          sublabel: 'Direct naar auto',
+        });
+        setSuggestions(results);
+        setShowSuggestions(true);
+        setActiveSuggestion(0);
+        return;
+      }
+
+      const sortedMerken = [...filters.merken].sort((a, b) => b.length - a.length);
       let matchedMerk: string | null = null;
       let modelQuery = '';
 
@@ -196,9 +251,21 @@ export function Hero() {
           });
         });
       } else {
+        // Merken
         const matchedMerken = sortedMerken.filter((m) => m.toLowerCase().includes(qLower));
-        matchedMerken.slice(0, 6).forEach((merk) => {
-          results.push({ type: 'merk', merk, label: merk, sublabel: 'Alle merken' });
+        matchedMerken.slice(0, 4).forEach((merk) => {
+          results.push({ type: 'merk', merk, label: merk, sublabel: 'Alle modellen' });
+        });
+
+        // Dealers
+        const matchedDealers = dealers.filter((d) => d.naam.toLowerCase().includes(qLower));
+        matchedDealers.slice(0, 4).forEach((dealer) => {
+          results.push({
+            type: 'dealer',
+            merk: dealer.naam,
+            label: dealer.naam,
+            sublabel: `${dealer.count} auto's`,
+          });
         });
       }
 
@@ -208,11 +275,24 @@ export function Hero() {
     };
 
     buildSuggestions();
-  }, [searchQuery, filters]);
+  }, [searchQuery, filters, dealers]);
 
   const handleSuggestionClick = (suggestion: Suggestion) => {
     setShowSuggestions(false);
     setSearchQuery(suggestion.label);
+
+    if (suggestion.type === 'kenteken') {
+      navigate(`/aanbod?kenteken=${encodeURIComponent(suggestion.merk)}`);
+      return;
+    }
+    if (suggestion.type === 'advertentie') {
+      navigate(`/aanbod/${suggestion.merk}`);
+      return;
+    }
+    if (suggestion.type === 'dealer') {
+      navigate(`/aanbod?aanbieder_naam=${encodeURIComponent(suggestion.merk)}`);
+      return;
+    }
     if (suggestion.type === 'merk') {
       navigate(`/aanbod?merk=${encodeURIComponent(suggestion.merk)}`);
     } else {
@@ -221,13 +301,34 @@ export function Hero() {
   };
 
   const handleSearch = () => {
+    const q = searchQuery.trim();
+
+    // Kenteken
+    const kentekenClean2 = q.replace(/[-\s]/g, '');
+    if (kentekenClean2.length >= 5 && kentekenClean2.length <= 8 && /^[a-zA-Z0-9]+$/.test(kentekenClean2) && !/^\d+$/.test(kentekenClean2)) {
+      navigate(`/aanbod?kenteken=${encodeURIComponent(q.toUpperCase().replace(/\s/g, '-'))}`);
+      return;
+    }
+
+    // Advertentienummer
+    if (/^\d{4,}$/.test(q)) {
+      navigate(`/aanbod/${q}`);
+      return;
+    }
+
+    // Dealer
+    const matchedDealer = dealers.find((d) => d.naam.toLowerCase() === q.toLowerCase());
+    if (matchedDealer) {
+      navigate(`/aanbod?aanbieder_naam=${encodeURIComponent(matchedDealer.naam)}`);
+      return;
+    }
+
     const params = new URLSearchParams();
 
     if (selectedMerken.length > 0) {
-      // Multiple merken: append each as separate param
       selectedMerken.forEach((m) => params.append('merk', m));
-    } else if (searchQuery.trim()) {
-      params.append('q', searchQuery.trim());
+    } else if (q) {
+      params.append('q', q);
     }
 
     if (selectedModellen.length > 0) {
