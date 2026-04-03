@@ -18,6 +18,7 @@ import BlogPage from './pages/BlogPage';
 import BlogDetailPage from './pages/BlogDetailPage';
 import MerkModelPage from './pages/MerkModelPage';
 import LegalPage from './pages/LegalPage';
+import CookieBanner from './components/CookieBanner';
 import SeoPage from './pages/SeoPage';
 
 // Admin imports
@@ -71,6 +72,7 @@ function PublicLayout() {
       <Header />
       <Outlet />
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
