@@ -44,7 +44,7 @@ const NAV_ITEMS = [
   { to: '/meer-informatie',       label: 'Meer informatie',  desc: 'Veelgestelde vragen',        icon: Info,        hasDropdown: true, dropdownKey: 'meer-informatie', parentSlug: 'meer-informatie' },
 ];
 
-const USP_ITEMS = ['Investeer in je eigen bedrijf', 'Direct eigenaar van de auto', 'Veel fiscale voordelen'];
+const USP_ITEMS = ['Investeer in je eigen bedrijf', 'Direct eigenaar van de auto', 'Veel fiscale voordelen', 'Financial lease voor ZZP & MKB', 'Geen jaarcijfers vereist', 'Vaste lage maandlast'];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -120,9 +120,8 @@ export function Header() {
     <>
       <style>{`
         @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-        .animate-marquee { animation: marquee 20s linear infinite; }
-        .animate-marquee:hover { animation-play-state: paused; }
-        @keyframes dropIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+        .animate-marquee { animation: marquee 12s linear infinite; }
+                @keyframes dropIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
         .drop-in { animation: dropIn 0.18s ease forwards; }
       `}</style>
 
@@ -311,7 +310,7 @@ export function Header() {
         </div>
         <div className="md:hidden overflow-hidden">
           <div className="animate-marquee flex whitespace-nowrap py-2">
-            {[...USP_ITEMS, ...USP_ITEMS].map((usp, i) => (
+            {[...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS].map((usp, i) => (
               <span key={i} className="inline-flex items-center mx-6 text-white text-xs font-medium">
                 <Check className="h-3.5 w-3.5 mr-1.5 text-smartlease-yellow flex-shrink-0" />{usp}
               </span>
