@@ -237,9 +237,10 @@ export function Footer() {
         <div className="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
           <span>{copyright} — Alle rechten voorbehouden</span>
           <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-gray-700 transition">Privacy</Link>
+            <Link to="/privacyverklaring" className="hover:text-gray-700 transition">Privacyverklaring</Link>
+            <Link to="/algemene-voorwaarden" className="hover:text-gray-700 transition">Algemene voorwaarden</Link>
+            <Link to="/cookiebeleid" className="hover:text-gray-700 transition">Cookiebeleid</Link>
             <Link to="/contact" className="hover:text-gray-700 transition">Contact</Link>
-            <Link to="/offerte" className="hover:text-gray-700 transition">Offerte</Link>
           </div>
         </div>
 
