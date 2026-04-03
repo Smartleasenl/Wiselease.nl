@@ -7,7 +7,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/occasions</loc>
+    <loc>https://wiselease.nl/aanbod</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -49,139 +49,223 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/elektrisch-leasen</loc>
+    <loc>https://wiselease.nl/offerte</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/equipment-lease</loc>
+    <loc>https://wiselease.nl/financial-lease/wat-is-financial-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/goedkoop-leasen</loc>
+    <loc>https://wiselease.nl/financial-lease/voor-ondernemers</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/import-lease</loc>
+    <loc>https://wiselease.nl/financial-lease/zzp-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/motor-leasen</loc>
+    <loc>https://wiselease.nl/financial-lease/starter-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/occasion-lease</loc>
+    <loc>https://wiselease.nl/financial-lease/elektrisch-leasen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/operational-lease</loc>
+    <loc>https://wiselease.nl/financial-lease/goedkoop-leasen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/starter-lease</loc>
+    <loc>https://wiselease.nl/financial-lease/occasion-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/voor-het-eerst-leasen</loc>
+    <loc>https://wiselease.nl/financial-lease/import-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/voor-ondernemers</loc>
+    <loc>https://wiselease.nl/financial-lease/operational-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/wat-is-financial-lease</loc>
+    <loc>https://wiselease.nl/financial-lease/motor-leasen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/financial-lease/zzp-lease</loc>
+    <loc>https://wiselease.nl/financial-lease/equipment-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/alle-fiscale-voordelen</loc>
+    <loc>https://wiselease.nl/financial-lease/voor-het-eerst-leasen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/auto-kopen-of-leasen</loc>
+    <loc>https://wiselease.nl/meer-informatie/hoe-werkt-financial-lease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/btw-of-marge-auto</loc>
+    <loc>https://wiselease.nl/meer-informatie/auto-kopen-of-leasen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/financial-lease-blog</loc>
+    <loc>https://wiselease.nl/meer-informatie/alle-fiscale-voordelen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/hoe-werkt-financial-lease</loc>
+    <loc>https://wiselease.nl/meer-informatie/btw-of-marge-auto</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/inruilen-leaseauto</loc>
+    <loc>https://wiselease.nl/meer-informatie/investeren-en-belastingvoordelen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/investeren-en-belastingvoordelen</loc>
+    <loc>https://wiselease.nl/meer-informatie/inruilen-leaseauto</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/reviews</loc>
+    <loc>https://wiselease.nl/meer-informatie/verschillende-leasevormen</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/veelgestelde-vragen</loc>
+    <loc>https://wiselease.nl/meer-informatie/waarom-smartlease</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/verschillende-leasevormen</loc>
+    <loc>https://wiselease.nl/financial-lease/lease/bmw</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/mercedes-benz</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/volkswagen</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/audi</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/toyota</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/tesla</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/zzp</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/elektrisch</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/zakelijk</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/starter</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/goedkoop</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/amsterdam</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wiselease.nl/informatie/meer-informatie/waarom-smartlease</loc>
+    <loc>https://wiselease.nl/financial-lease/lease/rotterdam</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/utrecht</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/eindhoven</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wiselease.nl/financial-lease/lease/den-haag</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
