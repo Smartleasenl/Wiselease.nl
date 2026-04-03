@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 interface LegalPageData {
@@ -10,20 +10,34 @@ interface LegalPageData {
   meta_description: string;
 }
 
+// Map hardcoded paths to slugs
+const PATH_TO_SLUG: Record<string, string> = {
+  '/privacyverklaring': 'privacyverklaring',
+  '/algemene-voorwaarden': 'algemene-voorwaarden',
+  '/cookiebeleid': 'cookiebeleid',
+};
+
 export default function LegalPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams<{ slug?: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
   const [page, setPage] = useState<LegalPageData | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Determine slug from either URL param or hardcoded path
+  const resolvedSlug = slug || PATH_TO_SLUG[location.pathname] || null;
+
   useEffect(() => {
-    if (!slug) return;
+    if (!resolvedSlug) {
+      navigate('/', { replace: true });
+      return;
+    }
     setLoading(true);
 
     supabase
       .from('legal_pages')
       .select('*')
-      .eq('slug', slug)
+      .eq('slug', resolvedSlug)
       .eq('is_published', true)
       .maybeSingle()
       .then(({ data, error }) => {
@@ -35,7 +49,7 @@ export default function LegalPage() {
         document.title = data.meta_title || data.title + ' – Wiselease.nl';
         setLoading(false);
       });
-  }, [slug, navigate]);
+  }, [resolvedSlug, navigate]);
 
   if (loading) {
     return (
