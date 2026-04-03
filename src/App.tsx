@@ -17,6 +17,8 @@ import VeelgesteldeVragenPage from './pages/VeelgesteldeVragenPage';
 import BlogPage from './pages/BlogPage';
 import BlogDetailPage from './pages/BlogDetailPage';
 import MerkModelPage from './pages/MerkModelPage';
+import LegalPage from './pages/LegalPage';
+import SeoPage from './pages/SeoPage';
 import SeoPage from './pages/SeoPage';
 
 // Admin imports
@@ -135,6 +137,12 @@ function App() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
 
+          <Route path="/privacyverklaring" element={<LegalPage />} />
+          <Route path="/algemene-voorwaarden" element={<LegalPage />} />
+          <Route path="/cookiebeleid" element={<LegalPage />} />
+          <Route path="/legal/:slug" element={<LegalPage />} />
+          <Route path="/financial-lease/lease/:slugMerk" element={<SeoPage />} />
+          <Route path="/financial-lease/lease/:slugMerk/:slugModel" element={<SeoPage />} />
           <Route path="*" element={<PlaceholderPage title="Pagina niet gevonden" />} />
         </Route>
 
