@@ -198,37 +198,32 @@ export function Footer() {
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Populaire merken</h4>
             <ul className="space-y-2">
-              {SEO_MERKEN_LINKS.map(link => (
-                <li key={link.href}>
-                  <Link to={link.href} className="text-sm text-gray-500 hover:text-teal-600 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              <li><Link to="/financial-lease/lease/bmw" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">BMW Financial Lease</Link></li>
+              <li><Link to="/financial-lease/lease/mercedes-benz" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Mercedes Financial Lease</Link></li>
+              <li><Link to="/financial-lease/lease/volkswagen" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Volkswagen Financial Lease</Link></li>
+              <li><Link to="/financial-lease/lease/audi" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Audi Financial Lease</Link></li>
+              <li><Link to="/financial-lease/lease/toyota" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Toyota Financial Lease</Link></li>
+              <li><Link to="/financial-lease/lease/tesla" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Tesla Financial Lease</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Financial Lease</h4>
             <ul className="space-y-2">
-              {SEO_CATEGORIE_LINKS.map(link => (
-                <li key={link.href}>
-                  <Link to={link.href} className="text-sm text-gray-500 hover:text-teal-600 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              <li><Link to="/financial-lease/lease/zzp" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">ZZP Lease</Link></li>
+              <li><Link to="/financial-lease/lease/elektrisch" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Elektrisch Leasen</Link></li>
+              <li><Link to="/financial-lease/lease/zakelijk" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Zakelijk Leasen</Link></li>
+              <li><Link to="/financial-lease/lease/starter" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Starter Lease</Link></li>
+              <li><Link to="/financial-lease/lease/goedkoop" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Goedkoop Leasen</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Steden</h4>
             <ul className="space-y-2">
-              {SEO_STAD_LINKS.map(link => (
-                <li key={link.href}>
-                  <Link to={link.href} className="text-sm text-gray-500 hover:text-teal-600 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              <li><Link to="/financial-lease/lease/amsterdam" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Financial Lease Amsterdam</Link></li>
+              <li><Link to="/financial-lease/lease/rotterdam" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Financial Lease Rotterdam</Link></li>
+              <li><Link to="/financial-lease/lease/utrecht" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Financial Lease Utrecht</Link></li>
+              <li><Link to="/financial-lease/lease/eindhoven" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Financial Lease Eindhoven</Link></li>
+              <li><Link to="/financial-lease/lease/den-haag" className="text-sm text-gray-500 hover:text-teal-600 transition-colors">Financial Lease Den Haag</Link></li>
             </ul>
           </div>
         </div>
