@@ -18,6 +18,23 @@ const AANBOD_SUB = [
   { label: "Marge auto's",  to: '/aanbod?type=marge',              icon: Car        },
 ];
 
+const SEO_MERKEN = [
+  { label: 'BMW Financial Lease',        to: '/financial-lease/lease/bmw' },
+  { label: 'Mercedes Financial Lease',   to: '/financial-lease/lease/mercedes-benz' },
+  { label: 'Volkswagen Financial Lease', to: '/financial-lease/lease/volkswagen' },
+  { label: 'Audi Financial Lease',       to: '/financial-lease/lease/audi' },
+  { label: 'Toyota Financial Lease',     to: '/financial-lease/lease/toyota' },
+  { label: 'Tesla Financial Lease',      to: '/financial-lease/lease/tesla' },
+];
+
+const SEO_CATEGORIEEN = [
+  { label: 'ZZP Lease',       to: '/financial-lease/lease/zzp' },
+  { label: 'Elektrisch',      to: '/financial-lease/lease/elektrisch' },
+  { label: 'Zakelijk',        to: '/financial-lease/lease/zakelijk' },
+  { label: 'Starter Lease',   to: '/financial-lease/lease/starter' },
+  { label: 'Goedkoop Leasen', to: '/financial-lease/lease/goedkoop' },
+];
+
 const NAV_ITEMS = [
   { to: '/aanbod',                label: 'Aanbod',          desc: "Bekijk 60.000+ auto's",      icon: Car,         hasDropdown: true, dropdownKey: 'aanbod'           },
   { to: '/calculator',            label: 'Calculator',       desc: 'Bereken je maandbedrag',     icon: Calculator                                                      },
