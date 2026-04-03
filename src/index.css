@@ -95,3 +95,11 @@ html, body, #root {
 .range-slider-thumb::-moz-range-thumb:active {
   transform: scale(1.25);
 }
+@keyframes usp-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.usp-marquee {
+  animation: usp-marquee 12s linear infinite;
+}
