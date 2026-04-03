@@ -17,6 +17,7 @@ import VeelgesteldeVragenPage from './pages/VeelgesteldeVragenPage';
 import BlogPage from './pages/BlogPage';
 import BlogDetailPage from './pages/BlogDetailPage';
 import MerkModelPage from './pages/MerkModelPage';
+import SeoPage from './pages/SeoPage';
 
 // Admin imports
 import LoginPage from './pages/admin/LoginPage';
