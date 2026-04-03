@@ -192,6 +192,47 @@ export function Footer() {
           </div>
         ) : null}
 
+
+        {/* SEO Links row */}
+        <div className="mt-10 pt-8 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Populaire merken</h4>
+            <ul className="space-y-2">
+              {SEO_MERKEN_LINKS.map(link => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-sm text-gray-500 hover:text-teal-600 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Financial Lease</h4>
+            <ul className="space-y-2">
+              {SEO_CATEGORIE_LINKS.map(link => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-sm text-gray-500 hover:text-teal-600 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Steden</h4>
+            <ul className="space-y-2">
+              {SEO_STAD_LINKS.map(link => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-sm text-gray-500 hover:text-teal-600 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
           <span>{copyright} — Alle rechten voorbehouden</span>
