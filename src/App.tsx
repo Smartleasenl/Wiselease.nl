@@ -19,7 +19,6 @@ import BlogDetailPage from './pages/BlogDetailPage';
 import MerkModelPage from './pages/MerkModelPage';
 import LegalPage from './pages/LegalPage';
 import SeoPage from './pages/SeoPage';
-import SeoPage from './pages/SeoPage';
 
 // Admin imports
 import LoginPage from './pages/admin/LoginPage';
