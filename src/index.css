@@ -101,6 +101,6 @@ html, body, #root {
 }
 
 .usp-marquee {
-  animation: usp-marquee 12s linear infinite !important;
+  animation: usp-marquee 25s linear infinite;
   will-change: transform;
 }
