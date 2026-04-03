@@ -308,9 +308,15 @@ export function Header() {
           ))}
         </div>
         <div className="md:hidden overflow-hidden">
-          <div className="usp-marquee flex whitespace-nowrap py-2">
+          <div
+            style={{
+              display: 'flex',
+              width: 'max-content',
+              animation: 'usp-scroll 12s linear infinite',
+            }}
+          >
             {[...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS].map((usp, i) => (
-              <span key={i} className="inline-flex items-center mx-6 text-white text-xs font-medium">
+              <span key={i} className="inline-flex items-center mx-6 text-white text-xs font-medium whitespace-nowrap py-2">
                 <Check className="h-3.5 w-3.5 mr-1.5 text-smartlease-yellow flex-shrink-0" />{usp}
               </span>
             ))}
