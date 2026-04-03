@@ -10,7 +10,6 @@ interface LegalPageData {
   meta_description: string;
 }
 
-// Map hardcoded paths to slugs
 const PATH_TO_SLUG: Record<string, string> = {
   '/privacyverklaring': 'privacyverklaring',
   '/algemene-voorwaarden': 'algemene-voorwaarden',
@@ -24,12 +23,11 @@ export default function LegalPage() {
   const [page, setPage] = useState<LegalPageData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Determine slug from either URL param or hardcoded path
   const resolvedSlug = slug || PATH_TO_SLUG[location.pathname] || null;
 
   useEffect(() => {
     if (!resolvedSlug) {
-      navigate('/', { replace: true });
+      navigate('\/', { replace: true });
       return;
     }
     setLoading(true);
@@ -42,7 +40,7 @@ export default function LegalPage() {
       .maybeSingle()
       .then(({ data, error }) => {
         if (error || !data) {
-          navigate('/', { replace: true });
+          navigate('\/', { replace: true });
           return;
         }
         setPage(data as LegalPageData);
@@ -62,25 +60,22 @@ export default function LegalPage() {
   if (!page) return null;
 
   return (
-    <div className="bg-white min-h-screen">
-      <div className="bg-slate-50 border-b border-slate-200 py-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-slate-900">{page.title}</h1>
-        </div>
-      </div>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div
-          className="prose prose-slate prose-lg max-w-none
-            prose-headings:font-bold prose-headings:text-slate-900
-            prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3
-            prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-2
-            prose-p:text-slate-600 prose-p:leading-relaxed
-            prose-li:text-slate-600
-            prose-a:text-teal-600 prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-slate-900"
-          dangerouslySetInnerHTML={{ __html: page.content }}
-        />
-      </div>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h1 className="text-3xl font-bold text-gray-900 mb-2">{page.title}</h1>
+      <p className="text-gray-400 text-sm mb-10">Laatste update: april 2026</p>
+
+      <div
+        className="prose prose-gray max-w-none text-gray-600 leading-relaxed
+          [&_section]:mb-8
+          [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-gray-900 [&_h2]:mb-3 [&_h2]:mt-0
+          [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-gray-900 [&_h3]:mb-2
+          [&_p]:mb-3 [&_p]:text-gray-600 [&_p]:leading-relaxed
+          [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-1 [&_ul]:mt-2 [&_ul]:mb-3
+          [&_li]:text-gray-600
+          [&_strong]:text-gray-900 [&_strong]:font-semibold
+          [&_a]:text-teal-600 [&_a:hover]:underline"
+        dangerouslySetInnerHTML={{ __html: page.content }}
+      />
     </div>
   );
 }
