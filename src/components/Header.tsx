@@ -119,7 +119,6 @@ export function Header() {
   return (
     <>
       <style>{`
-                @keyframes usp-marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
                 @keyframes dropIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
         .drop-in { animation: dropIn 0.18s ease forwards; }
       `}</style>
@@ -308,10 +307,7 @@ export function Header() {
           ))}
         </div>
         <div className="md:hidden overflow-hidden">
-          <div
-            className="flex whitespace-nowrap py-2"
-            style={{ animation: 'usp-marquee 12s linear infinite' }}
-          >
+          <div className="usp-marquee flex whitespace-nowrap py-2">
             {[...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS].map((usp, i) => (
               <span key={i} className="inline-flex items-center mx-6 text-white text-xs font-medium">
                 <Check className="h-3.5 w-3.5 mr-1.5 text-smartlease-yellow flex-shrink-0" />{usp}
