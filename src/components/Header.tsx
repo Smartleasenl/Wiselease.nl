@@ -119,7 +119,8 @@ export function Header() {
   return (
     <>
       <style>{`
-                @keyframes dropIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes usp-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes dropIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
         .drop-in { animation: dropIn 0.18s ease forwards; }
       `}</style>
 
