@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { Settings, LayoutDashboard, Users, FileText, BarChart3, Building2, LogOut, Menu, X, ChevronRight, Globe, LayoutGrid as Layout, PanelBottom, Star, HelpCircle, BookOpen, Link2 } from 'lucide-react';
@@ -33,6 +33,14 @@ export default function AdminLayout() {
     if (exact) return location.pathname === path;
     return location.pathname.startsWith(path);
   };
+
+  // Swap manifest naar admin manifest zodat "Installeren als app" de admin opent
+  useEffect(() => {
+    const link = document.querySelector('link[rel="manifest"]') as HTMLLinkElement;
+    const prev = link?.href;
+    if (link) link.href = '/admin-manifest.json';
+    return () => { if (link && prev) link.href = prev; };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
