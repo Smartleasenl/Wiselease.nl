@@ -42,33 +42,55 @@ function formatKm(km: number) {
   return new Intl.NumberFormat('nl-NL').format(km) + ' km';
 }
 
+// Bereken maandbedrag op basis van verkoopprijs
+// 72 maanden, 15% aanbetaling, 15% slottermijn, 8.99% rente
+function berekenMaandprijs(verkoopprijs: number): number {
+  const aanbetalingPct = 0.15;
+  const slottermijnPct = 0.15;
+  const rente = 0.0899;
+  const looptijd = 72;
+
+  const aanbetaling = verkoopprijs * aanbetalingPct;
+  const slottermijn = verkoopprijs * slottermijnPct;
+  const lening = verkoopprijs - aanbetaling;
+  const maandRente = rente / 12;
+
+  const maandbedrag =
+    ((lening - slottermijn / Math.pow(1 + maandRente, looptijd)) *
+      maandRente) /
+    (1 - Math.pow(1 + maandRente, -looptijd));
+
+  return Math.ceil(maandbedrag);
+}
+
 function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const slug = `${vehicle.merk}-${vehicle.model}`
     .toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+
+  const maandprijs = vehicle.maandprijs ?? berekenMaandprijs(vehicle.verkoopprijs);
 
   return (
     <Link
       to={`/auto/${vehicle.id}/${slug}`}
       className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 group flex flex-col"
     >
-      {/* Foto */}
-      <div className="relative h-44 bg-gray-100 overflow-hidden">
+      {/* Foto - 4:3 ratio zodat auto's niet worden afgesneden */}
+      <div className="relative w-full bg-gray-100 overflow-hidden" style={{ paddingBottom: '75%' }}>
         {vehicle.small_picture ? (
           <img
             src={vehicle.small_picture}
             alt={`${vehicle.merk} ${vehicle.model}`}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 p-2"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center">
             <Car size={40} className="text-gray-300" />
           </div>
         )}
-        {vehicle.maandprijs && (
-          <div className="absolute bottom-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-md">
-            v.a. {formatPrijs(vehicle.maandprijs)}/mnd
-          </div>
-        )}
+        {/* Maandprijs badge */}
+        <div className="absolute bottom-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow">
+          v.a. {formatPrijs(maandprijs)}/mnd
+        </div>
       </div>
 
       {/* Info */}
@@ -87,9 +109,14 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         </div>
 
         <div className="mt-auto pt-3 border-t border-gray-100 mt-3 flex items-center justify-between">
-          <span className="font-bold text-gray-900 text-base">
-            {formatPrijs(vehicle.verkoopprijs)}
-          </span>
+          <div>
+            <div className="font-bold text-gray-900 text-base">
+              {formatPrijs(vehicle.verkoopprijs)}
+            </div>
+            <div className="text-blue-600 text-xs font-medium">
+              {formatPrijs(maandprijs)}/mnd
+            </div>
+          </div>
           <span className="text-blue-600 text-sm font-medium group-hover:underline">
             Bekijk →
           </span>
