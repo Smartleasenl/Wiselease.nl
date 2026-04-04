@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { VehicleCard } from '../components/VehicleCard';
+import type { Vehicle } from '../types/vehicle';
 import { Calculator, Phone, ChevronRight, Car, CheckCircle } from 'lucide-react';
 
 interface SeoPage {
@@ -14,120 +16,15 @@ interface SeoPage {
   is_published: boolean;
 }
 
-interface Vehicle {
-  id: string;
-  merk: string;
-  model: string;
-  uitvoering: string;
-  bouwjaar: number;
-  kmstand: number;
-  verkoopprijs: number;
-  maandprijs?: number;
-  brandstof: string;
-  transmissie: string;
-  small_picture?: string;
-}
-
 const POPULAIRE_MERKEN = [
   'toyota', 'volkswagen', 'bmw', 'mercedes-benz',
   'renault', 'ford', 'audi', 'volvo', 'kia',
   'nissan', 'peugeot', 'hyundai',
 ];
 
-function formatPrijs(prijs: number) {
-  return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(prijs);
-}
-
-function formatKm(km: number) {
-  return new Intl.NumberFormat('nl-NL').format(km) + ' km';
-}
-
-// Bereken maandbedrag op basis van verkoopprijs
-// 72 maanden, 15% aanbetaling, 15% slottermijn, 8.99% rente
-function berekenMaandprijs(verkoopprijs: number): number {
-  const aanbetalingPct = 0.15;
-  const slottermijnPct = 0.15;
-  const rente = 0.0899;
-  const looptijd = 72;
-
-  const aanbetaling = verkoopprijs * aanbetalingPct;
-  const slottermijn = verkoopprijs * slottermijnPct;
-  const lening = verkoopprijs - aanbetaling;
-  const maandRente = rente / 12;
-
-  const maandbedrag =
-    ((lening - slottermijn / Math.pow(1 + maandRente, looptijd)) *
-      maandRente) /
-    (1 - Math.pow(1 + maandRente, -looptijd));
-
-  return Math.ceil(maandbedrag);
-}
-
-function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
-  const slug = `${vehicle.merk}-${vehicle.model}`
-    .toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-
-  const maandprijs = vehicle.maandprijs ?? berekenMaandprijs(vehicle.verkoopprijs);
-
-  return (
-    <Link
-      to={`/auto/${vehicle.id}/${slug}`}
-      className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 group flex flex-col"
-    >
-      {/* Foto - 4:3 ratio zodat auto's niet worden afgesneden */}
-      <div className="relative w-full bg-gray-100 overflow-hidden" style={{ paddingBottom: '75%' }}>
-        {vehicle.small_picture ? (
-          <img
-            src={vehicle.small_picture}
-            alt={`${vehicle.merk} ${vehicle.model}`}
-            className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 p-2"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Car size={40} className="text-gray-300" />
-          </div>
-        )}
-        {/* Maandprijs badge */}
-        <div className="absolute bottom-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow">
-          v.a. {formatPrijs(maandprijs)}/mnd
-        </div>
-      </div>
-
-      {/* Info */}
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="font-bold text-gray-900 text-base leading-snug">
-          {vehicle.merk} {vehicle.model}
-        </h3>
-        <p className="text-gray-500 text-sm mt-0.5 truncate">{vehicle.uitvoering}</p>
-
-        <div className="flex gap-3 mt-3 text-xs text-gray-500">
-          <span>{vehicle.bouwjaar}</span>
-          <span>·</span>
-          <span>{formatKm(vehicle.kmstand)}</span>
-          <span>·</span>
-          <span className="capitalize">{vehicle.brandstof?.toLowerCase()}</span>
-        </div>
-
-        <div className="mt-auto pt-3 border-t border-gray-100 mt-3 flex items-center justify-between">
-          <div>
-            <div className="font-bold text-gray-900 text-base">
-              {formatPrijs(vehicle.verkoopprijs)}
-            </div>
-            <div className="text-blue-600 text-xs font-medium">
-              {formatPrijs(maandprijs)}/mnd
-            </div>
-          </div>
-          <span className="text-blue-600 text-sm font-medium group-hover:underline">
-            Bekijk →
-          </span>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
 export default function MerkModelPage() {
   const { merk: merkSlug, model: modelSlug } = useParams<{ merk: string; model?: string }>();
+  const navigate = useNavigate();
 
   const [seoPage, setSeoPage] = useState<SeoPage | null>(null);
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -171,7 +68,7 @@ export default function MerkModelPage() {
 
     let q = supabase
       .from('vehicles')
-      .select('id, merk, model, uitvoering, bouwjaar, kmstand, verkoopprijs, maandprijs, brandstof, transmissie, small_picture')
+      .select('id, external_id, og_image_url, merk, model, uitvoering, categorie, verkoopprijs, btw_marge, bouwjaar_year, kmstand, brandstof, transmissie, vermogen, kleur, deuren, small_picture, aanbieder_naam, aanbieder_plaats, kenteken')
       .eq('is_active', true)
       .ilike('merk', merkFilter)
       .order('verkoopprijs', { ascending: true })
@@ -180,9 +77,8 @@ export default function MerkModelPage() {
     if (modelFilter) q = q.ilike('model', modelFilter);
 
     const { data } = await q;
-    setVehicles(data || []);
+    setVehicles((data || []) as unknown as Vehicle[]);
 
-    // Count
     let cq = supabase
       .from('vehicles')
       .select('*', { count: 'exact', head: true })
@@ -190,10 +86,15 @@ export default function MerkModelPage() {
       .ilike('merk', merkFilter);
 
     if (modelFilter) cq = cq.ilike('model', modelFilter);
-
     const { count } = await cq;
     setVehicleCount(count || 0);
   }
+
+  const handleCardClick = useCallback((vehicle: Vehicle) => {
+    const slug = `${vehicle.merk}-${vehicle.model}`
+      .toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    navigate(`/auto/${vehicle.id}/${slug}`);
+  }, [navigate]);
 
   const pageTitle = seoPage?.h1 || `${merkDisplay}${modelDisplay ? ' ' + modelDisplay : ''} Financial Lease`;
   const pageIntro = seoPage?.intro_tekst || `Bekijk ons actuele aanbod ${merkDisplay}${modelDisplay ? ' ' + modelDisplay : ''} financial lease occasions. Direct eigenaar, fiscaal voordelig, ook zonder jaarcijfers.`;
@@ -204,8 +105,6 @@ export default function MerkModelPage() {
       {/* ── Hero ── */}
       <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white pt-10 pb-12 px-4">
         <div className="max-w-6xl mx-auto">
-
-          {/* Breadcrumb */}
           <nav className="text-blue-300 text-sm mb-5 flex items-center gap-1 flex-wrap">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <ChevronRight size={13} />
@@ -233,8 +132,6 @@ export default function MerkModelPage() {
                 {pageIntro}
               </p>
             </div>
-
-            {/* Stats blokje */}
             {!loading && vehicleCount > 0 && (
               <div className="bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl p-4 text-center min-w-[140px] shrink-0">
                 <div className="text-3xl font-extrabold">{vehicleCount}</div>
@@ -243,7 +140,6 @@ export default function MerkModelPage() {
             )}
           </div>
 
-          {/* USP badges */}
           <div className="flex flex-wrap gap-2 mt-6">
             {['Direct eigenaar', 'Fiscaal voordelig', 'Zonder jaarcijfers', 'Vaste maandprijs'].map((k) => (
               <span key={k} className="flex items-center gap-1.5 bg-white bg-opacity-10 border border-white border-opacity-20 text-white text-xs font-medium px-3 py-1.5 rounded-full">
@@ -260,9 +156,7 @@ export default function MerkModelPage() {
         <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
           <div>
             <h2 className="text-xl font-bold text-gray-900">
-              {loading
-                ? 'Aanbod laden...'
-                : `${vehicleCount} ${merkDisplay}${modelDisplay ? ' ' + modelDisplay : ''} occasions`}
+              {loading ? 'Aanbod laden...' : `${vehicleCount} ${merkDisplay}${modelDisplay ? ' ' + modelDisplay : ''} occasions`}
             </h2>
             <p className="text-gray-400 text-sm mt-0.5">Gesorteerd op laagste prijs</p>
           </div>
@@ -277,13 +171,15 @@ export default function MerkModelPage() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-sm h-72 animate-pulse" />
+              <div key={i} className="bg-white rounded-2xl shadow-sm h-80 animate-pulse" />
             ))}
           </div>
         ) : vehicles.length > 0 ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {vehicles.map((v) => <VehicleCard key={v.id} vehicle={v} />)}
+              {vehicles.map((v) => (
+                <VehicleCard key={v.id} vehicle={v} onClick={() => handleCardClick(v)} />
+              ))}
             </div>
             {vehicleCount > 12 && (
               <div className="text-center mt-8">
@@ -319,37 +215,12 @@ export default function MerkModelPage() {
       )}
 
       <style>{`
-        .seo-body h2 {
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: #111827;
-          margin-top: 2.25rem;
-          margin-bottom: 0.65rem;
-          padding-bottom: 0.5rem;
-          border-bottom: 2px solid #e5e7eb;
-        }
+        .seo-body h2 { font-size: 1.15rem; font-weight: 700; color: #111827; margin-top: 2.25rem; margin-bottom: 0.65rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e7eb; }
         .seo-body h2:first-child { margin-top: 0; }
-        .seo-body p {
-          color: #4b5563;
-          line-height: 1.8;
-          margin-bottom: 1rem;
-          font-size: 0.97rem;
-        }
+        .seo-body p { color: #4b5563; line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
         .seo-body ul { list-style: none; padding: 0; margin-bottom: 1rem; }
-        .seo-body ul li {
-          color: #4b5563;
-          padding: 0.3rem 0 0.3rem 1.6rem;
-          position: relative;
-          line-height: 1.6;
-          font-size: 0.97rem;
-        }
-        .seo-body ul li::before {
-          content: '✓';
-          position: absolute;
-          left: 0;
-          color: #2563eb;
-          font-weight: 700;
-        }
+        .seo-body ul li { color: #4b5563; padding: 0.3rem 0 0.3rem 1.6rem; position: relative; line-height: 1.6; font-size: 0.97rem; }
+        .seo-body ul li::before { content: '✓'; position: absolute; left: 0; color: #2563eb; font-weight: 700; }
       `}</style>
 
       {/* ── CTA ── */}
@@ -362,17 +233,11 @@ export default function MerkModelPage() {
             Bereken direct jouw maandbedrag of laat ons je terugbellen voor persoonlijk advies. Geen verplichtingen.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/offerte"
-              className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 font-semibold px-7 py-3.5 rounded-lg hover:bg-blue-50 transition-colors shadow"
-            >
+            <Link to="/offerte" className="inline-flex items-center justify-center gap-2 bg-white text-blue-700 font-semibold px-7 py-3.5 rounded-lg hover:bg-blue-50 transition-colors shadow">
               <Calculator size={18} />
               Bereken maandbedrag
             </Link>
-            <Link
-              to="/bel-mij"
-              className="inline-flex items-center justify-center gap-2 border-2 border-white border-opacity-60 text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-blue-600 transition-colors"
-            >
+            <Link to="/bel-mij" className="inline-flex items-center justify-center gap-2 border-2 border-white border-opacity-60 text-white font-semibold px-7 py-3.5 rounded-lg hover:bg-blue-600 transition-colors">
               <Phone size={18} />
               Laat je terugbellen
             </Link>
