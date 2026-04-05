@@ -1,548 +1,190 @@
-// src/pages/VeelgesteldeVragenPage.tsx
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, Phone, Mail, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
-import { Phone, MessageCircle, ChevronDown, Search, Zap, TrendingUp, FileText, Car, Clock, Shield } from 'lucide-react';
 
-interface Faq {
-  id: string;
+interface FAQ {
   vraag: string;
   antwoord: string;
-  categorie: string;
-  sort_order: number;
 }
 
-const CAT_CONFIG: Record<string, { icon: React.ElementType; color: string; glow: string; label: string }> = {
-  Algemeen:   { icon: Zap,        color: '#00D4C8', glow: 'rgba(0,212,200,0.18)',   label: 'Algemeen'   },
-  Financieel: { icon: TrendingUp, color: '#60A5FA', glow: 'rgba(96,165,250,0.18)',  label: 'Financieel' },
-  Contract:   { icon: FileText,   color: '#A78BFA', glow: 'rgba(167,139,250,0.18)', label: 'Contract'   },
-  Aanbod:     { icon: Car,        color: '#FCD34D', glow: 'rgba(252,211,77,0.18)',  label: 'Aanbod'     },
-  Proces:     { icon: Clock,      color: '#34D399', glow: 'rgba(52,211,153,0.18)',  label: 'Proces'     },
-};
-const CATS = Object.keys(CAT_CONFIG);
+interface Categorie {
+  titel: string;
+  emoji: string;
+  vragen: FAQ[];
+}
 
-/* ── Single FAQ item with smooth height animation ── */
-function FaqItem({
-  faq, color, glow, isOpen, onToggle, idx,
-}: { faq: Faq; color: string; glow: string; isOpen: boolean; onToggle: () => void; idx: number }) {
-  const bodyRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
+const CATEGORIEEN: Categorie[] = [
+  {
+    titel: 'Financial Lease',
+    emoji: '📋',
+    vragen: [
+      {
+        vraag: 'Wat is financial lease?',
+        antwoord: 'Bij financial lease financiert Wiselease de aankoop van jouw auto. Jij betaalt een vast maandbedrag gedurende de gekozen looptijd. Aan het einde betaal je de slottermijn en is de auto volledig van jou. Je bent vanaf dag één economisch eigenaar — dat betekent ook dat jij profiteert van waardestijging en zelf de vrijheid hebt in keuzes rondom verzekering en onderhoud.',
+      },
+      {
+        vraag: 'Wat is operational lease?',
+        antwoord: 'Bij operational lease van Wiselease rij je een auto waarbij alles is inbegrepen: verzekering, onderhoud en wegenbelasting. Aan het einde van de looptijd lever je de auto in. Dit is de meest zorgeloze optie — je weet precies wat je maandelijks betaalt en hoeft nergens anders aan te denken.',
+      },
+      {
+        vraag: 'Wat is het verschil tussen financial lease en operational lease?',
+        antwoord: 'Bij financial lease word jij eigenaar van de auto na het betalen van de slottermijn. Verzekering, wegenbelasting en onderhoud regel je zelf — dit biedt fiscale voordelen voor ondernemers. Bij operational lease blijft de auto van Wiselease en is alles inbegrepen in het maandbedrag. Je levert de auto aan het einde in.',
+      },
+      {
+        vraag: 'Wat zijn de fiscale voordelen van financial lease?',
+        antwoord: 'Als ondernemer kun je de rente op het leasebedrag aftrekken als bedrijfskosten. De btw op zakelijke kosten zoals onderhoud en verzekering is terugvorderbaar. Overleg met je accountant voor jouw specifieke situatie, want de voordelen verschillen per rechtsvorm.',
+      },
+    ],
+  },
+  {
+    titel: 'Voorwaarden & Doelgroep',
+    emoji: '✅',
+    vragen: [
+      {
+        vraag: 'Voor wie is Wiselease?',
+        antwoord: 'Wiselease werkt uitsluitend met zakelijke klanten. Dit zijn ondernemers met een actieve KVK-inschrijving: ZZP\'ers, eenmanszaken, vennootschappen onder firma (VOF), besloten vennootschappen (BV) en andere rechtspersonen. Particulieren zonder KVK-inschrijving komen helaas niet in aanmerking.',
+      },
+      {
+        vraag: 'Wat als ik een BKR-registratie heb?',
+        antwoord: 'Een BKR-registratie hoeft geen probleem te zijn. In de meeste gevallen kunnen wij toch een passende oplossing vinden. Afhankelijk van de aard van de registratie kan een hogere aanbetaling van 5% tot 20% gevraagd worden. Neem contact met ons op voor een vrijblijvende beoordeling.',
+      },
+      {
+        vraag: 'Moet mijn bedrijf al lang bestaan?',
+        antwoord: 'Er is geen minimale bedrijfsduur vereist. Elke aanvraag wordt individueel beoordeeld op basis van jouw financiële situatie en bedrijfsprofiel. Startende ondernemers zijn welkom.',
+      },
+    ],
+  },
+  {
+    titel: 'Ons Aanbod',
+    emoji: '🚗',
+    vragen: [
+      {
+        vraag: 'Welke auto\'s zijn beschikbaar bij Wiselease?',
+        antwoord: 'Wiselease biedt een breed aanbod van occasions van Nederlandse dealers én nieuwe auto\'s rechtstreeks van de fabriek. Daarnaast is import uit Europa mogelijk. Heb je een specifieke auto op het oog die je niet op onze website ziet staan? Wij zoeken actief met je mee in ons netwerk.',
+      },
+      {
+        vraag: 'Kan ik een specifieke auto aanvragen?',
+        antwoord: 'Absoluut. Als jij een specifieke auto wilt — een bepaald merk, model, bouwjaar of uitvoering — dan zoeken wij gericht voor je. Onze specialisten hebben toegang tot een uitgebreid netwerk van Nederlandse dealers én Europese importeurs. Neem contact met ons op en wij gaan voor je aan de slag.',
+      },
+      {
+        vraag: 'Zijn er ook elektrische auto\'s beschikbaar?',
+        antwoord: 'Ja, zeker. In ons aanbod staan zowel volledig elektrische auto\'s als hybrides. Onze lease specialisten helpen je graag bij het kiezen van de juiste elektrische auto die past bij jouw rijgedrag en budget.',
+      },
+    ],
+  },
+  {
+    titel: 'Financiering & Kosten',
+    emoji: '💰',
+    vragen: [
+      {
+        vraag: 'Wat is de minimale aanbetaling?',
+        antwoord: 'Bij Wiselease geldt een minimale aanbetaling van 10% van de voertuigprijs. Een hogere aanbetaling verlaagt je maandlast. Bij een BKR-registratie kan een aanbetaling van 5% tot 20% gevraagd worden.',
+      },
+      {
+        vraag: 'Welke looptijden zijn mogelijk?',
+        antwoord: 'Voor financial lease kun je kiezen uit de volgende looptijden: 12, 18, 24, 30, 36, 42, 48, 54, 60, 66 of 72 maanden. Voor operational lease zijn de beschikbare looptijden 24, 36, 48 en 60 maanden.',
+      },
+      {
+        vraag: 'Wat is de rente?',
+        antwoord: 'De rente is vast voor de gehele looptijd — zo weet je altijd precies waar je aan toe bent. De exacte rente is afhankelijk van jouw aanvraag, het voertuig en de looptijd. Gebruik onze calculator voor een indicatie of vraag een vrijblijvende offerte aan.',
+      },
+      {
+        vraag: 'Wat zijn de bijkomende kosten?',
+        antwoord: 'Wij rekenen eenmalige bemiddelingskosten van €150 excl. btw. Bij financial lease zijn verzekering, wegenbelasting en onderhoud niet inbegrepen — die regel je zelf. Bij operational lease is alles inbegrepen in het maandbedrag.',
+      },
+    ],
+  },
+  {
+    titel: 'Aanvraag & Service',
+    emoji: '⚡',
+    vragen: [
+      {
+        vraag: 'Hoe snel word ik geholpen?',
+        antwoord: 'Binnen 24 uur heb je een specialist aan de lijn. Wij nemen snel contact met je op na je aanvraag om de mogelijkheden te bespreken.',
+      },
+      {
+        vraag: 'Hoe vraag ik een offerte aan?',
+        antwoord: 'Kies een auto uit ons aanbod, stel de gewenste looptijd en aanbetaling in via de calculator en klik op "Gratis offerte aanvragen". Vul je gegevens in en een van onze specialisten neemt binnen 24 uur contact met je op.',
+      },
+      {
+        vraag: 'Wat heb ik nodig voor een aanvraag?',
+        antwoord: 'Voor een aanvraag heb je nodig: je KVK-nummer, persoonlijke gegevens (naam, telefoonnummer en e-mailadres) en een keuze voor een auto. Wij verzorgen de rest van het proces.',
+      },
+    ],
+  },
+];
 
-  useEffect(() => {
-    if (bodyRef.current) setHeight(bodyRef.current.scrollHeight);
-  }, [faq.antwoord]);
-
+function FaqItem({ vraag, antwoord }: FAQ) {
+  const [open, setOpen] = useState(false);
   return (
-    <div
-      onClick={onToggle}
-      className="relative overflow-hidden cursor-pointer group"
-      style={{
-        borderRadius: 16,
-        border: `1px solid ${isOpen ? color + '55' : 'rgba(255,255,255,0.07)'}`,
-        background: isOpen ? `rgba(255,255,255,0.055)` : 'rgba(255,255,255,0.025)',
-        boxShadow: isOpen ? `0 0 60px ${glow}` : 'none',
-        transition: 'all 0.35s cubic-bezier(0.4,0,0.2,1)',
-      }}
-    >
-      {/* Animated top border */}
-      <div
-        style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-          background: isOpen ? `linear-gradient(90deg, transparent 0%, ${color} 50%, transparent 100%)` : 'transparent',
-          transition: 'all 0.4s ease',
-        }}
-      />
-
-      {/* Question row */}
-      <div className="flex items-center gap-4 px-5 py-5">
-        {/* Number badge */}
-        <div
-          className="flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center text-[11px] font-black"
-          style={{
-            background: isOpen ? color : 'rgba(255,255,255,0.06)',
-            color: isOpen ? '#000' : 'rgba(255,255,255,0.28)',
-            transition: 'all 0.3s ease',
-            boxShadow: isOpen ? `0 0 20px ${glow}` : 'none',
-          }}
-        >
-          {String(idx + 1).padStart(2, '0')}
-        </div>
-
-        <p
-          className="flex-1 text-sm sm:text-[15px] font-semibold leading-snug"
-          style={{
-            color: isOpen ? '#ffffff' : 'rgba(255,255,255,0.7)',
-            transition: 'color 0.3s ease',
-          }}
-        >
-          {faq.vraag}
-        </p>
-
-        <div
-          className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
-          style={{
-            background: isOpen ? color + '25' : 'rgba(255,255,255,0.05)',
-            transition: 'all 0.3s ease',
-          }}
-        >
-          <ChevronDown
-            style={{
-              width: 15, height: 15,
-              color: isOpen ? color : 'rgba(255,255,255,0.25)',
-              transform: isOpen ? 'rotate(180deg)' : 'none',
-              transition: 'all 0.35s cubic-bezier(0.4,0,0.2,1)',
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Answer */}
-      <div
-        style={{
-          maxHeight: isOpen ? height + 48 : 0,
-          opacity: isOpen ? 1 : 0,
-          overflow: 'hidden',
-          transition: 'max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease',
-        }}
+    <div className={`border rounded-xl transition-all ${open ? 'border-smartlease-yellow/30 bg-smartlease-yellow/5' : 'border-gray-200 bg-white'}`}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
       >
-        <div ref={bodyRef} className="px-5 pb-6 pt-1">
-          <div
-            style={{
-              height: 1,
-              background: `linear-gradient(90deg, ${color}40, transparent)`,
-              marginBottom: 16,
-            }}
-          />
-          <p className="text-sm leading-[1.85]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-            {faq.antwoord}
-          </p>
+        <span className={`font-semibold text-sm sm:text-base leading-snug ${open ? 'text-smartlease-yellow' : 'text-gray-900'}`}>
+          {vraag}
+        </span>
+        {open
+          ? <ChevronUp size={18} className="text-smartlease-yellow flex-shrink-0" />
+          : <ChevronDown size={18} className="text-gray-400 flex-shrink-0" />
+        }
+      </button>
+      {open && (
+        <div className="px-5 pb-5">
+          <p className="text-sm text-gray-600 leading-relaxed">{antwoord}</p>
         </div>
-      </div>
+      )}
     </div>
   );
 }
 
-/* ── Main page ── */
 export default function VeelgesteldeVragenPage() {
-  const [faqs, setFaqs]           = useState<Faq[]>([]);
-  const [loading, setLoading]     = useState(true);
-  const [expanded, setExpanded]   = useState<string | null>(null);
-  const [activecat, setActivecat] = useState('Alle');
-  const [query, setQuery]         = useState('');
-  const [mounted, setMounted]     = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setMounted(true), 60);
-    supabase
-      .from('faqs')
-      .select('*')
-      .eq('is_published', true)
-      .order('categorie')
-      .order('sort_order')
-      .then(({ data }) => {
-        setFaqs((data as Faq[]) || []);
-        setLoading(false);
-      });
-  }, []);
-
-  const catCounts = CATS.reduce((acc, c) => {
-    acc[c] = faqs.filter(f => f.categorie === c).length;
-    return acc;
-  }, {} as Record<string, number>);
-
-  const searched = query.trim()
-    ? faqs.filter(f =>
-        f.vraag.toLowerCase().includes(query.toLowerCase()) ||
-        f.antwoord.toLowerCase().includes(query.toLowerCase())
-      )
-    : faqs;
-
-  const filtered = activecat === 'Alle' ? searched : searched.filter(f => f.categorie === activecat);
-
-  const grouped = CATS.reduce((acc, cat) => {
-    const items = filtered.filter(f => f.categorie === cat);
-    if (items.length) acc[cat] = items;
-    return acc;
-  }, {} as Record<string, Faq[]>);
-
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(155deg, #04081a 0%, #080f1e 40%, #050c18 70%, #030712 100%)',
-        fontFamily: "'Inter', sans-serif",
-      }}
-    >
-      {/* ══════════════ HERO ══════════════ */}
-      <div className="relative overflow-hidden">
-        {/* Ambient orbs */}
-        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-          <div style={{
-            position: 'absolute', top: -80, left: '20%', width: 600, height: 600,
-            borderRadius: '50%', filter: 'blur(160px)',
-            background: 'radial-gradient(circle, rgba(0,212,200,0.1) 0%, transparent 70%)',
-            animation: 'slowPulse 12s ease-in-out infinite',
-          }} />
-          <div style={{
-            position: 'absolute', top: 40, right: '15%', width: 400, height: 400,
-            borderRadius: '50%', filter: 'blur(130px)',
-            background: 'radial-gradient(circle, rgba(96,165,250,0.08) 0%, transparent 70%)',
-            animation: 'slowPulse 15s ease-in-out infinite 4s',
-          }} />
-          {/* Grid lines */}
-          <div style={{
-            position: 'absolute', inset: 0, opacity: 0.025,
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
-          }} />
-          {/* Scanline effect */}
-          <div style={{
-            position: 'absolute', inset: 0, opacity: 0.03,
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.3) 2px, rgba(255,255,255,0.3) 3px)',
-          }} />
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero */}
+      <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-14 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4">Veelgestelde vragen</h1>
+          <p className="text-gray-400 text-lg">Alles wat je wilt weten over financial lease, operational lease en ons aanbod.</p>
         </div>
+      </div>
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 pt-24 pb-16 text-center">
-          {/* Pill badge */}
-          <div
-            className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-[11px] font-black uppercase tracking-[0.2em] mb-8`}
-            style={{
-              background: 'rgba(0,212,200,0.08)',
-              border: '1px solid rgba(0,212,200,0.25)',
-              color: '#00D4C8',
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? 'translateY(0)' : 'translateY(12px)',
-              transition: 'all 0.8s cubic-bezier(0.4,0,0.2,1)',
-            }}
-          >
-            <Shield style={{ width: 13, height: 13 }} />
-            {faqs.length} vragen &amp; antwoorden
-          </div>
-
-          {/* Title */}
-          <h1
-            style={{
-              fontSize: 'clamp(30px, 5.5vw, 64px)',
-              fontWeight: 900,
-              color: '#fff',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
-              marginBottom: 20,
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 0.9s cubic-bezier(0.4,0,0.2,1) 0.1s',
-            }}
-          >
-            Veelgestelde vragen<br />
-            <span style={{
-              background: 'linear-gradient(120deg, #00D4C8 0%, #38BDF8 45%, #818CF8 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
-              over financial lease
-            </span>
-          </h1>
-
-          <p
-            style={{
-              color: 'rgba(255,255,255,0.42)',
-              fontSize: '1.05rem',
-              lineHeight: 1.7,
-              maxWidth: 500,
-              margin: '0 auto 40px',
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? 'translateY(0)' : 'translateY(16px)',
-              transition: 'all 0.9s cubic-bezier(0.4,0,0.2,1) 0.18s',
-            }}
-          >
-            Antwoorden op de meest gestelde vragen van onze klanten.
-            Staat jouw vraag er niet bij? Wij helpen je direct verder.
-          </p>
-
-          {/* Search */}
-          <div
-            style={{
-              maxWidth: 520,
-              margin: '0 auto',
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? 'translateY(0)' : 'translateY(16px)',
-              transition: 'all 0.9s cubic-bezier(0.4,0,0.2,1) 0.26s',
-            }}
-          >
-            <div style={{ position: 'relative' }}>
-              <Search style={{
-                position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)',
-                width: 16, height: 16, color: 'rgba(255,255,255,0.28)',
-              }} />
-              <input
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder="Zoek een vraag..."
-                style={{
-                  width: '100%',
-                  padding: '15px 18px 15px 46px',
-                  borderRadius: 14,
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: '#fff',
-                  fontSize: 14,
-                  backdropFilter: 'blur(20px)',
-                  outline: 'none',
-                  boxSizing: 'border-box',
-                  transition: 'all 0.3s ease',
-                }}
-                onFocus={e => {
-                  e.currentTarget.style.borderColor = 'rgba(0,212,200,0.5)';
-                  e.currentTarget.style.boxShadow = '0 0 40px rgba(0,212,200,0.12)';
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-                }}
-                onBlur={e => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                }}
-              />
-              {query && (
-                <button
-                  onClick={() => setQuery('')}
-                  style={{
-                    position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
-                    background: 'rgba(255,255,255,0.1)', border: 'none', color: 'rgba(255,255,255,0.5)',
-                    borderRadius: 8, padding: '4px 10px', fontSize: 11, cursor: 'pointer', fontWeight: 700,
-                  }}
-                >
-                  wis
-                </button>
-              )}
+      {/* FAQ */}
+      <div className="max-w-3xl mx-auto px-4 py-12 space-y-10">
+        {CATEGORIEEN.map((cat) => (
+          <div key={cat.titel}>
+            <h2 className="flex items-center gap-2 text-lg font-bold text-gray-900 mb-4">
+              <span>{cat.emoji}</span> {cat.titel}
+            </h2>
+            <div className="space-y-2">
+              {cat.vragen.map((faq) => (
+                <FaqItem key={faq.vraag} {...faq} />
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        ))}
 
-      {/* ══════════════ STICKY CATEGORY BAR ══════════════ */}
-      <div style={{
-        position: 'sticky', top: 0, zIndex: 30,
-        background: 'rgba(4,8,26,0.88)',
-        backdropFilter: 'blur(28px)',
-        borderBottom: '1px solid rgba(255,255,255,0.055)',
-        padding: '10px 16px',
-      }}>
-        <div
-          className="max-w-4xl mx-auto"
-          style={{ display: 'flex', gap: 8, overflowX: 'auto', scrollbarWidth: 'none' }}
-        >
-          {/* All */}
-          {['Alle', ...CATS.filter(c => catCounts[c] > 0)].map(cat => {
-            const isAll = cat === 'Alle';
-            const cfg = isAll ? null : CAT_CONFIG[cat];
-            const Icon = cfg?.icon;
-            const active = activecat === cat;
-            const color = cfg?.color || '#00D4C8';
-            const count = isAll ? faqs.length : catCounts[cat];
-            return (
-              <button
-                key={cat}
-                onClick={() => { setActivecat(cat); setExpanded(null); }}
-                style={{
-                  flexShrink: 0,
-                  display: 'flex', alignItems: 'center', gap: 6,
-                  padding: '8px 14px',
-                  borderRadius: 10,
-                  border: `1px solid ${active ? color + '70' : 'rgba(255,255,255,0.08)'}`,
-                  background: active ? color + '20' : 'rgba(255,255,255,0.04)',
-                  color: active ? color : 'rgba(255,255,255,0.4)',
-                  fontSize: 11,
-                  fontWeight: 800,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  cursor: 'pointer',
-                  boxShadow: active ? `0 0 20px ${color}30` : 'none',
-                  transition: 'all 0.25s ease',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {Icon && <Icon style={{ width: 13, height: 13 }} />}
-                {cat}
-                <span style={{ opacity: 0.55, marginLeft: 2 }}>{count}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ══════════════ FAQ CONTENT ══════════════ */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        {loading ? (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '120px 0', gap: 16 }}>
-            <div style={{
-              width: 44, height: 44, borderRadius: '50%',
-              border: '2px solid rgba(255,255,255,0.06)',
-              borderTopColor: '#00D4C8',
-              animation: 'spin 0.9s linear infinite',
-            }} />
-            <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>Vragen laden...</p>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '100px 0' }}>
-            <div style={{ fontSize: 56, marginBottom: 16 }}>🔍</div>
-            <p style={{ color: '#fff', fontWeight: 800, fontSize: 20, marginBottom: 8 }}>Geen resultaten gevonden</p>
-            <p style={{ color: 'rgba(255,255,255,0.35)' }}>Probeer een andere zoekterm of categorie.</p>
-          </div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 56 }}>
-            {(activecat === 'Alle' ? Object.entries(grouped) : [[activecat, filtered] as [string, Faq[]]]).map(([cat, items], secIdx) => {
-              const cfg = CAT_CONFIG[cat as string];
-              const Icon = cfg?.icon || Zap;
-              let globalIdx = 0;
-              return (
-                <div key={cat as string}>
-                  {/* Section header */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 20 }}>
-                    <div style={{
-                      width: 44, height: 44, borderRadius: 14, flexShrink: 0,
-                      background: cfg?.glow || 'rgba(255,255,255,0.06)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <Icon style={{ width: 20, height: 20, color: cfg?.color || '#fff' }} />
-                    </div>
-                    <div>
-                      <h2 style={{ color: '#fff', fontWeight: 900, fontSize: 20, lineHeight: 1 }}>{cat as string}</h2>
-                      <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 12, marginTop: 3 }}>
-                        {(items as Faq[]).length} vragen
-                      </p>
-                    </div>
-                    <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg, ${cfg?.color || '#fff'}30, transparent)` }} />
-                  </div>
-
-                  {/* Items */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {(items as Faq[]).map((faq, i) => (
-                      <FaqItem
-                        key={faq.id}
-                        faq={faq}
-                        color={cfg?.color || '#00D4C8'}
-                        glow={cfg?.glow || 'rgba(0,212,200,0.15)'}
-                        isOpen={expanded === faq.id}
-                        idx={i}
-                        onToggle={() => setExpanded(expanded === faq.id ? null : faq.id)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* ══════════════ CTA BLOCK ══════════════ */}
-        <div
-          style={{
-            marginTop: 80,
-            borderRadius: 28,
-            padding: '56px 48px',
-            textAlign: 'center',
-            position: 'relative',
-            overflow: 'hidden',
-            background: 'linear-gradient(135deg, rgba(0,212,200,0.09) 0%, rgba(96,165,250,0.06) 50%, rgba(167,139,250,0.09) 100%)',
-            border: '1px solid rgba(0,212,200,0.18)',
-          }}
-        >
-          {/* Glow orbs */}
-          <div style={{
-            position: 'absolute', top: -60, right: -60, width: 220, height: 220,
-            borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none',
-            background: 'rgba(0,212,200,0.14)',
-          }} />
-          <div style={{
-            position: 'absolute', bottom: -60, left: -60, width: 220, height: 220,
-            borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none',
-            background: 'rgba(96,165,250,0.1)',
-          }} />
-
-          <div style={{ position: 'relative' }}>
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              padding: '6px 14px', borderRadius: 20, marginBottom: 20,
-              background: 'rgba(0,212,200,0.12)', color: '#00D4C8',
-              border: '1px solid rgba(0,212,200,0.22)',
-              fontSize: 10, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.18em',
-            }}>
-              Persoonlijk advies
-            </span>
-
-            <h3 style={{ color: '#fff', fontWeight: 900, fontSize: 'clamp(22px, 3vw, 34px)', marginBottom: 12 }}>
-              Staat je vraag er niet bij?
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.45)', marginBottom: 36, maxWidth: 420, margin: '0 auto 36px' }}>
-              Onze adviseurs staan klaar — snel, persoonlijk en volledig vrijblijvend.
-            </p>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-              <a
-                href="tel:0858008777"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 10,
-                  padding: '14px 28px', borderRadius: 14,
-                  background: '#00D4C8', color: '#04081a',
-                  fontWeight: 900, fontSize: 14, textDecoration: 'none',
-                  boxShadow: '0 0 40px rgba(0,212,200,0.35)',
-                  transition: 'transform 0.2s ease',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
-                onMouseLeave={e => (e.currentTarget.style.transform = 'none')}
-              >
-                <Phone style={{ width: 16, height: 16 }} />
-                085 – 80 08 777
-              </a>
-
-              <a
-                href="https://wa.me/31613669328"
-                target="_blank" rel="noopener noreferrer"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 10,
-                  padding: '14px 28px', borderRadius: 14,
-                  background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.8)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  fontWeight: 700, fontSize: 14, textDecoration: 'none',
-                  transition: 'transform 0.2s ease',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
-                onMouseLeave={e => (e.currentTarget.style.transform = 'none')}
-              >
-                <MessageCircle style={{ width: 16, height: 16 }} />
-                WhatsApp
-              </a>
-
-              <Link
-                to="/offerte"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 10,
-                  padding: '14px 28px', borderRadius: 14,
-                  background: 'rgba(255,255,255,0.08)', color: '#fff',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  fontWeight: 900, fontSize: 14, textDecoration: 'none',
-                  transition: 'transform 0.2s ease',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
-                onMouseLeave={e => (e.currentTarget.style.transform = 'none')}
-              >
-                Gratis offerte →
-              </Link>
-            </div>
+        {/* CTA */}
+        <div className="bg-smartlease-yellow rounded-2xl p-6 sm:p-8 text-white text-center">
+          <h3 className="text-xl font-bold mb-2">Staat jouw vraag er niet bij?</h3>
+          <p className="text-white/80 mb-6 text-sm">Neem gerust contact op. Onze specialisten helpen je graag verder.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="tel:0858008600"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-white text-smartlease-yellow font-semibold rounded-xl hover:bg-gray-50 transition text-sm">
+              <Phone size={16} /> 085 - 80 08 600
+            </a>
+            <a href="https://wa.me/31613669328" target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition text-sm">
+              <MessageCircle size={16} /> WhatsApp
+            </a>
+            <a href="mailto:info@wiselease.nl"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition text-sm">
+              <Mail size={16} /> info@wiselease.nl
+            </a>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes slowPulse { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.05)} }
-        @keyframes spin { to{transform:rotate(360deg)} }
-        input::placeholder { color: rgba(255,255,255,0.22); }
-        ::-webkit-scrollbar { display: none; }
-      `}</style>
     </div>
   );
 }
