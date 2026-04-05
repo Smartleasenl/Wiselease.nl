@@ -1,3 +1,4 @@
+import KvkSearch from '../components/KvkSearch';
 import { useState, useEffect, FormEvent } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { submitLead } from '../lib/leadService';
@@ -53,6 +54,7 @@ export function OffertePage() {
     bedrijfsnaam: '', kvk_nummer: '', bericht: '',
   });
   const [loading, setLoading] = useState(false);
+  const [kvkData, setKvkData] = useState<any>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [imageUrl, setImageUrl] = useState<string | null>(passedImageUrl);
