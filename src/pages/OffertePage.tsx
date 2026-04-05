@@ -134,9 +134,7 @@ export function OffertePage() {
           vehicle_info: vehicleTitle,
           vehicle_id: vehicle.id,
           vehicle_price: vehicle.verkoopprijs,
-          vehicle_url: vehicle.kenteken
-            ? `https://wiselease.nl/aanbod/${vehicle.kenteken.toLowerCase().replace(/\s+/g, '-')}`
-            : null,
+          vehicle_url: `https://wiselease.nl/auto/${vehicle.id}/${encodeURIComponent(vehicleTitle.toLowerCase().replace(/\s+/g, '-'))}`,
           vehicle_image: imageUrl || null,
           calculator: calculator ? {
             aankoopprijs: aankoopprijs ?? vehicle.verkoopprijs,
