@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import { validatePhone, phoneErrorMsg } from '../utils/validatePhone';
 import { submitLead } from '../lib/leadService';
 import {
   X,
@@ -19,8 +20,10 @@ interface BelMijModalProps {
 export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }: BelMijModalProps) {
   const [form, setForm] = useState({
     naam: '',
+    bedrijfsnaam: '',
     telefoon: '',
   });
+  const [phoneError, setPhoneError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -32,11 +35,11 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
     setLoading(true);
     setError('');
 
-    if (!form.naam.trim() || !form.telefoon.trim()) {
-      setError('Vul je naam en telefoonnummer in.');
-      setLoading(false);
-      return;
-    }
+    if (!form.naam.trim()) { setError('Vul je naam in.'); setLoading(false); return; }
+    if (!form.bedrijfsnaam.trim()) { setError('Vul je bedrijfsnaam in.'); setLoading(false); return; }
+    if (!form.telefoon.trim()) { setError('Vul je telefoonnummer in.'); setLoading(false); return; }
+    if (!validatePhone(form.telefoon)) { setPhoneError(phoneErrorMsg()); setLoading(false); return; }
+    setPhoneError('');
 
     const result = await submitLead({
       type: 'terugbelverzoek',
@@ -56,7 +59,8 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
   };
 
   const handleClose = () => {
-    setForm({ naam: '', telefoon: '' });
+    setForm({ naam: '', bedrijfsnaam: '', telefoon: '' });
+    setPhoneError('');
     setSuccess(false);
     setError('');
     onClose();
@@ -122,6 +126,13 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
               </div>
 
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Bedrijfsnaam <span className="text-red-500">*</span></label>
+                <input type="text" required value={form.bedrijfsnaam} onChange={(e) => setForm({ ...form, bedrijfsnaam: e.target.value })}
+                  placeholder="Jouw bedrijf BV"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
+              </div>
+
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Telefoonnummer <span className="text-red-500">*</span>
                 </label>
@@ -129,7 +140,8 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
                   type="tel"
                   required
                   value={form.telefoon}
-                  onChange={(e) => setForm({ ...form, telefoon: e.target.value })}
+                  onChange={(e) => { setForm({ ...form, telefoon: e.target.value }); setPhoneError(''); }}
+                  onBlur={() => form.telefoon && !validatePhone(form.telefoon) ? setPhoneError(phoneErrorMsg()) : setPhoneError('')}
                   placeholder="06 - 12345678"
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition"
                 />

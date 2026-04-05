@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import { validatePhone, phoneErrorMsg } from '../utils/validatePhone';
 import { submitLead } from '../lib/leadService';
 import { X, FileText, Send, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
 import type { CalculatorState } from './LeaseCalculator';
@@ -12,7 +13,8 @@ interface OfferteModalProps {
 }
 
 export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, calculatorState }: OfferteModalProps) {
-  const [form, setForm] = useState({ naam: '', email: '', telefoon: '', bericht: '' });
+  const [form, setForm] = useState({ naam: '', bedrijfsnaam: '', email: '', telefoon: '', bericht: '' });
+  const [phoneError, setPhoneError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -24,11 +26,11 @@ export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, 
     setLoading(true);
     setError('');
 
-    if (!form.naam.trim() || !form.telefoon.trim()) {
-      setError('Vul minimaal je naam en telefoonnummer in.');
-      setLoading(false);
-      return;
-    }
+    if (!form.naam.trim()) { setError('Vul je naam in.'); setLoading(false); return; }
+    if (!form.bedrijfsnaam.trim()) { setError('Vul je bedrijfsnaam in.'); setLoading(false); return; }
+    if (!form.telefoon.trim()) { setError('Vul je telefoonnummer in.'); setLoading(false); return; }
+    if (!validatePhone(form.telefoon)) { setPhoneError(phoneErrorMsg()); setLoading(false); return; }
+    setPhoneError('');
 
     const result = await submitLead({
       type: 'offerte',
@@ -57,7 +59,8 @@ export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, 
   };
 
   const handleClose = () => {
-    setForm({ naam: '', email: '', telefoon: '', bericht: '' });
+    setForm({ naam: '', bedrijfsnaam: '', email: '', telefoon: '', bericht: '' });
+    setPhoneError('');
     setSuccess(false);
     setError('');
     onClose();
@@ -122,6 +125,12 @@ export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, 
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
               </div>
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Bedrijfsnaam <span className="text-red-500">*</span></label>
+                <input type="text" required value={form.bedrijfsnaam} onChange={(e) => setForm({ ...form, bedrijfsnaam: e.target.value })}
+                  placeholder="Jouw bedrijf BV"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
+              </div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">E-mailadres</label>
                 <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="naam@voorbeeld.nl"
@@ -129,9 +138,11 @@ export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, 
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Telefoonnummer <span className="text-red-500">*</span></label>
-                <input type="tel" required value={form.telefoon} onChange={(e) => setForm({ ...form, telefoon: e.target.value })}
+                <input type="tel" required value={form.telefoon} onChange={(e) => { setForm({ ...form, telefoon: e.target.value }); setPhoneError(''); }}
+                  onBlur={() => form.telefoon && !validatePhone(form.telefoon) ? setPhoneError(phoneErrorMsg()) : setPhoneError('')}
                   placeholder="06 - 12345678"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
+                  className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition ${phoneError ? 'border-red-400' : 'border-gray-200'}`} />
+                {phoneError && <p className="text-xs text-red-500 mt-1">{phoneError}</p>}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Opmerking</label>
