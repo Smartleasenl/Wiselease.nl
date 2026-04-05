@@ -4,7 +4,7 @@ import { Shield, Clock, ThumbsUp, Users } from 'lucide-react';
 const usps = [
   {
     icon: Users,
-    title: '62.000+',
+    title: '29.000+',
     subtitle: 'Voertuigen beschikbaar',
     color: 'text-smartlease-yellow',
   },
