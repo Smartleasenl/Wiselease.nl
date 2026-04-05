@@ -136,6 +136,8 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
                 <KvkSearch
                   supabaseUrl={import.meta.env.VITE_SUPABASE_URL}
                   supabaseAnonKey={import.meta.env.VITE_SUPABASE_ANON_KEY}
+                  kvkSearchBaseUrl="https://nydjzahppdvlaeuywoln.supabase.co"
+                  kvkSearchAnonKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZGp6YWhwcGR2bGFldXl3b2xuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NjczMDQsImV4cCI6MjA4MDM0MzMwNH0.RVaZs28LXSjxjKoccu4ZYMj6XqSG-hJjw0SD8tcdkWc"
               orgId="272847f8-a174-4e62-aa93-83e0dea182fe"
                   value={form.bedrijfsnaam}
                   onChange={(v) => setForm({ ...form, bedrijfsnaam: v })}
