@@ -16,8 +16,6 @@ interface KvkBedrijf {
 interface KvkSearchProps {
   supabaseUrl: string;
   supabaseAnonKey: string;
-  kvkSearchBaseUrl?: string; // Override voor CRM project URL
-  kvkSearchAnonKey?: string; // Override voor CRM anon key
   orgId?: string;
   value: string;
   onChange: (value: string) => void;
@@ -29,8 +27,12 @@ interface KvkSearchProps {
 
 const queryCache = new Map<string, KvkBedrijf[]>();
 
+// KVK search gebruikt het CRM project voor companies lookup + KVK API
+const KVK_SEARCH_URL = "https://nydjzahppdvlaeuywoln.supabase.co";
+const KVK_SEARCH_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZGp6YWhwcGR2bGFldXl3b2xuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NjczMDQsImV4cCI6MjA4MDM0MzMwNH0.RVaZs28LXSjxjKoccu4ZYMj6XqSG-hJjw0SD8tcdkWc";
+
 export default function KvkSearch({
-  supabaseUrl, supabaseAnonKey, kvkSearchBaseUrl, kvkSearchAnonKey, orgId, value, onChange, onSelect,
+  supabaseUrl, supabaseAnonKey, orgId, value, onChange, onSelect,
   placeholder = 'Zoek op bedrijfsnaam...', className = '', accentColor = 'emerald',
 }: KvkSearchProps) {
   const [results, setResults] = useState<KvkBedrijf[]>([]);
@@ -63,11 +65,9 @@ export default function KvkSearch({
     try {
       const params = new URLSearchParams({ q });
       if (orgId) params.set('org_id', orgId);
-      const baseUrl = kvkSearchBaseUrl || supabaseUrl;
-      const anonKey = kvkSearchAnonKey || supabaseAnonKey;
       const res = await fetch(
-        `${baseUrl}/functions/v1/kvk-search?${params}`,
-        { headers: { 'Authorization': `Bearer ${anonKey}`, 'apikey': anonKey }, signal: abortRef.current.signal }
+        `${supabaseUrl}/functions/v1/kvk-search?${params}`,
+        { headers: { 'Authorization': `Bearer ${supabaseAnonKey}`, 'apikey': supabaseAnonKey }, signal: abortRef.current.signal }
       );
       const data = await res.json();
       const bedrijven = data.bedrijven || [];
