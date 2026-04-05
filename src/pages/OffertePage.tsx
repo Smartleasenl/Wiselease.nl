@@ -106,9 +106,10 @@ export function OffertePage() {
       telefoon: form.telefoon,
       bedrijfsnaam: form.bedrijfsnaam,
       kvk_nummer: form.kvk_nummer || undefined,
-      bericht: form.bericht || `Offerte aanvraag voor: ${vehicleTitle}`,
+      bericht: form.bericht || undefined,
       vehicle_id: vehicle.id,
       vehicle_info: vehicleTitle,
+      vehicle_url: window.location.href,
       calculator_data: calculator ? {
         looptijd: calculator.looptijd,
         aanbetaling: calculator.aanbetaling,
@@ -134,7 +135,7 @@ export function OffertePage() {
           vehicle_info: vehicleTitle,
           vehicle_id: vehicle.id,
           vehicle_price: vehicle.verkoopprijs,
-          vehicle_url: `https://wiselease.nl/auto/${vehicle.id}/${encodeURIComponent(vehicleTitle.toLowerCase().replace(/\s+/g, '-'))}`,
+          vehicle_url: window.location.href,
           vehicle_image: imageUrl || null,
           calculator: calculator ? {
             aankoopprijs: aankoopprijs ?? vehicle.verkoopprijs,
