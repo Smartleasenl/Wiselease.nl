@@ -46,6 +46,9 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
     const result = await submitLead({
       type: 'terugbelverzoek',
       naam: form.naam,
+      bedrijfsnaam: form.bedrijfsnaam,
+      kvk_nummer: kvkData?.kvkNummer || undefined,
+      kvk_data: kvkData || undefined,
       telefoon: form.telefoon,
       bericht: `Terugbelverzoek voor: ${vehicleInfo || 'Onbekend voertuig'}`,
       vehicle_id: vehicleId,
