@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import KvkSearch from './KvkSearch';
 import { validatePhone, phoneErrorMsg } from '../utils/validatePhone';
 import { submitLead } from '../lib/leadService';
 import { X, FileText, Send, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
@@ -15,6 +16,7 @@ interface OfferteModalProps {
 export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, calculatorState }: OfferteModalProps) {
   const [form, setForm] = useState({ naam: '', bedrijfsnaam: '', email: '', telefoon: '', bericht: '' });
   const [phoneError, setPhoneError] = useState('');
+  const [kvkData, setKvkData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -31,6 +33,7 @@ export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, 
     if (!form.telefoon.trim()) { setError('Vul je telefoonnummer in.'); setLoading(false); return; }
     if (!validatePhone(form.telefoon)) { setPhoneError(phoneErrorMsg()); setLoading(false); return; }
     setPhoneError('');
+    setKvkData(null);
 
     const result = await submitLead({
       type: 'offerte',
@@ -61,6 +64,7 @@ export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, 
   const handleClose = () => {
     setForm({ naam: '', bedrijfsnaam: '', email: '', telefoon: '', bericht: '' });
     setPhoneError('');
+    setKvkData(null);
     setSuccess(false);
     setError('');
     onClose();
@@ -126,9 +130,19 @@ export default function OfferteModal({ isOpen, onClose, vehicleId, vehicleInfo, 
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Bedrijfsnaam <span className="text-red-500">*</span></label>
-                <input type="text" required value={form.bedrijfsnaam} onChange={(e) => setForm({ ...form, bedrijfsnaam: e.target.value })}
-                  placeholder="Jouw bedrijf BV"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
+                <KvkSearch
+                  supabaseUrl={import.meta.env.VITE_SUPABASE_URL}
+                  supabaseAnonKey={import.meta.env.VITE_SUPABASE_ANON_KEY}
+                  value={form.bedrijfsnaam}
+                  onChange={(v) => setForm({ ...form, bedrijfsnaam: v })}
+                  onSelect={(b) => { setForm({ ...form, bedrijfsnaam: b.naam }); setKvkData(b); }}
+                  placeholder="Zoek op bedrijfsnaam..."
+                  className="border-gray-200"
+                  accentColor="yellow"
+                />
+                {kvkData && (
+                  <p className="text-xs text-green-600 mt-1">✓ {kvkData.naam} · KVK {kvkData.kvkNummer}{kvkData.plaats ? ` · ${kvkData.plaats}` : ''}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">E-mailadres</label>

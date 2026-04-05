@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import KvkSearch from './KvkSearch';
 import { validatePhone, phoneErrorMsg } from '../utils/validatePhone';
 import { submitLead } from '../lib/leadService';
 import {
@@ -24,6 +25,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
     telefoon: '',
   });
   const [phoneError, setPhoneError] = useState('');
+  const [kvkData, setKvkData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -127,9 +129,19 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Bedrijfsnaam <span className="text-red-500">*</span></label>
-                <input type="text" required value={form.bedrijfsnaam} onChange={(e) => setForm({ ...form, bedrijfsnaam: e.target.value })}
-                  placeholder="Jouw bedrijf BV"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
+                <KvkSearch
+                  supabaseUrl={import.meta.env.VITE_SUPABASE_URL}
+                  supabaseAnonKey={import.meta.env.VITE_SUPABASE_ANON_KEY}
+                  value={form.bedrijfsnaam}
+                  onChange={(v) => setForm({ ...form, bedrijfsnaam: v })}
+                  onSelect={(b) => { setForm({ ...form, bedrijfsnaam: b.naam }); setKvkData(b); }}
+                  placeholder="Zoek op bedrijfsnaam..."
+                  className="border-gray-200"
+                  accentColor="yellow"
+                />
+                {kvkData && (
+                  <p className="text-xs text-green-600 mt-1">✓ {kvkData.naam} · KVK {kvkData.kvkNummer}</p>
+                )}
               </div>
 
               <div>
