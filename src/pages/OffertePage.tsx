@@ -338,12 +338,35 @@ export function OffertePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Bedrijfsnaam <span className="text-red-500">*</span></label>
-                  <input type="text" required value={form.bedrijfsnaam} onChange={e => setForm({...form, bedrijfsnaam: e.target.value})} placeholder="Bedrijf B.V."
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
+                  <KvkSearch
+                    supabaseUrl={import.meta.env.VITE_SUPABASE_URL}
+                    supabaseAnonKey={import.meta.env.VITE_SUPABASE_ANON_KEY}
+                    orgId="272847f8-a174-4e62-aa93-83e0dea182fe"
+                    value={form.bedrijfsnaam}
+                    onChange={(v) => setForm({...form, bedrijfsnaam: v})}
+                    onSelect={(b) => { setForm({...form, bedrijfsnaam: b.naam, kvk_nummer: b.kvkNummer}); setKvkData(b); }}
+                    placeholder="Zoek op bedrijfsnaam..."
+                    className="border-gray-200"
+                    accentColor="yellow"
+                  />
+                  {kvkData && <p className="text-xs text-green-600 mt-1">✓ {kvkData.naam} · KVK {kvkData.kvkNummer}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">KvK-nummer <span className="text-gray-400 font-normal">(optioneel)</span></label>
-                  <input type="text" value={form.kvk_nummer} onChange={e => setForm({...form, kvk_nummer: e.target.value})} placeholder="12345678" maxLength={8}
+                  <input type="text" value={form.kvk_nummer}
+                    onChange={e => {
+                      const val = e.target.value.replace(/\D/g, '');
+                      setForm({...form, kvk_nummer: val});
+                      if (val.length === 8) {
+                        fetch('https://nydjzahppdvlaeuywoln.supabase.co/functions/v1/kvk-search?kvkNummer=' + val + '&org_id=272847f8-a174-4e62-aa93-83e0dea182fe', {
+                          headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZGp6YWhwcGR2bGFldXl3b2xuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NjczMDQsImV4cCI6MjA4MDM0MzMwNH0.RVaZs28LXSjxjKoccu4ZYMj6XqSG-hJjw0SD8tcdkWc', 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZGp6YWhwcGR2bGFldXl3b2xuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NjczMDQsImV4cCI6MjA4MDM0MzMwNH0.RVaZs28LXSjxjKoccu4ZYMj6XqSG-hJjw0SD8tcdkWc' }
+                        }).then(r => r.json()).then(d => {
+                          const b = d.bedrijven?.[0];
+                          if (b) { setForm(prev => ({...prev, bedrijfsnaam: b.naam, kvk_nummer: val})); setKvkData(b); }
+                        }).catch(() => {});
+                      }
+                    }}
+                    placeholder="12345678" maxLength={8}
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
                 </div>
               </div>
