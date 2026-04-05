@@ -22,6 +22,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
   const [form, setForm] = useState({
     naam: '',
     bedrijfsnaam: '',
+    kvk_nummer: '',
     telefoon: '',
   });
   const [phoneError, setPhoneError] = useState('');
@@ -47,7 +48,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
       type: 'terugbelverzoek',
       naam: form.naam,
       bedrijfsnaam: form.bedrijfsnaam,
-      kvk_nummer: kvkData?.kvkNummer || undefined,
+      kvk_nummer: kvkData?.kvkNummer || form.kvk_nummer || undefined,
       kvk_data: kvkData || undefined,
       telefoon: form.telefoon,
       bericht: `Terugbelverzoek voor: ${vehicleInfo || 'Onbekend voertuig'}`,
@@ -64,7 +65,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
   };
 
   const handleClose = () => {
-    setForm({ naam: '', bedrijfsnaam: '', telefoon: '' });
+    setForm({ naam: '', bedrijfsnaam: '', kvk_nummer: '', telefoon: '' });
     setPhoneError('');
     setSuccess(false);
     setError('');
@@ -138,7 +139,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
               orgId="272847f8-a174-4e62-aa93-83e0dea182fe"
                   value={form.bedrijfsnaam}
                   onChange={(v) => setForm({ ...form, bedrijfsnaam: v })}
-                  onSelect={(b) => { setForm({ ...form, bedrijfsnaam: b.naam }); setKvkData(b); }}
+                  onSelect={(b) => { setForm({ ...form, bedrijfsnaam: b.naam, kvk_nummer: b.kvkNummer }); setKvkData(b); }}
                   placeholder="Zoek op bedrijfsnaam..."
                   className="border-gray-200"
                   accentColor="yellow"
@@ -146,6 +147,24 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
                 {kvkData && (
                   <p className="text-xs text-green-600 mt-1">✓ {kvkData.naam} · KVK {kvkData.kvkNummer}</p>
                 )}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">KvK-nummer <span className="text-gray-400 font-normal text-xs">(optioneel)</span></label>
+                <input type="text" value={form.kvk_nummer}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, '');
+                    setForm({ ...form, kvk_nummer: val });
+                    if (val.length === 8) {
+                      fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/kvk-search?kvkNummer=${val}&org_id=272847f8-a174-4e62-aa93-83e0dea182fe`, {
+                        headers: { 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`, 'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY }
+                      }).then(r => r.json()).then(d => {
+                        const b = d.bedrijven?.[0];
+                        if (b) { setForm(prev => ({ ...prev, bedrijfsnaam: b.naam, kvk_nummer: val })); setKvkData(b); }
+                      }).catch(() => {});
+                    }
+                  }}
+                  placeholder="12345678" maxLength={8}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-smartlease-yellow/20 focus:border-smartlease-yellow transition" />
               </div>
 
               <div>
