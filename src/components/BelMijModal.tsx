@@ -135,6 +135,7 @@ export default function BelMijModal({ isOpen, onClose, vehicleId, vehicleInfo }:
                 <KvkSearch
                   supabaseUrl={import.meta.env.VITE_SUPABASE_URL}
                   supabaseAnonKey={import.meta.env.VITE_SUPABASE_ANON_KEY}
+              orgId="272847f8-a174-4e62-aa93-83e0dea182fe"
                   value={form.bedrijfsnaam}
                   onChange={(v) => setForm({ ...form, bedrijfsnaam: v })}
                   onSelect={(b) => { setForm({ ...form, bedrijfsnaam: b.naam }); setKvkData(b); }}
