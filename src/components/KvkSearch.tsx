@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Search, Loader2, CheckCircle } from 'lucide-react';
 
+// Altijd het CRM project gebruiken voor kvk-search (companies tabel + KVK API key)
+const KVK_BASE_URL = "https://nydjzahppdvlaeuywoln.supabase.co";
+const KVK_BASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZGp6YWhwcGR2bGFldXl3b2xuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NjczMDQsImV4cCI6MjA4MDM0MzMwNH0.RVaZs28LXSjxjKoccu4ZYMj6XqSG-hJjw0SD8tcdkWc";
+
 interface KvkBedrijf {
   kvkNummer: string;
   naam: string;
@@ -14,8 +18,8 @@ interface KvkBedrijf {
 }
 
 interface KvkSearchProps {
-  supabaseUrl: string;
-  supabaseAnonKey: string;
+  supabaseUrl: string;       // Eigen Supabase URL (niet gebruikt voor zoeken)
+  supabaseAnonKey: string;  // Eigen anon key (niet gebruikt voor zoeken)
   orgId?: string;
   value: string;
   onChange: (value: string) => void;
@@ -27,12 +31,8 @@ interface KvkSearchProps {
 
 const queryCache = new Map<string, KvkBedrijf[]>();
 
-// KVK search gebruikt het CRM project voor companies lookup + KVK API
-const KVK_SEARCH_URL = "https://nydjzahppdvlaeuywoln.supabase.co";
-const KVK_SEARCH_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZGp6YWhwcGR2bGFldXl3b2xuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NjczMDQsImV4cCI6MjA4MDM0MzMwNH0.RVaZs28LXSjxjKoccu4ZYMj6XqSG-hJjw0SD8tcdkWc";
-
 export default function KvkSearch({
-  supabaseUrl, supabaseAnonKey, orgId, value, onChange, onSelect,
+  orgId, value, onChange, onSelect,
   placeholder = 'Zoek op bedrijfsnaam...', className = '', accentColor = 'emerald',
 }: KvkSearchProps) {
   const [results, setResults] = useState<KvkBedrijf[]>([]);
@@ -53,7 +53,7 @@ export default function KvkSearch({
 
   const search = useCallback(async (q: string) => {
     if (q.length < 2) { setResults([]); setOpen(false); return; }
-    const cacheKey = q.toLowerCase().trim();
+    const cacheKey = q.toLowerCase().trim() + (orgId || '');
     if (queryCache.has(cacheKey)) {
       setResults(queryCache.get(cacheKey)!);
       setOpen(true);
@@ -66,8 +66,11 @@ export default function KvkSearch({
       const params = new URLSearchParams({ q });
       if (orgId) params.set('org_id', orgId);
       const res = await fetch(
-        `${supabaseUrl}/functions/v1/kvk-search?${params}`,
-        { headers: { 'Authorization': `Bearer ${supabaseAnonKey}`, 'apikey': supabaseAnonKey }, signal: abortRef.current.signal }
+        `${KVK_BASE_URL}/functions/v1/kvk-search?${params}`,
+        {
+          headers: { 'Authorization': `Bearer ${KVK_BASE_KEY}`, 'apikey': KVK_BASE_KEY },
+          signal: abortRef.current.signal
+        }
       );
       const data = await res.json();
       const bedrijven = data.bedrijven || [];
@@ -79,16 +82,14 @@ export default function KvkSearch({
     } finally {
       setLoading(false);
     }
-  }, [supabaseUrl, supabaseAnonKey, orgId]);
+  }, [orgId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     onChange(val);
     setSelected(false);
-    // CRM zoekt al bij 2 chars (snel), KVK bij 3
     if (val.length < 2) { setResults([]); setOpen(false); clearTimeout(timer.current); return; }
     clearTimeout(timer.current);
-    // Kortere debounce want CRM is snel
     timer.current = setTimeout(() => search(val), 300);
   };
 
