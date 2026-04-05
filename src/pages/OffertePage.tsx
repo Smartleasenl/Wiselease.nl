@@ -39,7 +39,7 @@ interface OfferteForm {
   bericht: string;
 }
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://bcjbghqrdlzwxgfuuxss.supabase.co';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://jtntbwioxszeocumgvzk.supabase.co';
 
 export function OffertePage() {
   const location = useLocation();
@@ -130,10 +130,22 @@ export function OffertePage() {
           voornaam: form.voornaam, achternaam: form.achternaam,
           email: form.email, telefoon: form.telefoon,
           bedrijfsnaam: form.bedrijfsnaam, kvk_nummer: form.kvk_nummer,
-          bericht: form.bericht, vehicle_info: vehicleTitle,
+          bericht: form.bericht,
+          vehicle_info: vehicleTitle,
+          vehicle_id: vehicle.id,
           vehicle_price: vehicle.verkoopprijs,
+          vehicle_url: vehicle.kenteken
+            ? `https://wiselease.nl/aanbod/${vehicle.kenteken.toLowerCase().replace(/\s+/g, '-')}`
+            : null,
           vehicle_image: imageUrl || null,
-          calculator: calculator,
+          calculator: calculator ? {
+            aankoopprijs: aankoopprijs ?? vehicle.verkoopprijs,
+            aanbetaling: calculator.aanbetaling,
+            financieringsbedrag: financieringsbedrag ?? undefined,
+            looptijd: calculator.looptijd,
+            slottermijn: calculator.slottermijn,
+            maandbedrag: calculator.maandbedrag,
+          } : null,
         }),
       }).catch(console.error);
     } else {
