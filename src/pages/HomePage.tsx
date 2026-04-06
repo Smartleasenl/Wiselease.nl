@@ -6,6 +6,7 @@ import { WhyWiselease } from '../components/WhyWiselease';
 import { BlogSection } from '../components/BlogSection';
 import { initScrollReveal } from '../utils/scrollReveal';
 import HoeWerktHetAnimatie from '../components/HoeWerktHetAnimatie';
+import { ReviewsHomepage } from '../components/ReviewsHomepage';
 
 export function HomePage() {
   useCanonical();
@@ -20,6 +21,7 @@ export function HomePage() {
       <PopularBrands />
       <WhyWiselease />
       <HoeWerktHetAnimatie />
+      <ReviewsHomepage />
       <BlogSection />
     </>
   );

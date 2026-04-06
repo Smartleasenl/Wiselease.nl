@@ -416,7 +416,7 @@ export function Hero() {
 </>)}
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-500 mb-6 max-w-2xl mx-auto leading-relaxed">
             Zoek in onze{' '}
             <span className="text-smartlease-yellow font-bold tabular-nums">
               {totalCount !== null && totalCount > 0 ? (
@@ -427,6 +427,30 @@ export function Hero() {
             </span>{' '}
             auto's
           </p>
+
+          {/* Social proof strip */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+            <div className="flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-gray-200 shadow-sm">
+              <div className="flex gap-0.5">
+                {[1,2,3,4,5].map(i => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#FBBF24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-gray-700">9.4 op Google</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-gray-200 shadow-sm">
+              <div className="flex -space-x-2">
+                {['ME','LB','DK'].map((init, i) => (
+                  <div key={i} className="w-6 h-6 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-[9px] font-bold text-blue-700">{init}</div>
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-gray-700">Honderden tevreden klanten</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white rounded-full px-4 py-2 border border-gray-200 shadow-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#185fa5" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span className="text-sm font-semibold text-gray-700">Binnen 24 uur reactie</span>
+            </div>
+          </div>
 
           {/* Search form */}
           <div className="bg-white rounded-2xl p-4 md:p-5 shadow-xl border border-gray-100">

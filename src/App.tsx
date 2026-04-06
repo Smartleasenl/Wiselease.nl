@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { StickyMobileCTA } from './components/StickyMobileCTA';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -148,6 +149,7 @@ function App() {
         </Route>
 
       </Routes>
+      <StickyMobileCTA />
     </BrowserRouter>
   );
 }
