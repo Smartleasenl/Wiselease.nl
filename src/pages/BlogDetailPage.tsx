@@ -99,7 +99,7 @@ export default function BlogDetailPage() {
       <div style={{ position: 'relative', height: 'clamp(300px, 50vh, 580px)', overflow: 'hidden' }}>
         {post.image_url && (
           <img src={post.image_url} alt={post.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}  loading="lazy" decoding="async" />
         )}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.72) 100%)' }} />
 
@@ -304,7 +304,7 @@ export default function BlogDetailPage() {
                   >
                     {r.image_url && (
                       <img src={r.image_url} alt={r.title}
-                        style={{ width: 52, height: 44, objectFit: 'cover', borderRadius: 8, flexShrink: 0 }} />
+                        style={{ width: 52, height: 44, objectFit: 'cover', borderRadius: 8, flexShrink: 0 }}  loading="lazy" decoding="async" />
                     )}
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <p style={{
