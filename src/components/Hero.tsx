@@ -409,8 +409,16 @@ export function Hero() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight tracking-tight text-gray-900 transition-opacity duration-200"
             style={{ opacity: settingsLoaded ? 1 : 0 }}
           >
-{heroTitle}
+{(<>
+  Waar{' '}
+  <span className="text-smartlease-yellow">slim</span>{' '}
+  {heroTitle.split(' ').slice(2).join(' ')}
+</>)}
           </h1>
+
+          <p className="text-base md:text-lg text-gray-500 mt-3 mb-6 max-w-xl mx-auto">
+            Slim leasen voor ZZP en MKB — transparant, snel en eerlijk
+          </p>
 
           <p className="text-lg md:text-xl text-gray-500 mb-6 max-w-2xl mx-auto leading-relaxed">
             Zoek in onze{' '}
