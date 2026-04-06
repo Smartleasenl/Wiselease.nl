@@ -59,12 +59,12 @@ function AnimatedCounter({ target }: { target: number }) {
 }
 
 const popularBrands = [
-  { name: 'BMW', logo: 'https://www.carlogos.org/car-logos/bmw-logo.png' },
-  { name: 'Mercedes-Benz', short: 'Mercedes', logo: 'https://www.carlogos.org/car-logos/mercedes-benz-logo.png' },
-  { name: 'Audi', logo: 'https://www.carlogos.org/car-logos/audi-logo.png' },
-  { name: 'Volkswagen', short: 'VW', logo: 'https://www.carlogos.org/car-logos/volkswagen-logo.png' },
-  { name: 'Toyota', logo: 'https://www.carlogos.org/car-logos/toyota-logo.png' },
-  { name: 'Volvo', logo: 'https://www.carlogos.org/car-logos/volvo-logo.png' },
+  { name: 'BMW', logo: '/logos/bmw.png' },
+  { name: 'Mercedes-Benz', short: 'Mercedes', logo: '/logos/mercedes.png' },
+  { name: 'Audi', logo: '/logos/audi.png' },
+  { name: 'Volkswagen', short: 'VW', logo: '/logos/volkswagen.png' },
+  { name: 'Toyota', logo: '/logos/toyota.png' },
+  { name: 'Volvo', logo: '/logos/volvo.png' },
 ];
 
 interface Suggestion {
