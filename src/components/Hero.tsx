@@ -554,23 +554,23 @@ export function Hero() {
 
           {/* Populaire merken */}
           <div className="mt-8">
-            <p className="text-sm text-gray-400 mb-4 font-medium uppercase tracking-wider">
+            <p className="text-xs text-gray-400 mb-4 font-semibold uppercase tracking-widest">
               Populaire merken
             </p>
-            <div className="flex flex-wrap justify-center gap-2.5 md:gap-3">
+            <div className="flex flex-wrap justify-center gap-2">
               {popularBrands.map((brand) => (
                 <button
                   key={brand.name}
                   onClick={() => handleBrandClick(brand.name)}
-                  className="flex items-center space-x-2 bg-white hover:bg-gray-50 border border-gray-200 hover:border-smartlease-yellow rounded-full px-4 py-2 md:px-5 md:py-2.5 transition-all duration-200 group shadow-sm hover:shadow-md"
+                  className="flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 hover:border-blue-500 rounded-full px-3.5 py-1.5 transition-all duration-200 group shadow-sm hover:shadow-md"
                 >
                   <img
                     src={brand.logo}
                     alt={brand.name}
-                    className="h-5 w-5 md:h-6 md:w-6 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+                    className="h-4 w-4 object-contain opacity-60 group-hover:opacity-100 transition-opacity"
                     loading="lazy"
                   />
-                  <span className="text-sm font-medium text-gray-600 group-hover:text-smartlease-yellow transition-colors">
+                  <span className="text-xs font-semibold text-gray-600 group-hover:text-blue-600 transition-colors tracking-wide">
                     {brand.short || brand.name}
                   </span>
                 </button>
