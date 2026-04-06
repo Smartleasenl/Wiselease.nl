@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { StickyMobileCTA } from './components/StickyMobileCTA';
 import { WhatsAppFloat } from './components/WhatsAppFloat';
 import { Header } from './components/Header';
@@ -24,21 +25,21 @@ import CookieBanner from './components/CookieBanner';
 import SeoPage from './pages/SeoPage';
 
 // Admin imports
-import LoginPage from './pages/admin/LoginPage';
-import AuthGuard from './components/admin/AuthGuard';
-import AdminLayout from './components/admin/AdminLayout';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import SiteInstellingenPage from './pages/admin/SiteInstellingenPage';
-import LeadsPage from './pages/admin/LeadsPage';
-import LeadDetailPage from './pages/admin/LeadDetailPage';
+const LoginPage = lazy(() => import('./pages/admin/LoginPage'));
+const AuthGuard = lazy(() => import('./components/admin/AuthGuard'));
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const SiteInstellingenPage = lazy(() => import('./pages/admin/SiteInstellingenPage'));
+const LeadsPage = lazy(() => import('./pages/admin/LeadsPage'));
+const LeadDetailPage = lazy(() => import('./pages/admin/LeadDetailPage'));
 import { PaginasPage, StatistiekenPage } from './pages/admin/PlaceholderPages';
-import DealersPage from './pages/admin/DealersPage';
-import PaginaBeheer from './pages/admin/PaginaBeheer';
-import FooterBeheer from './pages/admin/FooterBeheer';
-import FooterLinksAdmin from './pages/admin/FooterLinksAdmin';
-import ReviewsBeheer from './pages/admin/ReviewsBeheer';
-import FaqBeheer from './pages/admin/FaqBeheer';
-import BlogBeheer from './pages/admin/BlogBeheer';
+const DealersPage = lazy(() => import('./pages/admin/DealersPage'));
+const PaginaBeheer = lazy(() => import('./pages/admin/PaginaBeheer'));
+const FooterBeheer = lazy(() => import('./pages/admin/FooterBeheer'));
+const FooterLinksAdmin = lazy(() => import('./pages/admin/FooterLinksAdmin'));
+const ReviewsBeheer = lazy(() => import('./pages/admin/ReviewsBeheer'));
+const FaqBeheer = lazy(() => import('./pages/admin/FaqBeheer'));
+const BlogBeheer = lazy(() => import('./pages/admin/BlogBeheer'));
 
 if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
@@ -86,10 +87,10 @@ function App() {
       <Routes>
 
         {/* Admin login */}
-        <Route path="/admin/login" element={<LoginPage />} />
+        <Route path="/admin/login" element={<Suspense fallback={null}><LoginPage /></Suspense>} />
 
         {/* Admin routes */}
-        <Route path="/admin" element={<AuthGuard><AdminLayout /></AuthGuard>}>
+        <Route path="/admin" element={<Suspense fallback={null}><AuthGuard><AdminLayout /></AuthGuard></Suspense>}>
           <Route index element={<AdminDashboard />} />
           <Route path="site-instellingen" element={<SiteInstellingenPage />} />
           <Route path="leads" element={<LeadsPage />} />
