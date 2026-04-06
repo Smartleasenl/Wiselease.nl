@@ -16,7 +16,7 @@ export function StickyMobileCTA() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const hidden = ['/offerte', '/contact', '/bel-mij', '/admin'].some(p => location.pathname.startsWith(p));
+  const hidden = ['/offerte', '/contact', '/bel-mij', '/admin', '/auto/'].some(p => location.pathname.startsWith(p));
   if (hidden || !visible) return null;
 
   const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_TEXT)}`;
