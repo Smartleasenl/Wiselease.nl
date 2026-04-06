@@ -61,6 +61,15 @@ export default function SeoPage() {
         document.head.appendChild(meta);
       }
 
+      // Canonical tag
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', 'https://wiselease.nl' + window.location.pathname);
+
       setLoading(false);
     });
   }, [slugMerk, slugModel, navigate]);

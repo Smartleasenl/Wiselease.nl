@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -228,6 +229,7 @@ function Badge({ c }: { c: CriteriaItem }) {
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 export function KeuzehulpPage() {
+  useCanonical();
   const nav = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);

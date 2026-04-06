@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 import { useState, FormEvent } from 'react';
 import { submitLead } from '../lib/leadService';
 import {
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react';
 
 export function ContactPage() {
+  useCanonical();
   const [form, setForm] = useState({
     naam: '',
     email: '',

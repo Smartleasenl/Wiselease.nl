@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calculator, MessageCircle, FileText, Phone } from 'lucide-react';
@@ -19,6 +20,7 @@ const MAX_RESIDUAL_PERCENTAGES: Record<number, number> = {
 };
 
 export function CalculatorPage() {
+  useCanonical();
   const navigate = useNavigate();
   const [vehiclePrice, setVehiclePrice] = useState(30000);
   const [downPayment, setDownPayment] = useState(4500);

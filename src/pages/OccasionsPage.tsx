@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
 import { Filters } from '../components/Filters';
@@ -54,6 +55,7 @@ function buildQS(filters: SearchParams, page: number, sort: string) {
 }
 
 export function OccasionsPage() {
+  useCanonical();
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams] = useSearchParams();

@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 import { useEffect } from 'react';
 import { Hero } from '../components/Hero';
 import { PopularBrands } from '../components/PopularBrands';
@@ -7,6 +8,7 @@ import { initScrollReveal } from '../utils/scrollReveal';
 import HoeWerktHetAnimatie from '../components/HoeWerktHetAnimatie';
 
 export function HomePage() {
+  useCanonical();
   useEffect(() => {
     const cleanup = initScrollReveal();
     return cleanup;

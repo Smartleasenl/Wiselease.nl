@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 // src/pages/ReviewsPage.tsx
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
@@ -14,6 +15,7 @@ interface Review {
 }
 
 export default function ReviewsPage() {
+  useCanonical();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter]   = useState<number | null>(null);

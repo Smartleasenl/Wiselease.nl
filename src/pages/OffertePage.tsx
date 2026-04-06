@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 import KvkSearch from '../components/KvkSearch';
 import { useState, useEffect, FormEvent } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
@@ -42,6 +43,7 @@ interface OfferteForm {
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://jtntbwioxszeocumgvzk.supabase.co';
 
 export function OffertePage() {
+  useCanonical();
   const location = useLocation();
   const navigate = useNavigate();
 

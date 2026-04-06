@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Block admin
+Disallow: /admin
+Disallow: /admin/
+
+# Block offerte vergelijker (geen SEO waarde)
+Disallow: /offerte-vergelijker
+
+# Block bel-mij (geen SEO waarde)
+Disallow: /bel-mij
+
+Sitemap: https://wiselease.nl/sitemap.xml

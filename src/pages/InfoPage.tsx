@@ -20,8 +20,17 @@ export default function InfoPage() {
       document.title = page.meta_title || page.title;
       const m = document.querySelector('meta[name="description"]');
       if (m) m.setAttribute('content', page.meta_description || '');
+
+      // Canonical tag
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', 'https://wiselease.nl/' + slug);
     }
-  }, [page]);
+  }, [page, slug]);
 
   useEffect(() => {
     if (!loading && !page && subPages.length > 0) {

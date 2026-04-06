@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 import { useState, useMemo } from 'react';
 import { Search, X, Phone, Mail, ChevronDown, ChevronUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -331,6 +332,7 @@ function FaqItem({ vraag, antwoord, zoekterm, kleur }: FAQ & { zoekterm: string;
 }
 
 export default function VeelgesteldeVragenPage() {
+  useCanonical();
   const [zoekterm, setZoekterm] = useState('');
   const [actief, setActief] = useState<string | null>(null);
   const c = kl(SITE.kleur);

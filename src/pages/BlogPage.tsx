@@ -1,3 +1,4 @@
+import { useCanonical } from '../hooks/useCanonical';
 // src/pages/BlogPage.tsx
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -48,6 +49,7 @@ function CategoryBadge({ cat, small }: { cat: string; small?: boolean }) {
 }
 
 export default function BlogPage() {
+  useCanonical();
   const navigate = useNavigate();
   const [posts, setPosts]     = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
