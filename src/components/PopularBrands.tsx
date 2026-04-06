@@ -1,18 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 
 const brands = [
-  { name: 'BMW', logo: 'https://www.carlogos.org/car-logos/bmw-logo.png' },
-  { name: 'Mercedes-Benz', logo: 'https://www.carlogos.org/car-logos/mercedes-benz-logo.png' },
-  { name: 'Audi', logo: 'https://www.carlogos.org/car-logos/audi-logo.png' },
-  { name: 'Volkswagen', logo: 'https://www.carlogos.org/car-logos/volkswagen-logo.png' },
-  { name: 'Toyota', logo: 'https://www.carlogos.org/car-logos/toyota-logo.png' },
-  { name: 'Volvo', logo: 'https://www.carlogos.org/car-logos/volvo-logo.png' },
-  { name: 'Ford', logo: 'https://www.carlogos.org/car-logos/ford-logo.png' },
-  { name: 'Renault', logo: 'https://www.carlogos.org/car-logos/renault-logo.png' },
-  { name: 'Peugeot', logo: 'https://www.carlogos.org/car-logos/peugeot-logo.png' },
-  { name: 'Opel', logo: 'https://www.carlogos.org/car-logos/opel-logo.png' },
-  { name: 'Skoda', logo: 'https://www.carlogos.org/car-logos/skoda-logo.png' },
-  { name: 'KIA', logo: 'https://www.carlogos.org/car-logos/kia-logo.png' },
+  { name: 'BMW', logo: '/logos/bmw.png' },
+  { name: 'Mercedes-Benz', logo: '/logos/mercedes.png' },
+  { name: 'Audi', logo: '/logos/audi.png' },
+  { name: 'Volkswagen', logo: '/logos/volkswagen.png' },
+  { name: 'Toyota', logo: '/logos/toyota.png' },
+  { name: 'Volvo', logo: '/logos/volvo.png' },
+  { name: 'Ford', logo: '/logos/ford.svg' },
+  { name: 'Renault', logo: '/logos/renault.svg' },
+  { name: 'Peugeot', logo: '/logos/peugeot.svg' },
+  { name: 'Opel', logo: '/logos/opel.svg' },
+  { name: 'Skoda', logo: '/logos/skoda.svg' },
+  { name: 'KIA', logo: '/logos/kia.svg' },
 ];
 
 const leaseTypes = [
