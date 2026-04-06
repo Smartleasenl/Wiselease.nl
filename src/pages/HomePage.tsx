@@ -8,6 +8,7 @@ import { initScrollReveal } from '../utils/scrollReveal';
 import HoeWerktHetAnimatie from '../components/HoeWerktHetAnimatie';
 import { ReviewsHomepage } from '../components/ReviewsHomepage';
 import { KeuzehulpBanner } from '../components/KeuzehulpBanner';
+import { StappenBalk } from '../components/StappenBalk';
 
 export function HomePage() {
   useCanonical();
@@ -19,6 +20,7 @@ export function HomePage() {
   return (
     <>
       <Hero />
+      <StappenBalk />
       <PopularBrands />
       <WhyWiselease />
       <KeuzehulpBanner />
