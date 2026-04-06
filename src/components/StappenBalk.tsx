@@ -5,7 +5,7 @@ const STAPPEN = [
   {
     icon: Search,
     titel: 'Kies je auto',
-    sub: 'Uit duizenden occasions',
+    sub: 'Uit duizenden occasions & import',
   },
   {
     icon: FileText,
@@ -15,7 +15,7 @@ const STAPPEN = [
   {
     icon: Car,
     titel: 'Rij weg',
-    sub: 'Snel geleverd, vaste last',
+    sub: 'Binnen 72 uur rijden, vaste last',
   },
 ];
 
@@ -51,7 +51,7 @@ export function StappenBalk() {
 
           <button
             onClick={() => navigate('/offerte')}
-            className="flex-shrink-0 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all shadow-sm"
+            className="flex-shrink-0 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all shadow-sm"
           >
             Gratis offerte aanvragen
             <ArrowRight size={15} />
