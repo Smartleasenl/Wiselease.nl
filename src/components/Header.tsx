@@ -312,7 +312,7 @@ export function Header() {
             style={{
               display: 'flex',
               width: 'max-content',
-              animation: 'usp-marquee 28s linear infinite',
+              animation: 'usp-marquee 32s linear infinite',
             }}
           >
             {[...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS, ...USP_ITEMS].map((usp, i) => (
