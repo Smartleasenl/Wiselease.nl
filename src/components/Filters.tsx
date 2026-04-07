@@ -123,19 +123,18 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
     });
   }, []);
 
-  // Laad dealernamen uit actieve voertuigen
+  // Laad dealernamen met aantallen via RPC
   useEffect(() => {
-    vehicleApi.search({ per_page: 1000 }).then((data) => {
-      const countMap = new Map<string, number>();
-      data.vehicles.forEach((v: any) => {
-        const naam = v.aanbieder_naam;
-        if (naam) countMap.set(naam, (countMap.get(naam) || 0) + 1);
+    supabase
+      .rpc('get_dealer_counts')
+      .then(({ data }) => {
+        if (data) {
+          const sorted = (data as { aanbieder_naam: string; count: number }[])
+            .filter(d => d.aanbieder_naam)
+            .sort((a, b) => b.count - a.count);
+          setDealers(sorted.map(d => ({ naam: d.aanbieder_naam, count: d.count })));
+        }
       });
-      const sorted = Array.from(countMap.entries())
-        .map(([naam, count]) => ({ naam, count }))
-        .sort((a, b) => b.count - a.count);
-      setDealers(sorted);
-    });
   }, []);
 
   // Click outside handler
