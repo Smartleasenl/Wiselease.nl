@@ -315,21 +315,15 @@ const handleWhatsApp = () => {
           <div className="lg:col-span-8">
 
             {/* Hero Gallery */}
-            <div className="animate-fade-up opacity-0 rounded-2xl bg-white shadow-sm mb-5 overflow-visible">
-              <div className="flex items-center gap-2 p-0">
-                {images.length > 1 && (
-                  <button onClick={prevImage} className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 hover:bg-white/30 flex items-center justify-center text-white/25 hover:text-white/70 transition-all">
-                    <ChevronLeft className="h-5 w-5" />
-                  </button>
-                )}
-                <div
-                  ref={imageContainerRef}
-                  className="relative bg-gray-900 touch-pan-y flex-1 rounded-2xl overflow-hidden"
-                  style={{ aspectRatio: '4/3' }}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                >
+            <div className="animate-fade-up opacity-0 rounded-2xl overflow-hidden bg-white shadow-sm mb-5">
+              <div
+                ref={imageContainerRef}
+                className="relative bg-gray-900 touch-pan-y"
+                style={{ aspectRatio: '4/3' }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
                 {images.length > 0 ? (
                   <>
                     <img
@@ -357,15 +351,17 @@ const handleWhatsApp = () => {
                   </span>
                 )}
                 {images.length > 1 && (
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-xs font-medium tracking-wide">
-                    {currentImageIndex + 1} / {images.length}
-                  </div>
-                )}
-              </div>
-                {images.length > 1 && (
-                  <button onClick={nextImage} className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 hover:bg-white/30 flex items-center justify-center text-white/25 hover:text-white/70 transition-all">
-                    <ChevronRight className="h-5 w-5" />
-                  </button>
+                  <>
+                    <button onClick={prevImage} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent hover:bg-black/10 flex items-center justify-center text-white/20 hover:text-white/60 transition-all">
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button onClick={nextImage} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent hover:bg-black/10 flex items-center justify-center text-white/20 hover:text-white/60 transition-all">
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-xs font-medium tracking-wide">
+                      {currentImageIndex + 1} / {images.length}
+                    </div>
+                  </>
                 )}
               </div>
               {thumbImages.length > 1 && (
