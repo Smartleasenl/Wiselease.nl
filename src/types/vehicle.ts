@@ -54,6 +54,7 @@ export interface SearchParams {
   vermogen_max?: number;
   opties?: string[] | string;
   zoek?: string;
+  aanbieder_naam?: string;
   sort?: 'maandprijs_laag' | 'maandprijs_hoog' | 'prijs_laag' | 'prijs_hoog' | 'jaar_nieuw' | 'jaar_oud' | 'km_laag' | 'km_hoog' | 'nieuwste';
   page?: number;
   per_page?: number;
