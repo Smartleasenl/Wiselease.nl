@@ -318,7 +318,7 @@ const handleWhatsApp = () => {
             <div className="animate-fade-up opacity-0 rounded-2xl bg-white shadow-sm mb-5 overflow-visible">
               <div className="flex items-center gap-2 p-0">
                 {images.length > 1 && (
-                  <button onClick={prevImage} className="flex-shrink-0 w-9 h-9 rounded-full bg-white shadow-md hover:bg-gray-100 flex items-center justify-center text-gray-700 transition-all">
+                  <button onClick={prevImage} className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 hover:bg-white/30 flex items-center justify-center text-white/25 hover:text-white/70 transition-all">
                     <ChevronLeft className="h-5 w-5" />
                   </button>
                 )}
@@ -363,7 +363,7 @@ const handleWhatsApp = () => {
                 )}
               </div>
                 {images.length > 1 && (
-                  <button onClick={nextImage} className="flex-shrink-0 w-9 h-9 rounded-full bg-white shadow-md hover:bg-gray-100 flex items-center justify-center text-gray-700 transition-all">
+                  <button onClick={nextImage} className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 hover:bg-white/30 flex items-center justify-center text-white/25 hover:text-white/70 transition-all">
                     <ChevronRight className="h-5 w-5" />
                   </button>
                 )}
