@@ -91,7 +91,6 @@ function SpecItem({
         <p className="text-sm font-semibold text-gray-900">{value}</p>
       </div>
     </div>
-    </>
   );
 }
 
@@ -569,6 +568,5 @@ const handleWhatsApp = () => {
         </div>
       </div>
     </div>
-    </>
   );
 }
