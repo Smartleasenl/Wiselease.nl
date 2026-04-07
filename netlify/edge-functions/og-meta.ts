@@ -40,14 +40,14 @@ function buildHtml({ title, description, imageUrl, pageUrl }: {
 </html>`;
 }
 
+import type { Config, Context } from "@netlify/edge-functions";
+
 const BOT_UA = /facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot|discordbot|googlebot|bingbot|applebot|iframely|embed|preview|crawler|spider/i;
 
-export default async (request: Request) => {
-  // Geen bot: fetch de echte pagina (SPA)
+export default async (request: Request, context: Context) => {
+  // Geen bot: doorlaten naar de SPA
   const ua = request.headers.get("user-agent") || "";
-  if (!BOT_UA.test(ua)) {
-    return fetch(request);
-  }
+  if (!BOT_UA.test(ua)) return context.next();
 
   const url = new URL(request.url);
   const match = url.pathname.match(/^\/auto\/(\d+)/);
@@ -109,4 +109,4 @@ export default async (request: Request) => {
   });
 };
 
-export const config = { path: "/auto/*" };
+export const config: Config = { path: "/auto/*" };
