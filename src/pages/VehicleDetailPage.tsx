@@ -272,7 +272,6 @@ const handleWhatsApp = () => {
   const nap = (vehicle as any).nap as boolean | undefined;
 
   return (
-    <>
     <div className="bg-[#f8f9fb] min-h-screen pb-24 lg:pb-0">
       <style>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -568,6 +567,5 @@ const handleWhatsApp = () => {
         </div>
       </div>
     </div>
-    </>
   );
 }
