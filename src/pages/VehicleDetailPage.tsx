@@ -70,7 +70,6 @@ function AccordionSection({
         {children}
       </div>
     </div>
-    </>
   );
 }
 
