@@ -132,7 +132,7 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
           const sorted = (data as { aanbieder_naam: string; count: number }[])
             .filter(d => d.aanbieder_naam)
             .sort((a, b) => b.count - a.count);
-          setDealers(sorted.map(d => ({ naam: d.aanbieder_naam, count: d.count })));
+          setDealers(sorted.map(d => ({ naam: d.aanbieder_naam.replace(/\s+/g, ' ').trim(), count: d.count })));
         }
       });
   }, []);
