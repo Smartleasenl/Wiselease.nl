@@ -40,7 +40,15 @@ function buildHtml({ title, description, imageUrl, pageUrl }: {
 </html>`;
 }
 
+const BOT_UA = /facebookexternalhit|twitterbot|linkedinbot|whatsapp|telegrambot|slackbot|discordbot|googlebot|bingbot|applebot|iframely|embed|preview|crawler|spider/i;
+
 export default async (request: Request) => {
+  // Geen bot: fetch de echte pagina (SPA)
+  const ua = request.headers.get("user-agent") || "";
+  if (!BOT_UA.test(ua)) {
+    return fetch(request);
+  }
+
   const url = new URL(request.url);
   const match = url.pathname.match(/^\/auto\/(\d+)/);
   if (!match) {
