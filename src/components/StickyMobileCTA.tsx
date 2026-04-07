@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MessageCircle, FileText } from 'lucide-react';
 
-const WA_NUMBER = '31858008777';
+const WA_NUMBER = '31858008600';
 const WA_TEXT = 'Hallo, ik heb een vraag over financial lease bij Wiselease.nl';
 
 export function StickyMobileCTA() {
@@ -16,6 +16,7 @@ export function StickyMobileCTA() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Niet tonen op offerte/contact/admin/auto pagina's
   const hidden = ['/offerte', '/contact', '/bel-mij', '/admin', '/auto/'].some(p => location.pathname.startsWith(p));
   if (hidden || !visible) return null;
 
@@ -35,7 +36,7 @@ export function StickyMobileCTA() {
         </a>
         <button
           onClick={() => navigate('/offerte')}
-          className="flex-1 flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 py-3 bg-smartlease-yellow text-white font-semibold rounded-xl text-sm"
         >
           <FileText size={15} />
           Offerte aanvragen
