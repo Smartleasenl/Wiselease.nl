@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { SlidersHorizontal, X, ChevronDown, Search, Building2 } from 'lucide-react';
 import type { FiltersResponse, SearchParams, ModelOption } from '../types/vehicle';
 import { vehicleApi } from '../services/api';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 interface DealerOption {
   naam: string;
