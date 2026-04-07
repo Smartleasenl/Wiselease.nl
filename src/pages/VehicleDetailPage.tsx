@@ -466,6 +466,9 @@ const handleWhatsApp = () => {
                   {nap && (
                     <SpecItem icon={<Check className="h-[18px] w-[18px]" />} label="NAP" value="Gecertificeerd" />
                   )}
+                  {(vehicle as any).aanbieder_plaats && (
+                    <SpecItem icon={<MapPin className="h-[18px] w-[18px]" />} label="Locatie" value={(vehicle as any).aanbieder_plaats} />
+                  )}
                 </div>
               </AccordionSection>
 
@@ -494,9 +497,6 @@ const handleWhatsApp = () => {
                 )}
               </AccordionSection>
 
-              {(vehicle as any).aanbieder_plaats && (
-                <SpecItem icon={<MapPin className="h-[18px] w-[18px]" />} label="Locatie" value={(vehicle as any).aanbieder_plaats} />
-              )}
               {isAdmin && (
                 <AccordionSection title="Verkoper (admin)">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
