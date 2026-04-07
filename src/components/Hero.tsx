@@ -328,7 +328,7 @@ export function Hero() {
     if (selectedMerken.length > 0) {
       selectedMerken.forEach((m) => params.append('merk', m));
     } else if (q) {
-      params.append('q', q);
+      params.append('zoek', q);
     }
 
     if (selectedModellen.length > 0) {
