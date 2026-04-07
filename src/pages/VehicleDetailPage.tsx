@@ -518,6 +518,7 @@ const handleWhatsApp = () => {
               )}
             </div>
           </div>
+        </div>
 
           {/* ════════ RIGHT SIDEBAR ════════ */}
           <div className="hidden lg:block lg:col-span-4">
