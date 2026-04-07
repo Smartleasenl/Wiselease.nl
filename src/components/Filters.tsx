@@ -1,7 +1,20 @@
-import { useState, useEffect } from 'react';
-import { SlidersHorizontal, X, ChevronDown, Search } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SlidersHorizontal, X, ChevronDown, Search, Building2 } from 'lucide-react';
 import type { FiltersResponse, SearchParams, ModelOption } from '../types/vehicle';
 import { vehicleApi } from '../services/api';
+
+interface DealerOption {
+  naam: string;
+  count: number;
+}
+
+interface SearchSuggestion {
+  type: 'ad' | 'dealer' | 'text' | 'kenteken';
+  label: string;
+  sublabel?: string;
+  value: string;
+}
 import { RangeSlider } from './RangeSlider';
 import { MultiSelect } from './MultiSelect';
 
@@ -83,6 +96,12 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
     : [];
 
   const searchQuery = (filters.zoek as string) || '';
+  const [dealers, setDealers] = useState<DealerOption[]>([]);
+  const [searchSuggestions, setSearchSuggestions] = useState<SearchSuggestion[]>([]);
+  const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
+  const [activeSearchSuggestion, setActiveSearchSuggestion] = useState(-1);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     vehicleApi.getFilters().then((data) => {
@@ -97,6 +116,79 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
       }
     });
   }, []);
+
+  // Laad dealernamen uit actieve voertuigen
+  useEffect(() => {
+    vehicleApi.search({ per_page: 1000 }).then((data) => {
+      const countMap = new Map<string, number>();
+      data.vehicles.forEach((v: any) => {
+        const naam = v.aanbieder_naam;
+        if (naam) countMap.set(naam, (countMap.get(naam) || 0) + 1);
+      });
+      const sorted = Array.from(countMap.entries())
+        .map(([naam, count]) => ({ naam, count }))
+        .sort((a, b) => b.count - a.count);
+      setDealers(sorted);
+    });
+  }, []);
+
+  // Click outside handler
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setShowSearchSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  // Bouw zoeksuggesties
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (!q) {
+      setSearchSuggestions([]);
+      setShowSearchSuggestions(false);
+      return;
+    }
+    const qLower = q.toLowerCase();
+    const suggestions: SearchSuggestion[] = [];
+
+    // Advertentienummer
+    if (/^\d{4,}$/.test(q)) {
+      suggestions.push({ type: 'ad', label: `Advertentie #${q}`, sublabel: 'Direct naar auto', value: q });
+      setSearchSuggestions(suggestions);
+      setShowSearchSuggestions(true);
+      setActiveSearchSuggestion(-1);
+      return;
+    }
+
+    // Kenteken
+    const kentekenRegex = /^[a-zA-Z0-9]{2}[-\s]?[a-zA-Z0-9]{2,3}[-\s]?[a-zA-Z0-9]{2}$/;
+    if (kentekenRegex.test(q) && q.replace(/[-\s]/g, '').length >= 5) {
+      suggestions.push({ type: 'kenteken', label: `Kenteken ${q.toUpperCase()}`, sublabel: 'Zoek op kenteken', value: q.toUpperCase() });
+      setSearchSuggestions(suggestions);
+      setShowSearchSuggestions(true);
+      setActiveSearchSuggestion(-1);
+      return;
+    }
+
+    // Dealers
+    dealers.filter((d) => d.naam.toLowerCase().includes(qLower))
+      .slice(0, 4)
+      .forEach((dealer) => {
+        suggestions.push({ type: 'dealer', label: dealer.naam, sublabel: `${dealer.count} auto's`, value: dealer.naam });
+      });
+
+    // Vrije tekst als fallback
+    if (suggestions.length === 0) {
+      suggestions.push({ type: 'text', label: q, sublabel: "Zoek in alle auto's", value: q });
+    }
+
+    setSearchSuggestions(suggestions.slice(0, 6));
+    setShowSearchSuggestions(suggestions.length > 0);
+    setActiveSearchSuggestion(-1);
+  }, [searchQuery, dealers]);
 
   useEffect(() => {
     if (selectedMerken.length > 0) {
@@ -139,7 +231,45 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
   const handleSearchChange = (value: string) => {
     const newFilters = { ...filters };
     newFilters.zoek = value || undefined;
+    delete (newFilters as any).aanbieder_naam;
     onFiltersChange(newFilters);
+  };
+
+  const handleSearchSuggestionClick = (suggestion: SearchSuggestion) => {
+    setShowSearchSuggestions(false);
+    if (suggestion.type === 'ad') {
+      navigate(`/aanbod/${suggestion.value}`);
+    } else if (suggestion.type === 'dealer') {
+      const newFilters = { ...filters };
+      (newFilters as any).aanbieder_naam = suggestion.value;
+      newFilters.zoek = undefined;
+      onFiltersChange(newFilters);
+    } else if (suggestion.type === 'kenteken') {
+      const newFilters = { ...filters };
+      newFilters.zoek = suggestion.value;
+      onFiltersChange(newFilters);
+    } else {
+      const newFilters = { ...filters };
+      newFilters.zoek = suggestion.value;
+      onFiltersChange(newFilters);
+    }
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveSearchSuggestion((prev) => Math.min(prev + 1, searchSuggestions.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveSearchSuggestion((prev) => Math.max(prev - 1, -1));
+    } else if (e.key === 'Enter') {
+      if (activeSearchSuggestion >= 0 && searchSuggestions[activeSearchSuggestion]) {
+        handleSearchSuggestionClick(searchSuggestions[activeSearchSuggestion]);
+      }
+      setShowSearchSuggestions(false);
+    } else if (e.key === 'Escape') {
+      setShowSearchSuggestions(false);
+    }
   };
 
   const handleBudgetChange = (budgetRange: string) => {
@@ -206,6 +336,8 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
       delete newFilters.opties;
     } else if (key === 'zoek') {
       delete newFilters.zoek;
+    } else if (key === 'aanbieder_naam') {
+      delete (newFilters as any).aanbieder_naam;
     } else {
       delete (newFilters as any)[key];
     }
@@ -215,6 +347,9 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
   const getActiveChips = () => {
     const chips: { key: string; label: string }[] = [];
     if (searchQuery) chips.push({ key: 'zoek', label: `"${searchQuery}"` });
+    if ((filters as any).aanbieder_naam) {
+      chips.push({ key: 'aanbieder_naam', label: `Dealer: ${(filters as any).aanbieder_naam}` });
+    }
     if (selectedMerken.length > 0) {
       chips.push({ key: 'merk', label: selectedMerken.length === 1 ? selectedMerken[0] : `${selectedMerken.length} merken` });
     }
@@ -274,19 +409,54 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
       {/* Zoekbalk */}
       <div className="mb-4">
         <label className={labelClass}>Zoeken</label>
-        <div className="relative">
+        <div className="relative" ref={searchRef}>
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
-            placeholder="Bijv. S-Line, R-Line, M-Sport..."
+            onKeyDown={handleSearchKeyDown}
+            onFocus={() => searchSuggestions.length > 0 && setShowSearchSuggestions(true)}
+            placeholder="S-Line, AMG, dealernaam, kenteken, advertentie-ID..."
             className="w-full pl-9 pr-9 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-smartlease-yellow focus:border-smartlease-yellow transition-all bg-white hover:border-gray-300"
           />
           {searchQuery && (
             <button onClick={() => handleSearchChange('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
               <X className="h-4 w-4" />
             </button>
+          )}
+          {/* Suggesties dropdown */}
+          {showSearchSuggestions && searchSuggestions.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 z-50 overflow-hidden">
+              {searchSuggestions.map((suggestion, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => handleSearchSuggestionClick(suggestion)}
+                  className={`w-full text-left px-4 py-2.5 flex items-center gap-3 transition-colors border-b border-gray-50 last:border-0 ${
+                    i === activeSearchSuggestion ? 'bg-yellow-50' : 'hover:bg-gray-50'
+                  }`}
+                >
+                  {suggestion.type === 'dealer' ? (
+                    <Building2 className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
+                  ) : (
+                    <Search className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <span className={`text-sm font-medium ${i === activeSearchSuggestion ? 'text-smartlease-yellow' : 'text-gray-800'}`}>
+                      {suggestion.label}
+                    </span>
+                    {suggestion.type === 'dealer' && (
+                      <span className="text-xs text-gray-400 ml-1.5">Autobedrijf</span>
+                    )}
+                    {suggestion.sublabel && (
+                      <p className="text-xs text-gray-400 truncate">{suggestion.sublabel}</p>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
           )}
         </div>
       </div>
