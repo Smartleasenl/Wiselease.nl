@@ -14,7 +14,7 @@ function parseURL(search: string) {
   let sort = '';
   
   const skipKeys = new Set(['page', 'sort', 'bodytype', 'fuel', 'type']);
-  const arrayKeys = new Set(['model', 'merk', 'brandstof', 'categorie']);
+  const arrayKeys = new Set(['merk', 'model', 'brandstof', 'transmissie', 'kleur', 'btw_marge', 'categorie']);
 
   sp.forEach((value, key) => {
     if (key === 'page') { page = parseInt(value) || 1; return; }
