@@ -109,21 +109,13 @@ export function Hero() {
 
     // Laad dealernamen
     supabase
-      .from('vehicles')
-      .select('aanbieder_naam')
-      .eq('is_active', true)
-      .not('aanbieder_naam', 'is', null)
+      .rpc('get_dealer_counts')
       .then(({ data }) => {
         if (data) {
-          const countMap = new Map<string, number>();
-          data.forEach((v: any) => {
-            const naam = v.aanbieder_naam;
-            if (naam) countMap.set(naam, (countMap.get(naam) || 0) + 1);
-          });
-          const sorted = Array.from(countMap.entries())
-            .map(([naam, count]) => ({ naam, count }))
+          const sorted = (data as { aanbieder_naam: string; count: number }[])
+            .filter(d => d.aanbieder_naam)
             .sort((a, b) => b.count - a.count);
-          setDealers(sorted);
+          setDealers(sorted.map(d => ({ naam: d.aanbieder_naam.replace(/\s+/g, ' ').trim(), count: Number(d.count) })));
         }
       });
   }, []);
