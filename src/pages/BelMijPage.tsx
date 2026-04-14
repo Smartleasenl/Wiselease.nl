@@ -143,6 +143,8 @@ export function BelMijPage() {
         maandbedrag: calculator.maandbedrag,
         slottermijn: calculator.slottermijn,
       } : undefined,
+      entry_point: vehicle ? 'autopagina' : 'contact_formulier',
+      entry_point_detail: vehicleTitle || undefined,
     });
 
     if (result.success) {

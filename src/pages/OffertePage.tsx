@@ -120,6 +120,8 @@ export function OffertePage() {
         financieringsbedrag: financieringsbedrag ?? undefined,
         aankoopprijs: aankoopprijs ?? undefined,
       } : undefined,
+      entry_point: 'autopagina',
+      entry_point_detail: vehicleTitle || undefined,
     });
 
     if (result.success) {
