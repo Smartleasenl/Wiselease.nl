@@ -2,6 +2,7 @@ import { useCanonical } from '../hooks/useCanonical';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calculator, MessageCircle, FileText, Phone } from 'lucide-react';
+import { getRateConfig, berekenRente, type RateConfig } from '../utils/calculatorRente';
 
 const DURATION_OPTIONS = [12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72];
 
@@ -27,8 +28,11 @@ export function CalculatorPage() {
   const [duration, setDuration] = useState(72);
   const [residualValue, setResidualValue] = useState(4500);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
+  const [rateConfig, setRateConfig] = useState<RateConfig[]>([]);
 
   const maxResidualValue = vehiclePrice * (MAX_RESIDUAL_PERCENTAGES[duration] || 0.15);
+
+  useEffect(() => { getRateConfig().then(setRateConfig); }, []);
 
   useEffect(() => {
     setDownPayment(Math.round(vehiclePrice * 0.15 / 100) * 100);
@@ -42,8 +46,9 @@ export function CalculatorPage() {
   }, [duration, maxResidualValue]);
 
   useEffect(() => {
-    const r = 8.99 / 100 / 12;
     const loan = vehiclePrice - downPayment;
+    const rate = rateConfig.length > 0 ? berekenRente(loan, duration, rateConfig) : 8.99;
+    const r = rate / 100 / 12;
     const n = duration;
 
     if (loan <= 0) {

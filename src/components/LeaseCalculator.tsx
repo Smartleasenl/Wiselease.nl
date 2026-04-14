@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Calculator } from 'lucide-react';
+import { getRateConfig, berekenRente, type RateConfig } from '../utils/calculatorRente';
 
 export interface CalculatorState {
   looptijd: number;
@@ -27,9 +28,12 @@ export function LeaseCalculator({ vehiclePrice, onChange }: LeaseCalculatorProps
   const [duration, setDuration] = useState(72);
   const [residualValue, setResidualValue] = useState(vehiclePrice * 0.15);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
+  const [rateConfig, setRateConfig] = useState<RateConfig[]>([]);
 
   const maxResidualValue = vehiclePrice * (MAX_RESIDUAL_PERCENTAGES[duration] || 0.15);
   const financieringsbedrag = vehiclePrice - downPayment;
+
+  useEffect(() => { getRateConfig().then(setRateConfig); }, []);
 
   useEffect(() => {
     if (residualValue > maxResidualValue) {
@@ -38,7 +42,8 @@ export function LeaseCalculator({ vehiclePrice, onChange }: LeaseCalculatorProps
   }, [duration, maxResidualValue]);
 
   useEffect(() => {
-    const r = 8.99 / 100 / 12;
+    const rate = rateConfig.length > 0 ? berekenRente(financieringsbedrag, duration, rateConfig) : 8.99;
+    const r = rate / 100 / 12;
     const loan = vehiclePrice - downPayment;
     const n = duration;
     if (r === 0) {
@@ -47,7 +52,7 @@ export function LeaseCalculator({ vehiclePrice, onChange }: LeaseCalculatorProps
     }
     const pmt = (loan * r * Math.pow(1 + r, n) - residualValue * r) / (Math.pow(1 + r, n) - 1);
     setMonthlyPayment(pmt);
-  }, [vehiclePrice, downPayment, duration, residualValue]);
+  }, [vehiclePrice, downPayment, duration, residualValue, rateConfig, financieringsbedrag]);
 
   useEffect(() => {
     if (onChange) {
