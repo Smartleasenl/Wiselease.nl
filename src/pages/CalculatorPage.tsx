@@ -47,7 +47,7 @@ export function CalculatorPage() {
 
   useEffect(() => {
     const loan = vehiclePrice - downPayment;
-    const rate = rateConfig.length > 0 ? berekenRente(loan, duration, rateConfig) : 8.99;
+    const rate = rateConfig.length > 0 ? berekenRente(loan, duration, rateConfig) : 10.99;
     const r = rate / 100 / 12;
     const n = duration;
 

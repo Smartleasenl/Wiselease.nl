@@ -42,7 +42,7 @@ export function LeaseCalculator({ vehiclePrice, onChange }: LeaseCalculatorProps
   }, [duration, maxResidualValue]);
 
   useEffect(() => {
-    const rate = rateConfig.length > 0 ? berekenRente(financieringsbedrag, duration, rateConfig) : 8.99;
+    const rate = rateConfig.length > 0 ? berekenRente(financieringsbedrag, duration, rateConfig) : 10.99;
     const r = rate / 100 / 12;
     const loan = vehiclePrice - downPayment;
     const n = duration;

@@ -28,13 +28,13 @@ export function berekenRente(
   looptijdMaanden: number,
   config: RateConfig[]
 ): number {
-  if (!config.length || financieringsbedrag <= 0) return 8.99;
+  if (!config.length || financieringsbedrag <= 0) return 10.99;
 
   const rij = config.find(r =>
     financieringsbedrag >= r.min_bedrag &&
     (r.max_bedrag === null || financieringsbedrag <= r.max_bedrag)
   );
-  if (!rij) return 8.99;
+  if (!rij) return 10.99;
 
   const opslagKey = `looptijd_${looptijdMaanden}_opslag` as keyof RateConfig;
   const opslag = typeof rij[opslagKey] === 'number' ? (rij[opslagKey] as number) : 0;
