@@ -345,11 +345,7 @@ const handleWhatsApp = () => {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-                {vehicle.btw_marge && (
-                  <span className="absolute top-4 left-4 bg-smartlease-yellow text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
-                    {vehicle.btw_marge}
-                  </span>
-                )}
+                {/* BTW/Marge verplaatst naar prijs-sectie */}
                 {images.length > 1 && (
                   <>
                     <button onClick={prevImage} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent hover:bg-black/10 flex items-center justify-center text-white/20 hover:text-white/60 transition-all">
@@ -400,10 +396,40 @@ const handleWhatsApp = () => {
                         </span>
                         <span className="text-sm text-gray-400 font-medium">p/m</span>
                       </div>
-                      <span className="text-sm text-gray-400 mt-0.5">{formatPrice(vehicle.verkoopprijs)}</span>
+                      <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                        <span className="text-sm text-gray-400">{formatPrice(vehicle.verkoopprijs)}</span>
+                        {vehicle.btw_marge && (
+                          <span className="relative group/vat" title={vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar — je kunt de BTW terugvorderen als ondernemer' : 'Margeauto — geen BTW verrekenbaar, geen BTW op factuur'}>
+                            <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium cursor-help ${
+                              vehicle.btw_marge.toLowerCase() === 'btw' ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-700'
+                            }`}>
+                              {vehicle.btw_marge.toUpperCase()}
+                              <svg className="w-3 h-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                            </span>
+                            <span className="invisible group-hover/vat:visible absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-stone-900 text-white text-[11px] px-2.5 py-1 rounded shadow-sm whitespace-nowrap z-20 pointer-events-none">
+                              {vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar voor ondernemers' : 'Geen BTW verrekenbaar'}
+                            </span>
+                          </span>
+                        )}
+                      </div>
                     </>
                   ) : (
-                    <span className="text-3xl font-bold text-smartlease-blue">{formatPrice(vehicle.verkoopprijs)}</span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-3xl font-bold text-smartlease-blue">{formatPrice(vehicle.verkoopprijs)}</span>
+                      {vehicle.btw_marge && (
+                        <span className="relative group/vat" title={vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar — je kunt de BTW terugvorderen als ondernemer' : 'Margeauto — geen BTW verrekenbaar, geen BTW op factuur'}>
+                          <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium cursor-help ${
+                            vehicle.btw_marge.toLowerCase() === 'btw' ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-700'
+                          }`}>
+                            {vehicle.btw_marge.toUpperCase()}
+                            <svg className="w-3 h-3 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                          </span>
+                          <span className="invisible group-hover/vat:visible absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-stone-900 text-white text-[11px] px-2.5 py-1 rounded shadow-sm whitespace-nowrap z-20 pointer-events-none">
+                            {vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar voor ondernemers' : 'Geen BTW verrekenbaar'}
+                          </span>
+                        </span>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>

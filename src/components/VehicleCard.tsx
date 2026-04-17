@@ -108,11 +108,7 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
           </span>
         )}
 
-        {vehicle.btw_marge && (
-          <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">
-            {vehicle.btw_marge}
-          </span>
-        )}
+        {/* BTW/Marge verplaatst naar prijs-sectie */}
       </div>
 
       <div className="p-4 md:p-5">
@@ -132,13 +128,43 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
                 </span>
                 <span className="text-sm text-gray-400 font-medium">p/m</span>
               </div>
-              <div className="text-xs text-gray-400 mt-0.5">
-                {formatPrice(vehicle.verkoopprijs)}
+              <div className="flex items-center gap-2 mt-0.5 flex-wrap">
+                <span className="text-xs text-gray-400">
+                  {formatPrice(vehicle.verkoopprijs)}
+                </span>
+                {vehicle.btw_marge && (
+                  <span className="relative group/vat" title={vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar — je kunt de BTW terugvorderen als ondernemer' : 'Margeauto — geen BTW verrekenbaar, geen BTW op factuur'}>
+                    <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium cursor-help ${
+                      vehicle.btw_marge.toLowerCase() === 'btw' ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-700'
+                    }`}>
+                      {vehicle.btw_marge.toUpperCase()}
+                      <svg className="w-2.5 h-2.5 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    </span>
+                    <span className="invisible group-hover/vat:visible absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-stone-900 text-white text-[11px] px-2.5 py-1 rounded shadow-sm whitespace-nowrap z-20 pointer-events-none">
+                      {vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar voor ondernemers' : 'Geen BTW verrekenbaar'}
+                    </span>
+                  </span>
+                )}
               </div>
             </>
           ) : (
-            <div className="text-xl font-bold text-gray-900">
-              {formatPrice(vehicle.verkoopprijs)}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xl font-bold text-gray-900">
+                {formatPrice(vehicle.verkoopprijs)}
+              </span>
+              {vehicle.btw_marge && (
+                <span className="relative group/vat" title={vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar — je kunt de BTW terugvorderen als ondernemer' : 'Margeauto — geen BTW verrekenbaar, geen BTW op factuur'}>
+                  <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium cursor-help ${
+                    vehicle.btw_marge.toLowerCase() === 'btw' ? 'bg-emerald-50 text-emerald-800' : 'bg-stone-100 text-stone-700'
+                  }`}>
+                    {vehicle.btw_marge.toUpperCase()}
+                    <svg className="w-2.5 h-2.5 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  </span>
+                  <span className="invisible group-hover/vat:visible absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 bg-stone-900 text-white text-[11px] px-2.5 py-1 rounded shadow-sm whitespace-nowrap z-20 pointer-events-none">
+                    {vehicle.btw_marge.toLowerCase() === 'btw' ? 'BTW verrekenbaar voor ondernemers' : 'Geen BTW verrekenbaar'}
+                  </span>
+                </span>
+              )}
             </div>
           )}
         </div>

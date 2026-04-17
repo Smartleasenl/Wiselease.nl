@@ -1,8 +1,0 @@
-# Server-side 301 redirects voor oude URLs
-/occasions                              /aanbod                                  301
-/meer-informatie/veelgestelde-vragen   /veelgestelde-vragen                     301
-/meer-informatie/reviews               /reviews                                 301
-/meer-informatie/financial-lease-blog  /blog                                    301
-
-# SPA fallback - altijd als laatste
-/*    /index.html   200
