@@ -1,0 +1,37 @@
+[build]
+command = "npx vite build"
+publish = "dist"
+
+[[edge_functions]]
+  function = "og-meta"
+  path = "/auto/*"
+
+[[redirects]]
+  from = "/cars-data.xml"
+  to = "/.netlify/functions/cars-data"
+  status = 200
+
+[[redirects]]
+  from = "/share"
+  to = "/.netlify/functions/share"
+  status = 200
+
+[[redirects]]
+  from = "/public/img.php"
+  to = "/.netlify/functions/img-proxy-wiselease"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
