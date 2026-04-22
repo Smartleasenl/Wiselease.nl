@@ -31,17 +31,6 @@ const proxyImg = (url: string) => {
   return url;
 };
 
-function berekenMaandprijs(verkoopprijs: number): number {
-  if (!verkoopprijs || verkoopprijs <= 0) return 0;
-  const r = 8.99 / 100 / 12;
-  const aanbetaling = verkoopprijs * 0.15;
-  const slottermijn = verkoopprijs * 0.15;
-  const loan = verkoopprijs - aanbetaling;
-  const n = 72;
-  const pmt = (loan * r * Math.pow(1 + r, n) - slottermijn * r) / (Math.pow(1 + r, n) - 1);
-  return Math.round(pmt);
-}
-
 // ─── Accordion Section ────────────────────────────────────────────────────────
 function AccordionSection({
   title,
@@ -181,9 +170,7 @@ export function VehicleDetailPage() {
 const handleWhatsApp = () => {
   if (!vehicle) return;
 
-  const maandbedrag = calculatorState
-    ? calculatorState.maandbedrag
-    : berekenMaandprijs(vehicle.verkoopprijs);
+  const maandbedrag = calculatorState?.maandbedrag ?? vehicle.maandprijs ?? 0;
 
   const slug = `${vehicle.merk}-${vehicle.model}`
     .toLowerCase()
@@ -392,7 +379,7 @@ const handleWhatsApp = () => {
                     <>
                       <div className="flex items-baseline gap-2">
                         <span className="text-3xl md:text-4xl font-bold text-smartlease-yellow">
-                          € {(calculatorState ? calculatorState.maandbedrag : berekenMaandprijs(vehicle.verkoopprijs)).toLocaleString('nl-NL')},-
+                          € {maandbedrag.toLocaleString('nl-NL')},-
                         </span>
                         <span className="text-sm text-gray-400 font-medium">p/m</span>
                       </div>
@@ -577,7 +564,7 @@ const handleWhatsApp = () => {
               <>
                 <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Maandbedrag</p>
                 <p className="text-xl font-bold text-smartlease-yellow">
-                  € {(calculatorState ? calculatorState.maandbedrag : berekenMaandprijs(vehicle.verkoopprijs)).toLocaleString('nl-NL')} p/m
+                  € {maandbedrag.toLocaleString('nl-NL')} p/m
                 </p>
               </>
             ) : (

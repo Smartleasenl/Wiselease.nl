@@ -8,17 +8,6 @@ interface VehicleCardProps {
   onClick: () => void;
 }
 
-function berekenMaandprijs(verkoopprijs: number): number {
-  if (!verkoopprijs || verkoopprijs <= 0) return 0;
-  const r = 8.99 / 100 / 12;
-  const aanbetaling = verkoopprijs * 0.15;
-  const slottermijn = verkoopprijs * 0.15;
-  const loan = verkoopprijs - aanbetaling;
-  const n = 72;
-  const pmt = (loan * r * Math.pow(1 + r, n) - slottermijn * r) / (Math.pow(1 + r, n) - 1);
-  return Math.round(pmt);
-}
-
 const PLACEHOLDER_W = 946;
 const PLACEHOLDER_H = 473;
 
@@ -76,7 +65,7 @@ export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
   };
 
   const showPlaceholder = !imageUrl || imgError;
-  const maandprijs = berekenMaandprijs(vehicle.verkoopprijs);
+  const maandprijs = vehicle.maandprijs ?? 0;
 
   return (
     <div
