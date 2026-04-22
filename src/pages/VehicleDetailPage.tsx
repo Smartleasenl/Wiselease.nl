@@ -379,7 +379,7 @@ const handleWhatsApp = () => {
                     <>
                       <div className="flex items-baseline gap-2">
                         <span className="text-3xl md:text-4xl font-bold text-smartlease-yellow">
-                          € {maandbedrag.toLocaleString('nl-NL')},-
+                          € {(calculatorState?.maandbedrag ?? vehicle.maandprijs ?? 0).toLocaleString('nl-NL')},-
                         </span>
                         <span className="text-sm text-gray-400 font-medium">p/m</span>
                       </div>
@@ -564,7 +564,7 @@ const handleWhatsApp = () => {
               <>
                 <p className="text-[10px] uppercase tracking-wider text-gray-400 font-medium">Maandbedrag</p>
                 <p className="text-xl font-bold text-smartlease-yellow">
-                  € {maandbedrag.toLocaleString('nl-NL')} p/m
+                  € {(calculatorState?.maandbedrag ?? vehicle.maandprijs ?? 0).toLocaleString('nl-NL')} p/m
                 </p>
               </>
             ) : (
