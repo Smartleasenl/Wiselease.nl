@@ -28,12 +28,19 @@
     <meta property="og:title" content="Wiselease.nl | Financial Lease voor ZZP en MKB" />
     <meta property="og:description" content="Slim leasen voor ZZP en MKB. Transparant, snel en eerlijk. Ruim aanbod financial lease voertuigen." />
     <meta property="og:url" content="https://wiselease.nl" />
-    <meta property="og:image" content="https://jtntbwioxszeocumgvzk.supabase.co/storage/v1/object/public/site-assets/og-social.jpg" />
+    <!-- Default social-preview: de gevulde 512x512 Wiselease-merktegel. Autodetail-
+         pagina's (/auto/*) overschrijven dit server-side met de voertuigfoto via
+         netlify/edge-functions/og-meta.ts; die blijven dus ongemoeid. Vierkant asset
+         -> summary-card + 512x512 dimensies (anders croppt/letterboxt de preview). -->
+    <meta property="og:image" content="https://mijn.wiselease.nl/favicon-wiselease.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:type" content="image/png" />
     <!-- Twitter/X -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Wiselease.nl | Financial Lease voor ZZP en MKB" />
     <meta name="twitter:description" content="Slim leasen voor ZZP en MKB. Transparant, snel en eerlijk." />
-    <meta name="twitter:image" content="https://jtntbwioxszeocumgvzk.supabase.co/storage/v1/object/public/site-assets/og-social.jpg" />
+    <meta name="twitter:image" content="https://mijn.wiselease.nl/favicon-wiselease.png" />
 
     <!-- Organization Schema -->
     <script type="application/ld+json">
