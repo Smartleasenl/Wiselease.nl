@@ -215,7 +215,9 @@ export function Header() {
                                 >
                                   <Icon className="h-4 w-4 flex-shrink-0 opacity-60" />
                                   {sub.label}
-                                  {isSubActive && <ChevronRight className="h-3.5 w-3.5 ml-auto text-smartlease-yellow" />}
+                                  {/* Geen submenu hier: de actieve staat wordt al door de
+                                      highlight getoond. Een ChevronRight suggereerde ten
+                                      onrechte een uitklapbaar submenu. */}
                                 </button>
                               );
                             })}
