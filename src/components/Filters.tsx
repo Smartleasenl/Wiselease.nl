@@ -483,12 +483,12 @@ export function Filters({ filters, onFiltersChange, totalResults }: FiltersProps
           </select>
         </div>
         <div>
-          <label className={labelClass}>Categorie</label>
+          <label className={labelClass}>Carrosserie</label>
           <MultiSelect
             options={categorieen.map(c => ({ label: c }))}
             selected={selectedCategorieen}
             onChange={(vals) => handleMultiChange('categorie', vals)}
-            placeholder="Alle categorieën"
+            placeholder="Alle carrosserieën"
           />
         </div>
         <div>
