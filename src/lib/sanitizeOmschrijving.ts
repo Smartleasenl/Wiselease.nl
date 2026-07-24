@@ -30,10 +30,16 @@ function decodeEntities(text: string): string {
 }
 
 export function sanitizeOmschrijving(raw: string): string {
-  return DOMPurify.sanitize(decodeEntities(raw), {
+  const clean = DOMPurify.sanitize(decodeEntities(raw), {
     ALLOWED_TAGS,
     ALLOWED_ATTR: [],
     ALLOW_DATA_ATTR: false,
     ALLOW_ARIA_ATTR: false,
   });
+  // Sommige feeds leveren platte tekst met \n-regelovergangen i.p.v. HTML-tags.
+  // HTML collapst \n, dus zónder structuur-tags zetten we elke \n om naar <br> zodat
+  // de regelindeling behouden blijft (zoals de oude whitespace-pre-line deed). Bevat
+  // de content al <br>/<p>/<ul>/<ol>/<li>, dan laten we het ongemoeid — anders zou je
+  // dubbele witruimte krijgen bij feeds die al echte HTML aanleveren.
+  return /<(br|p|ul|ol|li)\b/i.test(clean) ? clean : clean.replace(/\n/g, '<br>');
 }
