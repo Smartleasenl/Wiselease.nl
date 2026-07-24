@@ -23,6 +23,7 @@ import {
 import type { VehicleDetail } from '../types/vehicle';
 import { LeaseCalculator, type CalculatorState } from '../components/LeaseCalculator';
 import { supabase } from '../lib/supabase';
+import { sanitizeOmschrijving } from '../lib/sanitizeOmschrijving';
 
 const proxyImg = (url: string) => {
   if (!url) return '';
@@ -504,7 +505,10 @@ const handleWhatsApp = () => {
 
               <AccordionSection title="Omschrijving">
                 {omschrijving ? (
-                  <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{omschrijving}</p>
+                  <div
+                    className="text-sm text-gray-600 leading-relaxed space-y-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-0.5"
+                    dangerouslySetInnerHTML={{ __html: sanitizeOmschrijving(omschrijving) }}
+                  />
                 ) : (
                   <p className="text-gray-500 text-sm">Geen omschrijving beschikbaar</p>
                 )}
